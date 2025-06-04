@@ -54,11 +54,11 @@ const OurWorksData: ourWorksCardData[] = [
 
 const OurWorkSection = () => {
   return (
-    <Box width="100%" data-testid="services-section">
+    <Box width="100%" data-testid="our-works-section">
       <VStack gap={{ base: "2rem", md: "3rem" }} textAlign="center">
         <Heading
           as="h2"
-          fontSize={{ base: "8rem", md: "10rem", lg: "12rem" }}
+          fontSize={{ base: "7rem", md: "8rem", lg: "10rem" }}
           color="yellow.100"
           fontFamily="pinyon"
           fontWeight="300"
@@ -79,8 +79,10 @@ const OurWorkSection = () => {
         gap="1.5rem"
         alignItems="center"
         justifyContent="center"
-        mb="5rem"
+        pb="5rem"
         mt="1rem"
+        borderBottomWidth="10px"
+        borderBottomColor="yellow.100"
       >
         <Link
           href="https://facebook.com"
@@ -135,13 +137,18 @@ const OurWorkSection = () => {
               bg={`url(${works.imageUrl?.src})`}
               backgroundSize="cover"
               backgroundPosition="center"
+              borderWidth={{
+                base: "0px 10px 10px 10px",
+                md: "0px 5px 10px 5px",
+              }}
+              borderColor="yellow.100"
               position="relative"
               color="white"
               _hover={{
                 transform: "scale(1.02)",
                 transition: "transform 0.3s ease-in-out",
               }}
-            ></GridItem>
+            />
           );
         })}
       </Grid>

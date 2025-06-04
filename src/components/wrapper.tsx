@@ -15,10 +15,10 @@ const Wrapper = ({ children, pt, bg, pb, color}: WrapperProps) => {
   return (
     <Box
       w="100%"
-      pt={pt ?? "7rem"}
-      pb={pb}
-      bg={bg ?? 'white'}
-      color={color ?? 'black'}
+      pt={pt ?? { base: "7rem", md: "10rem" }}
+      pb={pb ?? { base: "7rem", md: "10rem" }}
+      bg={bg ?? "white"}
+      color={color ?? "black"}
     >
       <Box maxW="1200px" w="90%" mx="auto">
         {children}

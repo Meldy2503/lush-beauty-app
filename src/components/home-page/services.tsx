@@ -67,7 +67,7 @@ const ServicesSection = () => {
       <VStack gap={{ base: "2rem", md: "3rem" }} textAlign="center">
         <Heading
           as="h2"
-          fontSize={{ base: "8rem", md: "10rem", lg: "12rem" }}
+          fontSize={{ base: "7rem", md: "8rem", lg: "10rem" }}
           color="yellow.100"
           fontFamily="pinyon"
           fontWeight="300"
