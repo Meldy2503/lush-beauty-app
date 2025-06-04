@@ -4,6 +4,7 @@
 import { Box } from "@chakra-ui/react";
 import HeroSection from "./hero";
 import Pendulum from "../pendulum";
+import LushAcademy from "./lush-academy";
 
 export default function HomePage() {
   return (
@@ -11,6 +12,7 @@ export default function HomePage() {
       {/* <Navbar /> */}
       <HeroSection />
       <Pendulum />
+      <LushAcademy />
     </Box>
   );
 }
