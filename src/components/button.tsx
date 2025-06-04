@@ -32,13 +32,14 @@ const Button = ({
       <Link href={href} passHref>
         <ChakraButton
           color={color ?? "white"}
-          fontSize={"1rem"}
+          cursor={"pointer"}
           fontWeight={"semibold"}
-          px={px ?? "1.5rem"}
-          py={py ?? ".5rem"}
+          fontFamily="playfair"
+          px={px ?? "2.5rem"}
+          py={py ?? ".8rem"}
           {...props}
           bg={bg ?? "black"}
-          _hover={hover ? { bg: hover } : { bg: "yellow" }}
+          _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
         >
           {children}
         </ChakraButton>
@@ -48,14 +49,15 @@ const Button = ({
 
   return (
     <ChakraButton
-      fontSize={"1rem"}
       fontWeight={"semibold"}
+      cursor={"pointer"}
+      fontFamily="playfair"
       color={color ?? "white"}
-      px={px ?? "1.5rem"}
-      py={py ?? ".5rem"}
+      px={px ?? "2.5rem"}
+      py={py ?? ".8rem"}
       bg={bg ?? "black"}
       {...props}
-      _hover={hover ? { bg: hover } : { bg: "yellow" }}
+      _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
     >
       {children}
     </ChakraButton>
