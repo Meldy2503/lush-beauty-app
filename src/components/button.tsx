@@ -11,6 +11,7 @@ interface ButtonProps extends ChakraButtonProps {
   children: React.ReactNode;
   href?: string;
   bg?: string;
+  fontSize?: string;
   color?: string;
   px?: string;
   py?: string;
@@ -22,6 +23,7 @@ const Button = ({
   href,
   bg,
   color,
+  fontSize,
   px,
   py,
   hover,
@@ -39,6 +41,7 @@ const Button = ({
           py={py ?? ".8rem"}
           {...props}
           bg={bg ?? "black"}
+          fontSize={fontSize }
           _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
         >
           {children}
@@ -55,6 +58,7 @@ const Button = ({
       color={color ?? "white"}
       px={px ?? "2.5rem"}
       py={py ?? ".8rem"}
+      fontSize={fontSize}
       bg={bg ?? "black"}
       {...props}
       _hover={hover ? { bg: hover } : { bg: "yellow.150" }}

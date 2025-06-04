@@ -16,11 +16,12 @@ const customConfig = {
     },
     tokens: {
       fonts: {
-        heading: { value: "'Allura', cursive" },
+        // heading: { value: "Allura, cursive" },
         body: { value: "'Lato', sans-serif" },
         lato: { value: "'Lato', sans-serif" },
         playfair: { value: "'Playfair Display', serif" },
-        allura: { value: "'Allura', cursive" },
+        allura: { value: "Allura, cursive" },
+        pinyon: { value: "'Pinyon Script', cursive" },
       },
       colors: {
         black: { value: "#000000" },
