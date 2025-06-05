@@ -8,6 +8,7 @@ import LushAcademy from "./lush-academy";
 import ServicesSection from "./services";
 import OurWorkSection from "./our-works";
 import AboutUsSection from "./about-us";
+import LushVideoSection from "./lush-video";
 
 export default function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default function HomePage() {
       <ServicesSection />
       <AboutUsSection />
       <OurWorkSection />
+      <LushVideoSection />
       {/* <Pendulum /> */}
       <LushAcademy />
     </Box>

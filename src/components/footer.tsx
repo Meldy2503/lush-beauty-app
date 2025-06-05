@@ -238,7 +238,7 @@ const Footer = () => {
               mb="1rem"
               color="yellow.50"
             >
-              SUBSCRIBE TO OUR NEWSLETTER
+              SUBSCRIBE FOR NEWSLETTER
             </Heading>
             <Text fontSize="1.45rem" lineHeight="1.8">
               Stay updated with our latest beauty tips, promotions, and new
@@ -279,10 +279,9 @@ const Footer = () => {
         borderTopWidth="1px"
         mt="5rem"
         pt="2rem"
-        pb="5rem"
       >
         <Text fontSize="1.5rem" fontWeight="300">
-          © {currentYear} Lush Beauty. All rights reserved.
+          © {currentYear} Lush & Luxe Beauty. All rights reserved.
         </Text>
         <Stack direction="row" gap="2rem" fontSize="1.3rem">
           <Link href="/privacy-policy" passHref>

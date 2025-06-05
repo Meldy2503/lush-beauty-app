@@ -1,12 +1,12 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import aboutImg from "../../assets/images/about-us-bg.webp";
+import aboutImg from "../../assets/images/academy-bg.webp";
 import Wrapper from "../wrapper";
 import Button from "../button";
 
-const AboutUsSection = () => {
+const LushVideoSection = () => {
   return (
-    <Wrapper pb={{ base: "9rem", lg: "13rem" }}>
+    <Wrapper>
       <Flex
         direction={{ base: "column", md: "row" }}
         alignItems="center"
@@ -21,23 +21,21 @@ const AboutUsSection = () => {
             fontFamily="playfair"
             mb={4}
           >
-            ABOUT US
+            DISCOVER YOUR RADIANCE
           </Heading>
           <Text fontWeight={"600"} color={"yellow.100"} fontFamily={"pinyon"}>
-            WELCOME TO LUSH & LUXE
+            BOOK YOUR SPOT NOW
           </Text>
           <Text py={"3rem"}>
-            Lush & Luxe Salon offers a curated range of professional beauty
-            services designed to help you feel confident, radiant, and
-            refreshed. From flawless makeup and brow perfection to rejuvenating
-            facials and luxury treatments, every session is customized to meet
-            your unique needs. Founded with a passion for beauty and wellness,
-            our studio blends skill, creativity, and care in a calm, welcoming
-            environment. Whether you are getting ready for a special occasion or
-            simply treating yourself, we’re here to make every visit feel like
-            self-care.
+            At Lush & Luxe Salon, we offer a thoughtfully curated selection of
+            beauty treatments tailored to enhance your natural glow. From
+            flawless makeup and expert brows to indulgent facials and signature
+            services, our team ensures every visit leaves you feeling pampered
+            and empowered. Whether you are preparing for a special event or
+            enjoying a well-deserved self-care day, step into a space where
+            beauty meets serenity.
           </Text>
-          <Button>Learn More</Button>
+          <Button>Book Now</Button>
         </Box>
 
         {/* Right: Image*/}
@@ -67,4 +65,4 @@ const AboutUsSection = () => {
   );
 };
 
-export default AboutUsSection;
+export default LushVideoSection;
