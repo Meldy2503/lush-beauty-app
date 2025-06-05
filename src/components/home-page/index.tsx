@@ -9,6 +9,7 @@ import ServicesSection from "./services";
 import OurWorkSection from "./our-works";
 import AboutUsSection from "./about-us";
 import LushVideoSection from "./lush-video";
+import ReviewSection from "./reviews";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       <ServicesSection />
       <AboutUsSection />
       <OurWorkSection />
+      <ReviewSection />
       <LushVideoSection />
       {/* <Pendulum /> */}
       <LushAcademy />

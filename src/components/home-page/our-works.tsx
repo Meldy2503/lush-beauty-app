@@ -54,7 +54,7 @@ const OurWorksData: ourWorksCardData[] = [
 
 const OurWorkSection = () => {
   return (
-    <Box width="100%" data-testid="our-works-section">
+    <Box width="100%" data-testid="our-works-section" pb='6rem'>
       <VStack gap={{ base: "2rem", md: "3rem" }} textAlign="center">
         <Heading
           as="h2"
