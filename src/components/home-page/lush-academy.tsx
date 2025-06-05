@@ -76,7 +76,7 @@ const LushAcademy = () => {
       bgSize="cover"
     >
       <Wrapper bg="rgb(0, 0, 0, 0.3)" color="white" pb="10rem">
-        <VStack gap={{ base: "2rem", md: "3rem" }} textAlign="center">
+        <VStack textAlign="center">
           <Heading
             as="h2"
             fontSize={{ base: "3rem", md: "4rem", lg: "5rem" }}
@@ -85,7 +85,7 @@ const LushAcademy = () => {
           >
             LUSH & LUXE
           </Heading>
-          <Text maxW="500px" mx="auto" mb="4rem">
+          <Text maxW="500px" mx="auto" mb="5rem" mt='1rem'>
             Indulge in unparalleled luxury. Discover a world of exquisite beauty
             treatments tailored just for you
           </Text>

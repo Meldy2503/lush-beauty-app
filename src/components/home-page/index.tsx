@@ -10,6 +10,7 @@ import OurWorkSection from "./our-works";
 import AboutUsSection from "./about-us";
 import LushVideoSection from "./lush-video";
 import ReviewSection from "./reviews";
+import OurStoreSection from "./our-store";
 
 export default function HomePage() {
   return (
@@ -20,6 +21,7 @@ export default function HomePage() {
       <AboutUsSection />
       <OurWorkSection />
       <ReviewSection />
+      <OurStoreSection />
       <LushVideoSection />
       {/* <Pendulum /> */}
       <LushAcademy />

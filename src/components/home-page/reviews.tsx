@@ -6,7 +6,7 @@ import aboutImg from "../../assets/images/academy-bg.webp";
 const ReviewSection = () => {
   return (
     <Wrapper>
-      <Box zIndex={2} boxShadow="lg" position="relative">
+      <Box zIndex={2} boxShadow="lg" position="relative" mb='3rem'>
         <Box
           position="absolute"
           left="-2rem"
@@ -24,7 +24,7 @@ const ReviewSection = () => {
           bg="black"
           color="white"
           px={{ base: "2rem", sm: "5rem", lg: "8rem" }}
-          py="12rem"
+          py={{ base: "6rem", md: "12rem" }}
         >
           {/* Left: Text Content */}
           <Box w={{ base: "100%", md: "55%" }}>
