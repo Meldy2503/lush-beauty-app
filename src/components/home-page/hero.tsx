@@ -95,11 +95,12 @@ const HeroSection = () => {
         <MotionBox
           position="relative"
           width="44%"
-          height="90%"
+          height="94%"
           style={{
             scale,
             boxShadow: `
-                     rgba(0, 0, 0, 0.8) 0px 15px 10px -5px; `,
+                       0 22px 10px -13px rgba(0, 0, 0, 0.8),
+      0 15px 10px -25px rgba(0, 0, 0, 0.8)`,
             overflow: "hidden", // Ensures shadows don't spill
           }}
           zIndex={3}
