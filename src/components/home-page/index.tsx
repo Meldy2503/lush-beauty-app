@@ -11,6 +11,7 @@ import AboutUsSection from "./about-us";
 import LushVideoSection from "./lush-video";
 import ReviewSection from "./reviews";
 import OurStoreSection from "./our-store";
+// import Test from "./test";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       {/* <Navbar /> */}
       <HeroSection />
       <ServicesSection />
+      {/* <Test /> */}
       <AboutUsSection />
       <OurWorkSection />
       <ReviewSection />

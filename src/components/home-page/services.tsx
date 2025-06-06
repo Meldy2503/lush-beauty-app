@@ -63,7 +63,7 @@ const servicesData: ServiceCardData[] = [
 
 const ServicesSection = () => {
   return (
-    <Box width="100%" data-testid="services-section">
+    <Box width="100%" data-testid="services-section" pt='5rem'>
       <VStack gap={{ base: "2rem", md: "3rem" }} textAlign="center">
         <Heading
           as="h2"
