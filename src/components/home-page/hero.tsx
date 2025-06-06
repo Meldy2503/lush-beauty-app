@@ -60,7 +60,6 @@ const HeroSection = () => {
             GLOW
           </Text>
         </Flex>
-
         {/* Right Image */}
         <Flex
           backgroundImage={`linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url(${heroImg1.src})`}
@@ -91,14 +90,17 @@ const HeroSection = () => {
             GLAM
           </Text>
         </Flex>
-
         {/* Center Video with scale animation */}
+        {/* rgba(0, 0, 0, 0.8) 20px 20px 10px -5px; /* Soft outer drop shadow  */}
         <MotionBox
           position="relative"
           width="44%"
           height="90%"
           style={{
             scale,
+            boxShadow: `
+                     rgba(0, 0, 0, 0.8) 0px 15px 10px -5px; `,
+            overflow: "hidden", // Ensures shadows don't spill
           }}
           zIndex={3}
         >
@@ -113,10 +115,10 @@ const HeroSection = () => {
             style={{
               objectFit: "cover",
               objectPosition: "top center",
+              border: ".5px solid black",
               overflow: "hidden",
             }}
           />
-
           <Box
             position="absolute"
             top="0"
