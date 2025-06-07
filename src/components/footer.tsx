@@ -219,7 +219,7 @@ const Footer = () => {
               Mon - Sat: 9:00 AM - 8:00 PM
             </Text>
             <Text fontSize="1.45rem" mt="-1rem">
-              Sunday: 10:00 AM - 6:00 PM
+              Sunday: Closed
             </Text>
           </Stack>
 

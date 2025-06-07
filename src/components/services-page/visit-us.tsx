@@ -2,7 +2,6 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import aboutImg from "../../assets/images/visit-us.webp";
 import Wrapper from "../wrapper";
-import Button from "../button";
 
 const VisitUsSection = () => {
   return (
@@ -14,34 +13,93 @@ const VisitUsSection = () => {
         gap={{ base: "5rem", md: "2rem" }}
       >
         {/* Left: Text Content */}
-        <Box w={{ base: "100%", md: "47%" }}>
+        <Box w={{ base: "100%", md: "50%" }}>
           <Heading
             as="h2"
-            fontSize={{ base: "2rem", md: "3rem" }}
+            fontSize={{ base: "2.5rem", md: "3.5rem" }}
             fontFamily="playfair"
             mb={4}
           >
             VISIT US
           </Heading>
-          <Text fontWeight={"600"} color={"yellow.100"} fontFamily={"pinyon"}>
-            WELCOME TO LUSH & LUXE
+          <Text
+            fontWeight={"600"}
+            color={"yellow.100"}
+            fontFamily={"allura"}
+            fontSize={{ base: "1.8rem", md: "2rem" }}
+          >
+            YOUR BEAUTY JOURNEY STARTS HERE
           </Text>
-          <Text py={"3rem"}>
-            Lush & Luxe Salon offers a curated range of professional beauty
-            services designed to help you feel confident, radiant, and
-            refreshed. From flawless makeup and brow perfection to rejuvenating
-            facials and luxury treatments, every session is customized to meet
-            your unique needs. Founded with a passion for beauty and wellness,
-            our studio blends skill, creativity, and care in a calm, welcoming
-            environment. Whether you are getting ready for a special occasion or
-            simply treating yourself, we’re here to make every visit feel like
-            self-care.
+          <Text pb={"3rem"} pt="2rem">
+            Step into Lush & Luxe Salon for premium beauty services in a calm,
+            welcoming environment. Whether you are coming for a quick touch-up
+            or a full pamper session, we’re here to help you look and feel your
+            absolute best.
           </Text>
-          <Button>Learn More</Button>
+          <Flex
+            gap={{ base: "1rem", sm: "2rem" }}
+            flexDir={{ base: "column", sm: "row" }}
+          >
+            <Box w={{ base: "100%", md: "55%" }}>
+              <Heading
+                as="h3"
+                fontSize={{ base: "1.6rem", md: "1.8rem" }}
+                fontFamily="playfair"
+                mb={4}
+                fontWeight={"600"}
+              >
+                Working Hours{" "}
+              </Heading>{" "}
+              <Text>Monday – Saturday: 9:00 AM – 8:00 PM</Text>
+              <Text>Sunday: Closed</Text>
+            </Box>
+            <Box w={{ base: "100%", md: "40%" }}>
+              <Heading
+                as="h3"
+                fontSize={{ base: "1.6rem", md: "1.8rem" }}
+                fontFamily="playfair"
+                mb={4}
+                fontWeight={"600"}
+              >
+                Location{" "}
+              </Heading>{" "}
+              <Text>125 Kingsway, London WC2B 6NH, United Kingdom</Text>
+            </Box>
+          </Flex>
+          <Flex
+            gap={{ base: "1rem", sm: "2rem" }}
+            flexDir={{ base: "column", sm: "row" }}
+            mt={{ base: "1rem", sm: "2rem" }}
+          >
+            <Box w={{ base: "100%", md: "55%" }}>
+              <Heading
+                as="h3"
+                fontSize={{ base: "1.6rem", md: "1.8rem" }}
+                fontFamily="playfair"
+                mb={4}
+                fontWeight={"600"}
+              >
+                Email{" "}
+              </Heading>{" "}
+              <Text>hello@lushluxe.co.uk</Text>
+            </Box>
+            <Box w={{ base: "100%", md: "40%" }}>
+              <Heading
+                as="h3"
+                fontSize={{ base: "1.6rem", md: "1.8rem" }}
+                fontFamily="playfair"
+                mb={4}
+                fontWeight={"600"}
+              >
+                Call Us{" "}
+              </Heading>{" "}
+              <Text>+44 20 1234 5678</Text>
+            </Box>
+          </Flex>
         </Box>
 
         {/* Right: Image*/}
-        <Box position="relative" w={{ base: "100%", md: "47%" }}>
+        <Box position="relative" w={{ base: "100%", md: "45%" }}>
           <Box zIndex={1} boxShadow="lg" position="relative">
             <Image
               src={aboutImg}
