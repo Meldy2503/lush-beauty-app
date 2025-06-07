@@ -21,9 +21,11 @@ import Button from "./button";
 import { TbLogin2 } from "react-icons/tb";
 import Logo from "./logo";
 import { usePathname } from "next/navigation";
+import ContactUsModal from "./contact-us/contact-modal";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const pathname = usePathname();
 
@@ -91,24 +93,25 @@ const Navbar = () => {
             >
               Services
             </Link>
-            <Link
-              href={"/contact-us"}
-              style={{
-                color: "black",
-                fontWeight: pathname === "/contact-us" ? "bold" : "300",
-                borderBottom:
-                  pathname === "/contact-us" ? "2px solid #DB9935" : "none",
-              }}
+            <Button
+              onClick={() => setIsContactModalOpen(true)}
+              bg="transparent"
+              fontFamily={"lato"}
+              color="#000"
+              hover='transparent'
+              
+              px="0"
+             
             >
               Contact Us
-            </Link>
+            </Button>
             <Link
               href={"/shop"}
               style={{
                 color: "black",
                 fontWeight: pathname === "/shop" ? "bold" : "300",
                 borderBottom:
-                  pathname === "/contact-us" ? "2px solid #DB9935" : "none",
+                  pathname === "/shop" ? "2px solid #DB9935" : "none",
               }}
             >
               Shop
@@ -148,6 +151,11 @@ const Navbar = () => {
             />
           </Box>
         </Flex>
+
+        <ContactUsModal
+          isOpen={isContactModalOpen}
+          onClose={() => setIsContactModalOpen(false)}
+        />
 
         {/* <Drawer.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
           <Portal>

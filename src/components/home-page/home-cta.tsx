@@ -66,7 +66,7 @@ const cardData: CardData[] = [
   },
 ];
 
-const LushAcademy = () => {
+const HomeCtaSection = () => {
   return (
     <Box
       bgImage={`url(${academyBg.src})`}
@@ -85,7 +85,7 @@ const LushAcademy = () => {
           >
             LUSH & LUXE
           </Heading>
-          <Text maxW="500px" mx="auto" mb="5rem" mt='1rem'>
+          <Text maxW="500px" mx="auto" mb="5rem" mt="1rem">
             Indulge in unparalleled luxury. Discover a world of exquisite beauty
             treatments tailored just for you
           </Text>
@@ -170,4 +170,4 @@ const LushAcademy = () => {
   );
 };
 
-export default LushAcademy;
+export default HomeCtaSection;

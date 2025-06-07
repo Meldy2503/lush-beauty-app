@@ -21,7 +21,7 @@ const HeroSection = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 3]);
 
   return (
-    <Box ref={containerRef} bg="white" position="relative" overflow={"hidden"}>
+    <Box ref={containerRef} bg="white" position="relative" overflow={"hidden"} mt='3rem'>
       <Box
         position="sticky"
         top="0"
