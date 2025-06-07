@@ -1,9 +1,96 @@
-import React from 'react'
+"use client";
 
-const ServiceHero = () => {
+import { Box, Flex, Heading, HStack, Text, VStack } from "@chakra-ui/react";
+import heroImg from "../../assets/images/services-bg.webp";
+import Wrapper from "../wrapper";
+import Button from "../button";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+
+const ServiceHeroSection = () => {
   return (
-    <div>ServiceHero</div>
-  )
-}
+    <>
+      <Box
+        bgImage={`url(${heroImg.src})`}
+        backgroundPosition="top center"
+        bgAttachment="fixed"
+        bgRepeat="no-repeat"
+        height="60vh"
+        bgSize="cover"
+        mt="5rem"
+      >
+        <VStack
+          textAlign="center"
+          px="2rem"
+          bg="rgb(0, 0, 0, 0.5)"
+          color="white"
+          height={"100%"}
+          w={"100%"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Heading
+            as="h2"
+            fontSize={{ base: "7rem", md: "8rem", lg: "10rem" }}
+            color="gray.50"
+            fontFamily="pinyon"
+            fontWeight="300"
+            lineHeight={1}
+          >
+            Our Services
+          </Heading>
+          <Heading
+            as="h3"
+            fontSize={{ base: "3rem", md: "4rem" }}
+            fontFamily="playfair"
+            color="white"
+            mt="1rem"
+          >
+            Experience Beauty & Luxury{" "}
+          </Heading>
+        </VStack>
+      </Box>
+      <Wrapper pt="6rem" pb="0">
+        <Box>
+          <Text
+            textAlign={"center"}
+            w={{ base: "100%", md: "80%", lg: "60%" }}
+            mx="auto"
+          >
+            At Lush & Luxe, we offer a complete range of beauty services to fit
+            your needs. From hair styling, to facial skin care, to body massage,
+            manicures, pedicures and more, we are your all-in-one resource for a
+            beautiful new you. come and experience it today!
+          </Text>
+          <Flex
+            alignItems={"center"}
+            gap={{ base: "1rem", sm: "3rem" }}
+            mt="5rem"
+            justifyContent={"center"}
+          >
+            <Button
+              href="/services"
+              bg="black"
+              color="white"
+              _hover={{ bg: "gray.700" }}
+            >
+              <HStack gap={{ base: ".5rem", sm: "1rem" }}>
+                <IoChatbubbleEllipsesOutline />
+                <Text>Let&apos;s Chat</Text>
+              </HStack>
+            </Button>
+            <Button
+              href="/services"
+              bg="black"
+              color="white"
+              _hover={{ bg: "gray.700" }}
+            >
+              Contact Us
+            </Button>
+          </Flex>
+        </Box>
+      </Wrapper>
+    </>
+  );
+};
 
-export default ServiceHero
+export default ServiceHeroSection;
