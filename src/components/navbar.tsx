@@ -70,23 +70,23 @@ const Navbar = () => {
             display={{ base: "none", lg: "flex" }}
           >
             <Link
-              href={"/jobs"}
+              href={"/about-us"}
               style={{
                 color: "#000",
                 fontWeight: pathname === "/about-us" ? "bold" : "300",
                 borderBottom:
-                  pathname === "/about-us" ? "2px solid #006adc" : "none",
+                  pathname === "/about-us" ? "2px solid #DB9935" : "none",
               }}
             >
               About Us
             </Link>
             <Link
-              href={"/jobs"}
+              href={"/services"}
               style={{
                 color: "#000",
                 fontWeight: pathname === "/services" ? "bold" : "300",
                 borderBottom:
-                  pathname === "/services" ? "2px solid #006adc" : "none",
+                  pathname === "/services" ? "2px solid #DB9935" : "none",
               }}
             >
               Services
@@ -97,21 +97,21 @@ const Navbar = () => {
                 color: "black",
                 fontWeight: pathname === "/contact-us" ? "bold" : "300",
                 borderBottom:
-                  pathname === "/contact-us" ? "2px solid #006adc" : "none",
+                  pathname === "/contact-us" ? "2px solid #DB9935" : "none",
               }}
             >
               Contact Us
             </Link>
             <Link
-              href={"/contact-us"}
+              href={"/shop"}
               style={{
                 color: "black",
-                fontWeight: pathname === "/contact-us" ? "bold" : "300",
+                fontWeight: pathname === "/shop" ? "bold" : "300",
                 borderBottom:
-                  pathname === "/contact-us" ? "2px solid #006adc" : "none",
+                  pathname === "/contact-us" ? "2px solid #DB9935" : "none",
               }}
             >
-              Store
+              Shop
             </Link>
           </Flex>
           <Flex align={"center"} gap="2rem">

@@ -1,17 +1,13 @@
 "use client";
 
-// import Navbar from "@/components/navbar";
 import { Box } from "@chakra-ui/react";
 import HeroSection from "./hero";
-// import Pendulum from "../pendulum";
 import LushAcademy from "./lush-academy";
 import ServicesSection from "./services";
 import OurWorkSection from "./our-works";
-import AboutUsSection from "./about-us";
 import LushVideoSection from "./lush-video";
 import ReviewSection from "./reviews";
-import OurStoreSection from "./our-store";
-// import Test from "./test";
+import ShopSection from "./shop";
 
 export default function HomePage() {
   return (
@@ -19,13 +15,10 @@ export default function HomePage() {
       {/* <Navbar /> */}
       <HeroSection />
       <ServicesSection />
-      {/* <Test /> */}
-      <AboutUsSection />
+      <LushVideoSection />
+      <ShopSection />
       <OurWorkSection />
       <ReviewSection />
-      <OurStoreSection />
-      <LushVideoSection />
-      {/* <Pendulum /> */}
       <LushAcademy />
     </Box>
   );

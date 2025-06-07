@@ -71,13 +71,13 @@ const ServicesSection = () => {
           color="yellow.100"
           fontFamily="pinyon"
           fontWeight="300"
-          lineHeight={1}
+          lineHeight={.7}
         >
           Services
         </Heading>
         <Text
           mx="auto"
-          mb="5rem"
+          mb="3rem"
           fontSize={{ base: "2rem", md: "3rem" }}
           fontFamily={"playfair"}
         >

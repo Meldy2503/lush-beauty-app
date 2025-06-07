@@ -1,10 +1,10 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import aboutImg from "../../assets/images/about-us-bg.webp";
+import aboutImg from "../../assets/images/visit-us.webp";
 import Wrapper from "../wrapper";
 import Button from "../button";
 
-const AboutUsSection = () => {
+const VisitUsSection = () => {
   return (
     <Wrapper pb={{ base: "9rem", lg: "13rem" }}>
       <Flex
@@ -21,7 +21,7 @@ const AboutUsSection = () => {
             fontFamily="playfair"
             mb={4}
           >
-            ABOUT US
+            VISIT US
           </Heading>
           <Text fontWeight={"600"} color={"yellow.100"} fontFamily={"pinyon"}>
             WELCOME TO LUSH & LUXE
@@ -67,4 +67,4 @@ const AboutUsSection = () => {
   );
 };
 
-export default AboutUsSection;
+export default VisitUsSection;

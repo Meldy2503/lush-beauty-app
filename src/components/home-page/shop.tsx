@@ -43,7 +43,7 @@ const cardData: CardData[] = [
   },
 ];
 
-const OurStoreSection = () => {
+const ShopSection = () => {
   return (
     <Box
       bgImage={`url(${academyBg.src})`}
@@ -97,7 +97,12 @@ const OurStoreSection = () => {
                 height={1000}
               />
               <VStack fontSize="2rem">
-                <Heading as="h4" fontFamily="playfair" color="white" mt={{base: "1rem", md: "2rem"}}>
+                <Heading
+                  as="h4"
+                  fontFamily="playfair"
+                  color="white"
+                  mt={{ base: "1rem", md: "2rem" }}
+                >
                   {card.heading}
                 </Heading>
                 <Text color="yellow.50" textAlign="center">
@@ -117,4 +122,4 @@ const OurStoreSection = () => {
   );
 };
 
-export default OurStoreSection;
+export default ShopSection;

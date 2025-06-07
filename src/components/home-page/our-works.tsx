@@ -54,7 +54,7 @@ const OurWorksData: ourWorksCardData[] = [
 
 const OurWorkSection = () => {
   return (
-    <Box width="100%" data-testid="our-works-section" pb='3rem'>
+    <Box width="100%" data-testid="our-works-section" pb='3rem' pt='5rem'>
       <VStack textAlign="center">
         <Heading
           as="h2"
@@ -62,7 +62,7 @@ const OurWorkSection = () => {
           color="yellow.100"
           fontFamily="pinyon"
           fontWeight="300"
-          lineHeight={1.3}
+          lineHeight={1.2}
         >
           Follow our{" "}
         </Heading>
@@ -79,8 +79,8 @@ const OurWorkSection = () => {
         gap="1rem"
         alignItems="center"
         justifyContent="center"
-        pb="5rem"
-        mt="1rem"
+        pb="3rem"
+        mt=".5rem"
         borderBottomWidth="10px"
         borderBottomColor="yellow.100"
       >
