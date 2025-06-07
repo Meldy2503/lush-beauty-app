@@ -154,10 +154,9 @@ const ServicesSection = () => {
                   fontSize={{ base: "2rem", md: "2.5rem" }}
                   fontFamily="playfair"
                   mb={3}
-                  border={service.imageUrl ? "2px solid black" : "none"}
+                  border={service.imageUrl ? "1.5px solid white" : "none"}
                   p={service.imageUrl ? "2rem" : 0}
-                  borderColor={"white"}
-                  borderWidth={"1.5px"}
+                 
                 >
                   {service.heading}
                 </Heading>
