@@ -4,14 +4,16 @@ import {
   Box,
   Flex,
   Icon,
-  DrawerRoot,
-  DrawerBackdrop,
-  DrawerPositioner,
-  DrawerContent,
-  DrawerCloseTrigger,
-  DrawerBody,
+//   DrawerRoot,
+//   DrawerBackdrop,
+//   DrawerPositioner,
+//   DrawerContent,
+//   DrawerCloseTrigger,
+//   DrawerBody,
   CloseButton,
   Text,
+  Drawer,
+  Portal,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
@@ -22,10 +24,17 @@ import { TbLogin2 } from "react-icons/tb";
 import Logo from "./logo";
 import { usePathname } from "next/navigation";
 import ContactUsModal from "./contact-us/contact-modal";
+// import { useModal } from "./ui/provider";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+//   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+//   const { openContactModal } = useModal();
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  
+    // const openContactModal = () => setIsContactModalOpen(true);
+    // const closeContactModal = () => setIsContactModalOpen(false);
+
 
   const pathname = usePathname();
 
@@ -157,7 +166,7 @@ const Navbar = () => {
           onClose={() => setIsContactModalOpen(false)}
         />
 
-        {/* <Drawer.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
+     <Drawer.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
           <Portal>
             <Drawer.Backdrop />
             <Drawer.Positioner>
@@ -218,8 +227,8 @@ const Navbar = () => {
               </Drawer.Content>
             </Drawer.Positioner>
           </Portal>
-        </Drawer.Root> */}
-        <DrawerRoot open={open} onOpenChange={(e) => setOpen(e.open)}>
+        </Drawer.Root> 
+        {/* <DrawerRoot open={open} onOpenChange={(e) => setOpen(e.open)}>
           <DrawerBackdrop />
           <DrawerPositioner>
             <DrawerContent bg="white" p={4}>
@@ -273,7 +282,7 @@ const Navbar = () => {
               </DrawerBody>
             </DrawerContent>
           </DrawerPositioner>
-        </DrawerRoot>
+        </DrawerRoot> */}
       </Box>
     </>
   );

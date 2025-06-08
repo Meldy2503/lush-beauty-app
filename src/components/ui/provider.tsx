@@ -1,9 +1,13 @@
 "use client";
-import { ChakraProvider, createSystem, defaultConfig } from "@chakra-ui/react";
-import Navbar from "../navbar";
-import Footer from "../footer";
+import {
+  ChakraProvider,
+  createSystem,
+  defaultConfig,
+  Text,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
-const customConfig = {
+const config = {
   ...defaultConfig,
   theme: {
     breakpoints: {
@@ -16,7 +20,6 @@ const customConfig = {
     },
     tokens: {
       fonts: {
-        // heading: { value: "Allura, cursive" },
         body: { value: "'Lato', sans-serif" },
         lato: { value: "'Lato', sans-serif" },
         playfair: { value: "'Playfair Display', serif" },
@@ -41,16 +44,22 @@ const customConfig = {
   },
 };
 
-const system = createSystem(customConfig);
+const system = createSystem(defaultConfig, config);
 
 export function Provider({ children }: { children: React.ReactNode }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setLoading(false);
+    }, 800);
+
+    return () => clearTimeout(delay);
+  }, []);
+
   return (
     <ChakraProvider value={system}>
-      <>
-        <Navbar />
-        {children}
-        <Footer />
-      </>
+      <>{loading ? <Text>Loading....</Text> : children}</>
     </ChakraProvider>
   );
 }
