@@ -54,22 +54,28 @@ const OurWorksData: ourWorksCardData[] = [
 
 const OurWorkSection = () => {
   return (
-    <Box width="100%" data-testid="our-works-section" pb='3rem' pt='5rem'>
+    <Box
+      width="100%"
+      data-testid="our-works-section"
+      pb="3rem"
+      pt={{ base: "7rem", md: "13rem" }}
+    >
       <VStack textAlign="center">
         <Heading
           as="h2"
-          fontSize={{ base: "7rem", md: "8rem", lg: "10rem" }}
+          fontSize={{ base: "10rem", md: "13rem", lg: "16rem" }}
           color="yellow.100"
-          fontFamily="pinyon"
+          fontFamily="allura"
           fontWeight="300"
-          lineHeight={1.2}
+          lineHeight={{ base: 0.6, md: 0.4 }}
         >
           Follow our{" "}
         </Heading>
         <Text
           mx="auto"
-          fontSize={{ base: "2rem", md: "3rem" }}
+          fontSize={{ base: "2.5rem", md: "3rem" }}
           fontFamily={"playfair"}
+          mt="2.5rem"
         >
           LATEST WORK{" "}
         </Text>
@@ -80,7 +86,7 @@ const OurWorkSection = () => {
         alignItems="center"
         justifyContent="center"
         pb="3rem"
-        mt=".5rem"
+        mt="1rem"
         borderBottomWidth="10px"
         borderBottomColor="yellow.100"
       >

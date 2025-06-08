@@ -30,11 +30,11 @@ const ServiceHeroSection = () => {
         >
           <Heading
             as="h2"
-            fontSize={{ base: "7rem", md: "8rem", lg: "10rem" }}
+            fontSize={{ base: "10rem", md: "13rem", lg: "16rem" }}
             color="gray.50"
-            fontFamily="pinyon"
+            fontFamily="allura"
             fontWeight="300"
-            lineHeight={1}
+            lineHeight={{ base: 0.8, md: 0.4 }}
           >
             Our Services
           </Heading>
@@ -43,7 +43,8 @@ const ServiceHeroSection = () => {
             fontSize={{ base: "3rem", md: "4rem" }}
             fontFamily="playfair"
             color="white"
-            mt="1rem"
+            mt={{ base: "2rem", md: "3rem" }}
+            lineHeight={1.4}
           >
             Experience Beauty & Luxury{" "}
           </Heading>
@@ -71,7 +72,7 @@ const ServiceHeroSection = () => {
               href="/services"
               bg="black"
               color="white"
-              _hover={{ bg: "gray.700" }}
+              px={{ base: "2rem", sm: "5rem" }}
             >
               <HStack gap={{ base: ".5rem", sm: "1rem" }}>
                 <IoChatbubbleEllipsesOutline />
@@ -79,10 +80,10 @@ const ServiceHeroSection = () => {
               </HStack>
             </Button>
             <Button
+              px={{ base: "2rem", sm: "5rem" }}
               href="/services"
               bg="black"
               color="white"
-              _hover={{ bg: "gray.700" }}
             >
               Contact Us
             </Button>

@@ -19,13 +19,14 @@ const VisitUsSection = () => {
             fontSize={{ base: "2.5rem", md: "3.5rem" }}
             fontFamily="playfair"
             mb={4}
+            lineHeight={1.3}
           >
             VISIT US
           </Heading>
           <Text
             fontWeight={"600"}
             color={"yellow.100"}
-            fontFamily={"allura"}
+            fontFamily={"playfair"}
             fontSize={{ base: "1.8rem", md: "2rem" }}
           >
             YOUR BEAUTY JOURNEY STARTS HERE
@@ -40,7 +41,7 @@ const VisitUsSection = () => {
             gap={{ base: "1rem", sm: "2rem" }}
             flexDir={{ base: "column", sm: "row" }}
           >
-            <Box w={{ base: "100%", md: "55%" }}>
+            <Box w={{ base: "100%", md: "55%" }} fontSize={"1.6rem"}>
               <Heading
                 as="h3"
                 fontSize={{ base: "1.6rem", md: "1.8rem" }}
@@ -117,7 +118,6 @@ const VisitUsSection = () => {
             height="105%"
             width="85%"
             bg="black"
-            borderRadius="md"
           />
         </Box>
       </Flex>

@@ -1,13 +1,13 @@
 "use client";
 
 import {
-    Box,
-    Flex,
-    Grid,
-    GridItem,
-    Heading,
-    Text,
-    VStack,
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
 import academy1 from "../../assets/images/academy-1.webp";
@@ -85,7 +85,7 @@ const HomeCtaSection = () => {
           >
             LUSH & LUXE
           </Heading>
-          <Text maxW="500px" mx="auto" mb="5rem" mt="1rem">
+          <Text maxW="500px" mx="auto" my="5rem">
             Indulge in unparalleled luxury. Discover a world of exquisite beauty
             treatments tailored just for you
           </Text>
@@ -141,8 +141,8 @@ const HomeCtaSection = () => {
                   <VStack gap="1rem" alignItems="flex-start" flexGrow={1}>
                     <Heading
                       as="h3"
-                      fontSize={{ base: "2rem", md: "2.5rem" }}
-                      fontFamily="allura"
+                      fontSize={{ base: "2rem", md: "2.3rem" }}
+                      fontFamily="playfair"
                       fontWeight="600"
                     >
                       {card.heading}
@@ -152,12 +152,7 @@ const HomeCtaSection = () => {
                     </Box>
                   </VStack>
 
-                  <Button
-                    href="/services"
-                    bg="black"
-                    color="white"
-                    _hover={{ bg: "gray.700" }}
-                  >
+                  <Button href="/services" bg="black" color="white">
                     Learn More
                   </Button>
                 </Flex>

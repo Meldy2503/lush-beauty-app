@@ -141,12 +141,13 @@ const ServiceListSection = () => {
                   fontSize={{ base: "2rem", md: "2.3rem" }}
                   fontFamily="playfair"
                   mb={"1.5rem"}
+                  lineHeight={1.4}
                 >
                   {service.heading}
                 </Heading>
                 <Text pb="1.5rem">{service.text}</Text>
-                <List.Root>
-                  <List.Item fontSize="1.5rem">
+                <List.Root mb='3rem'>
+                  <List.Item fontSize="1.5rem" listStyle={'none'}>
                     <Flex direction={"column"} gap="1rem">
                       {service.list?.map((item, idx) => (
                         <Flex
@@ -163,13 +164,11 @@ const ServiceListSection = () => {
                 </List.Root>
 
                 <Button
-                  fontSize="1.9rem"
                   bg="transparent"
                   color="white"
-                  mt="5rem"
-                  border="2px solid black"
+                  borderWidth="1px"
+                  w='100%'
                   borderColor={"white"}
-                  _hover={{ bg: "yellow.100" }}
                 >
                   Book Now
                 </Button>

@@ -45,7 +45,7 @@ const ReviewSection = () => {
                   objectPosition: "center",
                 }}
               />{" "}
-              <Text>Nancy Katherine</Text>
+              <Text fontFamily={'playfair'}>Nancy Katherine</Text>
             </Flex>
           </Box>
 
@@ -63,7 +63,7 @@ const ReviewSection = () => {
             >
               REVIEWS
             </Heading>{" "}
-            <Text color={"yellow.50"} mt="1rem">
+            <Text color={"yellow.50"} mt="1rem" >
               {" "}
               YOUR KIND WORDS
             </Text>{" "}

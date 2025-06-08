@@ -1,6 +1,14 @@
 "use client";
 
-import { Box, Grid, GridItem, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import Image, { StaticImageData } from "next/image";
 import academy1 from "../../assets/images/academy-1.webp";
 import academy2 from "../../assets/images/academy-2.webp";
@@ -56,11 +64,11 @@ const ShopSection = () => {
         <VStack textAlign="center">
           <Heading
             as="h2"
-            fontSize={{ base: "7rem", md: "8rem", lg: "10rem" }}
+            fontSize={{ base: "10rem", md: "13rem", lg: "16rem" }}
             color="gray.50"
-            fontFamily="pinyon"
+            fontFamily="allura"
             fontWeight="300"
-            lineHeight={1}
+            lineHeight={{ base: 0.8, md: 0.4 }}
           >
             Our Store
           </Heading>
@@ -69,11 +77,12 @@ const ShopSection = () => {
             fontSize={{ base: "3rem", md: "4rem" }}
             fontFamily="playfair"
             color="white"
-            mt="3rem"
+            mt={{ base: "4rem", md: "7rem" }}
+            mb="2rem"
           >
             SHOP NOW
           </Heading>
-          <Text maxW="400px" mx="auto" mb="5rem">
+          <Text maxW="450px" mx="auto" mb="5rem">
             Your go-to destination for premium beauty products that enhance your
             natural radiance.
           </Text>
@@ -96,27 +105,27 @@ const ShopSection = () => {
                 width={1000}
                 height={1000}
               />
-              <VStack fontSize="2rem">
+              <VStack>
                 <Heading
                   as="h4"
-                  fontFamily="playfair"
                   color="white"
                   mt={{ base: "1rem", md: "2rem" }}
+                  fontSize="1.7rem"
                 >
                   {card.heading}
                 </Heading>
-                <Text color="yellow.50" textAlign="center">
+                <Text color="yellow.50" textAlign="center" fontWeight={"500"}>
                   {card.amount}
                 </Text>
               </VStack>
             </GridItem>
           ))}
         </Grid>
-        <Box textAlign="center" mt="6rem">
-          <Button href="/services" px="5rem">
+        <Flex mt="6rem" alignItems={"center"} justifyContent={"center"}>
+          <Button href="/services" bg="yellow.100">
             See All
           </Button>
-        </Box>
+        </Flex>
       </Wrapper>
     </Box>
   );

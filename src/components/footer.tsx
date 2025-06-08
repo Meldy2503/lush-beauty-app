@@ -28,7 +28,7 @@ const Footer = () => {
           {/* logo and description */}
           <Logo />
           <Text
-            fontSize="1.4rem"
+            fontSize="1.5rem"
             lineHeight="1.8"
             fontWeight="300"
             width={{ base: "90%", lg: "70%" }}
@@ -112,12 +112,13 @@ const Footer = () => {
               fontWeight="700"
               mb="1rem"
               color="yellow.50"
+              lineHeight={1.4}
             >
               QUICK LINKS
             </Heading>
             <Link href="/" passHref>
               <Text
-                fontSize="1.45rem"
+                fontSize="1.5rem"
                 _hover={{
                   fontWeight: "500",
                   color: "yellow.50",
@@ -130,7 +131,7 @@ const Footer = () => {
             </Link>
             <Link href="/about-us" passHref>
               <Text
-                fontSize="1.45rem"
+                fontSize="1.5rem"
                 _hover={{
                   fontWeight: "500",
                   color: "yellow.50",
@@ -143,7 +144,7 @@ const Footer = () => {
             </Link>
             <Link href="/services" passHref>
               <Text
-                fontSize="1.45rem"
+                fontSize="1.5rem"
                 _hover={{
                   fontWeight: "500",
                   color: "yellow.50",
@@ -156,7 +157,7 @@ const Footer = () => {
             </Link>
             <Link href="/shop" passHref>
               <Text
-                fontSize="1.45rem"
+                fontSize="1.5rem"
                 _hover={{
                   fontWeight: "500",
                   color: "yellow.50",
@@ -169,7 +170,7 @@ const Footer = () => {
             </Link>
             <Link href="/contact-us" passHref>
               <Text
-                fontSize="1.45rem"
+                fontSize="1.5rem"
                 _hover={{
                   fontWeight: "500",
                   color: "yellow.50",
@@ -195,30 +196,31 @@ const Footer = () => {
               fontWeight="700"
               mb="1rem"
               color="yellow.50"
+              lineHeight={1.4}
             >
               CONTACT INFO
             </Heading>
             <Stack direction="row" gap="1rem">
               <Box as={MdLocationOn} boxSize="2.2rem" color="yellow.50" />
-              <Text fontSize="1.45rem" width={{ base: "100%", md: "65%" }}>
+              <Text fontSize="1.5rem" width={{ base: "100%", md: "65%" }}>
                 123 Beauty Lane, Lush City, LC 12345
               </Text>
             </Stack>
             <Stack direction="row" gap="1rem">
               <Box as={MdPhone} boxSize="2.2rem" color="yellow.50" />
-              <Text fontSize="1.45rem">+1 (555) 123-4567</Text>
+              <Text fontSize="1.5rem">+1 (555) 123-4567</Text>
             </Stack>
             <Stack direction="row" gap="1rem">
               <Box as={MdEmail} boxSize="2.2rem" color="yellow.50" />
-              <Text fontSize="1.45rem">info@lushbeauty.com</Text>
+              <Text fontSize="1.5rem">info@lushbeauty.com</Text>
             </Stack>
             <Text fontWeight="600" mt="1rem" fontFamily="playfair">
               Opening Hours:
             </Text>
-            <Text fontSize="1.45rem" mt="-1rem">
+            <Text fontSize="1.5rem" mt="-1rem">
               Mon - Sat: 9:00 AM - 8:00 PM
             </Text>
-            <Text fontSize="1.45rem" mt="-1rem">
+            <Text fontSize="1.5rem" mt="-1rem">
               Sunday: Closed
             </Text>
           </Stack>
@@ -237,31 +239,31 @@ const Footer = () => {
               fontFamily="playfair"
               mb="1rem"
               color="yellow.50"
+              lineHeight={1.4}
             >
               SUBSCRIBE FOR NEWSLETTER
             </Heading>
-            <Text fontSize="1.45rem" lineHeight="1.8">
+            <Text fontSize="1.5rem" lineHeight="1.8">
               Stay updated with our latest beauty tips, promotions, and new
               services.
             </Text>
             <Flex
-              direction={{ base: "row", lg: "column" }}
+              direction={{ base: "column", sm: "row", lg: "column" }}
               gap="1.5rem"
-              w={{ base: "100%", lg: "100%" }}
+              w="100%"
             >
               <Input
                 placeholder="Your email address"
-                size="lg"
-                fontSize="1.4rem"
-                p="1rem"
-                borderColor="gray.50"
-                bg="gray.800"
-                w={{ base: "60%", lg: "100%" }}
+                fontSize="1.5rem"
+                p="2.5rem 2rem"
+                borderColor="white"
+                bg="white"
+                w="100%"
                 color="black"
                 _hover={{ borderColor: "yellow.50" }}
-                _focus={{ borderColor: "yellow.50", bg: "gray.800" }}
+                _focus={{ borderColor: "yellow.50" }}
               />
-              <Button px="1rem" py=".8rem" bg="yellow.150">
+              <Button px="1rem" py=".8rem" bg="yellow.150" w="full">
                 Subscribe
               </Button>
             </Flex>
@@ -283,7 +285,7 @@ const Footer = () => {
         <Text fontSize="1.5rem" fontWeight="300">
           © {currentYear} Lush & Luxe Beauty. All rights reserved.
         </Text>
-        <Stack direction="row" gap="2rem" fontSize="1.3rem">
+        <Stack direction="row" gap="2rem">
           <Link href="/privacy-policy" passHref>
             <Text
               fontSize="1.5rem"

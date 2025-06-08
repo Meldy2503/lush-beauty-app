@@ -3,15 +3,15 @@ import {
   ChakraProvider,
   createSystem,
   defaultConfig,
-  Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import LoadingIcon from "../loading-icon";
 
 const config = {
   ...defaultConfig,
   theme: {
     breakpoints: {
-      xs: "350px",
+      xs: "380px",
       sm: "500px",
       md: "768px",
       lg: "1024px",
@@ -59,7 +59,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
 
   return (
     <ChakraProvider value={system}>
-      <>{loading ? <Text>Loading....</Text> : children}</>
+      <>{loading ? <LoadingIcon /> : children}</>
     </ChakraProvider>
   );
 }

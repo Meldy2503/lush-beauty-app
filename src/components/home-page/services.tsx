@@ -63,22 +63,26 @@ const servicesData: ServiceCardData[] = [
 
 const ServicesSection = () => {
   return (
-    <Box width="100%" data-testid="services-section" pt='5rem'>
+    <Box
+      width="100%"
+      data-testid="services-section"
+      pt={{ base: "7rem", md: "12rem" }}
+    >
       <VStack gap={{ base: "2rem", md: "3rem" }} textAlign="center">
         <Heading
           as="h2"
-          fontSize={{ base: "7rem", md: "8rem", lg: "10rem" }}
+          fontSize={{ base: "10rem", md: "13rem", lg: "16rem" }}
           color="yellow.100"
-          fontFamily="pinyon"
+          fontFamily="allura"
           fontWeight="300"
-          lineHeight={.7}
+          lineHeight={{ base: 0.8, md: 0.4 }}
         >
           Services
         </Heading>
         <Text
           mx="auto"
-          mb="3rem"
-          fontSize={{ base: "2rem", md: "3rem" }}
+          mb="3.5rem"
+          fontSize={{ base: "2.5rem", md: "3rem" }}
           fontFamily={"playfair"}
         >
           SERVICE MENU
@@ -151,12 +155,11 @@ const ServicesSection = () => {
               >
                 <Heading
                   as="h3"
-                  fontSize={{ base: "2rem", md: "2.5rem" }}
+                  fontSize={{ base: "1.8rem", md: "2.5rem" }}
                   fontFamily="playfair"
                   mb={3}
                   border={service.imageUrl ? "1.5px solid white" : "none"}
-                  p={service.imageUrl ? "2rem" : 0}
-                 
+                  p={service.imageUrl ? "2rem 1.5rem" : 0}
                 >
                   {service.heading}
                 </Heading>

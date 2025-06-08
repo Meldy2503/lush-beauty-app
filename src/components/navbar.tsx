@@ -4,12 +4,6 @@ import {
   Box,
   Flex,
   Icon,
-//   DrawerRoot,
-//   DrawerBackdrop,
-//   DrawerPositioner,
-//   DrawerContent,
-//   DrawerCloseTrigger,
-//   DrawerBody,
   CloseButton,
   Text,
   Drawer,
@@ -24,18 +18,10 @@ import { TbLogin2 } from "react-icons/tb";
 import Logo from "./logo";
 import { usePathname } from "next/navigation";
 import ContactUsModal from "./contact-us/contact-modal";
-// import { useModal } from "./ui/provider";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-//   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-//   const { openContactModal } = useModal();
-    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  
-    // const openContactModal = () => setIsContactModalOpen(true);
-    // const closeContactModal = () => setIsContactModalOpen(false);
-
-
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const pathname = usePathname();
 
   return (
@@ -52,8 +38,13 @@ const Navbar = () => {
         py="3rem"
         h="6rem"
       >
-        <Text textAlign={"center"} fontWeight={"600"} fontFamily={"allura"}>
-          Lush & Luxe: Discover your inner beauty
+        <Text
+          textAlign={"center"}
+          fontWeight={"600"}
+          fontFamily={"playfair"}
+          textTransform={"uppercase"}
+        >
+          Lush & Luxe - Discover Your Inner Beauty
         </Text>
       </Flex>
       <Box
@@ -107,10 +98,10 @@ const Navbar = () => {
               bg="transparent"
               fontFamily={"lato"}
               color="#000"
-              hover='transparent'
-              
+              hover="transparent"
+              fontWeight="300"
               px="0"
-             
+              py="0"
             >
               Contact Us
             </Button>
@@ -146,7 +137,9 @@ const Navbar = () => {
               </Flex>
             </Box>
 
-            <Button>Book Now</Button>
+            <Button px="2rem" py="1rem">
+              Book Now
+            </Button>
           </Flex>
 
           <Box
@@ -155,7 +148,7 @@ const Navbar = () => {
           >
             <Icon
               as={open ? AiOutlineClose : GiHamburgerMenu}
-              boxSize={20}
+              boxSize={10}
               cursor={"pointer"}
             />
           </Box>
@@ -166,7 +159,7 @@ const Navbar = () => {
           onClose={() => setIsContactModalOpen(false)}
         />
 
-     <Drawer.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
+        <Drawer.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
           <Portal>
             <Drawer.Backdrop />
             <Drawer.Positioner>
@@ -211,7 +204,6 @@ const Navbar = () => {
                       fontSize={"1rem"}
                       href={"/login"}
                       hover="#fff"
-                      mb="1rem"
                     >
                       Login
                     </Button>{" "}
@@ -227,62 +219,7 @@ const Navbar = () => {
               </Drawer.Content>
             </Drawer.Positioner>
           </Portal>
-        </Drawer.Root> 
-        {/* <DrawerRoot open={open} onOpenChange={(e) => setOpen(e.open)}>
-          <DrawerBackdrop />
-          <DrawerPositioner>
-            <DrawerContent bg="white" p={4}>
-              <DrawerCloseTrigger asChild>
-                <CloseButton size="sm" />
-              </DrawerCloseTrigger>
-              <DrawerBody>
-                <Flex direction="column" rowGap="1rem" align="center" mt="4rem">
-                  <Logo />
-                  <Link
-                    href="/jobs"
-                    style={{
-                      color: "black",
-                      fontWeight: pathname === "/jobs" ? "bold" : "300",
-                      borderBottom:
-                        pathname === "/jobs" ? "2px solid #006adc" : "none",
-                      marginTop: "2rem",
-                    }}
-                  >
-                    Jobs
-                  </Link>
-                  <Link
-                    href="/contact-us"
-                    style={{
-                      color: "black",
-                      margin: "1rem 0",
-                      fontWeight: pathname === "/contact-us" ? "bold" : "300",
-                      borderBottom:
-                        pathname === "/contact-us"
-                          ? "2px solid #006adc"
-                          : "none",
-                    }}
-                  >
-                    Contact Us
-                  </Link>
-                  <Button
-                    bg="transparent"
-                    color="black"
-                    fontSize="1rem"
-                    href="/login"
-                    hover="#fff"
-                    mb="1rem"
-                  >
-                    Login
-                  </Button>
-                  <Button px="1rem" href="/signup">
-                    <TbLogin2 />
-                    Sign up
-                  </Button>
-                </Flex>
-              </DrawerBody>
-            </DrawerContent>
-          </DrawerPositioner>
-        </DrawerRoot> */}
+        </Drawer.Root>
       </Box>
     </>
   );

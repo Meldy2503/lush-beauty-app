@@ -25,7 +25,7 @@ const CtaSection = () => {
           as="h2"
           fontSize={{ base: "2rem", md: "2.5rem" }}
           color="yellow.50"
-          fontFamily="pinyon"
+          fontFamily="playfair"
           fontWeight="300"
           lineHeight={1}
         >
@@ -33,14 +33,15 @@ const CtaSection = () => {
         </Heading>
         <Heading
           as="h3"
-          fontSize={{ base: "3rem", md: "5rem" }}
+          fontSize={{ base: "4rem", md: "5rem" }}
           fontFamily="playfair"
           color="white"
           mt="3rem"
+          lineHeight={1.3}
         >
           Book a Luxurious Service Today
         </Heading>
-        <Text maxW="500px" mx="auto" mb="4rem">
+        <Text maxW="500px" mx="auto" mb="4rem" mt='1rem'>
           Discover tailored treatments and expert care designed to leave you
           glowing. Your beauty journey starts here.
         </Text>

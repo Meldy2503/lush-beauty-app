@@ -1,22 +1,24 @@
 "use client";
 
-import {
-  Button as ChakraButton,
-  ButtonProps as ChakraButtonProps,
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import Link from "next/link";
 
-interface ButtonProps extends ChakraButtonProps {
+interface ButtonProps {
   children: React.ReactNode;
   href?: string;
   bg?: string;
   fontSize?: string;
-  border?: string;
+  fontWeight?: string;
+  borderWidth?: string;
   color?: string;
-  px?: string;
-  py?: string;
+  w?: string;
+  borderColor?: string;
+  px?: string | object;
+  py?: string | object;
+  fontFamily?: string;
   hover?: string;
+  onClick?: () => void;
 }
 
 const Button = ({
@@ -24,8 +26,13 @@ const Button = ({
   href,
   bg,
   color,
+  fontFamily,
   fontSize,
-  border,
+  fontWeight,
+  onClick,
+  w,
+  borderColor,
+  borderWidth,
   px,
   py,
   hover,
@@ -33,42 +40,51 @@ const Button = ({
 }: ButtonProps) => {
   if (href) {
     return (
-      <Link href={href} passHref>
-        <ChakraButton
+      <Link href={href} passHref onClick={onClick}>
+        <Box
           color={color ?? "white"}
+          textAlign={"center"}
           cursor={"pointer"}
-          fontWeight={"semibold"}
-          fontFamily="playfair"
-          px={px ?? "2.5rem"}
-          py={py ?? ".8rem"}
+          fontWeight={fontWeight ?? "500"}
+          w={w ?? "fit-content"}
+          fontFamily={fontFamily ?? "playfair"}
+          px={px ?? "5rem"}
+          py={py ?? "1.2rem"}
           {...props}
           bg={bg ?? "black"}
-          fontSize={fontSize }
-          border={border }
+          borderRadius="0"
+          fontSize={fontSize ?? "1.6rem"}
+          borderWidth={borderWidth}
+          borderColor={borderColor ?? "none"}
           _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
         >
           {children}
-        </ChakraButton>
+        </Box>
       </Link>
     );
   }
 
   return (
-    <ChakraButton
-      fontWeight={"semibold"}
+    <Box
+      fontWeight={fontWeight ?? "500"}
       cursor={"pointer"}
-      fontFamily="playfair"
+      fontFamily={fontFamily ?? "playfair"}
+      w={w ?? "fit-content"}
       color={color ?? "white"}
-      px={px ?? "2.5rem"}
-      py={py ?? ".8rem"}
-      fontSize={fontSize}
-      border={border}
+      borderRadius="0"
+      px={px ?? "5rem"}
+      textAlign={"center"}
+      py={py ?? "1.2rem"}
+      fontSize={fontSize ?? "1.6rem"}
+      borderColor={borderColor ?? "none"}
+      borderWidth={borderWidth}
       bg={bg ?? "black"}
+      onClick={onClick}
       {...props}
       _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
     >
       {children}
-    </ChakraButton>
+    </Box>
   );
 };
 
