@@ -12,7 +12,7 @@ interface ButtonProps {
   fontWeight?: string;
   borderWidth?: string;
   color?: string;
-  w?: string;
+  w?: string | object;
   borderColor?: string;
   px?: string | object;
   py?: string | object;

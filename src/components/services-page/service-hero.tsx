@@ -16,7 +16,7 @@ const ServiceHeroSection = () => {
         bgRepeat="no-repeat"
         height="60vh"
         bgSize="cover"
-        mt="5rem"
+        mt="10rem"
       >
         <VStack
           textAlign="center"

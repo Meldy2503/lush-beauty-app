@@ -156,7 +156,7 @@ const Navbar = () => {
 
         <ContactUsModal
           isOpen={isContactModalOpen}
-          onClose={() => setIsContactModalOpen(false)}
+          setIsContactModalOpen={setIsContactModalOpen}
         />
 
         <Drawer.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
