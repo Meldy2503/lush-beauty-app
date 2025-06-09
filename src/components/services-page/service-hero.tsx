@@ -16,12 +16,12 @@ const ServiceHeroSection = () => {
         bgRepeat="no-repeat"
         height="60vh"
         bgSize="cover"
-        mt="10rem"
+        mt="12rem"
       >
         <VStack
           textAlign="center"
           px="2rem"
-          bg="rgb(0, 0, 0, 0.5)"
+          bg="rgb(0, 0, 0, 0.55)"
           color="white"
           height={"100%"}
           w={"100%"}
@@ -46,12 +46,22 @@ const ServiceHeroSection = () => {
             mt={{ base: "2rem", md: "3rem" }}
             lineHeight={1.4}
           >
-            Experience Beauty & Luxury{" "}
+            EXPERIENCE BEAUTY & LUXURY
           </Heading>
         </VStack>
       </Box>
       <Wrapper pt="6rem" pb="0">
         <Box>
+          <Text
+            fontWeight={"600"}
+            color={"yellow.100"}
+            fontFamily={"playfair"}
+            fontSize={{ base: "1.8rem", md: "2rem" }}
+            textAlign={"center"}
+            mb="1.5rem"
+          >
+            SERVICES WE OFFER
+          </Text>
           <Text
             textAlign={"center"}
             w={{ base: "100%", md: "80%", lg: "60%" }}
@@ -65,7 +75,7 @@ const ServiceHeroSection = () => {
           <Flex
             alignItems={"center"}
             gap={{ base: "1rem", sm: "3rem" }}
-            mt="5rem"
+            mt="3rem"
             justifyContent={"center"}
           >
             <Button

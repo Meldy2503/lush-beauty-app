@@ -82,7 +82,7 @@ const ServicesSection = () => {
         <Text
           mx="auto"
           mb="3.5rem"
-          fontSize={{ base: "2.5rem", md: "3rem" }}
+          fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
           fontFamily={"playfair"}
         >
           SERVICE MENU

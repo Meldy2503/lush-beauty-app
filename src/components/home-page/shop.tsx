@@ -74,7 +74,7 @@ const ShopSection = () => {
           </Heading>
           <Heading
             as="h3"
-            fontSize={{ base: "3rem", md: "4rem" }}
+            fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
             fontFamily="playfair"
             color="white"
             mt={{ base: "4rem", md: "7rem" }}

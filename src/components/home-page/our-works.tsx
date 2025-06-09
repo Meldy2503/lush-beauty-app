@@ -73,7 +73,7 @@ const OurWorkSection = () => {
         </Heading>
         <Text
           mx="auto"
-          fontSize={{ base: "2.5rem", md: "3rem" }}
+          fontSize={{ base: "2.5rem", md: "3rem", lg:'3.5rem' }}
           fontFamily={"playfair"}
           mt="2.5rem"
         >

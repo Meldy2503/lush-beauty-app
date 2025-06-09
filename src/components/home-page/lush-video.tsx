@@ -17,7 +17,7 @@ const LushVideoSection = () => {
         <Box w={{ base: "100%", md: "47%" }}>
           <Heading
             as="h2"
-            fontSize={{ base: "2.5rem", md: "3.5rem" }}
+            fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
             fontFamily="playfair"
             mb={"2rem"}
             lineHeight={1.3}

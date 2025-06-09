@@ -16,7 +16,7 @@ const VisitUsSection = () => {
         <Box w={{ base: "100%", md: "50%" }}>
           <Heading
             as="h2"
-            fontSize={{ base: "2.5rem", md: "3.5rem" }}
+            fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
             fontFamily="playfair"
             mb={4}
             lineHeight={1.3}
