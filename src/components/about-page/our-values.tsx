@@ -17,7 +17,7 @@ interface ValueDataType {
 
 const OurValueSection = () => {
   return (
-    <Wrapper pt="0">
+    <Wrapper pt={{ base: "1rem", md: "3rem" }}>
       <Box mb={{ base: "3rem", md: "6rem" }}>
         <Heading
           color={"yellow.100"}

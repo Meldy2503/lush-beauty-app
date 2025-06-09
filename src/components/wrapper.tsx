@@ -5,8 +5,8 @@ import React from "react";
 
 interface WrapperProps {
   children: React.ReactNode;
-  pt?: string | { base?: string; md?: string; lg?: string };
-  pb?: string | { base?: string; md?: string; lg?: string };
+  pt?: string | object;
+  pb?: string | object;
   bg?: string;
   color?: string;
 }

@@ -8,7 +8,7 @@ import Image from "next/image";
 const OurStorySection = () => {
   return (
     <Wrapper>
-      <Box mb="5rem">
+      <Box mb="3rem">
         <Heading
           color={"yellow.100"}
           fontFamily={"playfair"}
