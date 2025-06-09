@@ -7,8 +7,7 @@ const AboutHeroSection = () => {
   return (
     <Box
       bgImage={`url(${heroImg.src})`}
-      backgroundPosition="top center"
-      bgAttachment="fixed"
+      bgPos={"top"}
       bgRepeat="no-repeat"
       height="60vh"
       bgSize="cover"
@@ -39,7 +38,7 @@ const AboutHeroSection = () => {
           fontSize={{ base: "3rem", md: "4rem" }}
           fontFamily="playfair"
           color="white"
-          mt={{ base: "2rem", md: "3rem" }}
+          mt={{ base: "1rem", md: "3rem" }}
           lineHeight={1.4}
         >
           LUSH & LUXE

@@ -75,7 +75,7 @@ const Navbar = () => {
               href={"/about-us"}
               style={{
                 color: "#000",
-                fontWeight: pathname === "/about-us" ? "bold" : "300",
+                fontWeight: pathname === "/about-us" ? "500" : "300",
                 borderBottom:
                   pathname === "/about-us" ? "2px solid #DB9935" : "none",
               }}
@@ -86,7 +86,7 @@ const Navbar = () => {
               href={"/services"}
               style={{
                 color: "#000",
-                fontWeight: pathname === "/services" ? "bold" : "300",
+                fontWeight: pathname === "/services" ? "500" : "300",
                 borderBottom:
                   pathname === "/services" ? "2px solid #DB9935" : "none",
               }}
@@ -109,7 +109,7 @@ const Navbar = () => {
               href={"/shop"}
               style={{
                 color: "black",
-                fontWeight: pathname === "/shop" ? "bold" : "300",
+                fontWeight: pathname === "/shop" ? "500" : "300",
                 borderBottom:
                   pathname === "/shop" ? "2px solid #DB9935" : "none",
               }}

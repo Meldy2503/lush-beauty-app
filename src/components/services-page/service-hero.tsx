@@ -11,8 +11,7 @@ const ServiceHeroSection = () => {
     <>
       <Box
         bgImage={`url(${heroImg.src})`}
-        backgroundPosition="top center"
-        bgAttachment="fixed"
+        bgPos={"top"}
         bgRepeat="no-repeat"
         height="60vh"
         bgSize="cover"
@@ -34,7 +33,7 @@ const ServiceHeroSection = () => {
             color="gray.50"
             fontFamily="allura"
             fontWeight="300"
-            lineHeight={{ base: 0.8, md: 0.4 }}
+            lineHeight={{ base: 0.7, md: 0.4 }}
           >
             Our Services
           </Heading>
@@ -43,7 +42,7 @@ const ServiceHeroSection = () => {
             fontSize={{ base: "3rem", md: "4rem" }}
             fontFamily="playfair"
             color="white"
-            mt={{ base: "2rem", md: "3rem" }}
+            mt={{ base: "1rem", md: "3rem" }}
             lineHeight={1.4}
           >
             EXPERIENCE BEAUTY & LUXURY
