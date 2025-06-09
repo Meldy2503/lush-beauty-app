@@ -25,33 +25,6 @@ interface ourWorksCardData {
   imageUrl: StaticImageData;
 }
 
-const OurWorksData: ourWorksCardData[] = [
-  {
-    id: 1,
-    imageUrl: ourWorkImg4,
-  },
-  {
-    id: 2,
-    imageUrl: ourWorkImg5,
-  },
-  {
-    id: 3,
-    imageUrl: ourWorkImg6,
-  },
-  {
-    id: 4,
-    imageUrl: ourWorkImg1,
-  },
-  {
-    id: 5,
-    imageUrl: ourWorkImg3,
-  },
-  {
-    id: 6,
-    imageUrl: ourWorkImg2,
-  },
-];
-
 const OurWorkSection = () => {
   return (
     <Box
@@ -73,7 +46,7 @@ const OurWorkSection = () => {
         </Heading>
         <Text
           mx="auto"
-          fontSize={{ base: "2.5rem", md: "3rem", lg:'3.5rem' }}
+          fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
           fontFamily={"playfair"}
           mt="2.5rem"
         >
@@ -163,3 +136,30 @@ const OurWorkSection = () => {
 };
 
 export default OurWorkSection;
+
+const OurWorksData: ourWorksCardData[] = [
+  {
+    id: 1,
+    imageUrl: ourWorkImg4,
+  },
+  {
+    id: 2,
+    imageUrl: ourWorkImg5,
+  },
+  {
+    id: 3,
+    imageUrl: ourWorkImg6,
+  },
+  {
+    id: 4,
+    imageUrl: ourWorkImg1,
+  },
+  {
+    id: 5,
+    imageUrl: ourWorkImg3,
+  },
+  {
+    id: 6,
+    imageUrl: ourWorkImg2,
+  },
+];

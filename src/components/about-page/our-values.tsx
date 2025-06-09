@@ -15,37 +15,6 @@ interface ValueDataType {
   bodyText: string;
 }
 
-const valueData: ValueDataType[] = [
-  {
-    id: 1,
-    imageUrl: valueIcon1,
-    heading: "Passion for Beauty",
-    bodyText:
-      "We live and breathe beauty. Our team is genuinely passionate about helping clients feel their best — and it shows in every brushstroke, every smile, and every result.",
-  },
-  {
-    id: 2,
-    imageUrl: valueIcon2,
-    heading: "Client-Centered Care",
-    bodyText:
-      "Your comfort, style, and satisfaction come first. We listen carefully, customize every service, and go above and beyond to ensure every guest feels valued",
-  },
-  {
-    id: 3,
-    imageUrl: valueIcon3,
-    heading: "Continuous Growth",
-    bodyText:
-      "We believe in mastering our craft. Through ongoing education and staying on top of trends, we’re always evolving to offer the highest quality and most innovative services.",
-  },
-  {
-    id: 4,
-    imageUrl: valueIcon4,
-    heading: "Intergrity in Service",
-    bodyText:
-      "From the products we use to the promises we keep, we value honesty, transparency, and consistency. We show up with excellence — every client, every time.",
-  },
-];
-
 const OurValueSection = () => {
   return (
     <Wrapper pt="0">
@@ -136,3 +105,34 @@ const OurValueSection = () => {
 };
 
 export default OurValueSection;
+
+const valueData: ValueDataType[] = [
+  {
+    id: 1,
+    imageUrl: valueIcon1,
+    heading: "Passion for Beauty",
+    bodyText:
+      "We live and breathe beauty. Our team is genuinely passionate about helping clients feel their best — and it shows in every brushstroke, every smile, and every result.",
+  },
+  {
+    id: 2,
+    imageUrl: valueIcon2,
+    heading: "Client-Centered Care",
+    bodyText:
+      "Your comfort, style, and satisfaction come first. We listen carefully, customize every service, and go above and beyond to ensure every guest feels valued",
+  },
+  {
+    id: 3,
+    imageUrl: valueIcon3,
+    heading: "Continuous Growth",
+    bodyText:
+      "We believe in mastering our craft. Through ongoing education and staying on top of trends, we’re always evolving to offer the highest quality and most innovative services.",
+  },
+  {
+    id: 4,
+    imageUrl: valueIcon4,
+    heading: "Intergrity in Service",
+    bodyText:
+      "From the products we use to the promises we keep, we value honesty, transparency, and consistency. We show up with excellence — every client, every time.",
+  },
+];

@@ -27,45 +27,6 @@ interface CardDataType {
   bodyText: string;
 }
 
-const cardData: CardDataType[] = [
-  {
-    id: 1,
-    imageUrl: academy1,
-    heading: "Makeup and Skincare",
-    bodyText: "Bespoke makeup artistry, Luxurious, glowing skincare.",
-  },
-  {
-    id: 2,
-    imageUrl: academy2,
-    heading: "Nail Art & Technology",
-    bodyText: "Exquisite nail designs, Meticulous care, latest tech.",
-  },
-  {
-    id: 3,
-    imageUrl: academy3,
-    heading: "Facial Treatments",
-    bodyText: "Advanced facial therapies, Restore balance, reveal glow.",
-  },
-  {
-    id: 4,
-    imageUrl: academy4,
-    heading: "Hair Styling & Design",
-    bodyText: "Precision cuts, vibrant color, Chic styling, elegant updos.",
-  },
-  {
-    id: 5,
-    imageUrl: academy5,
-    heading: "Lash and Eyebrow Treatment",
-    bodyText: "Sculpted brows, luscious lashes, Captivating, beautiful eyes.",
-  },
-  {
-    id: 6,
-    imageUrl: academy6,
-    heading: "Holistic Wellness & Beauty",
-    bodyText: "Serene wellness therapies, Nourishing, natural treatments.",
-  },
-];
-
 const HomeCtaSection = () => {
   return (
     <Box
@@ -166,3 +127,42 @@ const HomeCtaSection = () => {
 };
 
 export default HomeCtaSection;
+
+const cardData: CardDataType[] = [
+  {
+    id: 1,
+    imageUrl: academy1,
+    heading: "Makeup and Skincare",
+    bodyText: "Bespoke makeup artistry, Luxurious, glowing skincare.",
+  },
+  {
+    id: 2,
+    imageUrl: academy2,
+    heading: "Nail Art & Technology",
+    bodyText: "Exquisite nail designs, Meticulous care, latest tech.",
+  },
+  {
+    id: 3,
+    imageUrl: academy3,
+    heading: "Facial Treatments",
+    bodyText: "Advanced facial therapies, Restore balance, reveal glow.",
+  },
+  {
+    id: 4,
+    imageUrl: academy4,
+    heading: "Hair Styling & Design",
+    bodyText: "Precision cuts, vibrant color, Chic styling, elegant updos.",
+  },
+  {
+    id: 5,
+    imageUrl: academy5,
+    heading: "Lash and Eyebrow Treatment",
+    bodyText: "Sculpted brows, luscious lashes, Captivating, beautiful eyes.",
+  },
+  {
+    id: 6,
+    imageUrl: academy6,
+    heading: "Holistic Wellness & Beauty",
+    bodyText: "Serene wellness therapies, Nourishing, natural treatments.",
+  },
+];

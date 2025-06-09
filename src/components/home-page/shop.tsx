@@ -24,33 +24,6 @@ interface CardData {
   amount?: string;
 }
 
-const cardData: CardData[] = [
-  {
-    id: 1,
-    imageUrl: academy1,
-    heading: "Chebe Hair Butter",
-    amount: "$45.00",
-  },
-  {
-    id: 2,
-    imageUrl: academy2,
-    heading: "Chebe Hair Butter",
-    amount: "$45.00",
-  },
-  {
-    id: 3,
-    imageUrl: academy3,
-    heading: "Chebe Hair Butter",
-    amount: "$45.00",
-  },
-  {
-    id: 4,
-    imageUrl: academy1,
-    heading: "Chebe Hair Butter",
-    amount: "$45.00",
-  },
-];
-
 const ShopSection = () => {
   return (
     <Box
@@ -132,3 +105,30 @@ const ShopSection = () => {
 };
 
 export default ShopSection;
+
+const cardData: CardData[] = [
+  {
+    id: 1,
+    imageUrl: academy1,
+    heading: "Chebe Hair Butter",
+    amount: "$45.00",
+  },
+  {
+    id: 2,
+    imageUrl: academy2,
+    heading: "Chebe Hair Butter",
+    amount: "$45.00",
+  },
+  {
+    id: 3,
+    imageUrl: academy3,
+    heading: "Chebe Hair Butter",
+    amount: "$45.00",
+  },
+  {
+    id: 4,
+    imageUrl: academy1,
+    heading: "Chebe Hair Butter",
+    amount: "$45.00",
+  },
+];

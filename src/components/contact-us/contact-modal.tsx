@@ -35,7 +35,6 @@ const ContactUsModal = ({
       placement={"center"}
     >
       <Portal>
-        {/* <Dialog.Backdrop /> */}
         {isOpen && (
           <Box
             backgroundImage={`linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url(${contactBg.src})`}

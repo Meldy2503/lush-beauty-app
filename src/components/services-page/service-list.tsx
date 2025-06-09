@@ -19,6 +19,77 @@ interface ServiceCardData {
   list?: { item: string; value: string }[];
 }
 
+const ServiceListSection = () => {
+  return (
+    <Box width="100%" data-testid="services-section" pt="10rem">
+      <Grid
+        templateColumns={{
+          base: "repeat(1, 1fr)",
+          md: "repeat(2, 1fr)",
+          lg: "repeat(3, 1fr)",
+        }}
+        gap={0}
+      >
+        {serviceListData.map((service, index) => {
+          return (
+            <GridItem
+              key={service.id}
+              bg={index % 2 === 0 ? "black" : "yellow.100"}
+              color="white"
+            >
+              <Flex
+                direction="column"
+                h="100%"
+                py="5rem"
+                px={{ base: "2.5rem", sm: "4rem", xl: "8rem" }}
+              >
+                <Heading
+                  as="h3"
+                  fontSize={{ base: "2rem", md: "2.3rem" }}
+                  fontFamily="playfair"
+                  mb={"1.5rem"}
+                  lineHeight={1.4}
+                >
+                  {service.heading}
+                </Heading>
+                <Text pb="1.5rem">{service.text}</Text>
+                <List.Root mb="3rem">
+                  <List.Item fontSize="1.5rem" listStyle={"none"}>
+                    <Flex direction={"column"} gap="1rem">
+                      {service.list?.map((item, idx) => (
+                        <Flex
+                          key={idx}
+                          gap="2rem"
+                          justifyContent="space-between"
+                        >
+                          <Text>{item.item}</Text>
+                          <Text>{item.value}</Text>
+                        </Flex>
+                      ))}
+                    </Flex>
+                  </List.Item>
+                </List.Root>
+
+                <Button
+                  bg="transparent"
+                  color="white"
+                  borderWidth="1px"
+                  w="100%"
+                  borderColor={"white"}
+                >
+                  Book Now
+                </Button>
+              </Flex>
+            </GridItem>
+          );
+        })}
+      </Grid>
+    </Box>
+  );
+};
+
+export default ServiceListSection;
+
 const serviceListData: ServiceCardData[] = [
   {
     id: 1,
@@ -111,74 +182,3 @@ const serviceListData: ServiceCardData[] = [
     ],
   },
 ];
-
-const ServiceListSection = () => {
-  return (
-    <Box width="100%" data-testid="services-section" pt="10rem">
-      <Grid
-        templateColumns={{
-          base: "repeat(1, 1fr)",
-          md: "repeat(2, 1fr)",
-          lg: "repeat(3, 1fr)",
-        }}
-        gap={0}
-      >
-        {serviceListData.map((service, index) => {
-          return (
-            <GridItem
-              key={service.id}
-              bg={index % 2 === 0 ? "black" : "yellow.100"}
-              color="white"
-            >
-              <Flex
-                direction="column"
-                h="100%"
-                py="5rem"
-                px={{ base: "2.5rem", sm: "4rem", xl: "8rem" }}
-              >
-                <Heading
-                  as="h3"
-                  fontSize={{ base: "2rem", md: "2.3rem" }}
-                  fontFamily="playfair"
-                  mb={"1.5rem"}
-                  lineHeight={1.4}
-                >
-                  {service.heading}
-                </Heading>
-                <Text pb="1.5rem">{service.text}</Text>
-                <List.Root mb='3rem'>
-                  <List.Item fontSize="1.5rem" listStyle={'none'}>
-                    <Flex direction={"column"} gap="1rem">
-                      {service.list?.map((item, idx) => (
-                        <Flex
-                          key={idx}
-                          gap="2rem"
-                          justifyContent="space-between"
-                        >
-                          <Text>{item.item}</Text>
-                          <Text>{item.value}</Text>
-                        </Flex>
-                      ))}
-                    </Flex>
-                  </List.Item>
-                </List.Root>
-
-                <Button
-                  bg="transparent"
-                  color="white"
-                  borderWidth="1px"
-                  w='100%'
-                  borderColor={"white"}
-                >
-                  Book Now
-                </Button>
-              </Flex>
-            </GridItem>
-          );
-        })}
-      </Grid>
-    </Box>
-  );
-};
-
-export default ServiceListSection;

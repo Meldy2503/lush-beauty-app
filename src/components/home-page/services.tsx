@@ -22,45 +22,6 @@ interface ServiceCardData {
   heading: string;
 }
 
-const servicesData: ServiceCardData[] = [
-  {
-    id: 1,
-    imageUrl: serviceImg1,
-    heading: "HAIR STYLING & CUTS",
-  },
-  {
-    id: 2,
-    heading: "HAIR COLORING",
-  },
-  {
-    id: 3,
-    imageUrl: serviceImg4,
-    heading: "MANICURE & PEDICURE",
-  },
-  {
-    id: 4,
-    heading: "LASH & BROW ARTISTRY",
-  },
-  {
-    id: 5,
-    heading: "WAX & HAIR REMOVAL",
-  },
-  {
-    id: 6,
-    imageUrl: serviceImg3,
-    heading: "FACIAL TREATMENTS",
-  },
-  {
-    id: 7,
-    heading: "EYE LASH EXTENSIONS",
-  },
-  {
-    id: 8,
-    imageUrl: serviceImg2,
-    heading: "MASSAGE THERAPY",
-  },
-];
-
 const ServicesSection = () => {
   return (
     <Box
@@ -177,3 +138,42 @@ const ServicesSection = () => {
 };
 
 export default ServicesSection;
+
+const servicesData: ServiceCardData[] = [
+  {
+    id: 1,
+    imageUrl: serviceImg1,
+    heading: "HAIR STYLING & CUTS",
+  },
+  {
+    id: 2,
+    heading: "HAIR COLORING",
+  },
+  {
+    id: 3,
+    imageUrl: serviceImg4,
+    heading: "MANICURE & PEDICURE",
+  },
+  {
+    id: 4,
+    heading: "LASH & BROW ARTISTRY",
+  },
+  {
+    id: 5,
+    heading: "WAX & HAIR REMOVAL",
+  },
+  {
+    id: 6,
+    imageUrl: serviceImg3,
+    heading: "FACIAL TREATMENTS",
+  },
+  {
+    id: 7,
+    heading: "EYE LASH EXTENSIONS",
+  },
+  {
+    id: 8,
+    imageUrl: serviceImg2,
+    heading: "MASSAGE THERAPY",
+  },
+];
