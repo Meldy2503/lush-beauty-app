@@ -4,6 +4,7 @@ import Footer from "../footer";
 import Navbar from "../navbar";
 import AboutHeroSection from "./about-hero";
 import OurStorySection from "./our-story";
+import OurValueSection from "./our-values";
 
 export default function AboutUsPage() {
   return (
@@ -11,6 +12,7 @@ export default function AboutUsPage() {
       <Navbar />
       <AboutHeroSection />
       <OurStorySection />
+      <OurValueSection />
       <Footer />
     </>
   );

@@ -20,14 +20,14 @@ import academyBg from "../../assets/images/academy-bg.webp";
 import Button from "../button";
 import Wrapper from "../wrapper";
 
-interface CardData {
+interface CardDataType {
   id: number;
   imageUrl: StaticImageData;
   heading: string;
   bodyText: string;
 }
 
-const cardData: CardData[] = [
+const cardData: CardDataType[] = [
   {
     id: 1,
     imageUrl: academy1,

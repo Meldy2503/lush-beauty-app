@@ -38,6 +38,7 @@ const config = {
           50: { value: "#999" },
           100: { value: "#424242" },
           150: { value: "#1a1a1a" },
+          200: { value: "#ccc" },
         },
       },
     },

@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Heading, Text } from "@chakra-ui/react";
-import aboutImg from "../../assets/images/about-2.webp";
+import aboutImg from "../../assets/images/about-1.webp";
 import Wrapper from "../wrapper";
 import Image from "next/image";
 
