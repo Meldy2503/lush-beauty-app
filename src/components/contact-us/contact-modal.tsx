@@ -155,7 +155,7 @@ const ContactUsModal = ({
                   <Button
                     onClick={() => setIsContactModalOpen(false)}
                     bg="transparent"
-                    borderWidth="2px"
+                    borderWidth="1px"
                     borderColor="black"
                     color="black"
                     w={{ base: "100%", sm: "fit-content" }}
