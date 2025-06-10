@@ -11,6 +11,7 @@ import Image, { StaticImageData } from "next/image";
 import academy1 from "../../assets/images/academy-1.webp";
 import academy2 from "../../assets/images/academy-2.webp";
 import academy3 from "../../assets/images/academy-3.webp";
+import Link from "next/link";
 
 interface CardData {
   id: number;
@@ -29,28 +30,31 @@ const Products = () => {
       gapY={"3rem"}
     >
       {cardData.map((card) => (
-        <GridItem key={card.id} w="100%">
-          <Image
-            src={card.imageUrl}
-            alt={card.heading}
-            style={{ position: "relative" }}
-            width={1000}
-            height={1000}
-          />
-          <VStack>
-            <Heading
-              as="h4"
-              mt={{ base: "1rem", md: "1.5rem" }}
-              fontSize="1.7rem"
-              fontWeight={"400"}
-            >
-              {card.heading}
-            </Heading>
-            <Text color="yellow.100" textAlign="center" fontWeight={"500"}>
-              {card.amount}
-            </Text>
-          </VStack>
-        </GridItem>
+        // <Link href={`/shop/${id}`} key={card.id}>
+        <Link href={"/shop/1"} key={card.id}>
+          <GridItem w="100%">
+            <Image
+              src={card.imageUrl}
+              alt={card.heading}
+              style={{ position: "relative" }}
+              width={1000}
+              height={1000}
+            />
+            <VStack>
+              <Heading
+                as="h4"
+                mt={{ base: "1rem", md: "1.5rem" }}
+                fontSize="1.7rem"
+                fontWeight={"400"}
+              >
+                {card.heading}
+              </Heading>
+              <Text color="yellow.100" textAlign="center" fontWeight={"500"}>
+                {card.amount}
+              </Text>
+            </VStack>
+          </GridItem>
+        </Link>
       ))}
     </Grid>
   );
