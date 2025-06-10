@@ -8,9 +8,12 @@ import academy1 from "../../assets/images/academy-1.webp";
 import Button from "../button";
 import Wrapper from "../wrapper";
 import { CiDeliveryTruck } from "react-icons/ci";
+import { useState } from "react";
+import Cart from "./cart";
 
 const Product = () => {
   const router = useRouter();
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
     <Wrapper pt="14rem">
@@ -19,6 +22,7 @@ const Product = () => {
         bg="transparent"
         color="black"
         px={"0"}
+        hover="transparent"
       >
         ← Go Back
       </Button>
@@ -76,7 +80,7 @@ const Product = () => {
               </Box>
             </Flex>
           </Box>
-          <Button bg="yellow.100" w="full">
+          <Button bg="yellow.100" w="full" onClick={() => setIsCartOpen(true)}>
             ADD TO CART
           </Button>
           <Box mt="4rem">
@@ -149,6 +153,7 @@ const Product = () => {
           </Box>
         </Flex>
       </Box>
+      <Cart open={isCartOpen} setIsCartOpen={setIsCartOpen} />
     </Wrapper>
   );
 };

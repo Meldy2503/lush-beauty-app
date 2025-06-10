@@ -10,7 +10,6 @@ import {
   Portal,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { AiOutlineClose } from "react-icons/ai";
 import { GiHamburgerMenu, GiShoppingBag } from "react-icons/gi";
 import { useState } from "react";
 import Button from "./button";
@@ -18,10 +17,13 @@ import { TbLogin2 } from "react-icons/tb";
 import Logo from "./logo";
 import { usePathname } from "next/navigation";
 import ContactUsModal from "./contact-us/contact-modal";
+import Cart from "./shop-page/cart";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   const pathname = usePathname();
 
   return (
@@ -118,7 +120,11 @@ const Navbar = () => {
             </Link>
           </Flex>
           <Flex align={"center"} gap="2rem">
-            <Box position="relative">
+            <Box
+              position="relative"
+              onClick={() => setIsCartOpen(true)}
+              cursor="pointer"
+            >
               <GiShoppingBag style={{ fontSize: "3rem" }} />
               <Flex
                 position="absolute"
@@ -146,11 +152,9 @@ const Navbar = () => {
             onClick={() => setOpen(!open)}
             display={{ base: "block", lg: "none" }}
           >
-            <Icon
-              as={open ? AiOutlineClose : GiHamburgerMenu}
-              boxSize={10}
-              cursor={"pointer"}
-            />
+            {!open && (
+              <Icon as={GiHamburgerMenu} boxSize={10} cursor="pointer" />
+            )}
           </Box>
         </Flex>
 
@@ -158,8 +162,14 @@ const Navbar = () => {
           isOpen={isContactModalOpen}
           setIsContactModalOpen={setIsContactModalOpen}
         />
+        <Cart open={isCartOpen} setIsCartOpen={setIsCartOpen} />
 
-        <Drawer.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
+        <Drawer.Root
+          open={open}
+          onOpenChange={(e) => setOpen(e.open)}
+          placement={"start"}
+          size="xl"
+        >
           <Portal>
             <Drawer.Backdrop />
             <Drawer.Positioner>
