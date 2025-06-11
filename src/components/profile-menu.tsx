@@ -1,15 +1,11 @@
 import { Box, Flex, Menu, Portal, Text } from "@chakra-ui/react";
-import { useState } from "react";
 import { BsPerson } from "react-icons/bs";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import Button from "./ui/button";
 
 const ProfileMenu = () => {
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
   return (
-    <Menu.Root
-      open={isProfileOpen}
-      onOpenChange={(details) => setIsProfileOpen(details.open)}
-    >
+    <Menu.Root size="md">
       <Menu.Trigger asChild>
         <Flex
           gap=".7rem"
@@ -27,11 +23,19 @@ const ProfileMenu = () => {
 
       <Portal>
         <Menu.Positioner>
-          <Menu.Content>
-            <Menu.Item value="profile">My Profile</Menu.Item>
-            <Menu.Item value="settings">Settings</Menu.Item>
-            <Menu.Item value="orders">My Orders</Menu.Item>
-            <Menu.Item value="logout">Logout</Menu.Item>
+          <Menu.Content w="22rem" p="2rem">
+            <Menu.Item value="sign in" >
+              <Button w='100%' href='/login'> Sign in</Button>
+            </Menu.Item>
+            <Menu.Item value="settings" fontSize={"1.6rem"} p="1.2rem" mt='1rem'>
+              Settings
+            </Menu.Item>
+            <Menu.Item value="orders" fontSize={"1.6rem"} p="1.2rem">
+              My Orders
+            </Menu.Item>
+            <Menu.Item value="logout" fontSize={"1.6rem"} p="1.2rem">
+              Logout
+            </Menu.Item>
           </Menu.Content>
         </Menu.Positioner>
       </Portal>

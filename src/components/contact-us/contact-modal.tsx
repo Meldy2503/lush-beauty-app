@@ -11,10 +11,20 @@ import {
 } from "@chakra-ui/react";
 import Button from "../ui/button";
 import ContactForm from "./contact-form";
+import { useState } from "react";
+import contactBg from "../../assets/images/contact-bg.webp";
 
 const ContactUsModal = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   return (
-    <Dialog.Root lazyMount motionPreset="slide-in-bottom" placement={"center"}>
+    <Dialog.Root
+      lazyMount
+      motionPreset="slide-in-bottom"
+      placement={"center"}
+      scrollBehavior="inside"
+      closeOnInteractOutside = {false}
+    >
       <Dialog.Trigger asChild>
         <Button
           bg="transparent"
@@ -24,13 +34,14 @@ const ContactUsModal = () => {
           fontWeight="300"
           px="0"
           py="0"
+          onClick={() => setIsContactModalOpen(true)}
         >
           Contact Us
         </Button>
       </Dialog.Trigger>
       <Portal>
-        <Dialog.Backdrop />
-        {/* {isContactModalOpen && (
+        {/* <Dialog.Backdrop /> */}
+        {isContactModalOpen && (
           <Box
             backgroundImage={`linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url(${contactBg.src})`}
             backgroundSize="cover"
@@ -42,11 +53,11 @@ const ContactUsModal = () => {
             left={0}
             zIndex={1000}
           />
-        )} */}
+        )}
 
         <Dialog.Positioner>
           <Dialog.Content
-            bg="#f5f6f7"
+            bg="gray.250"
             maxW="1000px"
             w="full"
             p={{ base: "2rem", md: "5rem" }}
@@ -158,6 +169,7 @@ const ContactUsModal = () => {
                     borderColor="black"
                     color="black"
                     w={{ base: "100%", sm: "fit-content" }}
+                    onClick={() => setIsContactModalOpen(false)}
                   >
                     Cancel
                   </Button>
@@ -168,6 +180,7 @@ const ContactUsModal = () => {
               asChild
               bg="gray.200"
               _hover={{ bg: "gray.200" }}
+              onClick={() => setIsContactModalOpen(false)}
             >
               <CloseButton position="absolute" size={"2xl"} top={2} right={2} />
             </Dialog.CloseTrigger>

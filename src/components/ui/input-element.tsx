@@ -8,15 +8,15 @@ import {
   Flex,
   Icon,
   Input,
+  InputGroup,
   Text,
   Textarea,
-  defineStyle,
 } from "@chakra-ui/react";
 import { AiOutlineFileText, AiOutlinePlus } from "react-icons/ai";
 import { BiPlus } from "react-icons/bi";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 interface InputElementProps {
-  inputStyle?: "floating" | "filled";
   label?: string;
   placeholder?: string;
   border?: string;
@@ -32,7 +32,6 @@ interface InputElementProps {
 }
 
 export const InputElement = ({
-  inputStyle,
   label,
   placeholder,
   h,
@@ -43,6 +42,8 @@ export const InputElement = ({
   required = false,
   ...props
 }: InputElementProps) => {
+  const [show, setShow] = useState(false);
+
   // Track the uploaded filename to switch icons and show the name
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
@@ -96,7 +97,6 @@ export const InputElement = ({
               <Text fontSize="sm">Change File</Text>
             </Flex>
           )}
-          {/* Hidden native input that opens the file picker */}
           <Input
             type="file"
             required
@@ -108,34 +108,12 @@ export const InputElement = ({
       </Field.Root>
     );
   }
-  if (inputStyle == "floating") {
-    return (
-      <Field.Root required={required}>
-        <Box pos="relative" w="full">
-          <Input
-            required
-            fontSize={"1.6rem"}
-            border="1px solid"
-            py="1.5rem"
-            px="1rem"
-            type={type}
-            {...props}
-            value={value}
-            onChange={(e) =>
-              onChange?.(e as React.ChangeEvent<HTMLInputElement>)
-            }
-            rounded={"8px"}
-          />
-          <Field.Label css={floatingStyles}>{label}</Field.Label>
-        </Box>
-      </Field.Root>
-    );
-  }
+
   if (type === "textarea") {
     return (
       <Field.Root required={required}>
         {label && (
-          <Field.Label fontSize={"1.6rem"} mb=".8rem">
+          <Field.Label fontSize={"1.5rem"} mb=".5rem">
             {label}
           </Field.Label>
         )}
@@ -157,11 +135,46 @@ export const InputElement = ({
       </Field.Root>
     );
   }
+
+  if (type === "password") {
+    return (
+      <Field.Root required={required}>
+        {label && (
+          <Field.Label fontSize={"1.5rem"} mb=".5rem">
+            {label}
+          </Field.Label>
+        )}
+        <InputGroup
+          flex="1"
+          endElement={
+            <Box mr="1.5rem" onClick={() => setShow(!show)}>
+              {show ? <FiEyeOff size={17} /> : <FiEye size={17} />}
+            </Box>
+          }
+        >
+          <Input
+            type={show ? "text" : "password"}
+            border={border ?? "none"}
+            fontSize={"1.6rem"}
+            height="4.5rem"
+            bg="white"
+            p="1.5rem"
+            required
+            placeholder={placeholder || label}
+            {...props}
+            value={value}
+            onChange={onChange}
+          />
+        </InputGroup>
+      </Field.Root>
+    );
+  }
+
   return (
     <Field.Root required={required}>
       <Flex>
         {label && (
-          <Field.Label fontSize={"1.6rem"} mb=".8rem">
+          <Field.Label fontSize={"1.5rem"} mb=".5rem">
             {label}
           </Field.Label>
         )}
@@ -183,25 +196,3 @@ export const InputElement = ({
     </Field.Root>
   );
 };
-
-const floatingStyles = defineStyle({
-  pos: "absolute",
-  bg: "bg",
-  px: "0.5",
-  top: "-3",
-  insetStart: "2",
-  fontWeight: "normal",
-  fontSize: "1.6rem",
-  pointerEvents: "none",
-  transition: "position",
-  _peerPlaceholderShown: {
-    color: "fg.muted",
-    top: "2.5",
-    insetStart: "3",
-  },
-  _peerFocusVisible: {
-    color: "fg",
-    top: "-3",
-    insetStart: "2",
-  },
-});

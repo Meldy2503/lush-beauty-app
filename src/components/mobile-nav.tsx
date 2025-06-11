@@ -13,14 +13,9 @@ const MobileNav = () => {
   const pathname = usePathname();
 
   return (
-    <Drawer.Root
-      placement={"start"}
-      size="xl"
-    >
+    <Drawer.Root placement={"start"} size="xl" closeOnInteractOutside={false}>
       <Drawer.Trigger asChild>
-        <Box
-          display={{ base: "block", lg: "none" }}
-        >
+        <Box display={{ base: "block", lg: "none" }}>
           <Icon as={GiHamburgerMenu} boxSize={9} cursor="pointer" />
         </Box>
       </Drawer.Trigger>

@@ -23,7 +23,7 @@ interface CartProps {
 
 const Cart = ({ children }: CartProps) => {
   return (
-    <Drawer.Root size="xl" placement={"end"}>
+    <Drawer.Root size="xl" placement={"end"} closeOnInteractOutside={false}>
       <Drawer.Trigger asChild>
         {children ?? (
           <Box position="relative" cursor="pointer">
