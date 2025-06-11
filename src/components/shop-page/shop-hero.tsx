@@ -12,7 +12,7 @@ const ShopHeroSection = () => {
         bgRepeat="no-repeat"
         height="60vh"
         bgSize="cover"
-        mt="12rem"
+        mt="9rem"
       >
         <VStack
           textAlign="center"

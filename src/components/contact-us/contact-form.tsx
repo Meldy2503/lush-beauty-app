@@ -1,6 +1,6 @@
 import { Box, Stack } from "@chakra-ui/react";
 import React from "react";
-import { InputElement } from "../input-element";
+import { InputElement } from "../ui/input-element";
 
 const ContactForm = () => {
   return (
@@ -25,7 +25,6 @@ const ContactForm = () => {
             type="textarea"
           />
         </Stack>
-       
       </form>
     </Box>
   );

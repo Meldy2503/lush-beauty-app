@@ -9,33 +9,28 @@ import {
   Portal,
   Text,
 } from "@chakra-ui/react";
-import Button from "../button";
-import contactBg from "../../assets/images/contact-bg.webp";
+import Button from "../ui/button";
 import ContactForm from "./contact-form";
 
-interface ContactUsModalProps {
-  isOpen: boolean;
-  setIsContactModalOpen: (open: boolean) => void;
-}
-
-const ContactUsModal = ({
-  isOpen,
-  setIsContactModalOpen,
-}: ContactUsModalProps) => {
+const ContactUsModal = () => {
   return (
-    <Dialog.Root
-      lazyMount
-      open={isOpen}
-      onOpenChange={(open) => {
-        if (!open) {
-          setIsContactModalOpen(false);
-        }
-      }}
-      motionPreset="slide-in-bottom"
-      placement={"center"}
-    >
+    <Dialog.Root lazyMount motionPreset="slide-in-bottom" placement={"center"}>
+      <Dialog.Trigger asChild>
+        <Button
+          bg="transparent"
+          fontFamily={"lato"}
+          color="#000"
+          hover="transparent"
+          fontWeight="300"
+          px="0"
+          py="0"
+        >
+          Contact Us
+        </Button>
+      </Dialog.Trigger>
       <Portal>
-        {isOpen && (
+        <Dialog.Backdrop />
+        {/* {isContactModalOpen && (
           <Box
             backgroundImage={`linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url(${contactBg.src})`}
             backgroundSize="cover"
@@ -47,10 +42,15 @@ const ContactUsModal = ({
             left={0}
             zIndex={1000}
           />
-        )}
+        )} */}
 
         <Dialog.Positioner>
-          <Dialog.Content bg="#f5f6f7" maxW="1000px" w="full" p={{base:'2rem', md:'5rem'}}>
+          <Dialog.Content
+            bg="#f5f6f7"
+            maxW="1000px"
+            w="full"
+            p={{ base: "2rem", md: "5rem" }}
+          >
             <Dialog.Header>
               <Dialog.Title fontSize="2rem" fontWeight="bold" mb="2rem">
                 Contact Us
@@ -70,7 +70,7 @@ const ContactUsModal = ({
               <Flex
                 justifyContent={"space-between"}
                 gapX="1.5rem"
-                gapY={'5rem'}
+                gapY={"5rem"}
                 flexDir={{ base: "column", md: "row" }}
               >
                 {/* left form content */}
@@ -153,7 +153,6 @@ const ContactUsModal = ({
                 </Button>
                 <Dialog.ActionTrigger asChild>
                   <Button
-                    onClick={() => setIsContactModalOpen(false)}
                     bg="transparent"
                     borderWidth="1px"
                     borderColor="black"
@@ -167,11 +166,10 @@ const ContactUsModal = ({
             </Dialog.Footer>
             <Dialog.CloseTrigger
               asChild
-              onClick={() => setIsContactModalOpen(false)}
-              bg='gray.200'
-              _hover={{bg:'gray.200'}}
+              bg="gray.200"
+              _hover={{ bg: "gray.200" }}
             >
-              <CloseButton position="absolute" size={'2xl'} top={2} right={2} />
+              <CloseButton position="absolute" size={"2xl"} top={2} right={2} />
             </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>

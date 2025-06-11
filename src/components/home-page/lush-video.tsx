@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import aboutImg from "../../assets/images/academy-bg.webp";
 import Wrapper from "../wrapper";
-import Button from "../button";
+import Button from "../ui/button";
 
 const LushVideoSection = () => {
   return (

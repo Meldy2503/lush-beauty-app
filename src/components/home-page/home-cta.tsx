@@ -17,7 +17,7 @@ import academy4 from "../../assets/images/academy-4.webp";
 import academy5 from "../../assets/images/academy-5.webp";
 import academy6 from "../../assets/images/academy-6.webp";
 import academyBg from "../../assets/images/academy-bg.webp";
-import Button from "../button";
+import Button from "../ui/button";
 import Wrapper from "../wrapper";
 
 interface CardDataType {

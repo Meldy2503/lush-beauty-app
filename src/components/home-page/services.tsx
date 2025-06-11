@@ -10,7 +10,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
-import Button from "../button";
+import Button from "../ui/button";
 import serviceImg1 from "../../assets/images/service-1.webp";
 import serviceImg2 from "../../assets/images/service-2.webp";
 import serviceImg3 from "../../assets/images/service-3.webp";

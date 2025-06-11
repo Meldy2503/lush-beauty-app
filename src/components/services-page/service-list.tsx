@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import Button from "../button";
+import Button from "../ui/button";
 
 interface ServiceCardData {
   id: number;

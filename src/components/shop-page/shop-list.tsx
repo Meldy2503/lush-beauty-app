@@ -11,8 +11,8 @@ import {
   createListCollection,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import Button from "../button";
-import { InputElement } from "../input-element";
+import Button from "../ui/button";
+import { InputElement } from "../ui/input-element";
 import Wrapper from "../wrapper";
 import Products from "./products";
 

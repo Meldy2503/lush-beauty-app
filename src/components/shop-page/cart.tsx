@@ -14,21 +14,38 @@ import Image from "next/image";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import academy1 from "../../assets/images/academy-1.webp";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import Button from "../button";
+import Button from "../ui/button";
+import { GiShoppingBag } from "react-icons/gi";
 
 interface CartProps {
-  open: boolean;
-  setIsCartOpen: (open: boolean) => void;
+  children?: React.ReactNode;
 }
 
-const Cart = ({ open, setIsCartOpen }: CartProps) => {
+const Cart = ({ children }: CartProps) => {
   return (
-    <Drawer.Root
-      open={open}
-      size="xl"
-      onOpenChange={(e) => setIsCartOpen(e.open)}
-      placement={"end"}
-    >
+    <Drawer.Root size="xl" placement={"end"}>
+      <Drawer.Trigger asChild>
+        {children ?? (
+          <Box position="relative" cursor="pointer">
+            <GiShoppingBag style={{ fontSize: "3rem", color: "black" }} />
+            <Flex
+              position="absolute"
+              top="60%"
+              right="50%"
+              transform="translate(50%, -50%)"
+              borderRadius="50%"
+              color="white"
+              justifyContent="center"
+              alignItems="center"
+              fontSize="1.3rem"
+              zIndex={1}
+              pointerEvents="none"
+            >
+              0
+            </Flex>
+          </Box>
+        )}
+      </Drawer.Trigger>
       <Portal>
         <Drawer.Backdrop />
         <Drawer.Positioner>
@@ -40,7 +57,7 @@ const Cart = ({ open, setIsCartOpen }: CartProps) => {
                 fontSize={"2rem"}
                 color="white"
               >
-                Cart: 2 Items
+                Cart: 1 Item
               </Drawer.Title>
             </Drawer.Header>
             <Drawer.Body p="2rem">
@@ -134,7 +151,6 @@ const Cart = ({ open, setIsCartOpen }: CartProps) => {
                     borderWidth="1px"
                     borderColor="black"
                     color="black"
-                    onClick={() => setIsCartOpen(false)}
                   >
                     Cancel
                   </Button>

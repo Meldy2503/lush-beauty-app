@@ -5,7 +5,7 @@ import {
   defaultConfig,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import LoadingIcon from "../loading-icon";
+import LoadingIcon from "./loading-icon";
 
 const config = {
   ...defaultConfig,

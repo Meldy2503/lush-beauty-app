@@ -2,7 +2,7 @@
 
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 import ctaImg from "../../assets/images/services-cta.webp";
-import Button from "../button";
+import Button from "../ui/button";
 
 const CtaSection = () => {
   return (
@@ -41,7 +41,7 @@ const CtaSection = () => {
         >
           Book a Luxurious Service Today
         </Heading>
-        <Text maxW="500px" mx="auto" mb="4rem" mt='1rem'>
+        <Text maxW="500px" mx="auto" mb="4rem" mt="1rem">
           Discover tailored treatments and expert care designed to leave you
           glowing. Your beauty journey starts here.
         </Text>

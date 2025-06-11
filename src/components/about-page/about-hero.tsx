@@ -11,7 +11,7 @@ const AboutHeroSection = () => {
       bgRepeat="no-repeat"
       height="60vh"
       bgSize="cover"
-      mt="10rem"
+      mt="9rem"
     >
       <VStack
         textAlign="center"

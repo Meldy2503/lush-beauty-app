@@ -1,59 +1,53 @@
 "use client";
 
-import {
-  Box,
-  Flex,
-  Icon,
-  CloseButton,
-  Text,
-  Drawer,
-  Portal,
-} from "@chakra-ui/react";
+import { Box, Flex, HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { GiHamburgerMenu, GiShoppingBag } from "react-icons/gi";
-import { useState } from "react";
-import Button from "./button";
-import { TbLogin2 } from "react-icons/tb";
-import Logo from "./logo";
 import { usePathname } from "next/navigation";
 import ContactUsModal from "./contact-us/contact-modal";
+import MobileNav from "./mobile-nav";
+import ProfileMenu from "./profile-menu";
 import Cart from "./shop-page/cart";
+import Button from "./ui/button";
+import Logo from "./ui/logo";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
   const pathname = usePathname();
 
   return (
     <>
-      <Flex
-        w="100%"
-        bg="yellow.100"
-        color="white"
-        position="fixed"
-        top="0"
-        zIndex={500}
-        align={"center"}
-        justify={"center"}
-        py="3rem"
-        h="6rem"
-      >
-        <Text
-          textAlign={"center"}
-          fontWeight={"600"}
-          fontFamily={"playfair"}
-          textTransform={"uppercase"}
+      <Box w="100%" bg="yellow.100" position="fixed" top="0" zIndex={500}>
+        <Flex
+          color="white"
+          align={"center"}
+          justify={{ base: "flex-end", sm: "space-between" }}
+          width="90%"
+          maxW={"1200px"}
+          mx="auto"
+          py="1rem"
         >
-          Lush & Luxe - Discover Your Inner Beauty
-        </Text>
-      </Flex>
+          <Text
+            textAlign={"center"}
+            fontWeight={"600"}
+            fontSize={"1.6rem"}
+            fontFamily={"playfair"}
+            textTransform={"uppercase"}
+            display={{ base: "none", sm: "block" }}
+          >
+            Redefine Your Beauty
+          </Text>
+          <HStack gap="2rem">
+            <Cart />
+            <Button px="2rem" py=".5rem">
+              Book Now
+            </Button>
+          </HStack>
+        </Flex>
+      </Box>
       <Box
         w="100%"
         py="1rem"
         position={"fixed"}
-        top={"6rem"}
+        top={"5.4rem"}
         bg={"white"}
         color={"black"}
         zIndex={500}
@@ -66,8 +60,8 @@ const Navbar = () => {
           align={"center"}
           color="black"
         >
+          <MobileNav />
           <Logo />
-
           <Flex
             align={"center"}
             gap="4rem"
@@ -95,18 +89,7 @@ const Navbar = () => {
             >
               Services
             </Link>
-            <Button
-              onClick={() => setIsContactModalOpen(true)}
-              bg="transparent"
-              fontFamily={"lato"}
-              color="#000"
-              hover="transparent"
-              fontWeight="300"
-              px="0"
-              py="0"
-            >
-              Contact Us
-            </Button>
+            <ContactUsModal />
             <Link
               href={"/shop"}
               style={{
@@ -119,117 +102,8 @@ const Navbar = () => {
               Shop
             </Link>
           </Flex>
-          <Flex align={"center"} gap="2rem">
-            <Box
-              position="relative"
-              onClick={() => setIsCartOpen(true)}
-              cursor="pointer"
-            >
-              <GiShoppingBag style={{ fontSize: "3rem" }} />
-              <Flex
-                position="absolute"
-                top="60%"
-                right="50%"
-                transform="translate(50%, -50%)"
-                borderRadius="50%"
-                color="white"
-                justifyContent="center"
-                alignItems="center"
-                fontSize="1.3rem"
-                zIndex={1}
-                pointerEvents="none"
-              >
-                0
-              </Flex>
-            </Box>
-
-            <Button px="2rem" py="1rem">
-              Book Now
-            </Button>
-          </Flex>
-
-          <Box
-            onClick={() => setOpen(!open)}
-            display={{ base: "block", lg: "none" }}
-          >
-            {!open && (
-              <Icon as={GiHamburgerMenu} boxSize={10} cursor="pointer" />
-            )}
-          </Box>
+          <ProfileMenu />
         </Flex>
-
-        <ContactUsModal
-          isOpen={isContactModalOpen}
-          setIsContactModalOpen={setIsContactModalOpen}
-        />
-        <Cart open={isCartOpen} setIsCartOpen={setIsCartOpen} />
-
-        <Drawer.Root
-          open={open}
-          onOpenChange={(e) => setOpen(e.open)}
-          placement={"start"}
-          size="xl"
-        >
-          <Portal>
-            <Drawer.Backdrop />
-            <Drawer.Positioner>
-              <Drawer.Content bg={"white"}>
-                <Drawer.Body>
-                  <Flex
-                    direction="column"
-                    rowGap={"1rem"}
-                    align={"center"}
-                    mt="4rem"
-                  >
-                    <Logo />
-                    <Link
-                      href={"/jobs"}
-                      style={{
-                        color: "black",
-                        fontWeight: pathname === "/jobs" ? "bold" : "300",
-                        borderBottom:
-                          pathname === "/jobs" ? "2px solid #006adc" : "none",
-                        marginTop: "2rem",
-                      }}
-                    >
-                      Jobs
-                    </Link>
-                    <Link
-                      href={"/contact-us"}
-                      style={{
-                        color: "black",
-                        margin: "1rem 0",
-                        fontWeight: pathname === "/contact-us" ? "bold" : "300",
-                        borderBottom:
-                          pathname === "/contact-us"
-                            ? "2px solid #006adc"
-                            : "none",
-                      }}
-                    >
-                      Contact Us
-                    </Link>
-                    <Button
-                      bg={"transparent"}
-                      color={"black"}
-                      fontSize={"1rem"}
-                      href={"/login"}
-                      hover="#fff"
-                    >
-                      Login
-                    </Button>{" "}
-                    <Button px="1rem" href={"/signup"}>
-                      <TbLogin2 />
-                      Sign up
-                    </Button>{" "}
-                  </Flex>
-                </Drawer.Body>
-                <Drawer.CloseTrigger asChild>
-                  <CloseButton size="sm" />
-                </Drawer.CloseTrigger>
-              </Drawer.Content>
-            </Drawer.Positioner>
-          </Portal>
-        </Drawer.Root>
       </Box>
     </>
   );

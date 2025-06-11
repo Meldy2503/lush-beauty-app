@@ -3,7 +3,7 @@
 import { Box, Flex, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 import heroImg from "../../assets/images/services-bg.webp";
 import Wrapper from "../wrapper";
-import Button from "../button";
+import Button from "../ui/button";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 
 const ServiceHeroSection = () => {
@@ -15,7 +15,7 @@ const ServiceHeroSection = () => {
         bgRepeat="no-repeat"
         height="60vh"
         bgSize="cover"
-        mt="12rem"
+        mt="9rem"
       >
         <VStack
           textAlign="center"

@@ -4,8 +4,8 @@ import { Box, Flex, Heading, Input, Stack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from "react-icons/fa";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
-import Button from "./button";
-import Logo from "./logo";
+import Button from "./ui/button";
+import Logo from "./ui/logo";
 import Wrapper from "./wrapper";
 
 const Footer = () => {
