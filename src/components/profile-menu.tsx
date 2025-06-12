@@ -23,7 +23,7 @@ const ProfileMenu = () => {
 
       <Portal>
         <Menu.Positioner>
-          <Menu.Content w="22rem" p="2rem">
+          <Menu.Content  p="2rem" w='23rem'>
             <Menu.Item value="sign in" >
               <Button w='100%' href='/login'> Sign in</Button>
             </Menu.Item>

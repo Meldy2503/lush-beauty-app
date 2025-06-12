@@ -25,9 +25,8 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
       backgroundImage={`linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url(${bgImage.src})`}
       backgroundSize="cover"
       backgroundPosition="center"
-      height="100vh"
+      minHeight="100vh"
       width="100vw"
-      position="fixed"
       top={"0"}
       justifyContent={"center"}
       alignItems={"center"}
@@ -53,6 +52,7 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
           alignItems={"center"}
           flexDir={"column"}
           mb="5rem"
+          py={authType === "signup" ? "0rem" : { base: "3rem", md: "10rem" }}
         >
           <Logo />
           <Heading
