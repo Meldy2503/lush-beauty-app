@@ -10,12 +10,17 @@ import Cart from "./shop-page/cart";
 import Button from "./ui/button";
 import Logo from "./ui/logo";
 
-const Navbar = () => {
+interface NavbarProps {
+  display?: string;
+  top?: string;
+}
+
+const Navbar = ({display, top}:NavbarProps) => {
   const pathname = usePathname();
 
   return (
     <>
-      <Box w="100%" bg="yellow.100" position="fixed" top="0" zIndex={500}>
+      <Box w="100%" bg="yellow.100" position="fixed" top="0" zIndex={500} display={display}>
         <Flex
           color="white"
           align={"center"}
@@ -37,7 +42,7 @@ const Navbar = () => {
           </Text>
           <HStack gap="2rem">
             <Cart />
-            <Button px="2rem" py=".5rem">
+            <Button px="2rem" py=".5rem" href="/appointment">
               Book Now
             </Button>
           </HStack>
@@ -47,7 +52,7 @@ const Navbar = () => {
         w="100%"
         py="1rem"
         position={"fixed"}
-        top={"5.4rem"}
+        top={top ?? "5.4rem"}
         bg={"white"}
         color={"black"}
         zIndex={500}
