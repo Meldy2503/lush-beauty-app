@@ -2,15 +2,16 @@
 
 import { Box, Flex, Heading, HStack } from "@chakra-ui/react";
 import Image from "next/image";
-import aboutImg1 from "../../assets/images/about-6.webp";
+import groupBookingImg from "../../assets/images/group-booking-img.webp";
+import personalBookingImg from "../../assets/images/personal-booking-img.webp";
 import Button from "../ui/button";
 
 const BookingType = () => {
   return (
-    <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
+    <Flex gap="2rem" flexDir={{ base: "column", lg: "row" }}>
       <Box bg="white" p="2rem">
         <Image
-          src={aboutImg1}
+          src={personalBookingImg}
           alt="a smiling single lady"
           style={{ position: "relative" }}
           width={1000}
@@ -25,8 +26,8 @@ const BookingType = () => {
       </Box>
       <Box bg="white" p="2rem">
         <Image
-          src={aboutImg1}
-          alt="a smiling single lady"
+          src={groupBookingImg}
+          alt="smiling group of ladies"
           style={{ position: "relative" }}
           width={1000}
           height={1000}
