@@ -16,13 +16,12 @@ import SelectTechnician from "./select-technician";
 
 const AppointmentPage = () => {
   return (
-    <>
-      <Navbar />
+    <Box minH="100vh" bg="gray.250" pb="2rem">
+      <Navbar/>
       <Steps.Root
         defaultStep={0}
         count={steps.length}
         orientation={{ base: "horizontal", md: "vertical" }}
-        minH="100%"
         my="11rem"
         bg="gray.250"
       >
@@ -55,11 +54,9 @@ const AppointmentPage = () => {
           ))}
         </Steps.List>
         <Box
-          //   ml="25rem"
           ml={{ base: "0", md: "25rem" }}
-          //   w="calc(100% - 25rem)"
           w={{ base: "100%", md: "calc(100% - 25rem)" }}
-          p="2rem"
+          p="4.7rem 2rem"
           h="100%"
         >
           {steps.map((step, index) => (
@@ -74,9 +71,9 @@ const AppointmentPage = () => {
             size="sm"
             variant="outline"
             mt="3rem"
-            position={"fixed"}
+            position={{ base: "fixed", lg: "relative" }}
             bottom="0"
-            py={{ base: "2rem", lg: "5rem" }}
+            py={{ base: "2rem", lg: "3rem" }}
             w="100%"
             bg="gray.250"
           >
@@ -86,17 +83,24 @@ const AppointmentPage = () => {
                 borderWidth="1.5px"
                 borderColor="black"
                 color="black"
+                w={{ base: "100%", md: "fit-content" }}
               >
                 Prev
               </Button>
             </Steps.PrevTrigger>
             <Steps.NextTrigger asChild>
-              <Button>Continue</Button>
+              <Button
+                borderWidth="1.5px"
+                borderColor="black"
+                w={{ base: "100%", md: "fit-content" }}
+              >
+                Continue
+              </Button>
             </Steps.NextTrigger>
           </ButtonGroup>
         </Box>
       </Steps.Root>
-    </>
+    </Box>
   );
 };
 export default AppointmentPage;

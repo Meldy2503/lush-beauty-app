@@ -15,6 +15,7 @@ interface ButtonProps {
   w?: string | object;
   borderColor?: string;
   px?: string | object;
+  display?: string | object;
   py?: string | object;
   fontFamily?: string;
   hover?: string;
@@ -27,6 +28,7 @@ const Button = ({
   bg,
   color,
   fontFamily,
+  display,
   fontSize,
   fontWeight,
   onClick,
@@ -40,7 +42,7 @@ const Button = ({
 }: ButtonProps) => {
   if (href) {
     return (
-      <Link href={href} passHref onClick={onClick}>
+      <Link href={href} passHref onClick={onClick} >
         <Box
           color={color ?? "white"}
           textAlign={"center"}
@@ -55,6 +57,7 @@ const Button = ({
           borderRadius="0"
           fontSize={fontSize ?? "1.6rem"}
           borderWidth={borderWidth}
+          display={display}
           borderColor={borderColor ?? "none"}
           _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
         >
@@ -80,6 +83,7 @@ const Button = ({
       borderWidth={borderWidth}
       bg={bg ?? "black"}
       onClick={onClick}
+      display={display}
       {...props}
       _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
     >

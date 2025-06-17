@@ -15,12 +15,19 @@ interface NavbarProps {
   top?: string;
 }
 
-const Navbar = ({display, top}:NavbarProps) => {
+const Navbar = ({ display, top }: NavbarProps) => {
   const pathname = usePathname();
 
   return (
     <>
-      <Box w="100%" bg="yellow.100" position="fixed" top="0" zIndex={500} display={display}>
+      <Box
+        w="100%"
+        bg="yellow.100"
+        position="fixed"
+        top="0"
+        zIndex={500}
+        display={display}
+      >
         <Flex
           color="white"
           align={"center"}
@@ -42,9 +49,11 @@ const Navbar = ({display, top}:NavbarProps) => {
           </Text>
           <HStack gap="2rem">
             <Cart />
-            <Button px="2rem" py=".5rem" href="/appointment">
-              Book Now
-            </Button>
+            {pathname !== "/appointment" && (
+              <Button px="2rem" py=".5rem" href="/appointment">
+                Book Now
+              </Button>
+            )}
           </HStack>
         </Flex>
       </Box>
