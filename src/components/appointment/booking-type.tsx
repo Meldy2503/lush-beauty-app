@@ -1,27 +1,159 @@
+// "use client";
+
+// import { Box, ButtonGroup, Flex, Heading, HStack } from "@chakra-ui/react";
+// import Image from "next/image";
+// import groupBookingImg from "../../assets/images/group-booking-img.webp";
+// import personalBookingImg from "../../assets/images/personal-booking-img.webp";
+// import Button from "../ui/button";
+// import { useState } from "react";
+
+// interface BookingTypeProps {
+//   step: number;
+//   setStep: React.Dispatch<React.SetStateAction<number>>;
+// }
+
+// const BookingType = ({ setStep, step }: BookingTypeProps) => {
+//   const [bookingType, setBookingType] = useState("");
+//   console.log(bookingType);
+//   console.log(step, "step");
+//   console.log(setStep, "setStep");
+//   return (
+//     <Box>
+//       <Heading
+//         as="h3"
+//         fontSize={{ base: "1.9rem", md: "2rem" }}
+//         fontFamily="playfair"
+//         mb="2rem"
+//         lineHeight={1.3}
+//       >
+//         SELECT APPOINTMENT TYPE
+//       </Heading>
+//       <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
+//         <Box
+//           bg="white"
+//           p="2rem"
+//           borderColor={bookingType === "personal" ? "yellow.100" : "white"}
+//           borderWidth={"2px"}
+//           _hover={{ borderColor: "yellow.100" }}
+//           onClick={() => setBookingType("personal")}
+//         >
+//           <Image
+//             src={personalBookingImg}
+//             alt="a smiling single lady"
+//             style={{ position: "relative" }}
+//             width={1000}
+//             height={1000}
+//           />
+//           <HStack justifyContent={"space-between"} pt="2rem">
+//             <Heading as="h4" fontSize="1.7rem">
+//               Personal Booking{" "}
+//             </Heading>
+//             <Button px="3rem" bg="yellow.150">
+//               SELECT
+//             </Button>
+//           </HStack>
+//         </Box>
+//         <Box
+//           bg="white"
+//           p="2rem"
+//           borderColor={bookingType === "group" ? "yellow.100" : "white"}
+//           borderWidth={"2px"}
+//           _hover={{ borderColor: "yellow.100" }}
+//           onClick={() => setBookingType("group")}
+//         >
+//           <Image
+//             src={groupBookingImg}
+//             alt="smiling group of ladies"
+//             style={{ position: "relative" }}
+//             width={1000}
+//             height={1000}
+//           />
+//           <HStack justifyContent={"space-between"} pt="2rem">
+//             <Heading as="h4" fontSize="1.7rem">
+//               Group Booking{" "}
+//             </Heading>
+//             <Button px="3rem" bg="yellow.150">
+//               SELECT
+//             </Button>
+//           </HStack>
+//         </Box>
+//       </Flex>
+//       <ButtonGroup
+     
+//         mt="3rem"
+//         position={{ base: "fixed", md: "relative" }}
+//         bottom="0"
+//         py={{ base: "2rem", lg: "2rem" }}
+//         w="100%"
+//         bg="gray.250"
+//       >
+//         <Button
+//           bg="transparent"
+//           borderWidth="1.5px"
+//           borderColor="black"
+//           color="black"
+//           w={{ base: "100%", md: "fit-content" }}
+//         >
+//           Prev
+//         </Button>
+       
+//         <Button
+//           borderWidth="1.5px"
+//           borderColor="black"
+//           w={{ base: "100%", md: "fit-content" }}
+//           onClick={() => setStep(step + 1)}
+//         >
+//           Continue
+//         </Button>
+//       </ButtonGroup>
+//     </Box>
+//   );
+// };
+
+// export default BookingType;
+
+
 "use client";
 
-import { Box, Flex, Heading, HStack } from "@chakra-ui/react";
+import { Box, ButtonGroup, Flex, Heading, HStack } from "@chakra-ui/react";
 import Image from "next/image";
 import groupBookingImg from "../../assets/images/group-booking-img.webp";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
-import Button from "../ui/button";
 import { useState } from "react";
+import Button from "../ui/button";
 
-const BookingType = () => {
+interface BookingTypeProps {
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const BookingType = ({ setStep, step }: BookingTypeProps) => {
   const [bookingType, setBookingType] = useState("");
-console.log(bookingType);
+
+  const handleContinue = () => {
+    if (bookingType) {
+      setStep(step + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (step > 0) {
+      setStep(step - 1);
+    }
+  };
+
   return (
     <Box>
       <Heading
         as="h3"
-        fontSize={{ base: "2rem", md: "2.2rem" }}
+        fontSize={{ base: "1.9rem", md: "2rem" }}
         fontFamily="playfair"
-        mb='2rem'
+        mb="2rem"
         lineHeight={1.3}
       >
         SELECT APPOINTMENT TYPE
       </Heading>
-      <Flex gap="2rem" flexDir={{ base: "column", lg: "row" }}>
+      <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
         <Box
           bg="white"
           p="2rem"
@@ -29,6 +161,7 @@ console.log(bookingType);
           borderWidth={"2px"}
           _hover={{ borderColor: "yellow.100" }}
           onClick={() => setBookingType("personal")}
+          cursor="pointer"
         >
           <Image
             src={personalBookingImg}
@@ -53,6 +186,7 @@ console.log(bookingType);
           borderWidth={"2px"}
           _hover={{ borderColor: "yellow.100" }}
           onClick={() => setBookingType("group")}
+          cursor="pointer"
         >
           <Image
             src={groupBookingImg}
@@ -71,6 +205,41 @@ console.log(bookingType);
           </HStack>
         </Box>
       </Flex>
+      <ButtonGroup
+        mt="3rem"
+        position={{ base: "fixed", md: "relative" }}
+        bottom="0"
+        py={{ base: "2rem", lg: "2rem" }}
+        w="100%"
+        bg="gray.250"
+        cursor={""}
+      >
+        <Button
+          bg="transparent"
+          borderWidth="1.5px"
+          borderColor="black"
+          color="black"
+          w={{ base: "100%", md: "fit-content" }}
+          onClick={handlePrev}
+          disabled={step === 0}
+          opacity={step === 0 ? 0.2 : 1}
+          cursor={step === 0 ? "not-allowed" : "pointer"}
+        >
+          Prev
+        </Button>
+
+        <Button
+          borderWidth="1.5px"
+          borderColor="black"
+          w={{ base: "100%", md: "fit-content" }}
+          onClick={handleContinue}
+          disabled={!bookingType}
+          opacity={!bookingType ? 0.2 : 1}
+          cursor={!bookingType ? "not-allowed" : "pointer"}
+        >
+          Continue
+        </Button>
+      </ButtonGroup>
     </Box>
   );
 };

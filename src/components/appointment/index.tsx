@@ -1,25 +1,66 @@
 "use client";
 
-import { Box, ButtonGroup, Icon, Steps } from "@chakra-ui/react";
-import { FaRegCalendarAlt, FaRegCreditCard } from "react-icons/fa";
+import { Box, Icon, Steps } from "@chakra-ui/react";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlinePersonAddAlt } from "react-icons/md";
 import { RiCalendarScheduleLine, RiServiceLine } from "react-icons/ri";
 import Navbar from "../navbar";
-import Button from "../ui/button";
 import BookingType from "./booking-type";
-import MakePayment from "./make-payment";
 import SelectDateTime from "./select-date-time";
 import SelectLocation from "./select-location";
 import SelectService from "./select-service";
 import SelectTechnician from "./select-technician";
+import { useState } from "react";
+
+type SetStep = React.Dispatch<React.SetStateAction<number>>;
+
+const steps = [
+  {
+    title: "Booking type",
+    icon: RiCalendarScheduleLine,
+    content: (setStep: SetStep, step: number) => (
+      <BookingType setStep={setStep} step={step} />
+    ),
+  },
+  {
+    title: "Select Location",
+    icon: FaLocationDot,
+    content: (setStep: SetStep, step: number) => (
+      <SelectLocation setStep={setStep} step={step} />
+    ),
+  },
+  {
+    title: "Select Services",
+    icon: RiServiceLine,
+    content: (setStep: SetStep, step: number) => (
+      <SelectService setStep={setStep} step={step} />
+    ),
+  },
+  {
+    title: "Select Technician",
+    icon: MdOutlinePersonAddAlt,
+    content: (setStep: SetStep, step: number) => (
+      <SelectTechnician setStep={setStep} step={step} />
+    ),
+  },
+  {
+    title: "Select Date/Time",
+    icon: FaRegCalendarAlt,
+    content: (setStep: SetStep, step: number) => (
+      <SelectDateTime setStep={setStep} step={step} />
+    ),
+  },
+];
 
 const AppointmentPage = () => {
+  const [step, setStep] = useState(0);
+
   return (
     <Box minH="100vh" bg="gray.250" pb="2rem">
-      <Navbar/>
+      <Navbar />
       <Steps.Root
-        defaultStep={0}
+        step={step} 
         count={steps.length}
         orientation={{ base: "horizontal", md: "vertical" }}
         my="11rem"
@@ -32,111 +73,50 @@ const AppointmentPage = () => {
           top="10rem"
           left="0"
           zIndex="10"
-          mt="3rem"
+          mt="5.5rem"
+          bg='white'
           overflowY="auto"
-          display={{ base: "none", md: "block" }}
+          display={{ base: "none", lg: "block" }}
         >
-          {steps.map((step, index) => (
+          {steps.map((stepItem, index) => (
             <Steps.Item key={index} index={index} alignItems="center" pb="5rem">
               <Steps.Indicator bg="white" border="none" p="2rem">
                 <Steps.Status
                   incomplete={
-                    <Icon as={step.icon} color="gray.50" boxSize="8" />
+                    <Icon as={stepItem.icon} color="gray.50" boxSize="8" />
                   }
                   complete={
-                    <Icon as={step.icon} color="yellow.100" boxSize="8" />
+                    <Icon as={stepItem.icon} color="yellow.100" boxSize="8" />
                   }
                 />
               </Steps.Indicator>
-              <Steps.Title fontSize="1.6rem">{step.title}</Steps.Title>
+              <Steps.Title fontSize="1.6rem">{stepItem.title}</Steps.Title>
               <Steps.Separator my="1rem" h="4.1rem" ml=".7rem" />
             </Steps.Item>
           ))}
         </Steps.List>
         <Box
-          ml={{ base: "0", md: "25rem" }}
-          w={{ base: "100%", md: "calc(100% - 25rem)" }}
+          ml={{ base: "0", lg: "25rem" }}
+          w={{ base: "100%", lg: "calc(100% - 25rem)" }}
           p="4.7rem 2rem"
           h="100%"
         >
-          {steps.map((step, index) => (
+          {/* Render all step contents */}
+          {steps.map((stepObj, index) => (
             <Steps.Content key={index} index={index}>
-              {step.description}
+              {stepObj.content(setStep, step)}
             </Steps.Content>
           ))}
           <Steps.CompletedContent>
             All steps are complete!
           </Steps.CompletedContent>
-          <ButtonGroup
-            size="sm"
-            variant="outline"
-            mt="3rem"
-            position={{ base: "fixed", lg: "relative" }}
-            bottom="0"
-            py={{ base: "2rem", lg: "3rem" }}
-            w="100%"
-            bg="gray.250"
-          >
-            <Steps.PrevTrigger asChild>
-              <Button
-                bg="transparent"
-                borderWidth="1.5px"
-                borderColor="black"
-                color="black"
-                w={{ base: "100%", md: "fit-content" }}
-              >
-                Prev
-              </Button>
-            </Steps.PrevTrigger>
-            <Steps.NextTrigger asChild>
-              <Button
-                borderWidth="1.5px"
-                borderColor="black"
-                w={{ base: "100%", md: "fit-content" }}
-              >
-                Continue
-              </Button>
-            </Steps.NextTrigger>
-          </ButtonGroup>
         </Box>
       </Steps.Root>
     </Box>
   );
 };
-export default AppointmentPage;
 
-const steps = [
-  {
-    title: "Booking type",
-    icon: RiCalendarScheduleLine,
-    description: <BookingType />,
-  },
-  {
-    title: "Select Location",
-    icon: FaLocationDot,
-    description: <SelectLocation />,
-  },
-  {
-    title: "Select Services",
-    icon: RiServiceLine,
-    description: <SelectService />,
-  },
-  {
-    title: "Select Technician",
-    icon: MdOutlinePersonAddAlt,
-    description: <SelectTechnician />,
-  },
-  {
-    title: "Select Date/Time",
-    icon: FaRegCalendarAlt,
-    description: <SelectDateTime />,
-  },
-  {
-    title: "Make Payment",
-    icon: FaRegCreditCard,
-    description: <MakePayment />,
-  },
-];
+export default AppointmentPage;
 
 // "use client";
 

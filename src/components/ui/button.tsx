@@ -1,6 +1,6 @@
 "use client";
 
-import { Box } from "@chakra-ui/react";
+import { Box, Button as ChakraButton } from "@chakra-ui/react";
 import React from "react";
 import Link from "next/link";
 
@@ -13,6 +13,9 @@ interface ButtonProps {
   borderWidth?: string;
   color?: string;
   w?: string | object;
+  opacity?: number | object;
+  cursor?: string | object;
+  disabled?: boolean;
   borderColor?: string;
   px?: string | object;
   display?: string | object;
@@ -32,6 +35,9 @@ const Button = ({
   fontSize,
   fontWeight,
   onClick,
+  disabled,
+  opacity,
+  cursor,
   w,
   borderColor,
   borderWidth,
@@ -68,27 +74,29 @@ const Button = ({
   }
 
   return (
-    <Box
+    <ChakraButton
       fontWeight={fontWeight ?? "500"}
-      cursor={"pointer"}
+      cursor={cursor ?? "pointer"}
       fontFamily={fontFamily ?? "playfair"}
       w={w ?? "fit-content"}
       color={color ?? "white"}
       borderRadius="0"
       px={px ?? "5rem"}
       textAlign={"center"}
-      py={py ?? "1.2rem"}
+      py={py ?? "2rem"}
       fontSize={fontSize ?? "1.6rem"}
       borderColor={borderColor ?? "none"}
       borderWidth={borderWidth}
       bg={bg ?? "black"}
       onClick={onClick}
       display={display}
+      disabled={disabled}
+      opacity={opacity}
       {...props}
       _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
     >
       {children}
-    </Box>
+    </ChakraButton>
   );
 };
 
