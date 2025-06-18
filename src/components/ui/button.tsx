@@ -91,6 +91,7 @@ const Button = ({
       onClick={onClick}
       display={display}
       disabled={disabled}
+      zIndex={1}
       opacity={opacity}
       {...props}
       _hover={hover ? { bg: hover } : { bg: "yellow.150" }}

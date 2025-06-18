@@ -8,10 +8,10 @@ import personalBookingImg from "../../assets/images/personal-booking-img.webp";
 
 const BookingSummary = () => {
   return (
-    <Box bg="white" position={"relative"} display="flex" flexDirection="column">
+    <Box bg="white" position={"relative"} display="flex" flexDirection="column" shadow={'sm'}>
       <Heading
         as="h3"
-        fontSize={{ base: "1.8rem", md: "1.9rem" }}
+        fontSize={{ base: "1.7rem", md: "1.8rem" }}
         fontFamily="playfair"
         mb="2rem"
         px="1.5rem"
@@ -30,14 +30,14 @@ const BookingSummary = () => {
             <Heading
               as="h4"
               fontFamily="playfair"
-              mb="1rem"
+              mb=".5rem"
               lineHeight={1.4}
               textTransform={"uppercase"}
-              fontSize="1.5rem"
+              fontSize="1.45rem"
             >
               Lush & Luxe – Central London{" "}
             </Heading>
-            <Text lineHeight={1.35} w="95%" fontSize="1.4rem">
+            <Text lineHeight={1.3} w="95%" fontSize="1.35rem">
               68 Charlotte Street, Fitzrovia, London, W1T 4QF
             </Text>
           </Box>
@@ -67,8 +67,8 @@ const BookingSummary = () => {
               alt="a lush & luxe staff"
               style={{
                 borderRadius: "50%",
-                height: "6rem",
-                width: "6rem",
+                height: "5rem",
+                width: "5rem",
                 objectFit: "cover",
               }}
               width={100}
@@ -81,7 +81,7 @@ const BookingSummary = () => {
                 mb=".5rem"
                 lineHeight={1.4}
                 textTransform={"uppercase"}
-                fontSize="1.5rem"
+                fontSize="1.45rem"
               >
                 Ruth Patricia{" "}
               </Heading>
@@ -110,7 +110,7 @@ const BookingSummary = () => {
                 fontFamily="playfair"
                 mb=".5rem"
                 lineHeight={1.4}
-                fontSize="1.5rem"
+                fontSize="1.45rem"
               >
                 Tue, June 02, 2025{" "}
               </Heading>
@@ -127,7 +127,6 @@ const BookingSummary = () => {
         position="sticky"
         bottom="0"
         left="0"
-        zIndex="10"
         justifyContent={"space-between"}
         alignItems={"center"}
         gap="2rem"

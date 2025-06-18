@@ -1,8 +1,8 @@
 "use client";
 
-import { Box, ButtonGroup, Checkbox, Flex, Heading, Text } from "@chakra-ui/react";
-import BookingSummary from "./booking-summary";
+import { Box, Checkbox, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import Button from "../ui/button";
+import BookingSummary from "./booking-summary";
 
 interface SelectLocationProps {
   step: number;
@@ -11,10 +11,10 @@ interface SelectLocationProps {
 const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
   return (
     <Flex gap="2rem">
-      <Box w={{ base: "100%", md: "65%" }}>
+      <Box w={{ base: "100%", md: "65%" }} bg="white" p="2rem" shadow={"sm"}>
         <Heading
           as="h3"
-          fontSize={{ base: "1.9rem", md: "2rem" }}
+          fontSize={{ base: "1.7rem", md: "1.8rem" }}
           fontFamily="playfair"
           mb="2rem"
           lineHeight={1.3}
@@ -27,8 +27,8 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
             display={"flex"}
             justifyContent={"space-between"}
             w="full"
-            bg="white"
-            p={{ base: "2rem", sm: "2.5rem" }}
+            bg="gray.250"
+            p={{ base: "1.5rem", sm: "2rem" }}
             size="lg"
             gap="3rem"
           >
@@ -36,14 +36,14 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
 
             <Checkbox.Label>
               {" "}
-              <Box fontSize={{ base: "1.45rem", sm: "1.6rem" }}>
+              <Box fontSize={{ base: "1.45rem", sm: "1.5rem" }}>
                 <Heading
                   as="h4"
                   fontFamily="playfair"
                   mb="1rem"
                   lineHeight={1.4}
                   textTransform={"uppercase"}
-                  fontSize={{ base: "1.6rem", sm: "1.7rem" }}
+                  fontSize={{ base: "1.5rem", sm: "1.6rem" }}
                 >
                   Lush & Luxe – Central London{" "}
                 </Heading>
@@ -60,8 +60,8 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
             display={"flex"}
             justifyContent={"space-between"}
             w="full"
-            bg="white"
-            p={{ base: "2rem", sm: "2.5rem" }}
+            bg="gray.250"
+            p={{ base: "1.5rem", sm: "2rem" }}
             size="lg"
             gap="3rem"
           >
@@ -69,14 +69,14 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
 
             <Checkbox.Label>
               {" "}
-              <Box fontSize={{ base: "1.45rem", sm: "1.6rem" }}>
+              <Box fontSize={{ base: "1.45rem", sm: "1.5rem" }}>
                 <Heading
                   as="h4"
                   fontFamily="playfair"
                   mb="1rem"
                   lineHeight={1.4}
                   textTransform={"uppercase"}
-                  fontSize={{ base: "1.6rem", sm: "1.7rem" }}
+                  fontSize={{ base: "1.5rem", sm: "1.6rem" }}
                 >
                   Lush & Luxe – Manchester{" "}
                 </Heading>
@@ -90,20 +90,21 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
             </Checkbox.Control>
           </Checkbox.Root>
         </Flex>
-        <ButtonGroup
+        <HStack
           mt="3rem"
-          position={{ base: "fixed", md: "relative" }}
+          position={{ base: "sticky", md: "sticky" }}
           bottom="0"
-          py={{ base: "2rem", lg: "2rem" }}
-          w="100%"
-          bg="gray.250"
+          w="full"
+          gap="1rem"
+          justifyContent={"center"}
+          alignItems={"center"}
         >
           <Button
             bg="transparent"
             borderWidth="1.5px"
             borderColor="black"
             color="black"
-            w={{ base: "100%", md: "fit-content" }}
+            w="48%"
             onClick={() => setStep(step - 1)}
           >
             Prev
@@ -112,14 +113,17 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
           <Button
             borderWidth="1.5px"
             borderColor="black"
-            w={{ base: "100%", md: "fit-content" }}
+            w="48%"
             onClick={() => setStep(step + 1)}
           >
             Continue
           </Button>
-        </ButtonGroup>
+        </HStack>
       </Box>
-      <Box w={{ base: "100%", md: "35%" }}>
+      <Box
+        w={{ base: "100%", md: "35%" }}
+        display={{ base: "none", md: "block" }}
+      >
         <BookingSummary />
       </Box>
     </Flex>

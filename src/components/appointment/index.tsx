@@ -67,14 +67,13 @@ const AppointmentPage = () => {
         bg="gray.250"
       >
         <Steps.List
-          w="25rem"
+          w="23rem"
           p="2rem"
           position="fixed"
           top="10rem"
           left="0"
           zIndex="10"
-          mt="5.5rem"
-          bg='white'
+          mt="3rem"
           overflowY="auto"
           display={{ base: "none", lg: "block" }}
         >
@@ -96,8 +95,8 @@ const AppointmentPage = () => {
           ))}
         </Steps.List>
         <Box
-          ml={{ base: "0", lg: "25rem" }}
-          w={{ base: "100%", lg: "calc(100% - 25rem)" }}
+          ml={{ base: "0", lg: "23rem" }}
+          w={{ base: "100%", lg: "calc(100% - 23rem)" }}
           p="4.7rem 2rem"
           h="100%"
         >

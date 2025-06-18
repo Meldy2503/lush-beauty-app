@@ -79,7 +79,7 @@
 //         </Box>
 //       </Flex>
 //       <ButtonGroup
-     
+
 //         mt="3rem"
 //         position={{ base: "fixed", md: "relative" }}
 //         bottom="0"
@@ -96,7 +96,7 @@
 //         >
 //           Prev
 //         </Button>
-       
+
 //         <Button
 //           borderWidth="1.5px"
 //           borderColor="black"
@@ -112,14 +112,13 @@
 
 // export default BookingType;
 
-
 "use client";
 
-import { Box, ButtonGroup, Flex, Heading, HStack } from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack } from "@chakra-ui/react";
 import Image from "next/image";
+import { useState } from "react";
 import groupBookingImg from "../../assets/images/group-booking-img.webp";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
-import { useState } from "react";
 import Button from "../ui/button";
 
 interface BookingTypeProps {
@@ -143,10 +142,10 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
   };
 
   return (
-    <Box>
+    <Box bg="white" p="3rem" shadow={"sm"}>
       <Heading
         as="h3"
-        fontSize={{ base: "1.9rem", md: "2rem" }}
+        fontSize={{ base: "1.7rem", md: "1.8rem" }}
         fontFamily="playfair"
         mb="2rem"
         lineHeight={1.3}
@@ -155,13 +154,12 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
       </Heading>
       <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
         <Box
-          bg="white"
-          p="2rem"
           borderColor={bookingType === "personal" ? "yellow.100" : "white"}
           borderWidth={"2px"}
           _hover={{ borderColor: "yellow.100" }}
           onClick={() => setBookingType("personal")}
           cursor="pointer"
+          bg="gray.250"
         >
           <Image
             src={personalBookingImg}
@@ -170,23 +168,28 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
             width={1000}
             height={1000}
           />
-          <HStack justifyContent={"space-between"} pt="2rem">
+          <HStack justifyContent={"space-between"} p="2rem" gap="2rem">
             <Heading as="h4" fontSize="1.7rem">
               Personal Booking{" "}
             </Heading>
-            <Button px="3rem" bg="yellow.150">
+            <Button
+              px="3rem"
+              bg="transparent"
+              borderColor="black"
+              borderWidth="2px"
+              color="black"
+            >
               SELECT
             </Button>
           </HStack>
         </Box>
         <Box
-          bg="white"
-          p="2rem"
           borderColor={bookingType === "group" ? "yellow.100" : "white"}
           borderWidth={"2px"}
           _hover={{ borderColor: "yellow.100" }}
           onClick={() => setBookingType("group")}
           cursor="pointer"
+          bg="gray.250"
         >
           <Image
             src={groupBookingImg}
@@ -195,31 +198,37 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
             width={1000}
             height={1000}
           />
-          <HStack justifyContent={"space-between"} pt="2rem">
+          <HStack justifyContent={"space-between"} p="2rem" gap="2rem">
             <Heading as="h4" fontSize="1.7rem">
               Group Booking{" "}
             </Heading>
-            <Button px="3rem" bg="yellow.150">
+            <Button
+              px="3rem"
+              bg="transparent"
+              borderColor="black"
+              borderWidth="2px"
+              color="black"
+            >
               SELECT
             </Button>
           </HStack>
         </Box>
       </Flex>
-      <ButtonGroup
-        mt="3rem"
-        position={{ base: "fixed", md: "relative" }}
+      <HStack
+        mt="4rem"
+        position={{ base: "sticky", md: "relative" }}
         bottom="0"
-        py={{ base: "2rem", lg: "2rem" }}
-        w="100%"
-        bg="gray.250"
-        cursor={""}
+        w="full"
+        gap="2rem"
+        justifyContent={"center"}
+        alignItems={"center"}
       >
         <Button
           bg="transparent"
           borderWidth="1.5px"
           borderColor="black"
           color="black"
-          w={{ base: "100%", md: "fit-content" }}
+          w="49%"
           onClick={handlePrev}
           disabled={step === 0}
           opacity={step === 0 ? 0.2 : 1}
@@ -231,7 +240,7 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
         <Button
           borderWidth="1.5px"
           borderColor="black"
-          w={{ base: "100%", md: "fit-content" }}
+          w="49%"
           onClick={handleContinue}
           disabled={!bookingType}
           opacity={!bookingType ? 0.2 : 1}
@@ -239,7 +248,7 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
         >
           Continue
         </Button>
-      </ButtonGroup>
+      </HStack>
     </Box>
   );
 };

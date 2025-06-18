@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, ButtonGroup, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack } from "@chakra-ui/react";
 import Button from "../ui/button";
 import BookingSummary from "./booking-summary";
 
@@ -11,52 +11,56 @@ interface SelectDateTimeProps {
 
 const SelectDateTime = ({ setStep, step }: SelectDateTimeProps) => {
   return (
-    <Box>
-      <Box w={{ base: "100%", md: "65%" }}>
+    <Flex gap="2rem">
+      <Box w={{ base: "100%", md: "65%" }} bg="white" p="2rem" shadow={"sm"}>
         <Heading
           as="h3"
-          fontSize={{ base: "1.9rem", md: "2rem" }}
+          fontSize={{ base: "1.7rem", md: "1.8rem" }}
           fontFamily="playfair"
           mb="2rem"
           lineHeight={1.3}
           textTransform={"uppercase"}
         >
-          SELECT LTechnician
+          Select Date/time
         </Heading>
+        <HStack
+          mt="2rem"
+          position={{ base: "sticky", md: "relative" }}
+          bottom="0"
+          w="full"
+          gap="1rem"
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Button
+            bg="transparent"
+            borderWidth="1.5px"
+            borderColor="black"
+            color="black"
+            w="48%"
+            onClick={() => setStep(step - 1)}
+          >
+            Prev
+          </Button>
+
+          <Button
+            borderWidth="1.5px"
+            borderColor="black"
+            w="48%"
+            onClick={() => setStep(step + 1)}
+          >
+            Continue
+          </Button>
+        </HStack>
       </Box>
 
-      <ButtonGroup
-        mt="3rem"
-        position={{ base: "fixed", md: "relative" }}
-        bottom="0"
-        py={{ base: "2rem", lg: "2rem" }}
-        w="100%"
-        bg="gray.250"
+      <Box
+        w={{ base: "100%", md: "35%" }}
+        display={{ base: "none", md: "block" }}
       >
-        <Button
-          bg="transparent"
-          borderWidth="1.5px"
-          borderColor="black"
-          color="black"
-          w={{ base: "100%", md: "fit-content" }}
-          onClick={() => setStep(step - 1)}
-        >
-          Prev
-        </Button>
-
-        <Button
-          borderWidth="1.5px"
-          borderColor="black"
-          w={{ base: "100%", md: "fit-content" }}
-          onClick={() => setStep(step + 1)}
-        >
-          Continue
-        </Button>
-      </ButtonGroup>
-      <Box w={{ base: "100%", md: "35%" }}>
         <BookingSummary />
       </Box>
-    </Box>
+    </Flex>
   );
 };
 
