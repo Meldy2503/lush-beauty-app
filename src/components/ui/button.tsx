@@ -43,7 +43,7 @@ const Button = ({
   borderWidth,
   px,
   py,
-  hover,
+  // hover,
   ...props
 }: ButtonProps) => {
   if (href) {
@@ -65,7 +65,7 @@ const Button = ({
           borderWidth={borderWidth}
           display={display}
           borderColor={borderColor ?? "none"}
-          _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
+          // _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
         >
           {children}
         </Box>
@@ -94,7 +94,7 @@ const Button = ({
       zIndex={1}
       opacity={opacity}
       {...props}
-      _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
+      // _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
     >
       {children}
     </ChakraButton>

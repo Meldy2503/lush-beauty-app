@@ -2,7 +2,6 @@
 
 import {
   Box,
-  //   ButtonGroup,
   Flex,
   Heading,
   HStack,
@@ -33,7 +32,7 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
           lineHeight={1.3}
           textTransform={"uppercase"}
         >
-          SELECT Technician
+          Select Technician
         </Heading>
         <Flex
           bg="white"

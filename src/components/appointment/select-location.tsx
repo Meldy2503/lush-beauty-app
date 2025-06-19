@@ -11,7 +11,15 @@ interface SelectLocationProps {
 const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
   return (
     <Flex gap="2rem">
-      <Box w={{ base: "100%", md: "65%" }} bg="white" p="2rem" shadow={"sm"}>
+      <Flex
+        w={{ base: "100%", md: "65%" }}
+        bg="white"
+        p="2rem"
+        shadow={"sm"}
+        minH={{base:'80vh', md:'70vh'}}
+        position="relative"
+        flexDir={'column'}
+      >
         <Heading
           as="h3"
           fontSize={{ base: "1.7rem", md: "1.8rem" }}
@@ -91,13 +99,16 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
           </Checkbox.Root>
         </Flex>
         <HStack
-          mt="3rem"
-          position={{ base: "sticky", md: "sticky" }}
+          mt="auto"
+          position="sticky"
           bottom="0"
           w="full"
           gap="1rem"
           justifyContent={"center"}
           alignItems={"center"}
+          bg="white"
+          py="1rem"
+       
         >
           <Button
             bg="transparent"
@@ -119,7 +130,7 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
             Continue
           </Button>
         </HStack>
-      </Box>
+      </Flex>
       <Box
         w={{ base: "100%", md: "35%" }}
         display={{ base: "none", md: "block" }}
