@@ -49,8 +49,8 @@ const Navbar = ({ display, top }: NavbarProps) => {
           </Text>
           <HStack gap="2rem">
             <Cart />
-            {pathname !== "/appointment" && (
-              <Button px="2rem" py=".5rem" href="/appointment">
+            {pathname !== "/book-appointment" && (
+              <Button px="2rem" py=".5rem" href="/book-appointment">
                 Book Now
               </Button>
             )}

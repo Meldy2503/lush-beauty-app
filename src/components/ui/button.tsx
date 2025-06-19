@@ -48,7 +48,7 @@ const Button = ({
 }: ButtonProps) => {
   if (href) {
     return (
-      <Link href={href} passHref onClick={onClick} >
+      <Link href={href} passHref onClick={onClick}>
         <Box
           color={color ?? "white"}
           textAlign={"center"}
@@ -65,6 +65,7 @@ const Button = ({
           borderWidth={borderWidth}
           display={display}
           borderColor={borderColor ?? "none"}
+
           // _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
         >
           {children}

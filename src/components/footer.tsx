@@ -263,7 +263,7 @@ const Footer = () => {
                 _hover={{ borderColor: "yellow.50" }}
                 _focus={{ borderColor: "yellow.50" }}
               />
-              <Button px="1rem" py=".8rem" bg="yellow.150" w="full">
+              <Button px="1rem" py="2rem" bg="yellow.150" w="full">
                 Subscribe
               </Button>
             </Flex>
