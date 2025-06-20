@@ -1,4 +1,4 @@
-import UserAppointments from "@/components/user-appointments";
+import UserAppointmentsPage from "@/components/user-appointments";
 
 export const metadata = {
   title: "Lush Beauty - Premium Beauty Products",
@@ -6,10 +6,10 @@ export const metadata = {
     "Experience luxury beauty products and services with Lush Beauty.",
 };
 
-export default function Bookings() {
+export default function UserAppointments() {
   return (
     <>
-      <UserAppointments />
+      <UserAppointmentsPage />
     </>
   );
 }

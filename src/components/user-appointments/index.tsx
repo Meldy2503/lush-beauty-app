@@ -20,7 +20,7 @@ const UserAppointments = () => {
             lineHeight={1.3}
             textTransform={"uppercase"}
           >
-            Appointment{" "}
+            Appointments
           </Heading>
           <Tabs.Root defaultValue="new-appointment" variant="plain">
             <Tabs.List bg="gray.250" p="1">
