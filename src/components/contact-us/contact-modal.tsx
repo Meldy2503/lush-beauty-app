@@ -23,7 +23,7 @@ const ContactUsModal = () => {
       motionPreset="slide-in-bottom"
       placement={"center"}
       scrollBehavior="inside"
-      closeOnInteractOutside = {false}
+      closeOnInteractOutside={false}
     >
       <Dialog.Trigger asChild>
         <Button
@@ -40,7 +40,6 @@ const ContactUsModal = () => {
         </Button>
       </Dialog.Trigger>
       <Portal>
-        {/* <Dialog.Backdrop /> */}
         {isContactModalOpen && (
           <Box
             backgroundImage={`linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url(${contactBg.src})`}
@@ -104,7 +103,9 @@ const ContactUsModal = () => {
                     >
                       Working Hours{" "}
                     </Heading>{" "}
-                    <Text>Monday – Saturday: 9:00 AM – 8:00 PM</Text>
+                    <Text lineHeight={1.4}>
+                      Monday – Saturday: 9:00 AM – 8:00 PM
+                    </Text>
                     <Text pt="1rem">Sunday: Closed</Text>
                   </Box>
                   <Box>
@@ -117,7 +118,7 @@ const ContactUsModal = () => {
                     >
                       Location{" "}
                     </Heading>{" "}
-                    <Text lineHeight={1.3}>
+                    <Text lineHeight={1.4}>
                       125 Kingsway, London WC2B 6NH, United Kingdom
                     </Text>
                   </Box>
@@ -179,10 +180,9 @@ const ContactUsModal = () => {
             <Dialog.CloseTrigger
               asChild
               bg="gray.200"
-              _hover={{ bg: "gray.200" }}
               onClick={() => setIsContactModalOpen(false)}
             >
-              <CloseButton position="absolute" size={"2xl"} top={2} right={2} />
+              <CloseButton size={"2xl"} />
             </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>

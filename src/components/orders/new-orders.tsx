@@ -2,8 +2,8 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
 import academy from "../../assets/images/academy-1.webp";
-import Button from "../ui/button";
 import Tag from "../tag";
+import ViewOrderDetails from "./order-details";
 
 const NewOrders = () => {
   return (
@@ -54,9 +54,7 @@ const NewOrders = () => {
           </Box>
         </Flex>
         <Flex alignSelf={{ base: "flex-end", md: "center" }}>
-          <Button px="2rem" fontSize="1.5rem">
-            VIEW DETAILS
-          </Button>
+          <ViewOrderDetails />
         </Flex>
       </Flex>
       <Flex
@@ -105,9 +103,7 @@ const NewOrders = () => {
           </Box>
         </Flex>
         <Flex alignSelf={{ base: "flex-end", md: "center" }}>
-          <Button px="2rem" fontSize="1.5rem">
-            VIEW DETAILS
-          </Button>
+          <ViewOrderDetails />
         </Flex>
       </Flex>
     </Box>

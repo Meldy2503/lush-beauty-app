@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Tag from "../tag";
-import Button from "../ui/button";
+import ViewAppointmentDetails from "./appointment-details";
 
 const NewAppointments = () => {
   return (
@@ -37,9 +37,7 @@ const NewAppointments = () => {
           </Text>
         </Box>
         <Flex alignSelf={{ base: "flex-end", md: "center" }}>
-          <Button px="2rem" fontSize="1.5rem">
-            VIEW DETAILS
-          </Button>
+          <ViewAppointmentDetails />
         </Flex>
       </Flex>
       <Flex
@@ -74,9 +72,7 @@ const NewAppointments = () => {
           </Text>
         </Box>
         <Flex alignSelf={{ base: "flex-end", md: "center" }}>
-          <Button px="2rem" fontSize="1.5rem">
-            VIEW DETAILS
-          </Button>
+          <ViewAppointmentDetails />
         </Flex>
       </Flex>
     </Box>

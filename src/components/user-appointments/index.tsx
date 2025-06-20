@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../navbar";
 import Footer from "../footer";
 import Wrapper from "../wrapper";
-import { Tabs, Box, HStack, Text, Heading } from "@chakra-ui/react";
+import { Tabs, Box, HStack, Text, Heading, Span } from "@chakra-ui/react";
 import NewAppointments from "./new-appointments";
 import PastAppointments from "./past-appointments";
 
@@ -11,7 +11,7 @@ const UserAppointments = () => {
     <>
       <Navbar />
       <Wrapper>
-        <Box mt="5rem">
+        <Box mt="7rem">
           <Heading
             as="h2"
             fontSize={{ base: "1.8rem", md: "1.9rem" }}
@@ -29,9 +29,14 @@ const UserAppointments = () => {
                 p="2rem"
                 fontSize={"1.6rem"}
               >
-                <HStack gap=".5rem">
-                  <Text>New Appointment</Text>
-                  <Text>(2)</Text>
+                <HStack gap=".5rem" w="fit-content">
+                  <Text>
+                    New{" "}
+                    <Span display={{ base: "none", sm: "inline" }}>
+                      Appointment
+                    </Span>
+                  </Text>
+                  <Span>(2)</Span>
                 </HStack>
               </Tabs.Trigger>
               <Tabs.Trigger
@@ -39,7 +44,10 @@ const UserAppointments = () => {
                 p="2rem"
                 fontSize={"1.6rem"}
               >
-                Past appointment
+                Past{" "}
+                <Span display={{ base: "none", sm: "inline" }}>
+                  Appointment
+                </Span>
               </Tabs.Trigger>
               <Tabs.Indicator rounded="l2" />
             </Tabs.List>
