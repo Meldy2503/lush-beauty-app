@@ -66,7 +66,7 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
                   }}
                   width={100}
                   height={100}
-                />{" "}
+                />
                 <Heading
                   as="h4"
                   mt="1rem"

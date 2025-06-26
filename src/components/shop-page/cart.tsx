@@ -137,20 +137,21 @@ const Cart = ({ children }: CartProps) => {
               <Flex flexDirection={"column"} w="full" gap="3rem">
                 <HStack
                   justifyContent={"space-between"}
-                  fontSize={"1.8rem"}
+                  fontSize={"2rem"}
                   fontWeight={"bold"}
                 >
                   <Text>Total</Text>
                   <Text>£58.00</Text>
                 </HStack>
 
-                <HStack>
-                  <Button w="80%">Checkout</Button>
+                <HStack w="full" gap="1rem">
+                  <Button w="50%">Checkout</Button>
                   <Button
                     bg="transparent"
                     borderWidth="1px"
                     borderColor="black"
                     color="black"
+                    w="50%"
                   >
                     Cancel
                   </Button>

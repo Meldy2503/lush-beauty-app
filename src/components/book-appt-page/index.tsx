@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Icon, Steps } from "@chakra-ui/react";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import { FaRegCalendarAlt, FaRegCreditCard } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlinePersonAddAlt } from "react-icons/md";
 import { RiCalendarScheduleLine, RiServiceLine } from "react-icons/ri";
@@ -12,6 +12,7 @@ import SelectLocation from "./select-location";
 import SelectService from "./select-service";
 import SelectTechnician from "./select-technician";
 import { useState } from "react";
+import MakePayment from "./make-payment";
 
 type SetStep = React.Dispatch<React.SetStateAction<number>>;
 
@@ -51,6 +52,13 @@ const steps = [
       <SelectDateTime setStep={setStep} step={step} />
     ),
   },
+  {
+    title: "Make Payment",
+    icon: FaRegCreditCard,
+    content: (setStep: SetStep, step: number) => (
+      <MakePayment setStep={setStep} step={step} />
+    ),
+  },
 ];
 
 const AppointmentPage = () => {
@@ -63,19 +71,22 @@ const AppointmentPage = () => {
         step={step}
         count={steps.length}
         orientation={{ base: "horizontal", md: "vertical" }}
-        my="11rem"
+        my="9rem"
         bg="gray.250"
       >
         <Steps.List
           w="23rem"
           p="2rem"
           position="fixed"
-          top="10rem"
+          top="8.7rem"
+          bg="white"
           left="0"
           zIndex="10"
           mt="3rem"
           overflowY="auto"
           display={{ base: "none", lg: "block" }}
+          shadow={"sm"}
+          h="100%"
         >
           {steps.map((stepItem, index) => (
             <Steps.Item key={index} index={index} alignItems="center" pb="5rem">
@@ -87,10 +98,30 @@ const AppointmentPage = () => {
                   complete={
                     <Icon as={stepItem.icon} color="yellow.100" boxSize="8" />
                   }
+                  current={
+                    <Icon as={stepItem.icon} color="black" boxSize="8" />
+                  }
                 />
               </Steps.Indicator>
-              <Steps.Title fontSize="1.6rem">{stepItem.title}</Steps.Title>
-              <Steps.Separator my="1rem" h="4.1rem" ml=".7rem" />
+              <Steps.Title
+                fontSize="1.6rem"
+                color={
+                  step > index
+                    ? "yellow.100"
+                    : step === index
+                    ? "black"
+                    : "gray.50"
+                }
+                fontWeight={step > index ? "600" : "400"}
+              >
+                {stepItem.title}
+              </Steps.Title>
+              <Steps.Separator
+                my="1rem"
+                h="4.1rem"
+                ml=".7rem"
+                bg={step > index ? "yellow.100" : "gray.50"}
+              />
             </Steps.Item>
           ))}
         </Steps.List>
@@ -106,9 +137,9 @@ const AppointmentPage = () => {
               {stepObj.content(setStep, step)}
             </Steps.Content>
           ))}
-          <Steps.CompletedContent>
+          {/* <Steps.CompletedContent>
             All steps are complete!
-          </Steps.CompletedContent>
+          </Steps.CompletedContent> */}
         </Box>
       </Steps.Root>
     </Box>

@@ -65,6 +65,8 @@ const Navbar = ({ display, top }: NavbarProps) => {
         bg={"white"}
         color={"black"}
         zIndex={500}
+        borderBottomColor={'gray.300'}
+        borderBottomWidth='1px'
       >
         <Flex
           width="90%"

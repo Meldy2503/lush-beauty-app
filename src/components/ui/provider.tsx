@@ -40,6 +40,7 @@ const config = {
           150: { value: "#1a1a1a" },
           200: { value: "#ccc" },
           250: { value: "#F5F6F7" },
+          300: { value: "#e2e3e3" },
         },
       },
     },
@@ -54,7 +55,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const delay = setTimeout(() => {
       setLoading(false);
-    }, 800);
+    }, 500);
 
     return () => clearTimeout(delay);
   }, []);

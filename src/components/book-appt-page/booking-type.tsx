@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex, Heading, HStack } from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import groupBookingImg from "../../assets/images/group-booking-img.webp";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
@@ -44,9 +44,9 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
             gap="2rem"
             flexDir={{ base: "column", sm: "row" }}
           >
-            <Heading as="h4" fontSize="1.7rem">
+            <Text fontWeight={"600"} fontSize="1.7rem">
               Personal Booking{" "}
-            </Heading>
+            </Text>
             <Button
               px="2rem"
               bg="yellow.150"
@@ -77,9 +77,9 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
             gap="2rem"
             flexDir={{ base: "column", sm: "row" }}
           >
-            <Heading as="h4" fontSize="1.7rem">
+            <Text fontWeight={"600"} fontSize="1.7rem">
               Group Booking{" "}
-            </Heading>
+            </Text>
             <Button
               px="2rem"
               bg="yellow.150"

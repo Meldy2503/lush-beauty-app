@@ -27,7 +27,7 @@ const ServicesSection = () => {
     <Box
       width="100%"
       data-testid="services-section"
-      pt={{ base: "7rem", md: "12rem" }}
+      pt={{ base: "5rem", md: "8rem" }}
     >
       <VStack gap={{ base: "2rem", md: "3rem" }} textAlign="center">
         <Heading
@@ -36,7 +36,7 @@ const ServicesSection = () => {
           color="yellow.100"
           fontFamily="allura"
           fontWeight="300"
-          lineHeight={{ base: 0.8, md: 0.4 }}
+          lineHeight={ 0.4}
         >
           Services
         </Heading>
@@ -81,6 +81,11 @@ const ServicesSection = () => {
               backgroundPosition="center"
               position="relative"
               color="white"
+              border={
+                !finalIsImageCard
+                  ? { base: ".1px solid black", xl: "none" }
+                  : "none"
+              }
               _hover={
                 finalIsImageCard
                   ? {
@@ -97,7 +102,7 @@ const ServicesSection = () => {
                   left="0"
                   right="0"
                   bottom="0"
-                  bg="rgba(0,0,0,0.45)"
+                  bg="rgba(0,0,0,0.6)"
                   zIndex="0"
                   transition="background-color 0.3s ease-in-out"
                   _hover={{ bg: "rgba(0,0,0,0.6)" }}
@@ -116,17 +121,17 @@ const ServicesSection = () => {
               >
                 <Heading
                   as="h3"
-                  fontSize={{ base: "1.8rem", md: "2.5rem" }}
+                  fontSize={{ base: "2rem", md: "2.3rem" }}
                   fontFamily="playfair"
-                  mb={3}
-                  border={service.imageUrl ? "1.5px solid white" : "none"}
-                  p={service.imageUrl ? "2rem 1.5rem" : 0}
+                  border={service.imageUrl ? "1px solid white" : "none"}
+                  p={service.imageUrl ? "1.5rem" : 0}
+                  lineHeight={1.3}
                 >
                   {service.heading}
                 </Heading>
 
                 <Button fontSize="1.9rem" bg="transparent">
-                  Book Now
+                  Book Service
                 </Button>
               </Flex>
             </GridItem>

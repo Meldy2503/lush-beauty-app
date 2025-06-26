@@ -21,6 +21,7 @@ interface InputElementProps {
   placeholder?: string;
   border?: string;
   type?: string;
+  bg?: string;
   value?: string;
   h?: string;
   onChange?: (
@@ -36,6 +37,7 @@ export const InputElement = ({
   placeholder,
   h,
   border,
+  bg,
   type = "text",
   value,
   onChange,
@@ -122,7 +124,7 @@ export const InputElement = ({
           required
           border={border ?? "none"}
           fontSize={"1.6rem"}
-          bg="white"
+          bg={bg ?? "white"}
           height={h ?? "10rem"}
           size={"xl"}
           placeholder={placeholder || label}
@@ -157,7 +159,7 @@ export const InputElement = ({
             border={border ?? "none"}
             fontSize={"1.6rem"}
             height="4.5rem"
-            bg="white"
+            bg={bg ?? "white"}
             p="1.5rem"
             required
             placeholder={placeholder || label}
@@ -182,9 +184,9 @@ export const InputElement = ({
       </Flex>
       <Input
         border={border ?? "none"}
+        bg={bg ?? "white"}
         fontSize={"1.6rem"}
         height="4.5rem"
-        bg="white"
         p="1.5rem"
         required
         placeholder={placeholder || label}
