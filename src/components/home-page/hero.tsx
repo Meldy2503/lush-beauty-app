@@ -138,7 +138,7 @@ const HeroSection = () => {
             height="100%"
             background={{
               base: "linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.75))",
-              lg: "radial-gradient(circle, transparent -30%, rgba(0,0,0,1) 100%)",
+              lg: "radial-gradient(circle, transparent -10%, rgba(0,0,0,1) 100%)",
             }}
             zIndex={2}
             pointerEvents="none"
