@@ -145,13 +145,12 @@ const Cart = ({ children }: CartProps) => {
                 </HStack>
 
                 <HStack w="full" gap="1rem">
-                  <Button w="50%">Checkout</Button>
+                  <Button  href='/shop/order-summary'>Checkout</Button>
                   <Button
                     bg="transparent"
                     borderWidth="1px"
                     borderColor="black"
                     color="black"
-                    w="50%"
                   >
                     Cancel
                   </Button>
