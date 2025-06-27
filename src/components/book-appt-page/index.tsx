@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Icon, Steps } from "@chakra-ui/react";
-import { FaRegCalendarAlt, FaRegCreditCard } from "react-icons/fa";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlinePersonAddAlt } from "react-icons/md";
 import { RiCalendarScheduleLine, RiServiceLine } from "react-icons/ri";
@@ -12,7 +12,9 @@ import SelectLocation from "./select-location";
 import SelectService from "./select-service";
 import SelectTechnician from "./select-technician";
 import { useState } from "react";
-import MakePayment from "./make-payment";
+// import MakePayment from "./make-payment";
+import ConfirmBooking from "./confirm-booking";
+import { IoCheckmarkCircleOutline } from "react-icons/io5";
 
 type SetStep = React.Dispatch<React.SetStateAction<number>>;
 
@@ -53,12 +55,19 @@ const steps = [
     ),
   },
   {
-    title: "Make Payment",
-    icon: FaRegCreditCard,
+    title: "Confirm Booking",
+    icon: IoCheckmarkCircleOutline,
     content: (setStep: SetStep, step: number) => (
-      <MakePayment setStep={setStep} step={step} />
+      <ConfirmBooking setStep={setStep} step={step} />
     ),
   },
+  // {
+  //   title: "Make Payment",
+  //   icon: FaRegCreditCard,
+  //   content: (setStep: SetStep, step: number) => (
+  //     <MakePayment setStep={setStep} step={step} />
+  //   ),
+  // },
 ];
 
 const AppointmentPage = () => {

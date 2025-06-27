@@ -71,7 +71,7 @@ const MakePayment = ({ setStep, step }: MakePaymentProps) => {
         minH={{ base: "80vh", md: "70vh" }}
         position="relative"
         flexDir={"column"}
-      >
+       >
         <Heading
           as="h3"
           fontSize={{ base: "1.7rem", md: "1.8rem" }}

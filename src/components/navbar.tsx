@@ -61,7 +61,7 @@ const Navbar = ({ display, top }: NavbarProps) => {
         w="100%"
         py="1rem"
         position={"fixed"}
-        top={top ?? "5.4rem"}
+        top={top ?? "5rem"}
         bg={"white"}
         color={"black"}
         zIndex={500}

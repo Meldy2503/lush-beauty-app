@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  CloseButton,
   Dialog,
   Heading,
+  HStack,
   Portal,
   Text,
   VStack,
@@ -14,10 +14,15 @@ import Button from "../ui/button";
 
 const BookingConfirmationModal = () => {
   return (
-    <Dialog.Root scrollBehavior="inside" placement={"center"}>
+    <Dialog.Root
+      scrollBehavior="inside"
+      placement={"center"}
+      closeOnInteractOutside={false}
+      motionPreset="slide-in-bottom"
+    >
       <Dialog.Trigger asChild>
-        <Button borderWidth="1.5px" borderColor="black" w="48%">
-          Pay Now
+        <Button borderWidth="1.5px" borderColor="black" w="50%">
+          Confirm Booking
         </Button>
       </Dialog.Trigger>
       <Portal>
@@ -27,19 +32,16 @@ const BookingConfirmationModal = () => {
             maxW="600px"
             w="full"
             px={{ base: "2rem", md: "5rem" }}
-            py={{ base: "3rem", md: "5rem" }}
+            py="5rem"
             m=".5rem"
           >
-            <Dialog.CloseTrigger asChild>
-              <CloseButton size="2xl" _hover={{ bg: "gray.250" }} />
-            </Dialog.CloseTrigger>
             <Dialog.Body>
               <VStack textAlign={"center"}>
-                <Image src={tick} alt="tick icon" width={130} height={130} />
+                <Image src={tick} alt="tick icon" width={120} height={120} />
                 <Heading
                   as="h2"
-                  fontSize={{ base: "2.5rem", md: "3rem" }}
-                  my="2rem"
+                  fontSize={{ base: "2.2rem", md: "2.8rem" }}
+                  my="1rem"
                   lineHeight={1.3}
                   textTransform={"uppercase"}
                 >
@@ -50,10 +52,33 @@ const BookingConfirmationModal = () => {
                   w={{ base: "100%", md: "80%" }}
                   lineHeight={1.5}
                 >
-                  Thank you for booking with Lush & Luxe. Your appointment is
-                  officially set, and your payment has been received. We can’t
-                  wait to welcome you and give you the pampering you deserve! ✨
+                  Thanks for booking with Lush & Luxe!!. <br />
+                  We&apos;ve sent an email confirmation to you using your
+                  provided email address. ✨
                 </Text>
+                <HStack
+                  gap="1.5rem"
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  flexWrap={"wrap"}
+                  pt="3rem"
+                  w='full'
+                  flexDir={{ base: "column-reverse", sm: "row" }}
+                >
+                  <Button
+                    bg="transparent"
+                    borderWidth="1.5px"
+                    borderColor="black"
+                    color="black"
+                    px={{base:'5.5rem', sm:'2rem'}}
+                    href="/"
+                  >
+                    Go to Home
+                  </Button>
+                  <Button px="2rem" >
+                    Proceed to Pay £1000
+                  </Button>
+                </HStack>
               </VStack>
             </Dialog.Body>
           </Dialog.Content>
