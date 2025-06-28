@@ -7,6 +7,7 @@ import Image from "next/image";
 import heroImg1 from "../../assets/images/hero-img.webp";
 import scissors from "../../assets/images/scissors.png";
 import heroImg2 from "../../assets/images/hero-img-2.webp";
+import heroImg3 from "../../assets/images/test.webp";
 import Button from "../ui/button";
 
 interface SideImageProps {
@@ -28,7 +29,7 @@ const SideImage = ({ src, text, side }: SideImageProps) => (
     {...(side === "left" ? { left: "0" } : { right: "0" })}
     top="47%"
     height="85%"
-    width="28%"
+    width="32%"
     backgroundSize="cover"
     backgroundAttachment={"fixed"}
     backgroundPosition="center"
@@ -75,21 +76,14 @@ const HeroSection = () => {
       overflow="hidden"
       mt="7rem"
     >
-      <Box
-        position="sticky"
-        top="0"
-        h="90vh"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
+      <Box h="80vh" display="flex" justifyContent="center" alignItems="center">
         <SideImage src={heroImg1.src} text="GLAM" side="left" />
         <SideImage src={heroImg2.src} text="GLOW" side="right" />
 
         <MotionBox
           position="relative"
-          width={{ base: "100%", lg: "44%" }}
-          height="94%"
+          width={{ base: "100%", lg: "38%" }}
+          height="95%"
           boxShadow={{
             base: "none",
             lg: "0 22px 10px -13px rgba(0,0,0,0.8), 0 15px 10px -25px rgba(0,0,0,0.8)",
@@ -103,18 +97,17 @@ const HeroSection = () => {
           {!videoLoaded && (
             <Box
               position="absolute"
-              top="0"
-              left="0"
+              inset="0"
               width="100%"
               height="100%"
               zIndex={1}
-              bg={`url(${heroImg1.src}) center center / cover no-repeat`}
+              bg={`url(${heroImg3.src}) center center / cover no-repeat`}
             />
           )}
 
           <MotionVideo
             src={VIDEO_URL}
-            poster={heroImg1.src}
+            poster={heroImg3.src}
             autoPlay
             muted
             loop
@@ -123,21 +116,20 @@ const HeroSection = () => {
             height="100%"
             style={{
               objectFit: "cover",
-              objectPosition: "top center",
+              height: "100%",
+              objectPosition: "top",
               border: ".5px solid gray",
               display: videoLoaded ? "block" : "none",
             }}
             onLoadedData={handleVideoLoad}
           />
-
           <Flex
             position="absolute"
-            top="0"
-            left="0"
+            inset="0"
             width="100%"
             height="100%"
             background={{
-              base: "linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.75))",
+              base: "linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.75))",
               lg: "radial-gradient(circle, transparent -10%, rgba(0,0,0,1) 100%)",
             }}
             zIndex={2}
@@ -152,7 +144,6 @@ const HeroSection = () => {
               <Box position="absolute" bottom="35%" right="-3rem">
                 <Image src={scissors} alt="scissors" width={160} height={160} />
               </Box>
-
               <Text
                 position="relative"
                 fontFamily="playfair"
@@ -188,11 +179,9 @@ const HeroSection = () => {
                   zIndex={1}
                 />
               </Text>
-
               <Text fontSize="2.5rem" py="3rem" letterSpacing={".5rem"}>
                 BEAUTY SALON
               </Text>
-
               <Button bg="transparent" borderWidth="1px" borderColor="white">
                 BOOK NOW
               </Button>

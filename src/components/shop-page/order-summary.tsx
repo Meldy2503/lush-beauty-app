@@ -7,11 +7,12 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegCircleDot } from "react-icons/fa6";
 import Button from "../ui/button";
+import Cart from "./cart";
 
 const OrderSummaryPage = () => {
   return (
     <Wrapper bg="gray.250">
-      <Flex gap="2rem" mt="5rem" flexDir={{base:'column', lg:'row'}}>
+      <Flex gap="2rem" mt="5rem" flexDir={{ base: "column", lg: "row" }}>
         <Box w={{ base: "100%", lg: "70%" }}>
           {/* customer details section */}
 
@@ -62,19 +63,18 @@ const OrderSummaryPage = () => {
                   >
                     EMELDER OKAFOR
                   </Heading>
-                  <Text lineHeight={1.3} mb='.5rem'>
+                  <Text lineHeight={1.3} mb=".5rem">
                     2, Beverley street - United state
                   </Text>
                   <Text lineHeight={1.3}>+1 30241481957 </Text>
                 </Box>
               </Flex>
-              <Flex alignSelf={{ base: "flex-end", sm: "center" }}>
-                <FaRegEdit size={"2.6rem"} color="orange" />
+              <Flex alignSelf={{ base: "flex-end", sm: "center" }} color='yellow.100'>
+                <FaRegEdit size={"2.6rem"} />
               </Flex>
             </Flex>
           </Box>
           {/* order details section */}
-
           <Box bg="white" mt="2rem" p="2rem">
             <HStack
               py="2rem"
@@ -149,6 +149,18 @@ const OrderSummaryPage = () => {
               >
                 $40
               </Text>
+            </Flex>
+            <Flex justifyContent={'center'}>
+              <Cart>
+                <Button
+                  bg="transparent"
+                  color="yellow.100"
+                  fontSize="1.7rem"
+                  fontWeight="600"
+                >
+                  MODIFY CART
+                </Button>
+              </Cart>
             </Flex>
           </Box>
         </Box>

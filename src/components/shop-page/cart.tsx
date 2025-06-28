@@ -5,6 +5,7 @@ import {
   CloseButton,
   Drawer,
   Flex,
+  Grid,
   Heading,
   HStack,
   Portal,
@@ -144,17 +145,28 @@ const Cart = ({ children }: CartProps) => {
                   <Text>£58.00</Text>
                 </HStack>
 
-                <HStack w="full" gap="1rem">
-                  <Button  href='/shop/order-summary'>Checkout</Button>
+                <Grid
+                  templateColumns={{ base: "1fr", sm: "1fr 1fr" }}
+                  gap="1rem"
+                  w="full"
+                >
+                  <Button href="/shop/order-summary" w="100%" py="1.5rem">
+                    Checkout
+                  </Button>
                   <Button
+                    href="/shop"
                     bg="transparent"
                     borderWidth="1px"
                     borderColor="black"
                     color="black"
+                    w="100%"
                   >
-                    Cancel
+                    Add More Items
                   </Button>
-                </HStack>
+                </Grid>
+                <Drawer.CloseTrigger bg="white" asChild>
+                  <CloseButton size="lg" />
+                </Drawer.CloseTrigger>
               </Flex>
             </Drawer.Footer>
             <Drawer.CloseTrigger bg="white" asChild>

@@ -22,7 +22,7 @@ const Navbar = ({ display, top }: NavbarProps) => {
     <>
       <Box
         w="100%"
-        bg="yellow.100"
+         bg="yellow.150"
         position="fixed"
         top="0"
         zIndex={500}
@@ -35,7 +35,7 @@ const Navbar = ({ display, top }: NavbarProps) => {
           width="90%"
           maxW={"1200px"}
           mx="auto"
-          py="1rem"
+          py="1.5rem"
         >
           <Text
             textAlign={"center"}
@@ -50,7 +50,7 @@ const Navbar = ({ display, top }: NavbarProps) => {
           <HStack gap="2rem">
             <Cart />
             {pathname !== "/book-appointment" && (
-              <Button px="2rem" py=".5rem" href="/book-appointment">
+              <Button px="1.5rem" py=".5rem" href="/book-appointment">
                 Book Now
               </Button>
             )}
@@ -61,7 +61,7 @@ const Navbar = ({ display, top }: NavbarProps) => {
         w="100%"
         py="1rem"
         position={"fixed"}
-        top={top ?? "5rem"}
+        top={top ?? "6rem"}
         bg={"white"}
         color={"black"}
         zIndex={500}

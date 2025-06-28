@@ -10,7 +10,7 @@ const ShopHeroSection = () => {
         bgImage={`url(${heroImg.src})`}
         bgPos={"top"}
         bgRepeat="no-repeat"
-        height="60vh"
+        height="55vh"
         bgSize="cover"
         mt="9rem"
       >
