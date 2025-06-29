@@ -197,19 +197,26 @@ const Footer = () => {
               direction={{ base: "column", sm: "row", lg: "column" }}
               gap="1.5rem"
               w="100%"
+              alignItems={"center"}
             >
               <Input
                 placeholder="Your email address"
                 fontSize="1.5rem"
-                p="2.5rem 2rem"
+                p="2rem"
                 borderColor="white"
+                borderRadius={"0"}
                 bg="white"
                 w="100%"
                 color="black"
                 _hover={{ borderColor: "yellow.50" }}
                 _focus={{ borderColor: "yellow.50" }}
               />
-              <Button px="1rem" py="2rem" bg="yellow.150" w="full">
+              <Button
+                px="1rem"
+                py="2rem"
+                bg="yellow.150"
+                w={{ base: "full", sm: "fit-content", lg: "full" }}
+              >
                 Subscribe
               </Button>
             </Flex>

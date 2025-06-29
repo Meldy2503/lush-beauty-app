@@ -12,13 +12,17 @@ import Cart from "./cart";
 const OrderSummaryPage = () => {
   return (
     <Wrapper bg="gray.250">
-      <Flex gap="2rem" mt="5rem" flexDir={{ base: "column", lg: "row" }}>
+      <Flex
+        gap="2rem"
+        mt="6rem"
+        flexDir={{ base: "column-reverse", lg: "row" }}
+      >
         <Box w={{ base: "100%", lg: "70%" }}>
           {/* customer details section */}
 
-          <Box bg="white" p="2rem">
+          <Box bg="white" p="3rem 2rem ">
             <HStack
-              py="2rem"
+              pb="2rem"
               mb="2rem"
               borderBottomWidth={"2px"}
               borderBottomColor={"gray.250"}
@@ -78,9 +82,9 @@ const OrderSummaryPage = () => {
             </Flex>
           </Box>
           {/* order details section */}
-          <Box bg="white" mt="2rem" p="2rem">
+          <Box bg="white" mt="2rem" p="3rem 2rem">
             <HStack
-              py="2rem"
+              pb="2rem"
               mb="2rem"
               borderBottomWidth={"2px"}
               borderBottomColor={"gray.250"}
@@ -169,7 +173,11 @@ const OrderSummaryPage = () => {
         </Box>
 
         {/* order summary section */}
-        <Box w={{ base: "100%", lg: "30%" }} bg="white" p="2rem">
+        <Box
+          w={{ base: "100%", lg: "30%" }}
+          bg="white"
+          p="3rem 2rem"
+        >
           <Text fontWeight={"600"} pb="2rem">
             Order summary (2)
           </Text>
@@ -208,7 +216,9 @@ const OrderSummaryPage = () => {
           >
             <Text>Total</Text> <Text fontSize={"1.8rem"}>$55.00</Text>{" "}
           </HStack>
-          <Button w="full">Confirm Order</Button>
+            <Button w="full" href="/shop/order-confirmation">
+              Confirm Order
+            </Button>
         </Box>
       </Flex>
     </Wrapper>

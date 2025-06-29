@@ -10,7 +10,7 @@ const ViewAppointmentDetails = () => {
       scrollBehavior="inside"
     >
       <Dialog.Trigger asChild>
-        <Button px="2rem" fontSize="1.45rem">
+        <Button px="1rem" fontSize="1.45rem">
           VIEW DETAILS
         </Button>
       </Dialog.Trigger>
