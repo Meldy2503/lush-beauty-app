@@ -22,8 +22,8 @@ const SignUp = () => {
             type="number"
           />
           <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
-            <InputElement label="Country" placeholder="Peter Smith" />
-            <InputElement label="State" placeholder="Peter Smith" />
+            <InputElement label="Country" placeholder="United Kingdom" />
+            <InputElement label="State" placeholder="Manchester" />
           </Flex>
           <InputElement label="Address" placeholder="2 Beverley street" />
           <InputElement type="password" label="Password" placeholder="*****" />

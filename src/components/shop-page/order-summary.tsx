@@ -1,13 +1,12 @@
 import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import React from "react";
-import academy from "../../assets/images/academy-1.webp";
-import Wrapper from "../ui/wrapper";
-import { IoIosCheckmarkCircle } from "react-icons/io";
-import { FaRegEdit } from "react-icons/fa";
 import { FaRegCircleDot } from "react-icons/fa6";
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import academy from "../../assets/images/academy-1.webp";
 import Button from "../ui/button";
+import Wrapper from "../ui/wrapper";
 import Cart from "./cart";
+import PersonalDetailsModal from "./personal-details-modal";
 
 const OrderSummaryPage = () => {
   return (
@@ -19,7 +18,6 @@ const OrderSummaryPage = () => {
       >
         <Box w={{ base: "100%", lg: "70%" }}>
           {/* customer details section */}
-
           <Box bg="white" p="3rem 2rem ">
             <HStack
               pb="2rem"
@@ -70,14 +68,18 @@ const OrderSummaryPage = () => {
                   <Text lineHeight={1.3} mb=".5rem">
                     2, Beverley street - United state
                   </Text>
-                  <Text lineHeight={1.3}>+1 30241481957 </Text>
+                  <Text lineHeight={1.3} mb=".5rem">
+                    peter.smith@gmail.com{" "}
+                  </Text>
+                  <Text lineHeight={1.3}>+44241481957 </Text>
                 </Box>
               </Flex>
               <Flex
                 alignSelf={{ base: "flex-end", sm: "center" }}
                 color="yellow.100"
+                cursor={"pointer"}
               >
-                <FaRegEdit size={"2.6rem"} />
+                <PersonalDetailsModal />
               </Flex>
             </Flex>
           </Box>
@@ -173,11 +175,7 @@ const OrderSummaryPage = () => {
         </Box>
 
         {/* order summary section */}
-        <Box
-          w={{ base: "100%", lg: "30%" }}
-          bg="white"
-          p="3rem 2rem"
-        >
+        <Box w={{ base: "100%", lg: "30%" }} bg="white" p="3rem 2rem">
           <Text fontWeight={"600"} pb="2rem">
             Order summary (2)
           </Text>
@@ -216,9 +214,9 @@ const OrderSummaryPage = () => {
           >
             <Text>Total</Text> <Text fontSize={"1.8rem"}>$55.00</Text>{" "}
           </HStack>
-            <Button w="full" href="/shop/order-confirmation">
-              Confirm Order
-            </Button>
+          <Button w="full" href="/shop/order-confirmation">
+            Confirm Order
+          </Button>
         </Box>
       </Flex>
     </Wrapper>

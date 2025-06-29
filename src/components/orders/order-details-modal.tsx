@@ -1,8 +1,10 @@
+"use client";
+
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
 import Button from "../ui/button";
-import AppointmentDetailsContent from "./appt-details-content";
+import OrderDetailsContent from "./order-details-content";
 
-const ViewAppointmentDetails = () => {
+const ViewOrderDetailsModal = () => {
   return (
     <Dialog.Root
       placement="center"
@@ -10,7 +12,7 @@ const ViewAppointmentDetails = () => {
       scrollBehavior="inside"
     >
       <Dialog.Trigger asChild>
-        <Button px="1rem" fontSize="1.45rem">
+        <Button px="2rem" fontSize="1.45rem">
           VIEW DETAILS
         </Button>
       </Dialog.Trigger>
@@ -25,10 +27,10 @@ const ViewAppointmentDetails = () => {
             fontSize="1.6rem"
           >
             <Dialog.Header>
-              <Dialog.Title fontSize="2rem">Appointment details</Dialog.Title>
+              <Dialog.Title fontSize="2rem">Order details</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>
-              <AppointmentDetailsContent />
+              <OrderDetailsContent />
             </Dialog.Body>
             <Dialog.Footer mt="2rem">
               <Dialog.ActionTrigger asChild>
@@ -37,12 +39,12 @@ const ViewAppointmentDetails = () => {
                   borderColor="black"
                   borderWidth="2px"
                   color="black"
-                  py='1.6rem'
+                  py="1.6rem"
                 >
                   Close
                 </Button>
               </Dialog.ActionTrigger>
-              <Button href="/book-appointment">Book again</Button>
+              <Button href="/book-appointment">Shop again</Button>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild bg="gray.200">
               <CloseButton size="2xl" />
@@ -54,4 +56,4 @@ const ViewAppointmentDetails = () => {
   );
 };
 
-export default ViewAppointmentDetails;
+export default ViewOrderDetailsModal;

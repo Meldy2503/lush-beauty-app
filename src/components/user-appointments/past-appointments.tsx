@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Tag from "../ui/tag";
-import ViewAppointmentDetails from "./appointment-details";
+import ViewAppointmentDetails from "./appointment-details-modal";
 
 const PastAppointments = () => {
   return (

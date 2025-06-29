@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import academy from "../../assets/images/academy-1.webp";
 import Tag from "../ui/tag";
-import ViewOrderDetails from "./order-details";
+import ViewOrderDetailsModal from "./order-details-modal";
 
 const PastOrders = () => {
   return (
@@ -54,7 +54,7 @@ const PastOrders = () => {
           </Box>
         </Flex>
         <Flex alignSelf={{ base: "flex-end", md: "center" }}>
-          <ViewOrderDetails />
+          <ViewOrderDetailsModal />
         </Flex>
       </Flex>
       <Flex
@@ -103,7 +103,7 @@ const PastOrders = () => {
           </Box>
         </Flex>
         <Flex alignSelf={{ base: "flex-end", md: "center" }}>
-          <ViewOrderDetails />
+          <ViewOrderDetailsModal />
         </Flex>
       </Flex>
     </Box>
