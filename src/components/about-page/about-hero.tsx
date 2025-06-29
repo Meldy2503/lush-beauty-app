@@ -9,7 +9,7 @@ const AboutHeroSection = () => {
       bgImage={`url(${salonImg.src})`}
       bgPos={"center"}
       bgRepeat="no-repeat"
-      height="65vh"
+      height={{ base: "65vh", "2xl": "50vh" }}
       bgSize="cover"
     >
       <VStack

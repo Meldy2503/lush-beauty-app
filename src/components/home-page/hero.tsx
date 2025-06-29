@@ -68,7 +68,12 @@ const HeroSection = () => {
 
   return (
     <Box ref={containerRef} bg="white" position="relative" overflow="hidden">
-      <Box h="90vh" display="flex" justifyContent="center" alignItems="center">
+      <Box
+        height={{ base: "90vh", "2xl": "60vh" }}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
         <SideImage src={heroImg1.src} text="GLAM" side="left" />
         <SideImage src={heroImg2.src} text="GLOW" side="right" />
 

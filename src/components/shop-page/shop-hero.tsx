@@ -9,7 +9,7 @@ const ShopHeroSection = () => {
       bgImage={`url(${cosmeticsImg.src})`}
       bgPos={"center"}
       bgRepeat="no-repeat"
-      height="60vh"
+      height={{ base: "60vh", "2xl": "50vh" }}
       bgSize="cover"
     >
       <VStack

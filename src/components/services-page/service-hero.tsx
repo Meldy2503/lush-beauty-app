@@ -13,9 +13,10 @@ const ServiceHeroSection = () => {
         bgImage={`url(${salonImg.src})`}
         bgPos={"center"}
         bgRepeat="no-repeat"
-        height="65vh"
+        height={{base:'65vh', '2xl':'50vh'}}
         bgSize="cover"
       >
+   
         <VStack
           textAlign="center"
           px="2rem"
@@ -33,7 +34,7 @@ const ServiceHeroSection = () => {
             fontFamily="allura"
             fontWeight="300"
             lineHeight={{ base: 0.7, md: 0.4 }}
-            pt='9rem'
+            pt="9rem"
           >
             Our Services
           </Heading>
