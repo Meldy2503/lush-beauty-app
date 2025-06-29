@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
 import academy from "../../assets/images/academy-1.webp";
-import Tag from "../tag";
+import Tag from "../ui/tag";
 import ViewOrderDetails from "./order-details";
 
 const PastOrders = () => {

@@ -40,11 +40,11 @@ const Products = () => {
               width={1000}
               height={1000}
             />
-            <VStack>
+            <VStack textAlign="center">
               <Heading
                 as="h4"
                 mt={{ base: "1rem", md: "1.5rem" }}
-                fontSize="1.7rem"
+                fontSize= {{base:'1.5rem', sm:'1.6rem', lg:'1.7rem'}}
                 fontWeight={"400"}
               >
                 {card.heading}

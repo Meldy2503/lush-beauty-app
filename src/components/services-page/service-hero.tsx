@@ -1,8 +1,8 @@
 "use client";
 
 import { Box, Flex, Heading, HStack, Text, VStack } from "@chakra-ui/react";
-import heroImg from "../../assets/images/services-bg.webp";
-import Wrapper from "../wrapper";
+import salonImg from "../../assets/images/salon-img.webp";
+import Wrapper from "../ui/wrapper";
 import Button from "../ui/button";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 
@@ -10,17 +10,16 @@ const ServiceHeroSection = () => {
   return (
     <>
       <Box
-        bgImage={`url(${heroImg.src})`}
-        bgPos={"top"}
+        bgImage={`url(${salonImg.src})`}
+        bgPos={"center"}
         bgRepeat="no-repeat"
-        height="60vh"
+        height="65vh"
         bgSize="cover"
-        mt="9rem"
       >
         <VStack
           textAlign="center"
           px="2rem"
-          bg="rgb(0, 0, 0, 0.55)"
+          bg="rgb(0, 0, 0, 0.6)"
           color="white"
           height={"100%"}
           w={"100%"}
@@ -34,6 +33,7 @@ const ServiceHeroSection = () => {
             fontFamily="allura"
             fontWeight="300"
             lineHeight={{ base: 0.7, md: 0.4 }}
+            pt='9rem'
           >
             Our Services
           </Heading>

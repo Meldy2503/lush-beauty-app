@@ -13,8 +13,8 @@ import {
 import { useState } from "react";
 import Button from "../ui/button";
 import { InputElement } from "../ui/input-element";
-import Wrapper from "../wrapper";
 import Products from "./products";
+import Wrapper from "../ui/wrapper";
 
 interface CategoriesData {
   label: string;
@@ -56,12 +56,12 @@ const ShopListSection = () => {
           >
             <Select.HiddenSelect />
 
-            <Select.Control>
+            <Select.Control bg='white'>
               <Select.Trigger fontSize="1.6rem">
                 <Select.ValueText
                   py="1.5rem"
                   px="1rem"
-                  placeholder="Select Category"
+                  placeholder="Filter"
                 />
               </Select.Trigger>
               <Select.IndicatorGroup>
@@ -93,15 +93,15 @@ const ShopListSection = () => {
         <Box
           w={{ base: "100%", md: "25%" }}
           display={{ base: "none", md: "block" }}
-          mt="-7rem"
+          mt="-6rem"
         >
           <Heading
             as="h2"
-            fontSize={{ base: "2rem", md: "2.2rem" }}
+            fontSize={{ base: "1.8rem", md: "2rem" }}
             fontFamily="playfair"
             fontWeight="300"
             lineHeight={{ base: 0.8, md: 0.4 }}
-            mb="4rem"
+            mb="3rem"
           >
             FILTER BY
           </Heading>
@@ -175,7 +175,7 @@ export default ShopListSection;
 
 const categories: CategoriesData[] = [
   { label: "All", value: "All", count: 145 },
-  { label: "Eyes", value: "Eyes", count: 12 },
-  { label: "Face", value: "Face", count: 18 },
-  { label: "Lips", value: "Lips", count: 15 },
+  { label: "Cosmetics", value: "Cosmetics", count: 12 },
+  { label: "Lotion", value: "Lotion", count: 18 },
+  { label: "Nails", value: "Nails", count: 15 },
 ];

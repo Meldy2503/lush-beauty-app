@@ -7,7 +7,7 @@ import { CiDeliveryTruck } from "react-icons/ci";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import academy1 from "../../assets/images/academy-1.webp";
 import Button from "../ui/button";
-import Wrapper from "../wrapper";
+import Wrapper from "../ui/wrapper";
 import Cart from "./cart";
 
 const Product = () => {
@@ -80,9 +80,9 @@ const Product = () => {
           </Box>
 
           <Cart>
-          <Button bg="yellow.100" w="full" >
-            ADD TO CART
-          </Button>
+            <Button bg="yellow.100" w="full">
+              ADD TO CART
+            </Button>
           </Cart>
           <Box mt="4rem">
             <HStack mb="1rem" fontWeight={600}>
@@ -113,7 +113,10 @@ const Product = () => {
           We want you to love your 7-Color LED Beauty Face Mask, but if
           you&apos;re not completely satisfied, we&apos;re here to help.{" "}
         </Text>
-        <Flex gap={{base:'1rem', md:'5rem', lg:'10rem'}} flexDir={{base:'column', md:'row'}}>
+        <Flex
+          gap={{ base: "1rem", md: "5rem", lg: "10rem" }}
+          flexDir={{ base: "column", md: "row" }}
+        >
           <Box fontSize={"1.55rem"} mt="2rem">
             <Text mb="1rem">
               You may return the item within 14 days of delivery if:

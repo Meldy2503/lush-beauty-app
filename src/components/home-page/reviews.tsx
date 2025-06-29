@@ -1,12 +1,12 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import Wrapper from "../wrapper";
+import Wrapper from "../ui/wrapper";
 import Image from "next/image";
 import aboutImg from "../../assets/images/academy-bg.webp";
 
 const ReviewSection = () => {
   return (
     <Wrapper>
-      <Box zIndex={2} boxShadow="lg" position="relative" mb='3rem'>
+      <Box zIndex={2} boxShadow="lg" position="relative" mb="3rem">
         <Box
           position="absolute"
           left="-2rem"
@@ -45,7 +45,7 @@ const ReviewSection = () => {
                   objectPosition: "center",
                 }}
               />{" "}
-              <Text fontFamily={'playfair'}>Nancy Katherine</Text>
+              <Text fontFamily={"playfair"}>Nancy Katherine</Text>
             </Flex>
           </Box>
 
@@ -63,7 +63,7 @@ const ReviewSection = () => {
             >
               REVIEWS
             </Heading>{" "}
-            <Text color={"yellow.50"} mt="1rem" >
+            <Text color={"yellow.50"} mt="1rem">
               {" "}
               YOUR KIND WORDS
             </Text>{" "}

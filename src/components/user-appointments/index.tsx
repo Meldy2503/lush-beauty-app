@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import Wrapper from "../wrapper";
+import Wrapper from "../ui/wrapper";
 import { Tabs, Box, HStack, Text, Heading, Span } from "@chakra-ui/react";
 import NewAppointments from "./new-appointments";
 import PastAppointments from "./past-appointments";

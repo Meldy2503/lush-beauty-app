@@ -28,19 +28,20 @@ const Cart = ({ children }: CartProps) => {
       <Drawer.Trigger asChild>
         {children ?? (
           <Box position="relative" cursor="pointer">
-            <GiShoppingBag style={{ fontSize: "3rem", color: "black" }} />
+            <GiShoppingBag style={{ fontSize: "2.8rem", color: "white" }} />
             <Flex
               position="absolute"
               top="60%"
               right="50%"
               transform="translate(50%, -50%)"
               borderRadius="50%"
-              color="white"
+              color="black"
               justifyContent="center"
               alignItems="center"
               fontSize="1.3rem"
               zIndex={1}
               pointerEvents="none"
+              fontWeight={'bold'}
             >
               0
             </Flex>

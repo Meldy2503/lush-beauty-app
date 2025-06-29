@@ -2,7 +2,7 @@
 
 import { Accordion, Box, Heading, Span } from "@chakra-ui/react";
 import { useState } from "react";
-import Wrapper from "../wrapper";
+import Wrapper from "../ui/wrapper";
 import { BsPlusSquareFill } from "react-icons/bs";
 import { AiFillMinusSquare } from "react-icons/ai";
 

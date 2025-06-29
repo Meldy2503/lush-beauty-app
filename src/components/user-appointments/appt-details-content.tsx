@@ -5,8 +5,7 @@ import Image from "next/image";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
-import Tag from "../tag";
-
+import Tag from "../ui/tag";
 
 const AppointmentDetailsContent = () => {
   return (

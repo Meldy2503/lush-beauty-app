@@ -1,28 +1,31 @@
 "use client";
 
-import { Box, Flex, HStack, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ContactUsModal from "./contact-us/contact-modal";
+import ContactUsModal from "../contact-us/contact-modal";
+import ProfileMenu from "../ui/profile-menu";
+import Cart from "../shop-page/cart";
+import SocialMediaIcons from "../ui/social-media-icons";
+import Button from "../ui/button";
+import Logo from "../ui/logo";
 import MobileNav from "./mobile-nav";
-import ProfileMenu from "./profile-menu";
-import Cart from "./shop-page/cart";
-import Button from "./ui/button";
-import Logo from "./ui/logo";
 
 interface NavbarProps {
   display?: string;
   top?: string;
+  bg?: string;
+  color?: string;
 }
 
-const Navbar = ({ display, top }: NavbarProps) => {
+const Navbar = ({ display, top, bg, color }: NavbarProps) => {
   const pathname = usePathname();
 
   return (
     <>
       <Box
         w="100%"
-         bg="yellow.150"
+        bg="yellow.150"
         position="fixed"
         top="0"
         zIndex={500}
@@ -35,38 +38,25 @@ const Navbar = ({ display, top }: NavbarProps) => {
           width="90%"
           maxW={"1200px"}
           mx="auto"
-          py="1.5rem"
+          py="1rem"
         >
-          <Text
-            textAlign={"center"}
-            fontWeight={"600"}
-            fontSize={"1.6rem"}
-            fontFamily={"playfair"}
-            textTransform={"uppercase"}
-            display={{ base: "none", sm: "block" }}
-          >
-            Redefine Your Beauty
-          </Text>
-          <HStack gap="2rem">
+          <Box display={{ base: "none", sm: "block" }}>
+            <SocialMediaIcons boxSize="2rem" />
+          </Box>
+          <HStack gap="1.5rem">
             <Cart />
-            {pathname !== "/book-appointment" && (
-              <Button px="1.5rem" py=".5rem" href="/book-appointment">
-                Book Now
-              </Button>
-            )}
+            <ProfileMenu />
           </HStack>
         </Flex>
       </Box>
       <Box
         w="100%"
-        py="1rem"
+        py="1.2rem"
         position={"fixed"}
-        top={top ?? "6rem"}
-        bg={"white"}
-        color={"black"}
+        top={top ?? "4.8rem"}
+        bg={bg ?? "rgb(0,0,0,0.8)"}
+        color={color ?? "white"}
         zIndex={500}
-        borderBottomColor={'gray.300'}
-        borderBottomWidth='1px'
       >
         <Flex
           width="90%"
@@ -76,7 +66,6 @@ const Navbar = ({ display, top }: NavbarProps) => {
           align={"center"}
           color="black"
         >
-          <MobileNav />
           <Logo />
           <Flex
             align={"center"}
@@ -86,8 +75,8 @@ const Navbar = ({ display, top }: NavbarProps) => {
             <Link
               href={"/about-us"}
               style={{
-                color: "#000",
-                fontWeight: pathname === "/about-us" ? "500" : "300",
+                color: color ?? "white",
+                fontWeight: pathname === "/about-us" ? "500" : "400",
                 borderBottom:
                   pathname === "/about-us" ? "2px solid #DB9935" : "none",
               }}
@@ -97,20 +86,20 @@ const Navbar = ({ display, top }: NavbarProps) => {
             <Link
               href={"/services"}
               style={{
-                color: "#000",
-                fontWeight: pathname === "/services" ? "500" : "300",
+                color: color ?? "white",
+                fontWeight: pathname === "/services" ? "500" : "400",
                 borderBottom:
                   pathname === "/services" ? "2px solid #DB9935" : "none",
               }}
             >
               Services
             </Link>
-            <ContactUsModal />
+            <ContactUsModal color={color} />
             <Link
               href={"/shop"}
               style={{
-                color: "black",
-                fontWeight: pathname === "/shop" ? "500" : "300",
+                color: color ?? "white",
+                fontWeight: pathname === "/services" ? "500" : "400",
                 borderBottom:
                   pathname === "/shop" ? "2px solid #DB9935" : "none",
               }}
@@ -118,7 +107,21 @@ const Navbar = ({ display, top }: NavbarProps) => {
               Shop
             </Link>
           </Flex>
-          <ProfileMenu />
+
+          {pathname !== "/book-appointment" && (
+            <Box display={{ base: "none", sm: "block" }}>
+              <Button
+                px="1.2rem"
+                py=".6rem"
+                href="/book-appointment"
+                borderColor="yellow.150"
+                borderWidth="1.5px"
+              >
+                Book Appointment
+              </Button>
+            </Box>
+          )}
+          <MobileNav color={color} bg={bg} />
         </Flex>
       </Box>
     </>

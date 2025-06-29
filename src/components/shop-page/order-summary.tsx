@@ -2,7 +2,7 @@ import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
 import academy from "../../assets/images/academy-1.webp";
-import Wrapper from "../wrapper";
+import Wrapper from "../ui/wrapper";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegCircleDot } from "react-icons/fa6";
@@ -69,7 +69,10 @@ const OrderSummaryPage = () => {
                   <Text lineHeight={1.3}>+1 30241481957 </Text>
                 </Box>
               </Flex>
-              <Flex alignSelf={{ base: "flex-end", sm: "center" }} color='yellow.100'>
+              <Flex
+                alignSelf={{ base: "flex-end", sm: "center" }}
+                color="yellow.100"
+              >
                 <FaRegEdit size={"2.6rem"} />
               </Flex>
             </Flex>
@@ -150,7 +153,7 @@ const OrderSummaryPage = () => {
                 $40
               </Text>
             </Flex>
-            <Flex justifyContent={'center'}>
+            <Flex justifyContent={"center"}>
               <Cart>
                 <Button
                   bg="transparent"

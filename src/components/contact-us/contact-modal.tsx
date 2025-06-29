@@ -14,7 +14,11 @@ import ContactForm from "./contact-form";
 import { useState } from "react";
 import contactBg from "../../assets/images/contact-bg.webp";
 
-const ContactUsModal = () => {
+interface ContactUsModalProps {
+  color?: string
+}
+
+const ContactUsModal = ({ color }: ContactUsModalProps) => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   return (
@@ -29,9 +33,9 @@ const ContactUsModal = () => {
         <Button
           bg="transparent"
           fontFamily={"lato"}
-          color="#000"
+          color={color ?? "white"}
           hover="transparent"
-          fontWeight="300"
+          fontWeight="400"
           px="0"
           py="0"
           onClick={() => setIsContactModalOpen(true)}

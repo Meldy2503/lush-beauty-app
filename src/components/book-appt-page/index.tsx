@@ -75,7 +75,7 @@ const AppointmentPage = () => {
 
   return (
     <Box minH="100vh" bg="gray.250" pb="2rem">
-      <Navbar />
+      <Navbar bg='white' color='black'/>
       <Steps.Root
         step={step}
         count={steps.length}
@@ -86,8 +86,9 @@ const AppointmentPage = () => {
         <Steps.List
           w="23rem"
           p="2rem"
+          pt='3.8rem'
           position="fixed"
-          top="8.7rem"
+          top="8rem"
           bg="white"
           left="0"
           zIndex="10"

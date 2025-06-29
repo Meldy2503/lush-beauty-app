@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import aboutImg from "../../assets/images/visit-us.webp";
-import Wrapper from "../wrapper";
+import salonImg from "../../assets/images/visit-us.webp";
+import Wrapper from "../ui/wrapper";
 
 const VisitUsSection = () => {
   return (
@@ -103,7 +103,7 @@ const VisitUsSection = () => {
         <Box position="relative" w={{ base: "100%", md: "45%" }}>
           <Box zIndex={1} boxShadow="lg" position="relative">
             <Image
-              src={aboutImg}
+              src={salonImg}
               alt="beauty salon office image"
               style={{ position: "relative" }}
               width={1000}

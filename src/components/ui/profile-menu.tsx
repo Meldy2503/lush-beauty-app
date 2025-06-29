@@ -1,8 +1,8 @@
 import { Box, Flex, HStack, Menu, Portal, Text } from "@chakra-ui/react";
-import { BsPerson } from "react-icons/bs";
 import { MdKeyboardArrowDown, MdLogout } from "react-icons/md";
-import Button from "./ui/button";
+import Button from "./button";
 import Link from "next/link";
+import { IoPersonCircleSharp } from "react-icons/io5";
 
 const ProfileMenu = () => {
   return (
@@ -14,10 +14,11 @@ const ProfileMenu = () => {
           cursor="pointer"
           _hover={{ opacity: 0.8 }}
         >
-          <BsPerson />
-          <Text>Account</Text>
+          <IoPersonCircleSharp size="2.5rem" />
+
+          <Text>Hi Emelder</Text>
           <Box mt=".5rem">
-            <MdKeyboardArrowDown />
+            <MdKeyboardArrowDown size="2.3rem" />
           </Box>
         </Flex>
       </Menu.Trigger>

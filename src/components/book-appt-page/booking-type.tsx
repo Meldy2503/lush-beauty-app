@@ -13,12 +13,12 @@ interface BookingTypeProps {
 
 const BookingType = ({ setStep, step }: BookingTypeProps) => {
   return (
-    <Box bg="white" p="4rem 3rem" shadow={"sm"}>
+    <Box bg="white" px="3rem" pt='2rem' pb='5rem' shadow={"sm"}>
       <Heading
         as="h3"
         fontSize={{ base: "1.7rem", md: "1.8rem" }}
         fontFamily="playfair"
-        mb="2rem"
+        mb="4rem"
         lineHeight={1.3}
       >
         SELECT APPOINTMENT TYPE

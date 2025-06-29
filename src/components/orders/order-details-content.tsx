@@ -4,7 +4,7 @@ import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
-import Tag from "../tag";
+import Tag from "../ui/tag";
 import academy from "../../assets/images/academy-1.webp";
 
 const OrderDetailsContent = () => {
@@ -118,7 +118,7 @@ const OrderDetailsContent = () => {
               $5.00
             </Text>{" "}
           </HStack>
-          <HStack justifyContent={"space-between"} gap="2rem" mt='2rem'>
+          <HStack justifyContent={"space-between"} gap="2rem" mt="2rem">
             <Text fontWeight={"400"}>Total</Text>{" "}
             <Text fontWeight={"600"} fontSize={"1.8rem"}>
               $45.00

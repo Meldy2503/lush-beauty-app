@@ -15,7 +15,7 @@ import academy2 from "../../assets/images/academy-2.webp";
 import academy3 from "../../assets/images/academy-3.webp";
 import academyBg from "../../assets/images/academy-bg.webp";
 import Button from "../ui/button";
-import Wrapper from "../wrapper";
+import Wrapper from "../ui/wrapper";
 
 interface CardData {
   id: number;
@@ -95,7 +95,7 @@ const ShopSection = () => {
           ))}
         </Grid>
         <Flex mt="6rem" alignItems={"center"} justifyContent={"center"}>
-          <Button href="/services" bg="yellow.100">
+          <Button href="/services" bg="yellow.150">
             See All
           </Button>
         </Flex>

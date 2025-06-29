@@ -2,11 +2,11 @@
 
 import { Box, Flex, Heading, Input, Stack, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from "react-icons/fa";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
-import Button from "./ui/button";
-import Logo from "./ui/logo";
-import Wrapper from "./wrapper";
+import SocialMediaIcons from "../ui/social-media-icons";
+import Button from "../ui/button";
+import Logo from "../ui/logo";
+import Wrapper from "../ui/wrapper";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -36,61 +36,7 @@ const Footer = () => {
             Lush Beauty offers premium beauty services and products to help you
             look and feel your best every day.
           </Text>
-          <Stack direction="row" gap="1.5rem">
-            <Link
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Box
-                as={FaFacebook}
-                boxSize="2.5rem"
-                color="white"
-                _hover={{ color: "yellow.50" }}
-                transition="all 0.3s ease"
-              />
-            </Link>
-            <Link
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Box
-                as={FaInstagram}
-                boxSize="2.5rem"
-                color="white"
-                _hover={{ color: "yellow.50" }}
-                transition="all 0.3s ease"
-              />
-            </Link>
-            <Link
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Box
-                as={FaTwitter}
-                boxSize="2.5rem"
-                color="white"
-                _hover={{ color: "yellow.50" }}
-                transition="all 0.3s ease"
-              />
-            </Link>
-
-            <Link
-              href="https://tiktok.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Box
-                as={FaTiktok}
-                boxSize="2.5rem"
-                color="white"
-                _hover={{ color: "yellow.50" }}
-                transition="all 0.3s ease"
-              />
-            </Link>
-          </Stack>
+          <SocialMediaIcons />
         </Stack>
         <Flex
           flexWrap={{ base: "wrap", lg: "nowrap" }}

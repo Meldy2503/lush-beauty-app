@@ -1,7 +1,7 @@
 import { Box, Heading, HStack, Tabs, Text } from "@chakra-ui/react";
 import Footer from "../footer";
 import Navbar from "../navbar";
-import Wrapper from "../wrapper";
+import Wrapper from "../ui/wrapper";
 import NewOrders from "./new-orders";
 import PastOrders from "./past-orders";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex, Text, chakra, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Flex, Text, VStack, chakra, useBreakpointValue } from "@chakra-ui/react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
 import Image from "next/image";
@@ -27,14 +27,12 @@ const SideImage = ({ src, text, side }: SideImageProps) => (
     backgroundImage={`linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url(${src})`}
     position="absolute"
     {...(side === "left" ? { left: "0" } : { right: "0" })}
-    top="47%"
-    height="85%"
+    top="0"
+    height="90%"
     width="32%"
     backgroundSize="cover"
-    backgroundAttachment={"fixed"}
     backgroundPosition="center"
     color="white"
-    transform="translateY(-50%)"
     zIndex={1}
     justifyContent="center"
     alignItems="center"
@@ -69,14 +67,8 @@ const HeroSection = () => {
   const handleVideoLoad = useCallback(() => setVideoLoaded(true), []);
 
   return (
-    <Box
-      ref={containerRef}
-      bg="white"
-      position="relative"
-      overflow="hidden"
-      mt="7rem"
-    >
-      <Box h="80vh" display="flex" justifyContent="center" alignItems="center">
+    <Box ref={containerRef} bg="white" position="relative" overflow="hidden">
+      <Box h="90vh" display="flex" justifyContent="center" alignItems="center">
         <SideImage src={heroImg1.src} text="GLAM" side="left" />
         <SideImage src={heroImg2.src} text="GLOW" side="right" />
 
@@ -140,7 +132,11 @@ const HeroSection = () => {
             color="white"
             textAlign="center"
           >
-            <Box position="relative" display={{ base: "block", lg: "none" }}>
+            <Box
+              position="relative"
+              display={{ base: "block", lg: "none" }}
+              pt="5rem"
+            >
               <Box position="absolute" bottom="35%" right="-3rem">
                 <Image src={scissors} alt="scissors" width={160} height={160} />
               </Box>
@@ -182,9 +178,16 @@ const HeroSection = () => {
               <Text fontSize="2.5rem" py="3rem" letterSpacing={".5rem"}>
                 BEAUTY SALON
               </Text>
-              <Button bg="transparent" borderWidth="1px" borderColor="white">
-                BOOK NOW
-              </Button>
+              <VStack>
+                <Button
+                  bg="transparent"
+                  borderWidth="1px"
+                  borderColor="white"
+                  href="/book-appointment"
+                >
+                  BOOK NOW
+                </Button>
+              </VStack>
             </Box>
           </Flex>
         </MotionBox>

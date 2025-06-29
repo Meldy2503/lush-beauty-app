@@ -32,7 +32,7 @@ const config = {
         yellow: {
           50: { value: "#E4B169" },
           100: { value: "#DB9935" },
-          150: { value: "#A9762A" },
+          150: { value: "#ca8317" },
         },
         gray: {
           50: { value: "#999" },
