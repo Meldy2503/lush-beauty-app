@@ -8,7 +8,7 @@ import Button from "../ui/button";
 const UpdatePassword = () => {
   return (
     <Box>
-      <Text mb="3rem" mt='1rem' textAlign={'center'}>
+      <Text mb="3rem" mt="1rem" textAlign={"center"}>
         You can update your password at any time below.
       </Text>
 
@@ -17,7 +17,8 @@ const UpdatePassword = () => {
         borderColor="gray.200"
         borderRadius={"sm"}
         w={{ base: "full", md: "80%", lg: "60%", xl: "50%" }}
-        p={{ base: "1rem", sm: "2rem", lg: "3rem", xl: "4rem" }}
+        px={{ base: "1rem", sm: "2rem", lg: "3rem", xl: "4rem" }}
+        py={{ base: "3rem", md: "4rem" }}
         mx="auto"
       >
         <form>

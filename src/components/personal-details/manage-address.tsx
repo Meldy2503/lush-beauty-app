@@ -24,17 +24,20 @@ const ManageAddress = () => {
               borderColor="gray.200"
               borderRadius={"sm"}
               p="1.5rem"
+              gap="2rem"
+              flexDir={{ base: "column", sm: "row" }}
             >
-              <RadioGroup.Item value={item.value} gap="1.5rem">
+              <RadioGroup.Item value={item.value} gap="1.5rem" w="80%">
                 <RadioGroup.ItemHiddenInput />
                 <RadioGroup.ItemIndicator scale="1.2" />
                 <RadioGroup.ItemText
                   fontSize={{ base: "1.5rem", md: "1.6rem" }}
+                  lineHeight={1.4}
                 >
                   {item.label}
                 </RadioGroup.ItemText>
               </RadioGroup.Item>
-              <Flex cursor={"pointer"} color="yellow.100" gap="1.5rem">
+              <Flex cursor={"pointer"} color="yellow.100" gap="1rem" alignSelf={{base:'flex-end',md: "center"}}>
                 <AddressModal icon={<FaRegEdit size="2rem" />} />
                 <Box
                   onClick={() => {
