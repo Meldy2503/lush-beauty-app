@@ -17,11 +17,18 @@ const DetailsWrapper = ({ title, value }: { title: string; value: string }) => {
         w="90%"
         justifyContent={"space-between"}
         flexDir={{ base: "column", md: "row" }}
+        fontSize={{ base: "1.5rem", md: "1.6rem" }}
       >
-        <Text color="gray.100" w={{ base: "90%", sm: "30%" }}>
+        <Text color="gray.100" w={{ base: "90%", md: "30%" }}>
           {title}
         </Text>
-        <Text w={{ base: "90%", sm: "70%" }}>{value}</Text>
+        <Text
+          w={{ base: "90%", md: "70%" }}
+          wordBreak="break-all" 
+          whiteSpace="pre-line"
+        >
+          {value}
+        </Text>
       </Flex>
       <PersonalDetailsModal />
     </HStack>
@@ -36,12 +43,12 @@ const UserDetails = () => {
         easy, and see your personalised offers.
       </Text>
       <Flex gap="2rem" flexDir="column">
-        <DetailsWrapper title="Name" value=" Emelder Okafor" />
+        <DetailsWrapper title="Name" value="Emelder Okafor" />
         <DetailsWrapper
           title="Email Address"
-          value=" emelder.charles25@gmail.com"
+          value="emelder.charles25@gmail.com"
         />
-        <DetailsWrapper title="Phone Number" value=" 07881175122" />
+        <DetailsWrapper title="Phone Number" value="07881175122" />
         <DetailsWrapper title="Address" value=" 25 Beverly St. London, UK" />
       </Flex>
     </Box>
