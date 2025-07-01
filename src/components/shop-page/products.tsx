@@ -32,7 +32,7 @@ const Products = () => {
       {cardData.map((card) => (
         // <Link href={`/shop/${id}`} key={card.id}>
         <Link href={"/shop/1"} key={card.id}>
-          <GridItem w="100%">
+          <GridItem w="100%" bg="white">
             <Image
               src={card.imageUrl}
               alt={card.heading}
@@ -40,16 +40,15 @@ const Products = () => {
               width={1000}
               height={1000}
             />
-            <VStack textAlign="center">
+            <VStack textAlign="center" py="1rem">
               <Heading
                 as="h4"
-                mt={{ base: "1rem", md: "1.5rem" }}
-                fontSize= {{base:'1.5rem', sm:'1.6rem', lg:'1.7rem'}}
+                fontSize={{ base: "1.5rem", sm: "1.6rem", lg: "1.7rem" }}
                 fontWeight={"400"}
               >
                 {card.heading}
               </Heading>
-              <Text color="yellow.100" textAlign="center" fontWeight={"500"}>
+              <Text color="yellow.100" textAlign="center" fontWeight={"600"}>
                 {card.amount}
               </Text>
             </VStack>

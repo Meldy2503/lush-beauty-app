@@ -1,26 +1,15 @@
-"use client";
+import LoginPage from "@/components/auth/login-page";
 
-import Button from "@/components/ui/button";
-import { Stack } from "@chakra-ui/react";
-import { InputElement } from "../../../components/ui/input-element";
-import AuthWrapper from "@/components/auth/auth-wrapper";
-
-const Login = () => {
-  return (
-    <AuthWrapper authType="login">
-      <form>
-        <Stack gap="3rem">
-          <InputElement
-            label="Email address"
-            placeholder="peter@gmail.com"
-            type="email"
-          />
-          <InputElement type="password" label="Password" placeholder="*****" />
-          <Button w="full">Sign in</Button>
-        </Stack>
-      </form>
-    </AuthWrapper>
-  );
+export const metadata = {
+  title: "Lush Beauty - Premium Beauty Products",
+  description:
+    "Experience luxury beauty products and services with Lush Beauty.",
 };
 
-export default Login;
+export default function Login() {
+  return (
+    <>
+      <LoginPage />
+    </>
+  );
+}

@@ -8,7 +8,13 @@ import personalBookingImg from "../../assets/images/personal-booking-img.webp";
 
 const BookingSummary = () => {
   return (
-    <Box bg="white" position={"relative"} display="flex" flexDirection="column" shadow={'sm'}>
+    <Box
+      bg="white"
+      position={"relative"}
+      display="flex"
+      flexDirection="column"
+      shadow={"sm"}
+    >
       <Heading
         as="h3"
         fontSize={{ base: "1.7rem", md: "1.8rem" }}
@@ -21,7 +27,12 @@ const BookingSummary = () => {
       >
         Booking summary{" "}
       </Heading>{" "}
-      <Box overflowY="auto" h="65vh" pb="4rem" px="1.5rem">
+      <Box
+        overflowY="auto"
+        h={{ base: "100%", md: "65vh" }}
+        pb="4rem"
+        px="1.5rem"
+      >
         <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
           <HStack bg="white" p=".8rem" rounded={"full"} shadow={"md"}>
             <IoLocationOutline size={"2.3rem"} />

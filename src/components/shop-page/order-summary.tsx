@@ -76,8 +76,7 @@ const OrderSummaryPage = () => {
               </Flex>
               <Flex
                 alignSelf={{ base: "flex-end", sm: "center" }}
-                color="yellow.100"
-                cursor={"pointer"}
+             
               >
                 <PersonalDetailsModal />
               </Flex>
@@ -154,7 +153,7 @@ const OrderSummaryPage = () => {
                 lineHeight={1.3}
                 fontWeight={"600"}
                 py=".5rem"
-                fontSize={"2rem"}
+                fontSize={"1.8rem"}
               >
                 $40
               </Text>

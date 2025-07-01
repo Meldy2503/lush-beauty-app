@@ -31,6 +31,7 @@ const ShopListSection = () => {
 
   return (
     <Wrapper bg="gray.250" pt="5rem">
+      {/* search and filter section */}
       <Flex
         mb="3rem"
         justifyContent={{ base: "space-between", md: "flex-end" }}
@@ -151,7 +152,7 @@ const ShopListSection = () => {
             ))}
           </RadioGroup.Root>
         </Box>
-
+       {/* products section */}
         <Box w={{ base: "100%", md: "75%" }}>
           <Products />
           <Flex alignItems={"center"} justifyContent={"center"} mt="6rem">

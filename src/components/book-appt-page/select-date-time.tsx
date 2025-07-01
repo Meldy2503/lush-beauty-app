@@ -1,8 +1,8 @@
 "use client";
 
-import { Box, Flex, Heading, HStack } from "@chakra-ui/react";
-import Button from "../ui/button";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import BookingSummary from "./booking-summary";
+import StepNavigationBtns from "../ui/navigation-btns";
 
 interface SelectDateTimeProps {
   step: number;
@@ -23,35 +23,10 @@ const SelectDateTime = ({ setStep, step }: SelectDateTimeProps) => {
         >
           Select Date/time
         </Heading>
-        <HStack
-          mt="2rem"
-          position={{ base: "sticky", md: "relative" }}
-          bottom="0"
-          w="full"
-          gap="1rem"
-          justifyContent={"center"}
-          alignItems={"center"}
-        >
-          <Button
-            bg="transparent"
-            borderWidth="1.5px"
-            borderColor="black"
-            color="black"
-            w="48%"
-            onClick={() => setStep(step - 1)}
-          >
-            Prev
-          </Button>
-
-          <Button
-            borderWidth="1.5px"
-            borderColor="black"
-            w="48%"
-            onClick={() => setStep(step + 1)}
-          >
-            Continue
-          </Button>
-        </HStack>
+        <StepNavigationBtns
+          prevOnClick={() => setStep(step - 1)}
+          nextOnClick={() => setStep(step + 1)}
+        />
       </Box>
 
       <Box

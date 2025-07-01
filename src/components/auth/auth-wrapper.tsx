@@ -4,7 +4,6 @@ import Button from "@/components/ui/button";
 import Logo from "@/components/ui/logo";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import bgImage from "../../assets/images/contact-bg.webp";
 
 interface AuthWrapperProps {
@@ -18,7 +17,6 @@ const authTypes = {
 };
 
 const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
-  const router = useRouter();
 
   return (
     <Flex
@@ -33,19 +31,19 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
       flexDir={"column"}
     >
       <Box
-        w={{ base: "95%", md: "80%" }}
+        w={{ base: "95%", md: "80%", xl:'60%' }}
         bg="gray.250"
         p="2rem"
         flexDir={"column"}
       >
         <Button
-          onClick={() => router.back()}
           bg="transparent"
           color="black"
           px={"0"}
           hover="transparent"
+          href='/'
         >
-          ← Go Back
+          ← Home Page
         </Button>
         <Flex
           justifyContent={"center"}
@@ -66,7 +64,7 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
           </Heading>
           <Flex
             gap="2rem"
-            w={{ base: "100%", md: "80%", xl: "50%" }}
+            w={{ base: "100%", md: "80%", xl: "70%" }}
             direction={"column"}
             h="100%"
             mt="4rem"

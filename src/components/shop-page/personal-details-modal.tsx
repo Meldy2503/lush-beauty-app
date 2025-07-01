@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/ui/button";
-import { Flex, Stack, Dialog, Portal, CloseButton } from "@chakra-ui/react";
+import { Flex, Stack, Dialog, Portal, CloseButton, Box } from "@chakra-ui/react";
 import { InputElement } from "../ui/input-element";
 import { FaRegEdit } from "react-icons/fa";
 
@@ -13,7 +13,9 @@ const PersonalDetailsModal = () => {
       scrollBehavior="inside"
     >
       <Dialog.Trigger asChild>
-        <FaRegEdit size={"2.6rem"} />
+        <Box color="yellow.100" cursor={"pointer"}>
+          <FaRegEdit size={"2.3rem"} />
+        </Box>
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />

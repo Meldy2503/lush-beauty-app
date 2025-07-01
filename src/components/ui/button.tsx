@@ -55,7 +55,7 @@ const Button = ({
           cursor={"pointer"}
           fontWeight={fontWeight ?? "500"}
           w={w ?? "fit-content"}
-          fontFamily={fontFamily ?? "playfair"}
+          fontFamily={fontFamily ?? "lato"}
           px={px ?? "5rem"}
           py={py ?? "1.2rem"}
           {...props}
@@ -78,13 +78,13 @@ const Button = ({
     <ChakraButton
       fontWeight={fontWeight ?? "500"}
       cursor={cursor ?? "pointer"}
-      fontFamily={fontFamily ?? "playfair"}
+      fontFamily={fontFamily ?? "lato"}
       w={w ?? "fit-content"}
       color={color ?? "white"}
       borderRadius="0"
       px={px ?? "5rem"}
       textAlign={"center"}
-      py={py ?? "2rem"}
+      py={py ?? "2.2rem"}
       fontSize={fontSize ?? "1.6rem"}
       borderColor={borderColor ?? "none"}
       borderWidth={borderWidth}

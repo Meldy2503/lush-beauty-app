@@ -6,10 +6,9 @@ import {
   Checkbox,
   Flex,
   Heading,
-  HStack,
-  Text,
+  Text
 } from "@chakra-ui/react";
-import Button from "../ui/button";
+import StepNavigationBtns from "../ui/navigation-btns";
 import BookingSummary from "./booking-summary";
 
 interface SelectServiceProps {
@@ -35,7 +34,7 @@ const SelectService = ({ setStep, step }: SelectServiceProps) => {
           collapsible
           multiple
           variant={"plain"}
-          h="65vh"
+          h={{ base: "90vh", md: "65vh" }}
           overflowY={"auto"}
         >
           {items.map((item, index) => (
@@ -106,37 +105,10 @@ const SelectService = ({ setStep, step }: SelectServiceProps) => {
             </Accordion.Item>
           ))}
         </Accordion.Root>{" "}
-        <HStack
-          mt="auto"
-          position="sticky"
-          bottom="0"
-          w="full"
-          gap="1rem"
-          justifyContent={"center"}
-          alignItems={"center"}
-          pt="2rem"
-          bg="white"
-        >
-          <Button
-            bg="transparent"
-            borderWidth="1.5px"
-            borderColor="black"
-            color="black"
-            w="48%"
-            onClick={() => setStep(step - 1)}
-          >
-            Prev
-          </Button>
-
-          <Button
-            borderWidth="1.5px"
-            borderColor="black"
-            w="48%"
-            onClick={() => setStep(step + 1)}
-          >
-            Continue
-          </Button>
-        </HStack>
+        <StepNavigationBtns
+          prevOnClick={() => setStep(step - 1)}
+          nextOnClick={() => setStep(step + 1)}
+        />
       </Box>
       <Box
         w={{ base: "100%", md: "35%" }}

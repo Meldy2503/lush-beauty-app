@@ -1,7 +1,7 @@
 "use client";
 
-import { Box, Checkbox, Flex, Heading, HStack, Text } from "@chakra-ui/react";
-import Button from "../ui/button";
+import { Box, Checkbox, Flex, Heading, Text } from "@chakra-ui/react";
+import StepNavigationBtns from "../ui/navigation-btns";
 import BookingSummary from "./booking-summary";
 
 interface SelectLocationProps {
@@ -16,9 +16,9 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
         bg="white"
         p="2rem"
         shadow={"sm"}
-        minH={{base:'80vh', md:'70vh'}}
+        minH={{ base: "80vh", md: "70vh" }}
         position="relative"
-        flexDir={'column'}
+        flexDir={"column"}
       >
         <Heading
           as="h3"
@@ -98,38 +98,10 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
             </Checkbox.Control>
           </Checkbox.Root>
         </Flex>
-        <HStack
-          mt="auto"
-          position="sticky"
-          bottom="0"
-          w="full"
-          gap="1rem"
-          justifyContent={"center"}
-          alignItems={"center"}
-          bg="white"
-          py="1rem"
-       
-        >
-          <Button
-            bg="transparent"
-            borderWidth="1.5px"
-            borderColor="black"
-            color="black"
-            w="48%"
-            onClick={() => setStep(step - 1)}
-          >
-            Prev
-          </Button>
-
-          <Button
-            borderWidth="1.5px"
-            borderColor="black"
-            w="48%"
-            onClick={() => setStep(step + 1)}
-          >
-            Continue
-          </Button>
-        </HStack>
+        <StepNavigationBtns
+          prevOnClick={() => setStep(step - 1)}
+          nextOnClick={() => setStep(step + 1)}
+        />
       </Flex>
       <Box
         w={{ base: "100%", md: "35%" }}

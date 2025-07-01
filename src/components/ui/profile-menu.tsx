@@ -38,7 +38,7 @@ const ProfileMenu = () => {
               p="1.2rem"
               mt="1rem"
             >
-              <Link href={"/user-details"}>Personal Account</Link>
+              <Link href={"/personal-details"}>Personal Account</Link>
             </Menu.Item>
             <Menu.Item value="orders" fontSize={"1.6rem"} p="1.2rem">
               <Link href={"/orders"}> My Orders</Link>

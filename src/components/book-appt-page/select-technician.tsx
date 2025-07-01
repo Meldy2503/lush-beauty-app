@@ -14,6 +14,7 @@ import Image from "next/image";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
 import { IoIosStar } from "react-icons/io";
 import { PiUsersThree } from "react-icons/pi";
+import StepNavigationBtns from "../ui/navigation-btns";
 
 interface SelectTechnicianProps {
   step: number;
@@ -39,7 +40,7 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
           justifyContent={"space-between"}
           gap="1rem"
           flexWrap={"wrap"}
-          h="64vh"
+          h={{ base: "90vh", md: "64vh" }}
           overflowY={"auto"}
         >
           {staff.map((staff, index) => {
@@ -111,35 +112,10 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
           })}
         </Flex>
 
-        <HStack
-          mt="2rem"
-          position={{ base: "relative", md: "relative" }}
-          bottom="0"
-          w="full"
-          gap="1rem"
-          justifyContent={"center"}
-          alignItems={"center"}
-        >
-          <Button
-            bg="transparent"
-            borderWidth="1.5px"
-            borderColor="black"
-            color="black"
-            w="48%"
-            onClick={() => setStep(step - 1)}
-          >
-            Prev
-          </Button>
-
-          <Button
-            borderWidth="1.5px"
-            borderColor="black"
-            w="48%"
-            onClick={() => setStep(step + 1)}
-          >
-            Continue
-          </Button>
-        </HStack>
+        <StepNavigationBtns
+          prevOnClick={() => setStep(step - 1)}
+          nextOnClick={() => setStep(step + 1)}
+        />
       </Box>
 
       <Box
