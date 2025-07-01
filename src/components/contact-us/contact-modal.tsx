@@ -32,7 +32,6 @@ const ContactUsModal = ({ color }: ContactUsModalProps) => {
       <Dialog.Trigger asChild>
         <Button
           bg="transparent"
-          fontFamily={"lato"}
           color={color ?? "white"}
           hover="transparent"
           fontWeight="400"

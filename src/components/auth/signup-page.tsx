@@ -21,11 +21,12 @@ const SignUpPage = () => {
             placeholder="+447056835551"
             type="number"
           />
-          <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
-            <InputElement label="Country" placeholder="United Kingdom" />
-            <InputElement label="State" placeholder="Manchester" />
-          </Flex>
           <InputElement label="Address" placeholder="2 Beverley street" />
+          <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
+            <InputElement label="Postcode" placeholder="E13RFF" />
+            <InputElement label="Town/City" placeholder="Manchester" />
+          </Flex>
+          <InputElement label="Country" placeholder="United Kingdom" />
           <InputElement type="password" label="Password" placeholder="*****" />
           <Button w="full">Sign up</Button>
         </Stack>

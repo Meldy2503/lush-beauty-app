@@ -55,6 +55,7 @@ const UserDetailsPage = () => {
                     <Text
                       fontSize={{ base: "1.5rem", md: "1.6rem" }}
                       lineHeight={1.4}
+                      fontWeight={'600'}
                     >
                       {item.title}
                     </Text>{" "}

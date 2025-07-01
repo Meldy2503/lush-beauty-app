@@ -1,11 +1,18 @@
 "use client";
 
 import Button from "@/components/ui/button";
-import { Flex, Stack, Dialog, Portal, CloseButton, Box } from "@chakra-ui/react";
+import {
+  Checkbox,
+  CloseButton,
+  Dialog,
+  Flex,
+  Portal,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import { InputElement } from "../ui/input-element";
-import { FaRegEdit } from "react-icons/fa";
 
-const PersonalDetailsModal = () => {
+const AddressModal = ({icon}:{icon?: React.ReactNode}) => {
   return (
     <Dialog.Root
       placement="center"
@@ -13,9 +20,7 @@ const PersonalDetailsModal = () => {
       scrollBehavior="inside"
     >
       <Dialog.Trigger asChild>
-        <Box color="yellow.100" cursor={"pointer"}>
-          <FaRegEdit size={"2.3rem"} />
-        </Box>
+       {icon ?? <Button fontWeight="400">Add address</Button>}
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />
@@ -30,34 +35,38 @@ const PersonalDetailsModal = () => {
           >
             <Dialog.Header>
               <Dialog.Title fontSize="2rem" mb="5rem">
-                Personal details
+                Add New Address{" "}
               </Dialog.Title>
             </Dialog.Header>
             <form>
               <Dialog.Body>
                 <Stack gap="2rem">
                   <InputElement label="Full name" placeholder="Peter Smith" />
-                  <InputElement
-                    label="Email address"
-                    placeholder="peter@gmail.com"
-                    type="email"
-                  />
-                  <InputElement
-                    label="Phone number"
-                    placeholder="+447056835551"
-                    type="number"
-                  />
-                  <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
-                    <InputElement
-                      label="Country"
-                      placeholder="United Kingdom"
-                    />
-                    <InputElement label="State" placeholder="Manchester" />
-                  </Flex>
+
                   <InputElement
                     label="Address"
                     placeholder="2 Beverley street"
                   />
+                  <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
+                    <InputElement label="Postcode" placeholder="E13RFF" />
+                    <InputElement label="Town/City" placeholder="Manchester" />
+                  </Flex>
+
+                  <InputElement label="Country" placeholder="United Kingdom" />
+                  <Checkbox.Root pb="2rem" px=".6rem">
+                    <Checkbox.HiddenInput />
+                    <Checkbox.Control scale={1.5}>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+
+                    <Checkbox.Label
+                      fontSize={{ base: "1.5rem", md: "1.6rem" }}
+                      ml=".5rem"
+                    >
+                      {" "}
+                      <Text lineHeight={1.35}>Select as default address</Text>
+                    </Checkbox.Label>
+                  </Checkbox.Root>
                 </Stack>
               </Dialog.Body>
               <Dialog.Footer
@@ -92,4 +101,4 @@ const PersonalDetailsModal = () => {
   );
 };
 
-export default PersonalDetailsModal;
+export default AddressModal;

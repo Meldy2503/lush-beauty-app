@@ -6,7 +6,7 @@ import academy from "../../assets/images/academy-1.webp";
 import Button from "../ui/button";
 import Wrapper from "../ui/wrapper";
 import Cart from "./cart";
-import PersonalDetailsModal from "./personal-details-modal";
+import PersonalDetailsModal from "../personal-details/personal-details-modal";
 
 const OrderSummaryPage = () => {
   return (
@@ -74,10 +74,7 @@ const OrderSummaryPage = () => {
                   <Text lineHeight={1.3}>+44241481957 </Text>
                 </Box>
               </Flex>
-              <Flex
-                alignSelf={{ base: "flex-end", sm: "center" }}
-             
-              >
+              <Flex alignSelf={{ base: "flex-end", sm: "center" }}>
                 <PersonalDetailsModal />
               </Flex>
             </Flex>

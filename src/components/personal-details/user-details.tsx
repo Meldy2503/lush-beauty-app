@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Flex, HStack, Text } from "@chakra-ui/react";
-import PersonalDetailsModal from "../shop-page/personal-details-modal";
+import PersonalDetailsModal from "./personal-details-modal";
 
 const DetailsWrapper = ({ title, value }: { title: string; value: string }) => {
   return (
@@ -24,7 +24,7 @@ const DetailsWrapper = ({ title, value }: { title: string; value: string }) => {
         </Text>
         <Text
           w={{ base: "90%", md: "70%" }}
-          wordBreak="break-all" 
+          wordBreak="break-all"
           whiteSpace="pre-line"
         >
           {value}
