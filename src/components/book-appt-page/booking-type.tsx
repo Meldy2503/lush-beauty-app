@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import groupBookingImg from "../../assets/images/group-booking-img.webp";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
@@ -13,16 +13,15 @@ interface BookingTypeProps {
 
 const BookingType = ({ setStep, step }: BookingTypeProps) => {
   return (
-    <Box bg="white" px="3rem" pt='2rem' pb='5rem' shadow={"sm"}>
-      <Heading
-        as="h3"
-        fontSize={{ base: "1.7rem", md: "1.8rem" }}
-        fontFamily="playfair"
-        mb="4rem"
-        lineHeight={1.3}
-      >
-        SELECT APPOINTMENT TYPE
-      </Heading>
+    <Flex
+      bg="white"
+      shadow={"sm"}
+      justifyContent={"center"}
+      flexDir={"column"}
+      h={{ base: "100%", md: "80vh" }}
+      overflowY={"auto"}
+      p={{ base: "2rem", sm: "3rem" }}
+    >
       <Flex gap="4rem 2rem" flexDir={{ base: "column", md: "row" }}>
         <Box
           borderWidth={"2px"}
@@ -38,24 +37,25 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
             width={1000}
             height={1000}
           />
-          <HStack
+          <Flex
             justifyContent={"space-between"}
-            p="2rem"
+            p="3rem 2rem"
             gap="2rem"
-            flexDir={{ base: "column", sm: "row" }}
+            flexDir={{ base: "column", xl: "row" }}
           >
-            <Text fontWeight={"600"} fontSize="1.7rem">
+            <Text fontWeight={"600"} fontSize="1.8rem">
               Personal Booking{" "}
             </Text>
             <Button
               px="2rem"
               bg="yellow.150"
               onClick={() => setStep(step + 1)}
-              w={{ base: "full", sm: "fit-content" }}
+              w={{ base: "full", xl: "fit-content" }}
+              fontSize="1.5rem"
             >
               CREATE BOOKING
             </Button>
-          </HStack>
+          </Flex>
         </Box>
         <Box
           borderWidth={"2px"}
@@ -71,27 +71,28 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
             width={1000}
             height={1000}
           />
-          <HStack
+          <Flex
             justifyContent={"space-between"}
-            p="2rem"
+            p="3rem 2rem"
             gap="2rem"
-            flexDir={{ base: "column", sm: "row" }}
+            flexDir={{ base: "column", xl: "row" }}
           >
-            <Text fontWeight={"600"} fontSize="1.7rem">
+            <Text fontWeight={"600"} fontSize="1.8rem">
               Group Booking{" "}
             </Text>
             <Button
               px="2rem"
               bg="yellow.150"
               onClick={() => setStep(step + 1)}
-              w={{ base: "full", sm: "fit-content" }}
+              w={{ base: "full", xl: "fit-content" }}
+              fontSize="1.5rem"
             >
               CREATE BOOKING
             </Button>
-          </HStack>
+          </Flex>
         </Box>
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 

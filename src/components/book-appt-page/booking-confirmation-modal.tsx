@@ -21,7 +21,7 @@ const BookingConfirmationModal = () => {
       motionPreset="slide-in-bottom"
     >
       <Dialog.Trigger asChild>
-        <Button borderWidth="1.5px" borderColor="black" w="50%">
+        <Button borderWidth="1.5px" borderColor="black" w="49%">
           Confirm Booking
         </Button>
       </Dialog.Trigger>

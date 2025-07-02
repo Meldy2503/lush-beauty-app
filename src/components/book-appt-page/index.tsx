@@ -74,7 +74,7 @@ const AppointmentPage = () => {
   const [step, setStep] = useState(0);
 
   return (
-    <Box minH="100vh" bg="gray.250" pb="2rem">
+    <Box h="100vh" bg="gray.250" overflow={{base: 'auto', xl:'hidden'}}>
       <Navbar bg='white' color='black'/>
       <Steps.Root
         step={step}
@@ -138,8 +138,9 @@ const AppointmentPage = () => {
         <Box
           ml={{ base: "0", lg: "23rem" }}
           w={{ base: "100%", lg: "calc(100% - 23rem)" }}
-          p="4.7rem 2rem"
-          h="100%"
+          px="2rem"
+          pt={{ base: "3rem", lg: "4.7rem" }}
+          pb='2rem'
         >
           {/* Render all step contents */}
           {steps.map((stepObj, index) => (

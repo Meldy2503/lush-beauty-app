@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Flex,
-  Heading,
-  HStack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 import Button from "../ui/button";
 import BookingSummary from "./booking-summary";
 import Image from "next/image";
@@ -15,6 +8,9 @@ import personalBookingImg from "../../assets/images/personal-booking-img.webp";
 import { IoIosStar } from "react-icons/io";
 import { PiUsersThree } from "react-icons/pi";
 import StepNavigationBtns from "../ui/navigation-btns";
+import { FaListUl } from "react-icons/fa";
+import { IoGridSharp } from "react-icons/io5";
+import { InputElement } from "../ui/input-element";
 
 interface SelectTechnicianProps {
   step: number;
@@ -23,25 +19,40 @@ interface SelectTechnicianProps {
 
 const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
   return (
-    <Flex gap="2rem">
-      <Box w={{ base: "100%", md: "65%" }} bg="white" p="2rem" shadow={"sm"}>
+    <Flex gap="2rem" alignItems="stretch">
+      <Box
+        w={{ base: "100%", md: "65%" }}
+        bg="white"
+        px="2rem"
+        pt="2rem"
+        shadow={"sm"}
+      >
         <Heading
           as="h3"
           fontSize={{ base: "1.7rem", md: "1.8rem" }}
           fontFamily="playfair"
-          mb="2rem"
           lineHeight={1.3}
           textTransform={"uppercase"}
         >
           Select Technician
         </Heading>
+        <Flex justify={"space-between"} gap="2rem 3rem" py="2rem">
+          <InputElement
+            placeholder="Search stylist.."
+            border="1px solid gray.100"
+          />
+          <HStack gap="1rem">
+            <FaListUl />
+            <IoGridSharp />
+          </HStack>
+        </Flex>
         <Flex
-          bg="white"
           justifyContent={"space-between"}
           gap="1rem"
           flexWrap={"wrap"}
-          h={{ base: "90vh", md: "64vh" }}
           overflowY={"auto"}
+          h={{ base: "90vh", md: "59vh" }}
+          pb={{ base: "5rem", md: "2rem" }}
         >
           {staff.map((staff, index) => {
             return (
@@ -111,16 +122,15 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
             );
           })}
         </Flex>
-
         <StepNavigationBtns
           prevOnClick={() => setStep(step - 1)}
           nextOnClick={() => setStep(step + 1)}
         />
       </Box>
-
       <Box
         w={{ base: "100%", md: "35%" }}
-        display={{ base: "none", md: "block" }}
+        display={{ base: "none", md: "flex" }}
+        overflowY="auto"
       >
         <BookingSummary />
       </Box>

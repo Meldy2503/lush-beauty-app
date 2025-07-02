@@ -17,8 +17,14 @@ interface SelectServiceProps {
 }
 const SelectService = ({ setStep, step }: SelectServiceProps) => {
   return (
-    <Flex gap="2rem">
-      <Box w={{ base: "100%", md: "65%" }} bg="white" p="2rem" shadow={"sm"}>
+    <Flex gap="2rem" alignItems="stretch">
+      <Box
+        w={{ base: "100%", md: "65%" }}
+        bg="white"
+        px="2rem"
+        pt="2rem"
+        shadow={"sm"}
+      >
         {" "}
         <Heading
           as="h3"
@@ -34,7 +40,8 @@ const SelectService = ({ setStep, step }: SelectServiceProps) => {
           collapsible
           multiple
           variant={"plain"}
-          h={{ base: "90vh", md: "65vh" }}
+          h={{ base: "90vh", md: "66vh" }}
+          pb={{ base: "5rem", md: "2rem" }}
           overflowY={"auto"}
         >
           {items.map((item, index) => (
@@ -112,7 +119,7 @@ const SelectService = ({ setStep, step }: SelectServiceProps) => {
       </Box>
       <Box
         w={{ base: "100%", md: "35%" }}
-        display={{ base: "none", md: "block" }}
+        display={{ base: "none", md: "flex" }}
       >
         <BookingSummary />
       </Box>{" "}

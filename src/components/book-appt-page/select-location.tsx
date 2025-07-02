@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Checkbox, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, RadioGroup, Text } from "@chakra-ui/react";
 import StepNavigationBtns from "../ui/navigation-btns";
 import BookingSummary from "./booking-summary";
 
@@ -10,13 +10,14 @@ interface SelectLocationProps {
 }
 const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
   return (
-    <Flex gap="2rem">
+    <Flex gap="2rem" alignItems="stretch">
       <Flex
         w={{ base: "100%", md: "65%" }}
         bg="white"
-        p="2rem"
+        px="2rem"
+        pt="2rem"
         shadow={"sm"}
-        minH={{ base: "80vh", md: "70vh" }}
+        h={{ base: "90vh", md: "82.5vh" }}
         position="relative"
         flexDir={"column"}
       >
@@ -30,74 +31,66 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
         >
           SELECT LOCATION
         </Heading>
-        <Flex gap="2rem" flexDir="column">
-          <Checkbox.Root
-            display={"flex"}
-            justifyContent={"space-between"}
-            w="full"
-            bg="gray.250"
-            p={{ base: "1.5rem", sm: "2rem" }}
-            size="lg"
-            gap="3rem"
-          >
-            <Checkbox.HiddenInput />
-
-            <Checkbox.Label>
-              {" "}
-              <Box fontSize={{ base: "1.45rem", sm: "1.5rem" }}>
-                <Heading
-                  as="h4"
-                  fontFamily="playfair"
-                  mb="1rem"
-                  lineHeight={1.4}
-                  textTransform={"uppercase"}
-                  fontSize={{ base: "1.5rem", sm: "1.6rem" }}
-                >
-                  Lush & Luxe – Central London{" "}
-                </Heading>
-                <Text color={"gray.100"} lineHeight={1.35} w="95%">
-                  68 Charlotte Street, Fitzrovia, London, W1T 4QF
-                </Text>
-              </Box>
-            </Checkbox.Label>
-            <Checkbox.Control scale={1.5}>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-          </Checkbox.Root>
-          <Checkbox.Root
-            display={"flex"}
-            justifyContent={"space-between"}
-            w="full"
-            bg="gray.250"
-            p={{ base: "1.5rem", sm: "2rem" }}
-            size="lg"
-            gap="3rem"
-          >
-            <Checkbox.HiddenInput />
-
-            <Checkbox.Label>
-              {" "}
-              <Box fontSize={{ base: "1.45rem", sm: "1.5rem" }}>
-                <Heading
-                  as="h4"
-                  fontFamily="playfair"
-                  mb="1rem"
-                  lineHeight={1.4}
-                  textTransform={"uppercase"}
-                  fontSize={{ base: "1.5rem", sm: "1.6rem" }}
-                >
-                  Lush & Luxe – Manchester{" "}
-                </Heading>
-                <Text color={"gray.100"} lineHeight={1.35} w="95%">
-                  68 Charlotte Street, Fitzrovia, London, W1T 4QF
-                </Text>
-              </Box>
-            </Checkbox.Label>
-            <Checkbox.Control scale={1.5}>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-          </Checkbox.Root>
-        </Flex>
+        <RadioGroup.Root defaultValue="1" w="full">
+          <Flex gap="2rem" flexDir="column">
+            <RadioGroup.Item
+              value="1"
+              gap="1.5rem"
+              display="flex"
+              justifyContent="space-between"
+              bg="gray.250"
+              p={{ base: "1.5rem", sm: "2rem" }}
+            >
+              <RadioGroup.ItemText>
+                <Box fontSize={{ base: "1.45rem", sm: "1.5rem" }}>
+                  <Heading
+                    as="h4"
+                    fontFamily="playfair"
+                    mb="1rem"
+                    lineHeight={1.4}
+                    textTransform="uppercase"
+                    fontSize={{ base: "1.5rem", sm: "1.6rem" }}
+                  >
+                    Lush & Luxe – Central London
+                  </Heading>
+                  <Text color="gray.100" lineHeight={1.35} >
+                    68 Charlotte Street, Fitzrovia, London, W1T 4QF
+                  </Text>
+                </Box>
+              </RadioGroup.ItemText>
+              <RadioGroup.ItemHiddenInput />
+              <RadioGroup.ItemIndicator scale="1.7" />
+            </RadioGroup.Item>
+            <RadioGroup.Item
+              value="2"
+              gap="1.5rem"
+              display="flex"
+              justifyContent="space-between"
+              bg="gray.250"
+              p={{ base: "1.5rem", sm: "2rem" }}
+            >
+              <RadioGroup.ItemText>
+                <Box fontSize={{ base: "1.45rem", sm: "1.5rem" }}>
+                  <Heading
+                    as="h4"
+                    fontFamily="playfair"
+                    mb="1rem"
+                    lineHeight={1.4}
+                    textTransform="uppercase"
+                    fontSize={{ base: "1.5rem", sm: "1.6rem" }}
+                  >
+                    Lush & Luxe – West London
+                  </Heading>
+                  <Text color="gray.100" lineHeight={1.35}>
+                    123 West Street, Kensington, London, W8 5TT
+                  </Text>
+                </Box>
+              </RadioGroup.ItemText>
+              <RadioGroup.ItemHiddenInput />
+              <RadioGroup.ItemIndicator scale="1.7" />
+            </RadioGroup.Item>
+          </Flex>
+        </RadioGroup.Root>
         <StepNavigationBtns
           prevOnClick={() => setStep(step - 1)}
           nextOnClick={() => setStep(step + 1)}
@@ -105,7 +98,7 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
       </Flex>
       <Box
         w={{ base: "100%", md: "35%" }}
-        display={{ base: "none", md: "block" }}
+        display={{ base: "none", md: "flex" }}
       >
         <BookingSummary />
       </Box>

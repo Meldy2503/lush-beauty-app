@@ -13,8 +13,19 @@ interface ConfirmBookingProps {
 
 const ConfirmBooking = ({ setStep, step }: ConfirmBookingProps) => {
   return (
-    <Flex gap="2rem" flexDir={{ base: "column-reverse", md: "row" }}>
-      <Box w={{ base: "100%", md: "65%" }} bg="white" p="2rem" shadow={"sm"}>
+    <Flex
+      gap="2rem"
+      flexDir={{ base: "column-reverse", md: "row" }}
+      alignItems={"stretch"}
+    >
+      <Box
+        w={{ base: "100%", md: "65%" }}
+        bg="white"
+        px="2rem"
+        pt="2rem"
+        mb={{ base: "3rem", md: "0" }}
+        shadow={"sm"}
+      >
         {" "}
         <Heading
           as="h3"
@@ -25,7 +36,7 @@ const ConfirmBooking = ({ setStep, step }: ConfirmBookingProps) => {
         >
           CONFIRM BOOKING{" "}
         </Heading>{" "}
-        <Box h={{ base: "100%", md: "59vh" }} overflowY={"auto"} pb="3rem">
+        <Box h={{ base: "100%", md: "62vh" }} overflowY={"auto"} pb="3rem">
           <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
             Cancellation Policy:
           </Text>
@@ -80,7 +91,7 @@ const ConfirmBooking = ({ setStep, step }: ConfirmBookingProps) => {
           bottom="0"
           left="0"
           w="full"
-          py='1rem'
+          py="2rem"
           px={{ base: "2rem", md: "0" }}
           zIndex={10}
           bg="white"
@@ -91,7 +102,10 @@ const ConfirmBooking = ({ setStep, step }: ConfirmBookingProps) => {
               <Checkbox.Indicator />
             </Checkbox.Control>
 
-            <Checkbox.Label fontSize={{ base: "1.5rem", md: "1.6rem" }} ml=".5rem">
+            <Checkbox.Label
+              fontSize={{ base: "1.5rem", md: "1.6rem" }}
+              ml=".5rem"
+            >
               {" "}
               <Text lineHeight={1.35}>
                 I agree to the terms and conditions{" "}
@@ -114,7 +128,10 @@ const ConfirmBooking = ({ setStep, step }: ConfirmBookingProps) => {
         </Box>
       </Box>
 
-      <Box w={{ base: "100%", md: "35%" }}>
+      <Box
+        w={{ base: "100%", md: "35%" }}
+        display={{ base: "block", md: "flex" }}
+      >
         <BookingSummary />
       </Box>
     </Flex>

@@ -27,7 +27,7 @@ const StepNavigationBtns = ({
       justifyContent="center"
       alignItems="center"
       bg="white"
-      py={{ base: "2rem", md: "1rem" }}
+      py='2rem'
       px={{ base: "1.5rem", md: "0" }}
       zIndex={10}
     >

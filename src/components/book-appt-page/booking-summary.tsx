@@ -48,7 +48,7 @@ const BookingSummary = () => {
             >
               Lush & Luxe – Central London{" "}
             </Heading>
-            <Text lineHeight={1.3} w="95%" fontSize="1.35rem">
+            <Text lineHeight={1.3} w="95%" fontSize="1.3rem">
               68 Charlotte Street, Fitzrovia, London, W1T 4QF
             </Text>
           </Box>
