@@ -4,13 +4,15 @@ import Navbar from "../navbar";
 import Wrapper from "../ui/wrapper";
 import NewOrders from "./new-orders";
 import PastOrders from "./past-orders";
+import { GoBack } from "../ui/go-back";
 
 const OrdersPage = () => {
   return (
     <>
       <Navbar />
-      <Wrapper bg='gray.250'>
-        <Box mt="6rem" bg="white" p='3rem 2rem'>
+      <Wrapper bg="gray.250">
+        <GoBack/>
+        <Box mt="1rem" bg="white" p="3rem 2rem">
           <Heading
             as="h2"
             fontSize={{ base: "1.8rem", md: "1.9rem" }}

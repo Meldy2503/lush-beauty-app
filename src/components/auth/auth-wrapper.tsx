@@ -2,9 +2,10 @@
 
 import Button from "@/components/ui/button";
 import Logo from "@/components/ui/logo";
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import bgImage from "../../assets/images/contact-bg.webp";
+import { FaCircleArrowLeft } from "react-icons/fa6";
 
 interface AuthWrapperProps {
   children: React.ReactNode;
@@ -17,7 +18,6 @@ const authTypes = {
 };
 
 const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
-
   return (
     <Flex
       backgroundImage={`linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url(${bgImage.src})`}
@@ -31,26 +31,31 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
       flexDir={"column"}
     >
       <Box
-        w={{ base: "95%", md: "80%", xl:'60%' }}
+        w={{ base: "95%", md: "80%", xl: "60%" }}
         bg="gray.250"
         p="2rem"
         flexDir={"column"}
+        overflow={"auto"}
+        h={authType === "signup" ? "95vh" : "100%"}
+        rounded="md"
       >
-        <Button
-          bg="transparent"
-          color="black"
-          px={"0"}
-          hover="transparent"
-          href='/'
-        >
-          ← Home Page
-        </Button>
+        <HStack mb="1.5rem">
+          <FaCircleArrowLeft size="2.3rem" />
+          <Button
+            href="/"
+            bg="transparent"
+            color="black"
+            px={"0"}
+            hover="transparent"
+          >
+            Go to Home
+          </Button>
+        </HStack>
         <Flex
           justifyContent={"center"}
           alignItems={"center"}
           flexDir={"column"}
-          mb="5rem"
-          py={authType === "signup" ? "0rem" : { base: "3rem", md: "10rem" }}
+          pb={authType === "signup" ? "2rem" : { base: "3rem", md: "5rem" }}
         >
           <Logo />
           <Heading
@@ -66,9 +71,7 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
             gap="2rem"
             w={{ base: "100%", md: "80%", xl: "70%" }}
             direction={"column"}
-            h="100%"
             mt="4rem"
-            overflow={"auto"}
           >
             {children}
           </Flex>

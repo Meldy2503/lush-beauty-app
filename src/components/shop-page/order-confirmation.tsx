@@ -3,39 +3,28 @@
 import {
   Box,
   Flex,
-  HStack,
-  Text,
-  VStack,
-  InputGroup,
   Group,
   Heading,
+  HStack,
+  InputGroup,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
+import { FaRegCreditCard } from "react-icons/fa";
 import { usePaymentInputs } from "react-payment-inputs";
 import Button from "../ui/button";
 import CreditCards from "../ui/credit-cards";
-import Wrapper from "../ui/wrapper";
+import { GoBack } from "../ui/go-back";
 import { InputElement } from "../ui/input-element";
-import { FaRegCreditCard } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import Wrapper from "../ui/wrapper";
 
 const OrderConfirmationPage = () => {
   const payment = usePaymentInputs();
-    const router = useRouter();
   
 
   return (
     <Wrapper bg="gray.250">
-      <Box mt="5rem" mb="1.5rem">
-        <Button
-          onClick={() => router.back()}
-          bg="transparent"
-          color="black"
-          px={"0"}
-          hover="transparent"
-        >
-          ← Go Back
-        </Button>
-      </Box>
+      <GoBack/>
       <Flex gap="2rem" flexDir={{ base: "column", lg: "row" }}>
         <Box w={{ base: "100%", lg: "60%" }} bg="white" p="3rem 2rem">
           <HStack
@@ -141,7 +130,7 @@ const OrderConfirmationPage = () => {
               $5.00
             </Text>{" "}
           </HStack>
-          <Box bg="gray.250" p=".5rem" fontSize={"1.5rem"} mt='5rem'>
+          <Box bg="gray.250" p=".5rem" fontSize={"1.5rem"} mt="5rem">
             <Text>Payment Summary</Text>
           </Box>
           <HStack

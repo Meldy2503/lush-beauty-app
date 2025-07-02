@@ -7,13 +7,15 @@ import Button from "../ui/button";
 import Wrapper from "../ui/wrapper";
 import Cart from "./cart";
 import PersonalDetailsModal from "../personal-details/personal-details-modal";
+import { GoBack } from "../ui/go-back";
 
 const OrderSummaryPage = () => {
   return (
     <Wrapper bg="gray.250">
+      <GoBack />
+
       <Flex
         gap="2rem"
-        mt="6rem"
         flexDir={{ base: "column-reverse", lg: "row" }}
       >
         <Box w={{ base: "100%", lg: "70%" }}>

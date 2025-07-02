@@ -2,33 +2,22 @@
 
 import { Box, Flex, Heading, HStack, List, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import academy1 from "../../assets/images/academy-1.webp";
 import Button from "../ui/button";
 import Wrapper from "../ui/wrapper";
 import Cart from "./cart";
+import { GoBack } from "../ui/go-back";
 
 const Product = () => {
-  const router = useRouter();
-
   return (
-    <Wrapper pt="14rem">
-      <Button
-        onClick={() => router.back()}
-        bg="transparent"
-        color="black"
-        px={"0"}
-        hover="transparent"
-      >
-        ← Go Back
-      </Button>
+    <Wrapper >
+      <GoBack />
       <Flex
         direction={{ base: "column", md: "row" }}
         justifyContent="space-between"
         gap="2rem"
-        mt="2rem"
       >
         {/* Left: Image*/}
         <Box w={{ base: "100%", md: "50%" }}>
@@ -56,7 +45,7 @@ const Product = () => {
             for all Light Beige types, Women&apos;s holiday gift, Mother&apos;s
             Day gift
           </Text>
-          <Text fontWeight={"600"} fontSize={"2.3rem"} pb="2rem">
+          <Text fontWeight={"600"} fontSize={"2rem"} pb="2rem">
             $45.00
           </Text>
           <Box mb="2rem">
