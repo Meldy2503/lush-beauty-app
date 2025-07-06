@@ -36,12 +36,19 @@ const ViewAppointmentDetailsModal = () => {
                   borderColor="black"
                   borderWidth="2px"
                   color="black"
-                  py="1.6rem"
+                  py="2rem"
+                  px={{ base: "3rem", sm: "5rem" }}
                 >
                   Close
                 </Button>
               </Dialog.ActionTrigger>
-              <Button href="/book-appointment">Book again</Button>
+              <Button
+                py="1.6rem"
+                href="/book-appointment"
+                px={{ base: "2rem", sm: "5rem" }}
+              >
+                Book again
+              </Button>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild bg="gray.200">
               <CloseButton size="2xl" />

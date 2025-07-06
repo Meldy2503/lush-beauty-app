@@ -71,20 +71,18 @@ const PersonalDetailsModal = () => {
                 flexWrap={"wrap"}
                 gap="1rem"
               >
-                <Button w={{ base: "full", sm: "fit-content" }}>
-                  Save Changes
-                </Button>
                 <Dialog.ActionTrigger asChild>
                   <Button
                     bg="transparent"
                     borderColor="black"
                     borderWidth="1.5px"
                     color="black"
-                    w={{ base: "full", sm: "fit-content" }}
+                    px={{ base: "3rem", sm: "5rem" }}
                   >
                     Close
                   </Button>
                 </Dialog.ActionTrigger>
+                <Button px={{ base: "2rem", sm: "5rem" }}>Save Changes</Button>
               </Dialog.Footer>
             </form>{" "}
             <Dialog.CloseTrigger asChild bg="gray.200">

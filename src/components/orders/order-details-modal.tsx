@@ -38,12 +38,19 @@ const ViewOrderDetailsModal = () => {
                   borderColor="black"
                   borderWidth="2px"
                   color="black"
-                  py="1.6rem"
+                  py="2rem"
+                  px={{ base: "3rem", sm: "5rem" }}
                 >
                   Close
                 </Button>
               </Dialog.ActionTrigger>
-              <Button href="/book-appointment">Shop again</Button>
+              <Button
+                href="/shop"
+                py="1.6rem"
+                px={{ base: "2rem", sm: "5rem" }}
+              >
+                Shop again
+              </Button>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild bg="gray.200">
               <CloseButton size="2xl" />

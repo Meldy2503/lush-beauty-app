@@ -150,17 +150,26 @@ const Cart = ({ children }: CartProps) => {
                 </HStack>
 
                 <Grid
-                  templateColumns={{ base: "1fr", sm: "1fr 1fr" }}
+                  templateColumns={{ base: "1fr 1fr", sm: "1fr 1fr" }}
                   gap="1rem"
                   w="full"
                 >
                   {pathname !== "/shop/order-summary" ? (
-                    <Button href="/shop/order-summary" w="100%" py="1.35rem">
+                    <Button
+                      href="/shop/order-summary"
+                      w="100%"
+                      py="1.35rem"
+                      px={{ base: "3rem", sm: "5rem" }}
+                    >
                       Checkout
                     </Button>
                   ) : (
                     <Drawer.ActionTrigger asChild>
-                      <Button w="100%" py="1.85rem">
+                      <Button
+                        w="100%"
+                        py="1.85rem"
+                        px={{ base: "3rem", sm: "5rem" }}
+                      >
                         Close
                       </Button>
                     </Drawer.ActionTrigger>
@@ -172,8 +181,9 @@ const Cart = ({ children }: CartProps) => {
                     borderColor="black"
                     color="black"
                     w="100%"
+                    px={{ base: "1rem", sm: "5rem" }}
                   >
-                    Add More Items
+                    Shop More
                   </Button>
                 </Grid>
               </Flex>

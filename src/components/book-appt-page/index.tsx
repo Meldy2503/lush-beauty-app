@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Icon, Steps } from "@chakra-ui/react";
+import { useState } from "react";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdOutlinePersonAddAlt } from "react-icons/md";
@@ -11,10 +12,9 @@ import SelectDateTime from "./select-date-time";
 import SelectLocation from "./select-location";
 import SelectService from "./select-service";
 import SelectTechnician from "./select-technician";
-import { useState } from "react";
 // import MakePayment from "./make-payment";
-import ConfirmBooking from "./confirm-booking";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import ConfirmBooking from "./confirm-booking";
 
 type SetStep = React.Dispatch<React.SetStateAction<number>>;
 
@@ -148,9 +148,6 @@ const AppointmentPage = () => {
               {stepObj.content(setStep, step)}
             </Steps.Content>
           ))}
-          {/* <Steps.CompletedContent>
-            All steps are complete!
-          </Steps.CompletedContent> */}
         </Box>
       </Steps.Root>
     </Box>

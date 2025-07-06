@@ -4,6 +4,7 @@ import { Avatar, Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
+import { FiMinus, FiPlus } from "react-icons/fi";
 
 const BookingSummary = () => {
   return (
@@ -53,20 +54,52 @@ const BookingSummary = () => {
             </Text>
           </Box>
         </Flex>
-        {/* services section */}
+        {/* Expected clients section */}
         <Box
           borderTopWidth={"2px"}
           borderColor={"gray.250"}
-          py="1rem"
-          mt="2rem"
+          py="1.5rem"
+          mt="1.5rem"
         >
-          <Flex pb="1rem" justifyContent={"space-between"} gap="2rem">
-            <Text>Skin Analysis </Text>
-            <Text>$4</Text>
+          <Flex justifyContent={"space-between"} gap="2rem">
+            <Text>Number of Clients</Text>
+            <Text>3</Text>
           </Flex>
-          <Flex pb="1rem" justifyContent={"space-between"} gap="2rem">
+        </Box>
+        {/* services section */}
+        <Box borderTopWidth={"2px"} borderColor={"gray.250"} py="1.5rem">
+          <Flex
+            justifyContent={"space-between"}
+            gapX="2rem"
+            gapY="1rem"
+            w="full"
+            flexWrap={"wrap"}
+          >
             <Text>Skin Analysis </Text>
-            <Text>$4</Text>
+            <Flex
+              w={{ base: "100%", sm: "auto" }}
+              gap="1rem"
+              justifyContent={{ base: "flex-end", sm: "inherit" }}
+            >
+              <Text>£40</Text>
+              <Text fontStyle="italic">x</Text>{" "}
+              <Flex
+                alignItems={"center"}
+                justifyContent={"space-between"}
+                w="6.5rem"
+                border="1px solid black"
+                p=".3rem .5rem"
+                fontSize={"1.3rem"}
+              >
+                <Box>
+                  <FiMinus />
+                </Box>
+                <Text>3</Text>
+                <Box>
+                  <FiPlus />
+                </Box>
+              </Flex>
+            </Flex>
           </Flex>
         </Box>
         {/* technician section */}
@@ -75,7 +108,6 @@ const BookingSummary = () => {
             Technician selected
           </Text>
           <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
-           
             <Avatar.Root size="2xl" boxSize={"5rem"} variant={"solid"}>
               <Avatar.Fallback name="Grace Edith" />
               <Avatar.Image src={personalBookingImg.src} />

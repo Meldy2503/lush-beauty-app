@@ -25,8 +25,7 @@ const ContactUsModal = ({ color }: ContactUsModalProps) => {
     <Dialog.Root
       lazyMount
       motionPreset="slide-in-bottom"
-      placement={"center"}
-      scrollBehavior="inside"
+      placement={{ base: "top", md: "center" }}
       closeOnInteractOutside={false}
     >
       <Dialog.Trigger asChild>
@@ -94,32 +93,28 @@ const ContactUsModal = ({ color }: ContactUsModalProps) => {
                 <ContactDetails />
               </Flex>
             </Dialog.Body>
-            <Dialog.Footer pt= {{ base: "3rem", sm: "4rem" }}>
-              <Flex
-                gap="1rem"
-                w="full"
-              >
+            <Dialog.Footer pt={{ base: "3rem", sm: "4rem" }}>
+              <Dialog.ActionTrigger asChild>
                 <Button
-                  borderWidth="2px"
+                  bg="transparent"
+                  borderWidth="1px"
                   borderColor="black"
-                  px={{base: "2rem", sm: "5rem"}}
-                  py='2.1rem'
+                  color="black"
+                  px={{ base: "3rem", sm: "5rem" }}
+                  onClick={() => setIsContactModalOpen(false)}
                 >
-                  Send Message
-                </Button> 
-                <Dialog.ActionTrigger asChild>
-                  <Button
-                    bg="transparent"
-                    borderWidth="1px"
-                    borderColor="black"
-                    color="black"
-                    onClick={() => setIsContactModalOpen(false)}
-                    
-                  >
-                    Cancel
-                  </Button>
-                </Dialog.ActionTrigger>
-              </Flex>
+                  Cancel
+                </Button>
+              </Dialog.ActionTrigger>
+              <Button
+                borderWidth="2px"
+                borderColor="black"
+                px={{ base: "2rem", sm: "5rem" }}
+                py="2.1rem"
+              >
+                Send Message
+              </Button>
+
             </Dialog.Footer>
             <Dialog.CloseTrigger
               asChild

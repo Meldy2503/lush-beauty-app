@@ -67,7 +67,9 @@ export const InputElement = ({
       <Field.Root required={required} w="full">
         {label && (
           <Flex mb="1">
-            <Field.Label fontWeight="semibold">{label}</Field.Label>
+            <Field.Label fontWeight="semibold" lineHeight={1.3}>
+              {label}
+            </Field.Label>
             {required && <Field.RequiredIndicator color="red.500" ml="1" />}
           </Flex>
         )}
@@ -115,7 +117,7 @@ export const InputElement = ({
     return (
       <Field.Root required={required}>
         {label && (
-          <Field.Label fontSize={"1.5rem"} mb=".5rem">
+          <Field.Label fontSize={"1.5rem"} mb=".5rem" lineHeight={1.3}>
             {label}
           </Field.Label>
         )}
@@ -142,7 +144,7 @@ export const InputElement = ({
     return (
       <Field.Root required={required}>
         {label && (
-          <Field.Label fontSize={"1.5rem"} mb=".5rem">
+          <Field.Label fontSize={"1.5rem"} mb=".5rem" lineHeight={1.3}>
             {label}
           </Field.Label>
         )}
@@ -176,7 +178,7 @@ export const InputElement = ({
     <Field.Root required={required}>
       <Flex>
         {label && (
-          <Field.Label fontSize={"1.5rem"} mb=".5rem">
+          <Field.Label fontSize={"1.5rem"} mb=".5rem" lineHeight={1.3}>
             {label}
           </Field.Label>
         )}
