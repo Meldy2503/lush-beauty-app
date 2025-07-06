@@ -115,6 +115,7 @@ const ContactUsModal = ({ color }: ContactUsModalProps) => {
                     color="black"
                     w={{ base: "100%", sm: "fit-content" }}
                     onClick={() => setIsContactModalOpen(false)}
+                    
                   >
                     Cancel
                   </Button>

@@ -17,12 +17,15 @@ import academy1 from "../../assets/images/academy-1.webp";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Button from "../ui/button";
 import { GiShoppingBag } from "react-icons/gi";
+import { usePathname } from "next/navigation";
 
 interface CartProps {
   children?: React.ReactNode;
 }
 
 const Cart = ({ children }: CartProps) => {
+  const pathname = usePathname();
+
   return (
     <Drawer.Root size="xl" placement={"end"} closeOnInteractOutside={false}>
       <Drawer.Trigger asChild>
@@ -41,7 +44,7 @@ const Cart = ({ children }: CartProps) => {
               fontSize="1.3rem"
               zIndex={1}
               pointerEvents="none"
-              fontWeight={'bold'}
+              fontWeight={"bold"}
             >
               0
             </Flex>
@@ -151,9 +154,17 @@ const Cart = ({ children }: CartProps) => {
                   gap="1rem"
                   w="full"
                 >
-                  <Button href="/shop/order-summary" w="100%" py="1.5rem">
-                    Checkout
-                  </Button>
+                  {pathname !== "/shop/order-summary" ? (
+                    <Button href="/shop/order-summary" w="100%" py="1.35rem">
+                      Checkout
+                    </Button>
+                  ) : (
+                    <Drawer.ActionTrigger asChild>
+                      <Button w="100%" py="1.85rem">
+                        Close
+                      </Button>
+                    </Drawer.ActionTrigger>
+                  )}
                   <Button
                     href="/shop"
                     bg="transparent"
@@ -165,9 +176,6 @@ const Cart = ({ children }: CartProps) => {
                     Add More Items
                   </Button>
                 </Grid>
-                <Drawer.CloseTrigger bg="white" asChild>
-                  <CloseButton size="lg" />
-                </Drawer.CloseTrigger>
               </Flex>
             </Drawer.Footer>
             <Drawer.CloseTrigger bg="white" asChild>

@@ -1,6 +1,4 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import Image from "next/image";
-import aboutImg from "../../assets/images/academy-bg.webp";
 import Wrapper from "../ui/wrapper";
 import Button from "../ui/button";
 
@@ -46,24 +44,32 @@ const LushVideoSection = () => {
 
         {/* Right: Image*/}
         <Box position="relative" w={{ base: "100%", md: "47%" }}>
-          <Box zIndex={1} boxShadow="lg" position="relative">
-            <Image
-              src={aboutImg}
-              alt="beauty salon office image"
-              style={{ position: "relative" }}
-              width={1000}
-              height={1000}
-            />
+          <Box
+            zIndex={1}
+            boxShadow="lg"
+            position="relative"
+            h={{ base: "300px", md: "500px" }}
+          >
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{ height: "100%", width: "100%", objectFit: "cover" }}
+              poster="/images/video-img.jpg"
+            >
+              <source src="/videos/video.mp4" type="video/mp4" />
+              <source src="/videos/video.webm" type="video/webm" />
+              Your browser does not support the video tag.
+            </video>
           </Box>
           <Box
             position="absolute"
-            right="-1.5rem"
-            top="-1.5rem"
-            bottom={"5rem"}
-            height="105%"
+            right={{ base: "-1rem", md: "-2rem" }}
+            top={{ base: "-1rem", md: "-2rem" }}
+            bottom={{ base: "-1rem", md: "-2rem" }}
             width="85%"
             bg="black"
-            borderRadius="md"
           />
         </Box>
       </Flex>
