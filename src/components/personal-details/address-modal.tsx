@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { InputElement } from "../ui/input-element";
 
-const AddressModal = ({icon}:{icon?: React.ReactNode}) => {
+const AddressModal = ({ icon }: { icon?: React.ReactNode }) => {
   return (
     <Dialog.Root
       placement={{ base: "top", md: "center" }}
@@ -74,6 +74,9 @@ const AddressModal = ({icon}:{icon?: React.ReactNode}) => {
                 flexWrap={"wrap"}
                 gap="1rem"
               >
+                <Button w={{ base: "full", sm: "fit-content" }}>
+                  Save Changes
+                </Button>
                 <Dialog.ActionTrigger asChild>
                   <Button
                     bg="transparent"
@@ -85,9 +88,6 @@ const AddressModal = ({icon}:{icon?: React.ReactNode}) => {
                     Close
                   </Button>
                 </Dialog.ActionTrigger>
-                <Button w={{ base: "full", sm: "fit-content" }}>
-                  Save Changes
-                </Button>
               </Dialog.Footer>
             </form>{" "}
             <Dialog.CloseTrigger asChild bg="gray.200">

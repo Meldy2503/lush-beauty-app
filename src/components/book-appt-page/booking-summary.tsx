@@ -1,7 +1,6 @@
 "use client";
 
-import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
-import Image from "next/image";
+import { Avatar, Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
@@ -33,6 +32,7 @@ const BookingSummary = () => {
         pb="4rem"
         px="1.5rem"
       >
+        {/* location section */}
         <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
           <HStack bg="white" p=".8rem" rounded={"full"} shadow={"md"}>
             <IoLocationOutline size={"2.3rem"} />
@@ -53,6 +53,7 @@ const BookingSummary = () => {
             </Text>
           </Box>
         </Flex>
+        {/* services section */}
         <Box
           borderTopWidth={"2px"}
           borderColor={"gray.250"}
@@ -68,23 +69,17 @@ const BookingSummary = () => {
             <Text>$4</Text>
           </Flex>
         </Box>
+        {/* technician section */}
         <Box borderTopWidth={"2px"} borderColor={"gray.250"} pt="1.5rem">
           <Text fontWeight={"bold"} mb="1rem">
             Technician selected
           </Text>
           <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
-            <Image
-              src={personalBookingImg}
-              alt="a lush & luxe staff"
-              style={{
-                borderRadius: "50%",
-                height: "5rem",
-                width: "5rem",
-                objectFit: "cover",
-              }}
-              width={100}
-              height={100}
-            />{" "}
+           
+            <Avatar.Root size="2xl" boxSize={"5rem"} variant={"solid"}>
+              <Avatar.Fallback name="Grace Edith" />
+              <Avatar.Image src={personalBookingImg.src} />
+            </Avatar.Root>
             <Box>
               <Heading
                 as="h4"
@@ -102,6 +97,7 @@ const BookingSummary = () => {
             </Box>
           </Flex>
         </Box>
+        {/* date and time section */}
         <Box
           borderTopWidth={"2px"}
           borderColor={"gray.250"}
@@ -132,6 +128,7 @@ const BookingSummary = () => {
           </Flex>
         </Box>
       </Box>
+      {/* Booking Total Section */}
       <Flex
         p="2.5rem 1.5rem"
         w="full"

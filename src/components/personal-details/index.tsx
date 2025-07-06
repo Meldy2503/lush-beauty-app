@@ -101,7 +101,7 @@ const UserDetailsPage = () => {
             Stay up to date with your bookings and appointments. Click below to
             view your order and appointment history.
           </Text>
-          <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
+          <Flex gap="2rem" flexDir={{ base: "column", xl: "row" }}>
             {/* Orders Card */}
             <Link href="/orders">
               <HStack

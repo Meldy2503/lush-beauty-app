@@ -1,7 +1,14 @@
 "use client";
 
-import { Box, Flex, Heading, HStack, Text, VStack } from "@chakra-ui/react";
-import Image from "next/image";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Heading,
+  HStack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { FaListUl } from "react-icons/fa";
 import { IoIosStar } from "react-icons/io";
@@ -96,18 +103,10 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
                 rounded="md"
                 _hover={{ borderColor: "yellow.100" }}
               >
-                <Image
-                  src={staff.img}
-                  alt="a lush & luxe staff"
-                  style={{
-                    borderRadius: "50%",
-                    height: "7rem",
-                    width: "7rem",
-                    objectFit: "cover",
-                  }}
-                  width={100}
-                  height={100}
-                />
+                <Avatar.Root size="2xl" boxSize={"6rem"} variant={"solid"}>
+                  <Avatar.Fallback name={staff.name} />
+                  <Avatar.Image src={staff.img.src} />
+                </Avatar.Root>
                 <VStack
                   mt={isGridOrientation ? "1rem" : { base: "1rem", sm: "0" }}
                 >
