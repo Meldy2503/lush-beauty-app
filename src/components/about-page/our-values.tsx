@@ -30,7 +30,7 @@ const OurValueSection = () => {
         </Heading>
         <Heading
           as="h3"
-          fontSize={{ base: "2rem", md: "2.5rem", lg: "3rem" }}
+          fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
           fontFamily="playfair"
           my={"2rem"}
           lineHeight={1.3}
@@ -54,7 +54,7 @@ const OurValueSection = () => {
       <Flex
         flexWrap={"wrap"}
         justifyContent={"space-between"}
-        gap={{ base: "2.5rem", lg: "4rem" }}
+        gap={{ base: "3rem", lg: "4rem" }}
         position={"relative"}
       >
         <Box
@@ -76,12 +76,17 @@ const OurValueSection = () => {
 
         {valueData.map((values) => {
           return (
-            <Flex key={values.id} w={{ base: "100%", md: "47%" }} gap="2rem">
+            <Flex
+              key={values.id}
+              w={{ base: "100%", md: "47%" }}
+              gap={{ base: "1rem", sm: "2rem" }}
+              flexDirection={{ base: "column", sm: "row" }}
+            >
               <Image
                 src={values.imageUrl}
                 alt="image of the beauty salon owners"
-                width={90}
-                height={90}
+                width={80}
+                height={80}
               />
               <Box>
                 <Heading

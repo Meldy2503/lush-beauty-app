@@ -7,12 +7,11 @@ import OrderDetailsContent from "./order-details-content";
 const ViewOrderDetailsModal = () => {
   return (
     <Dialog.Root
-      placement="center"
+      placement={{ base: "top", md: "center" }}
       motionPreset="slide-in-bottom"
-      scrollBehavior="inside"
     >
       <Dialog.Trigger asChild>
-        <Button px="2rem" fontSize="1.45rem">
+        <Button px="2rem" fontSize="1.4rem">
           VIEW DETAILS
         </Button>
       </Dialog.Trigger>

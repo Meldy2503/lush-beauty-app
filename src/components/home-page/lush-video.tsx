@@ -13,24 +13,24 @@ const LushVideoSection = () => {
       >
         {/* Left: Text Content */}
         <Box w={{ base: "100%", md: "47%" }}>
-          <Heading
-            as="h2"
-            fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
-            fontFamily="playfair"
-            mb={"2rem"}
-            lineHeight={1.3}
-          >
-            DISCOVER YOUR RADIANCE
-          </Heading>
           <Text
             fontWeight={"600"}
             color={"yellow.100"}
             fontFamily={"playfair"}
             fontSize={{ base: "1.8rem", md: "2rem" }}
+            mb={"1rem"}
           >
             BOOK YOUR SPOT NOW
           </Text>
-          <Text py="3rem">
+          <Heading
+            as="h2"
+            fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
+            fontFamily="playfair"
+            lineHeight={1.3}
+          >
+            DISCOVER YOUR RADIANCE
+          </Heading>
+          <Text pt="2rem" pb='3rem'>
             At Lush & Luxe Salon, we offer a thoughtfully curated selection of
             beauty treatments tailored to enhance your natural glow. From
             flawless makeup and expert brows to indulgent facials and signature

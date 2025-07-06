@@ -25,6 +25,7 @@ const ReviewSection = () => {
           color="white"
           px={{ base: "2rem", sm: "5rem", lg: "8rem" }}
           py={{ base: "6rem", md: "12rem" }}
+          alignItems="center"
         >
           {/* Left: Text Content */}
           <Box w={{ base: "100%", md: "55%" }}>
@@ -57,13 +58,17 @@ const ReviewSection = () => {
           >
             <Heading
               as="h3"
-              fontSize={{ base: "3rem", md: "4rem" }}
+              fontSize={{ base: "2.5rem", md: "3.5rem" }}
               fontFamily="playfair"
               mb={4}
             >
               REVIEWS
             </Heading>{" "}
-            <Text color={"yellow.50"} mt="1rem">
+            <Text
+              color={"yellow.50"}
+              mt={{ base: ".5rem", md: "1rem" }}
+              fontSize={{ base: "1.5rem", md: "1.7rem" }}
+            >
               {" "}
               YOUR KIND WORDS
             </Text>{" "}

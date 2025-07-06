@@ -36,8 +36,9 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
         p="2rem"
         flexDir={"column"}
         overflow={"auto"}
-        h={authType === "signup" ? "95vh" : "100%"}
+        h={authType === "signup" ? "100vh" : "100%"}
         rounded="md"
+        my=".5rem"
       >
         <HStack mb="1.5rem">
           <FaCircleArrowLeft size="2.3rem" />
@@ -60,7 +61,7 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
           <Logo />
           <Heading
             as="h2"
-            fontSize={{ base: "1.7rem", md: "2rem" }}
+            fontSize={{ base: "2rem", md: "2.5rem" }}
             lineHeight={1.3}
             textAlign="center"
             mt={8}
@@ -71,7 +72,7 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
             gap="2rem"
             w={{ base: "100%", md: "80%", xl: "70%" }}
             direction={"column"}
-            mt="4rem"
+            mt="3rem"
           >
             {children}
           </Flex>
@@ -81,7 +82,7 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
               : "Don’t have an account? "}{" "}
             <Link
               href={authType === "signup" ? "/login" : "/sign-up"}
-              style={{ fontWeight: "bold", color: "#A9762A" }}
+              style={{ fontWeight: "bold", color: "#ca8317" }}
             >
               {authType === "signup" ? "Login" : "Sign up"}
             </Link>

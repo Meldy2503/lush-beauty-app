@@ -46,7 +46,7 @@ const HomeCtaSection = () => {
           >
             LUSH & LUXE
           </Heading>
-          <Text maxW="500px" mx="auto" my="5rem">
+          <Text maxW="500px" mx="auto" mb="4rem" mt={{ base: "2rem", md: "4rem" }}>
             Indulge in unparalleled luxury. Discover a world of exquisite beauty
             treatments tailored just for you
           </Text>

@@ -1,16 +1,22 @@
 "use client";
 
 import Button from "@/components/ui/button";
-import { Flex, Stack, Dialog, Portal, CloseButton, Box } from "@chakra-ui/react";
+import {
+  Flex,
+  Stack,
+  Dialog,
+  Portal,
+  CloseButton,
+  Box,
+} from "@chakra-ui/react";
 import { InputElement } from "../ui/input-element";
 import { FaRegEdit } from "react-icons/fa";
 
 const PersonalDetailsModal = () => {
   return (
     <Dialog.Root
-      placement="center"
+      placement={{ base: "top", md: "center" }}
       motionPreset="slide-in-bottom"
-      scrollBehavior="inside"
     >
       <Dialog.Trigger asChild>
         <Box color="yellow.100" cursor={"pointer"}>

@@ -14,23 +14,24 @@ const VisitUsSection = () => {
       >
         {/* Left: Text Content */}
         <Box w={{ base: "100%", md: "50%" }}>
-          <Heading
-            as="h2"
-            fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
-            fontFamily="playfair"
-            mb={4}
-            lineHeight={1.3}
-          >
-            VISIT US
-          </Heading>
           <Text
             fontWeight={"600"}
             color={"yellow.100"}
             fontFamily={"playfair"}
             fontSize={{ base: "1.8rem", md: "2rem" }}
+            mb={"1rem"}
           >
-            YOUR BEAUTY JOURNEY STARTS HERE
+            VISIT US
           </Text>
+          <Heading
+            as="h2"
+            fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
+            fontFamily="playfair"
+            lineHeight={1.3}
+          >
+            YOUR GLOW STARTS HERE
+          </Heading>
+
           <Text pb={"3rem"} pt="2rem">
             Step into Lush & Luxe Salon for premium beauty services in a calm,
             welcoming environment. Whether you are coming for a quick touch-up

@@ -37,10 +37,10 @@ const BookingConfirmationModal = () => {
           >
             <Dialog.Body>
               <VStack textAlign={"center"}>
-                <Image src={tick} alt="tick icon" width={120} height={120} />
+                <Image src={tick} alt="tick icon" width={100} height={100} />
                 <Heading
                   as="h2"
-                  fontSize={{ base: "2.2rem", md: "2.8rem" }}
+                  fontSize={{ base: "2.2rem", md: "2.5rem" }}
                   my="1rem"
                   lineHeight={1.3}
                   textTransform={"uppercase"}
@@ -52,9 +52,9 @@ const BookingConfirmationModal = () => {
                   w={{ base: "100%", md: "80%" }}
                   lineHeight={1.5}
                 >
-                  Thanks for booking with Lush & Luxe!!. <br />
-                  We&apos;ve sent an email confirmation to you using your
-                  provided email address. ✨
+                  Thanks for booking with Lush
+                  & Luxe! <br />A confirmation email has been sent. You can pay
+                  online or in person at your appointment day ✨
                 </Text>
                 <HStack
                   gap="1.5rem"
@@ -62,7 +62,7 @@ const BookingConfirmationModal = () => {
                   alignItems={"center"}
                   flexWrap={"wrap"}
                   pt="3rem"
-                  w='full'
+                  w="full"
                   flexDir={{ base: "column-reverse", sm: "row" }}
                 >
                   <Button
@@ -70,14 +70,12 @@ const BookingConfirmationModal = () => {
                     borderWidth="1.5px"
                     borderColor="black"
                     color="black"
-                    px={{base:'5.5rem', sm:'2rem'}}
+                    px={{ base: "5.5rem", sm: "2rem" }}
                     href="/"
                   >
                     Go to Home
                   </Button>
-                  <Button px="2rem" >
-                    Proceed to Pay £1000
-                  </Button>
+                  <Button px="2rem">Proceed to Pay £1000</Button>
                 </HStack>
               </VStack>
             </Dialog.Body>

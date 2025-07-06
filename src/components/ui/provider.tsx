@@ -35,7 +35,7 @@ const config = {
           150: { value: "#ca8317" },
         },
         gray: {
-          50: { value: "#999" },
+          50: { value: "#afaeae" },
           100: { value: "#424242" },
           150: { value: "#1a1a1a" },
           200: { value: "#ccc" },

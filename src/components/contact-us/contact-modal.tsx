@@ -94,26 +94,25 @@ const ContactUsModal = ({ color }: ContactUsModalProps) => {
                 <ContactDetails />
               </Flex>
             </Dialog.Body>
-            <Dialog.Footer mt="5rem">
+            <Dialog.Footer pt= {{ base: "3rem", sm: "4rem" }}>
               <Flex
-                direction={{ base: "column", sm: "row" }}
-                gap="1.5rem"
+                gap="1rem"
                 w="full"
               >
                 <Button
                   borderWidth="2px"
                   borderColor="black"
-                  w={{ base: "100%", sm: "fit-content" }}
+                  px={{base: "2rem", sm: "5rem"}}
+                  py='2.1rem'
                 >
                   Send Message
-                </Button>
+                </Button> 
                 <Dialog.ActionTrigger asChild>
                   <Button
                     bg="transparent"
                     borderWidth="1px"
                     borderColor="black"
                     color="black"
-                    w={{ base: "100%", sm: "fit-content" }}
                     onClick={() => setIsContactModalOpen(false)}
                     
                   >

@@ -20,7 +20,7 @@ const OurStorySection = () => {
         </Heading>
         <Heading
           as="h3"
-          fontSize={{ base: "2rem", md: "2.5rem", lg: "3rem" }}
+          fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
           fontFamily="playfair"
           my={"2rem"}
           lineHeight={1.3}

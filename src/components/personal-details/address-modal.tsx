@@ -15,12 +15,11 @@ import { InputElement } from "../ui/input-element";
 const AddressModal = ({icon}:{icon?: React.ReactNode}) => {
   return (
     <Dialog.Root
-      placement="center"
+      placement={{ base: "top", md: "center" }}
       motionPreset="slide-in-bottom"
-      scrollBehavior="inside"
     >
       <Dialog.Trigger asChild>
-       {icon ?? <Button fontWeight="400">Add address</Button>}
+        {icon ?? <Button fontWeight="400">Add address</Button>}
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />
