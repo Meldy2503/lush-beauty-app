@@ -21,8 +21,10 @@ interface InputElementProps {
   placeholder?: string;
   border?: string;
   type?: string;
+  min?: string | number;
   bg?: string;
-  value?: string;
+  value?: string | number;
+  defaultValue?: string | number;
   h?: string;
   onChange?: (
     e:
@@ -40,6 +42,8 @@ export const InputElement = ({
   bg,
   type = "text",
   value,
+  defaultValue,
+  min,
   onChange,
   required = false,
   ...props
@@ -190,11 +194,13 @@ export const InputElement = ({
         fontSize={"1.6rem"}
         height="4.5rem"
         p="1.5rem"
+        min={min}
         required
         placeholder={placeholder || label}
         type={type}
         {...props}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange}
       />
     </Field.Root>

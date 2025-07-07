@@ -1,11 +1,16 @@
 "use client";
 
-import { Box, CloseButton, Dialog, Flex, Portal, Text } from "@chakra-ui/react";
+import { updateAppointment } from "@/store/slices/appointment-slice";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import groupBookingImg from "../../assets/images/group-booking-img.webp";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
 import Button from "../ui/button";
-import { InputElement } from "../ui/input-element";
+import ExpectedClientModal from "./expected-client-modal";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 interface BookingTypeProps {
   step: number;
@@ -13,6 +18,26 @@ interface BookingTypeProps {
 }
 
 const BookingType = ({ setStep, step }: BookingTypeProps) => {
+  const dispatch = useDispatch();
+  const numOfClients = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.numberOfClients
+  );
+
+  const [expectedClients, setExpectedClients] = useState<number>(
+    numOfClients ?? 1
+  );
+
+  const handleBooking = (clients: number) => {
+    setExpectedClients(clients);
+    dispatch(
+      updateAppointment({
+        numberOfClients: clients,
+      })
+    );
+    setStep(step + 1);
+  };
+  console.log(numOfClients, "numOfClients store");
+  console.log(expectedClients, "Expected Clients state");
   return (
     <Flex
       bg="white"
@@ -24,140 +49,69 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
       p={{ base: "2rem", sm: "3rem" }}
     >
       <Flex gap="4rem 2rem" flexDir={{ base: "column", md: "row" }}>
-        <Box
-          borderWidth={"2px"}
-          borderColor="white"
-          _hover={{ borderColor: "yellow.100" }}
-          cursor="pointer"
-          bg="gray.250"
-        >
-          <Image
-            src={personalBookingImg}
-            alt="a smiling single lady"
-            style={{ position: "relative" }}
-            width={1000}
-            height={1000}
-          />
-          <Flex
-            justifyContent={"space-between"}
-            p="3rem 2rem"
-            gap="2rem"
-            flexDir={{ base: "column", xl: "row" }}
-          >
-            <Text fontWeight={"600"} fontSize="1.8rem">
-              Personal Booking{" "}
-            </Text>
-            <Button
-              px="2rem"
-              bg="yellow.150"
-              onClick={() => setStep(step + 1)}
-              w={{ base: "full", xl: "fit-content" }}
-              fontSize="1.5rem"
+        {bookingTypeData.map((bookingType) => {
+          return (
+            <Box
+              key={bookingType.id}
+              borderWidth={"2px"}
+              borderColor="white"
+              _hover={{ borderColor: "yellow.100" }}
+              cursor="pointer"
+              bg="gray.250"
             >
-              CREATE BOOKING
-            </Button>
-          </Flex>
-        </Box>
-        <Box
-          borderWidth={"2px"}
-          borderColor="white"
-          _hover={{ borderColor: "yellow.100" }}
-          cursor="pointer"
-          bg="gray.250"
-        >
-          <Image
-            src={groupBookingImg}
-            alt="smiling group of ladies"
-            style={{ position: "relative" }}
-            width={1000}
-            height={1000}
-          />
-          <Flex
-            justifyContent={"space-between"}
-            p="3rem 2rem"
-            gap="2rem"
-            flexDir={{ base: "column", xl: "row" }}
-          >
-            <Text fontWeight={"600"} fontSize="1.8rem">
-              Group Booking{" "}
-            </Text>
-
-            {/* expected client modal */}
-            <Dialog.Root
-              motionPreset="slide-in-bottom"
-              placement="center"
-              closeOnInteractOutside={false}
-            >
-              <Dialog.Trigger asChild>
-                <Button
-                  px="2rem"
-                  bg="yellow.150"
-                  w={{ base: "full", xl: "fit-content" }}
-                  fontSize="1.5rem"
-                >
-                  CREATE BOOKING
-                </Button>
-              </Dialog.Trigger>
-              <Portal>
-                <Dialog.Backdrop />
-                <Dialog.Positioner>
-                  <Dialog.Content
-                    maxW="800px"
-                    w="full"
-                    p={{ base: "2rem", md: "5rem" }}
-                    m=".5rem"
+              <Image
+                src={personalBookingImg}
+                alt="a smiling single lady"
+                style={{ position: "relative" }}
+                width={1000}
+                height={1000}
+              />
+              <Flex
+                justifyContent={"space-between"}
+                p="3rem 2rem"
+                gap="2rem"
+                flexDir={{ base: "column", xl: "row" }}
+              >
+                <Text fontWeight={"600"} fontSize="1.8rem">
+                  {bookingType.title}
+                </Text>
+                {bookingType.id === "personal" ? (
+                  <Button
+                    px="2rem"
+                    bg="yellow.150"
+                    onClick={() => handleBooking(1)}
+                    w={{ base: "full", xl: "fit-content" }}
+                    fontSize="1.5rem"
                   >
-                    <Dialog.Header>
-                      <Dialog.Title
-                        fontSize="2rem"
-                        fontWeight="bold"
-                        mb="4rem"
-                        lineHeight={1.3}
-                      >
-                        Expected Number of clients
-                      </Dialog.Title>
-                    </Dialog.Header>
-                    <Dialog.Body>
-                      <InputElement
-                        type="number"
-                        label="Please enter the number of expected clients"
-                        placeholder="1"
-                        bg="gray.250"
-                      />
-                    </Dialog.Body>
-                    <Dialog.Footer pt="4rem">
-                      <Dialog.ActionTrigger asChild>
-                        <Button
-                          bg="transparent"
-                          borderWidth="1px"
-                          borderColor="black"
-                          color="black"
-                          px={{ base: "2rem", sm: "5rem" }}
-                        >
-                          Cancel
-                        </Button>
-                      </Dialog.ActionTrigger>
-                      <Dialog.ActionTrigger asChild>
-                        <Button
-                          onClick={() => setStep(step + 1)}
-                          px={{ base: "2rem", sm: "5rem" }}
-                        >
-                          Continue
-                        </Button>
-                      </Dialog.ActionTrigger>
-                    </Dialog.Footer>
-                    <Dialog.CloseTrigger asChild _hover={{ bg: "gray.250" }}>
-                      <CloseButton size="2xl" />
-                    </Dialog.CloseTrigger>
-                  </Dialog.Content>
-                </Dialog.Positioner>
-              </Portal>
-            </Dialog.Root>
-          </Flex>
-        </Box>
+                    CREATE BOOKING
+                  </Button>
+                ) : (
+                  <ExpectedClientModal
+                    onClick={() => handleBooking(expectedClients)}
+                    numOfClients={numOfClients}
+                    setExpectedClients={setExpectedClients}
+                  />
+                )}
+              </Flex>
+            </Box>
+          );
+        })}
       </Flex>
     </Flex>
   );
 };
 
 export default BookingType;
+
+const bookingTypeData = [
+  {
+    id: "personal",
+    title: "Personal Booking",
+    image: personalBookingImg,
+  },
+  {
+    id: "group",
+    title: "Group Booking",
+    image: groupBookingImg,
+  },
+];

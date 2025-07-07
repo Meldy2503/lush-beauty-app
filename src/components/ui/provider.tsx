@@ -1,11 +1,10 @@
 "use client";
-import {
-  ChakraProvider,
-  createSystem,
-  defaultConfig,
-} from "@chakra-ui/react";
+import { ChakraProvider, createSystem, defaultConfig } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import LoadingIcon from "./loading-icon";
+import { Provider as ReduxProvider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "@/store";
 
 const config = {
   ...defaultConfig,
@@ -61,8 +60,12 @@ export function Provider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <ChakraProvider value={system}>
-      <>{loading ? <LoadingIcon /> : children}</>
-    </ChakraProvider>
+    <ReduxProvider store={store}>
+      <ChakraProvider value={system}>
+        <PersistGate loading={null} persistor={persistor}>
+          <>{loading ? <LoadingIcon /> : children}</>
+        </PersistGate>
+      </ChakraProvider>
+    </ReduxProvider>
   );
 }

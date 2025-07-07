@@ -5,8 +5,20 @@ import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
 import { FiMinus, FiPlus } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { branches } from "./select-location";
 
 const BookingSummary = () => {
+  const branchId = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.branchId
+  );
+  const numOfClients = useSelector(
+    (state: RootState) =>
+      state.appointment.appointments[0]?.numberOfClients
+  );
+  const branchDetails = branches.find((branch) => branch.id === branchId);
+
   return (
     <Box
       bg="white"
@@ -14,6 +26,7 @@ const BookingSummary = () => {
       display="flex"
       flexDirection="column"
       shadow={"sm"}
+      w="full"
     >
       <Heading
         as="h3"
@@ -34,26 +47,29 @@ const BookingSummary = () => {
         px="1.5rem"
       >
         {/* location section */}
-        <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
-          <HStack bg="white" p=".8rem" rounded={"full"} shadow={"md"}>
-            <IoLocationOutline size={"2.3rem"} />
-          </HStack>
-          <Box>
-            <Heading
-              as="h4"
-              fontFamily="playfair"
-              mb=".5rem"
-              lineHeight={1.4}
-              textTransform={"uppercase"}
-              fontSize="1.45rem"
-            >
-              Lush & Luxe – Central London{" "}
-            </Heading>
-            <Text lineHeight={1.3} w="95%" fontSize="1.3rem">
-              68 Charlotte Street, Fitzrovia, London, W1T 4QF
-            </Text>
-          </Box>
-        </Flex>
+        {branchDetails && (
+          <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
+            <HStack bg="white" p=".8rem" rounded={"full"} shadow={"md"}>
+              <IoLocationOutline size={"2.3rem"} />
+            </HStack>
+            <Box>
+              <Heading
+                as="h4"
+                fontFamily="playfair"
+                mb=".5rem"
+                lineHeight={1.4}
+                textTransform={"uppercase"}
+                fontSize="1.4rem"
+              >
+                Lush & Luxe – {branchDetails.name}
+              </Heading>
+              <Text lineHeight={1.3} w="95%" fontSize="1.3rem">
+                {branchDetails.address}, {branchDetails.city},{" "}
+                {branchDetails.country}
+              </Text>
+            </Box>
+          </Flex>
+        )}
         {/* Expected clients section */}
         <Box
           borderTopWidth={"2px"}
@@ -63,7 +79,7 @@ const BookingSummary = () => {
         >
           <Flex justifyContent={"space-between"} gap="2rem">
             <Text>Number of Clients</Text>
-            <Text>3</Text>
+            <Text>{numOfClients}</Text>
           </Flex>
         </Box>
         {/* services section */}
