@@ -3,21 +3,25 @@
 import { Avatar, Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
-import personalBookingImg from "../../assets/images/personal-booking-img.webp";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { branches } from "./select-location";
+import { staffs } from "./select-technician";
+import { IoIosCheckmarkCircle } from "react-icons/io";
 
 const BookingSummary = () => {
   const branchId = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.branchId
   );
-  const numOfClients = useSelector(
-    (state: RootState) =>
-      state.appointment.appointments[0]?.numberOfClients
-  );
   const branchDetails = branches.find((branch) => branch.id === branchId);
+  const numOfClients = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.numberOfClients
+  );
+  const specialistId = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.specialistId
+  );
+  const staffDetails = staffs.find((staff) => staff.id === specialistId);
 
   return (
     <Box
@@ -119,32 +123,41 @@ const BookingSummary = () => {
           </Flex>
         </Box>
         {/* technician section */}
-        <Box borderTopWidth={"2px"} borderColor={"gray.250"} pt="1.5rem">
-          <Text fontWeight={"bold"} mb="1rem">
-            Technician selected
-          </Text>
-          <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
-            <Avatar.Root size="2xl" boxSize={"5rem"} variant={"solid"}>
-              <Avatar.Fallback name="Grace Edith" />
-              <Avatar.Image src={personalBookingImg.src} />
-            </Avatar.Root>
-            <Box>
-              <Heading
-                as="h4"
-                fontFamily="playfair"
-                mb=".5rem"
-                lineHeight={1.4}
-                textTransform={"uppercase"}
-                fontSize="1.45rem"
-              >
-                Ruth Patricia{" "}
-              </Heading>
-              <Text lineHeight={1.3} fontSize="1.35rem">
-                Facial expert - 35yrs{" "}
-              </Text>
-            </Box>
-          </Flex>
-        </Box>
+        {staffDetails && (
+          <Box borderTopWidth={"2px"} borderColor={"gray.250"} pt="1.5rem">
+            <Text fontWeight={"bold"} mb="1rem">
+              Technician selected
+            </Text>
+            <Flex
+              bg="gray.250"
+              alignItems={"center"}
+              p="1rem"
+              gap="1.5rem"
+              justifyContent={"space-between"}
+            >
+              <Avatar.Root size="2xl" boxSize={"5rem"} variant={"solid"}>
+                <Avatar.Fallback name={staffDetails.name} />
+                <Avatar.Image src={staffDetails.img.src} />
+              </Avatar.Root>
+              <Box>
+                <Heading
+                  as="h4"
+                  fontFamily="playfair"
+                  mb=".5rem"
+                  lineHeight={1.4}
+                  textTransform={"uppercase"}
+                  fontSize="1.4rem"
+                >
+                  {staffDetails.name}
+                </Heading>
+                <Text lineHeight={1.3} fontSize="1.3rem">
+                  {staffDetails.typeOfService} - {staffDetails.age}yrs
+                </Text>
+              </Box>
+              <IoIosCheckmarkCircle color="#DB9935" size="2.5rem" />
+            </Flex>
+          </Box>
+        )}
         {/* date and time section */}
         <Box
           borderTopWidth={"2px"}
