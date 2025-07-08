@@ -11,16 +11,11 @@ import Button from "../ui/button";
 import ExpectedClientModal from "./expected-client-modal";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { useRouter } from "next/navigation";
-
-// interface BookingTypeProps {
-//   step: number;
-//   setStep: React.Dispatch<React.SetStateAction<number>>;
-// }
+ import { useRouter } from "next/navigation";
 
 const BookingTypePage = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
+   const router = useRouter();
   const numOfClients = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.numberOfClients
   );
@@ -36,7 +31,7 @@ const BookingTypePage = () => {
         numberOfClients: clients,
       })
     );
-    router.push("/book-appointment/select-location");
+     router.push("/book-appointment/select-location");
   };
 
   return (
@@ -79,6 +74,7 @@ const BookingTypePage = () => {
                 </Text>
                 {bookingType.id === "personal" ? (
                   <Button
+                    href="/book-appointment/select-location"
                     px="2rem"
                     bg="yellow.150"
                     onClick={() => handleBooking(1)}

@@ -98,6 +98,7 @@ const SelectTechnicianPage = () => {
           overflowY={"auto"}
           h={{ base: "90vh", md: "59vh" }}
           pb={{ base: "5rem", md: "2rem" }}
+          cursor={'pointer'}
         >
           {staffs.map((staff, index) => {
             return (

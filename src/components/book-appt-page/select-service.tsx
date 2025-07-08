@@ -6,16 +6,196 @@ import {
   Checkbox,
   Flex,
   Heading,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import StepNavigationBtns from "../ui/navigation-btns";
 import BookingSummary from "./booking-summary";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { updateAppointment } from "@/store/slices/appointment-slice";
+import { useEffect, useState } from "react";
 
+// Sample data - moved to top to avoid hoisting issues
+export const serviceItems = [
+  {
+    value: "1001",
+    name: "facial treatment",
+    description:
+      "Glow starts with great skin. Hydrate, cleanse, and refresh your face with our custom facials.",
+    categories: [
+      {
+        name: "Skin Analysis ",
+        estimatedTime: "30",
+        price: 20,
+      },
+      {
+        name: "Exfoliation ",
+        estimatedTime: "30",
+        price: 10,
+      },
+      {
+        name: "Hydrating Mask",
+        estimatedTime: "30",
+        price: 25,
+      },
+      {
+        name: "Face & Neck Massage",
+        estimatedTime: "30",
+        price: 15,
+      },
+    ],
+  },
+  {
+    value: "1002",
+    name: "body treatment",
+    description: "Relax and rejuvenate with our luxurious body treatments.",
+    categories: [
+      {
+        name: "Full Body Massage",
+        estimatedTime: "60",
+        price: 50,
+      },
+      {
+        name: "Body Scrub",
+        estimatedTime: "45",
+        price: 35,
+      },
+      {
+        name: "Hot Stone Therapy",
+        estimatedTime: "75",
+        price: 60,
+      },
+      {
+        name: "Aromatherapy",
+        estimatedTime: "90",
+        price: 70,
+      },
+    ],
+  },
+  {
+    value: "1003",
+    name: "nail care",
+    description: "Perfect your nails with our professional nail care services.",
+    categories: [
+      {
+        name: "Manicure",
+        estimatedTime: "45",
+        price: 25,
+      },
+      {
+        name: "Pedicure",
+        estimatedTime: "60",
+        price: 30,
+      },
+      {
+        name: "Gel Polish",
+        estimatedTime: "30",
+        price: 20,
+      },
+      {
+        name: "Nail Art",
+        estimatedTime: "60",
+        price: 40,
+      },
+    ],
+  },
+  {
+    value: "1004",
+    name: "hair styling",
+    description:
+      "Transform your look with our professional hair styling services.",
+    categories: [
+      {
+        name: "Cut & Style",
+        estimatedTime: "60",
+        price: 45,
+      },
+      {
+        name: "Color Treatment",
+        estimatedTime: "120",
+        price: 80,
+      },
+      {
+        name: "Deep Conditioning",
+        estimatedTime: "45",
+        price: 30,
+      },
+      {
+        name: "Styling Only",
+        estimatedTime: "30",
+        price: 25,
+      },
+    ],
+  },
+];
 
 const SelectServicePage = () => {
-    const router = useRouter();
-  
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const serviceSelections = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.serviceSelections
+  );
+
+  // Initialize state with existing selections or empty array
+  const [selectedServices, setSelectedServices] = useState<
+    { serviceId: string; categoryIds: string[] }[]
+  >(serviceSelections || []);
+
+  const handleServiceToggle = (serviceId: string, categoryName: string) => {
+    setSelectedServices((prev) => {
+      const existingService = prev.find(
+        (service) => service.serviceId === serviceId
+      );
+
+      if (existingService) {
+        // Service exists, toggle the category
+        const isSelected = existingService.categoryIds.includes(categoryName);
+
+        return prev.map((service) =>
+          service.serviceId === serviceId
+            ? {
+                ...service,
+                categoryIds: isSelected
+                  ? service.categoryIds.filter((id) => id !== categoryName)
+                  : [...service.categoryIds, categoryName],
+              }
+            : service
+        );
+      } else {
+        // Service doesn't exist, add it with this category
+        return [...prev, { serviceId, categoryIds: [categoryName] }];
+      }
+    });
+  };
+
+  useEffect(() => {
+    // Filter out services with empty categoryIds before dispatching
+    const filteredServices = selectedServices.filter(
+      (service) => service.categoryIds.length > 0
+    );
+
+    dispatch(updateAppointment({ serviceSelections: filteredServices }));
+  }, [selectedServices, dispatch]);
+
+  // Check if a specific service category is selected
+  const isServiceSelected = (serviceId: string, categoryName: string) => {
+    const service = selectedServices.find(
+      (service) => service.serviceId === serviceId
+    );
+    return service?.categoryIds.includes(categoryName) || false;
+  };
+
+  const handleNextClick = () => {
+    dispatch(
+      updateAppointment({
+        serviceSelections: selectedServices,
+      })
+    );
+    router.push("/book-appointment/select-technician");
+  };
+
   return (
     <Flex gap="2rem" alignItems="stretch">
       <Box
@@ -25,7 +205,6 @@ const SelectServicePage = () => {
         pt="2rem"
         shadow={"sm"}
       >
-        {" "}
         <Heading
           as="h3"
           fontSize={{ base: "1.7rem", md: "1.8rem" }}
@@ -38,13 +217,12 @@ const SelectServicePage = () => {
         </Heading>
         <Accordion.Root
           collapsible
-          multiple
           variant={"plain"}
           h={{ base: "90vh", md: "66vh" }}
           pb={{ base: "5rem", md: "2rem" }}
           overflowY={"auto"}
         >
-          {items.map((item, index) => (
+          {serviceItems.map((item, index) => (
             <Accordion.Item key={index} value={item.value} py=".4rem">
               <Accordion.ItemTrigger
                 bg="gray.250"
@@ -60,14 +238,14 @@ const SelectServicePage = () => {
                     fontFamily="playfair"
                     mb=".7rem"
                   >
-                    {item.title}
+                    {item.name}
                   </Text>
                   <Text
                     fontSize={{ base: "1.4rem", md: "1.5rem" }}
                     lineHeight={1.4}
                     color="gray.100"
                   >
-                    {item.subTitle}
+                    {item.description}
                   </Text>
                 </Box>
                 <Accordion.ItemIndicator fontSize={"2rem"} color="black" />
@@ -77,44 +255,50 @@ const SelectServicePage = () => {
                 borderRadius={"0rem"}
                 pb="1rem"
               >
-                {item.serviceTypes.map((service, index) => {
+                {item.categories.map((service, serviceIndex) => {
                   return (
                     <Accordion.ItemBody
-                      key={index}
+                      key={serviceIndex}
                       px={{ base: "1.7rem", sm: "2.5rem" }}
-                      pb="1rem"
-                      display={"flex"}
-                      justifyContent={"space-between"}
+                      pb="2rem"
                     >
-                      <Checkbox.Root size="lg">
+                      <Checkbox.Root
+                        size="lg"
+                        checked={isServiceSelected(item.value, service.name)}
+                        onCheckedChange={() =>
+                          handleServiceToggle(item.value, service.name)
+                        }
+                      >
                         <Checkbox.HiddenInput />
-                        <Checkbox.Control>
+                        <Checkbox.Control scale={"1.25"}>
                           <Checkbox.Indicator />
                         </Checkbox.Control>
-                        <Checkbox.Label>
-                          {" "}
-                          <Text fontSize={{ base: "1.45rem", sm: "1.5rem" }}>
-                            {service.serviceName}
+                        <Checkbox.Label ml=".6rem">
+                          <Text
+                            fontSize={{ base: "1.4rem", sm: "1.45rem" }}
+                            fontWeight={"600"}
+                          >
+                            {service.name}
+                          </Text>
+                          <Text
+                            fontSize={{ base: "1.35rem", sm: "1.4rem" }}
+                            mt=".7rem"
+                          >
+                            {service.estimatedTime} mins - £{service.price}
                           </Text>
                         </Checkbox.Label>
                       </Checkbox.Root>
-                      <Text
-                        fontSize={{ base: "1.45rem", sm: "1.5rem" }}
-                        fontWeight={"400"}
-                      >
-                        {" "}
-                        ${service.price}
-                      </Text>
                     </Accordion.ItemBody>
                   );
                 })}
               </Accordion.ItemContent>
             </Accordion.Item>
           ))}
-        </Accordion.Root>{" "}
+        </Accordion.Root>
         <StepNavigationBtns
           prevOnClick={() => router.back()}
-          nextOnClick={() => router.push("/book-appointment/select-technician")}
+          nextOnClick={handleNextClick}
+          nextDisabled={selectedServices.length === 0}
         />
       </Box>
       <Box
@@ -122,133 +306,9 @@ const SelectServicePage = () => {
         display={{ base: "none", md: "flex" }}
       >
         <BookingSummary />
-      </Box>{" "}
+      </Box>
     </Flex>
   );
 };
 
 export default SelectServicePage;
-
-const items = [
-  {
-    value: "a",
-    title: "facial treatment",
-    subTitle:
-      "Glow starts with great skin. Hydrate, cleanse, and refresh your face with our custom facials.",
-    serviceTypes: [
-      {
-        serviceName: "Skin Analysis ",
-        price: 20,
-      },
-      {
-        serviceName: "Exfoliation ",
-        price: 10,
-      },
-      {
-        serviceName: "Hydrating Mask",
-        price: 25,
-      },
-      {
-        serviceName: "Face & Neck Massage",
-        price: 15,
-      },
-    ],
-  },
-  {
-    value: "b",
-    title: "Manicure & Pedicure",
-    subTitle: "Nail care that leaves you polished and pampered.",
-    text: "We offer a full range of beauty services including hair styling, coloring, facials, waxing, manicures, pedicures, makeup, and more. Whether you're looking for a quick refresh or a full transformation, our expert team has you covered.",
-    serviceTypes: [
-      {
-        serviceName: "Skin Analysis ",
-        price: 20,
-      },
-      {
-        serviceName: "Exfoliation ",
-        price: 10,
-      },
-      {
-        serviceName: "Hydrating Mask",
-        price: 25,
-      },
-      {
-        serviceName: "Face & Neck Massage",
-        price: 15,
-      },
-    ],
-  },
-  {
-    value: "c",
-    title: "Hair Styling & Cut",
-    subTitle:
-      "Fresh cuts, flawless styling — made just for you. Whether it's a trim, big chop.",
-    text: "We only use high-quality, salon-grade, and cruelty-free products that are gentle on your skin and hair. We carefully select brands that deliver results while aligning with our values of beauty and wellness.",
-    serviceTypes: [
-      {
-        serviceName: "Skin Analysis ",
-        price: 20,
-      },
-      {
-        serviceName: "Exfoliation ",
-        price: 10,
-      },
-      {
-        serviceName: "Hydrating Mask",
-        price: 25,
-      },
-      {
-        serviceName: "Face & Neck Massage",
-        price: 15,
-      },
-    ],
-  },
-  {
-    value: "d",
-    title: "Hair Coloring",
-    subTitle: "Change your shade, refresh your style.",
-    text: "We understand that life happens! We kindly ask for at least 24 hours' notice for cancellations or changes. This allows us to accommodate other guests and respect everyone's time.",
-    serviceTypes: [
-      {
-        serviceName: "Skin Analysis ",
-        price: 20,
-      },
-      {
-        serviceName: "Exfoliation ",
-        price: 10,
-      },
-      {
-        serviceName: "Hydrating Mask",
-        price: 25,
-      },
-      {
-        serviceName: "Face & Neck Massage",
-        price: 15,
-      },
-    ],
-  },
-  {
-    value: "e",
-    title: "Waxing & Hair Removal",
-    subTitle: "Smooth, clean, and confident.",
-    text: "We understand that life happens! We kindly ask for at least 24 hours' notice for cancellations or changes. This allows us to accommodate other guests and respect everyone's time.",
-    serviceTypes: [
-      {
-        serviceName: "Skin Analysis ",
-        price: 20,
-      },
-      {
-        serviceName: "Exfoliation ",
-        price: 10,
-      },
-      {
-        serviceName: "Hydrating Mask",
-        price: 25,
-      },
-      {
-        serviceName: "Face & Neck Massage",
-        price: 15,
-      },
-    ],
-  },
-];

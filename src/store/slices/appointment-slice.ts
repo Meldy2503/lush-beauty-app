@@ -37,3 +37,6 @@ const appointmentSlice = createSlice({
 
 export const { updateAppointment, setLoading } = appointmentSlice.actions;
 export default appointmentSlice.reducer;
+
+
+

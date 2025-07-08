@@ -24,6 +24,7 @@ const config = {
         playfair: { value: "'Playfair Display', serif" },
         allura: { value: "Allura, cursive" },
         pinyon: { value: "'Pinyon Script', cursive" },
+        poppins: { value: "'Poppins', sans-serif" },
       },
       colors: {
         black: { value: "#000000" },

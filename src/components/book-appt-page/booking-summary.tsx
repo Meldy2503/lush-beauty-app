@@ -1,6 +1,14 @@
 "use client";
 
-import { Avatar, Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Text,
+} from "@chakra-ui/react";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import { FiMinus, FiPlus } from "react-icons/fi";
@@ -10,6 +18,8 @@ import { branches } from "./select-location";
 import { staffs } from "./select-technician";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { formatAppointmentDateTime } from "@/utils";
+import { serviceItems } from "./select-service";
+import { useState } from "react";
 
 const BookingSummary = () => {
   const branchId = useSelector(
@@ -19,6 +29,17 @@ const BookingSummary = () => {
   const numOfClients = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.numberOfClients
   );
+  const [updateClientCount, setUpdateClientCount] = useState<number>(
+    numOfClients ?? 1
+  );
+
+  // const [updateClientCounts, setUpdateClientCounts] = useState<number[]>(
+  //   Array(numOfClients || 1).fill(1) // Initial count of 1 per client
+  // );
+  const serviceSelections = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.serviceSelections
+  );
+
   const specialistId = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.specialistId
   );
@@ -27,6 +48,27 @@ const BookingSummary = () => {
     (state: RootState) => state.appointment.appointments[0]?.appointmentDateTime
   );
   const { date, time } = formatAppointmentDateTime(appointmentDateTime);
+
+  const handleClientCountChange = (increment: boolean) => {
+    setUpdateClientCount((prevCount) =>
+      increment
+        ? Math.min(prevCount + 1, numOfClients ?? 1)
+        : Math.max(prevCount - 1, 1)
+    );
+  };
+
+  // const handleClientCountChange = useCallback(
+  //   (increment: boolean, index: number) => {
+  //     setUpdateClientCounts((prevCounts) => {
+  //       const updated = [...prevCounts];
+  //       updated[index] = increment
+  //         ? Math.min(updated[index] + 1, numOfClients ?? 1)
+  //         : Math.max(updated[index] - 1, 1);
+  //       return updated;
+  //     });
+  //   },
+  //   [numOfClients]
+  // );
 
   return (
     <Box
@@ -86,47 +128,94 @@ const BookingSummary = () => {
           py="1.5rem"
           mt="1.5rem"
         >
-          <Flex justifyContent={"space-between"} gap="2rem">
+          <Flex justifyContent={"space-between"} gap="2rem" fontSize={"1.5rem"}>
             <Text>Number of Clients</Text>
             <Text>{numOfClients}</Text>
           </Flex>
         </Box>
-        {/* services section */}
-        <Box borderTopWidth={"2px"} borderColor={"gray.250"} py="1.5rem">
-          <Flex
-            justifyContent={"space-between"}
-            gapX="2rem"
-            gapY="1rem"
-            w="full"
-            flexWrap={"wrap"}
-          >
-            <Text>Skin Analysis </Text>
-            <Flex
-              w={{ base: "100%", sm: "auto" }}
-              gap="1rem"
-              justifyContent={{ base: "flex-end", sm: "inherit" }}
-            >
-              <Text>£40</Text>
-              <Text fontStyle="italic">x</Text>{" "}
-              <Flex
-                alignItems={"center"}
-                justifyContent={"space-between"}
-                w="6.5rem"
-                border="1px solid black"
-                p=".3rem .5rem"
-                fontSize={"1.3rem"}
-              >
-                <Box>
-                  <FiMinus />
-                </Box>
-                <Text>3</Text>
-                <Box>
-                  <FiPlus />
-                </Box>
-              </Flex>
-            </Flex>
-          </Flex>
+        {/*services section */}
+        <Box
+          borderTopWidth={"2px"}
+          borderColor={"gray.250"}
+          py=".5rem"
+          fontSize={"1.5rem"}
+        >
+          {serviceSelections
+            ?.filter((selection) => selection.categoryIds.length > 0)
+            .map((selection) => {
+              const serviceDetail = serviceItems.find(
+                (item) => item.value === selection.serviceId
+              );
+
+              if (!serviceDetail) return null;
+
+              const selectedCategories = serviceDetail.categories.filter(
+                (cat) => selection.categoryIds.includes(cat.name)
+              );
+              return selectedCategories.map((category) => (
+                <Flex
+                  key={`${selection.serviceId}-${category.name}`}
+                  justifyContent={"space-between"}
+                  gapX="2rem"
+                  gapY="1rem"
+                  w="full"
+                  flexWrap={"wrap"}
+                  py="1rem"
+                >
+                  <Text>{category.name}</Text>
+                  <Flex
+                    w={{ base: "100%", sm: "auto" }}
+                    gap="1rem"
+                    justifyContent={{ base: "flex-end", sm: "inherit" }}
+                    alignItems={"center"}
+                  >
+                    <Text>£{category.price}</Text>
+                    {numOfClients > 1 && (
+                      <HStack gap="1rem">
+                        <Text fontStyle="italic">x</Text>
+
+                        <HStack
+                          justifyContent={"space-between"}
+                          border="1px solid black"
+                          fontSize={"1.5rem"}
+                          p=".2rem"
+                        >
+                          <Button
+                            bg="transparent"
+                            color="black"
+                            onClick={() => handleClientCountChange(false)}
+                            disabled={updateClientCount === 1}
+                            cursor={
+                              updateClientCount === 1
+                                ? "not-allowed"
+                                : "pointer"
+                            }
+                          >
+                            <FiMinus />
+                          </Button>
+                          <Text>{updateClientCount}</Text>
+                          <Button
+                            bg="transparent"
+                            color="black"
+                            onClick={() => handleClientCountChange(true)}
+                            disabled={updateClientCount === numOfClients}
+                            cursor={
+                              updateClientCount === numOfClients
+                                ? "not-allowed"
+                                : "pointer"
+                            }
+                          >
+                            <FiPlus />
+                          </Button>
+                        </HStack>
+                      </HStack>
+                    )}
+                  </Flex>
+                </Flex>
+              ));
+            })}
         </Box>
+
         {/* technician section */}
         {staffDetails && (
           <Box borderTopWidth={"2px"} borderColor={"gray.250"} pt="1.5rem">
@@ -208,6 +297,8 @@ const BookingSummary = () => {
         gap="2rem"
         borderTopWidth={"2px"}
         borderColor={"gray.250"}
+        bg="white"
+        zIndex={100}
       >
         <Text fontWeight={"400"}>Booking Total</Text>{" "}
         <Text fontWeight={"600"}>$10.00</Text>{" "}
