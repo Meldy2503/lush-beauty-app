@@ -11,14 +11,16 @@ import Button from "../ui/button";
 import ExpectedClientModal from "./expected-client-modal";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import { useRouter } from "next/navigation";
 
-interface BookingTypeProps {
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-}
+// interface BookingTypeProps {
+//   step: number;
+//   setStep: React.Dispatch<React.SetStateAction<number>>;
+// }
 
-const BookingType = ({ setStep, step }: BookingTypeProps) => {
+const BookingTypePage = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const numOfClients = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.numberOfClients
   );
@@ -34,10 +36,9 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
         numberOfClients: clients,
       })
     );
-    setStep(step + 1);
+    router.push("/book-appointment/select-location");
   };
-  console.log(numOfClients, "numOfClients store");
-  console.log(expectedClients, "Expected Clients state");
+
   return (
     <Flex
       bg="white"
@@ -60,7 +61,8 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
               bg="gray.250"
             >
               <Image
-                src={personalBookingImg}
+                src={bookingType.image}
+                priority
                 alt="a smiling single lady"
                 style={{ position: "relative" }}
                 width={1000}
@@ -101,7 +103,7 @@ const BookingType = ({ setStep, step }: BookingTypeProps) => {
   );
 };
 
-export default BookingType;
+export default BookingTypePage;
 
 const bookingTypeData = [
   {

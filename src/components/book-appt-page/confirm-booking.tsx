@@ -1,17 +1,17 @@
 "use client";
 
 import { Box, Checkbox, Flex, Heading, HStack, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import BookingSummary from "./booking-summary";
 import Button from "../ui/button";
 import BookingConfirmationModal from "./booking-confirmation-modal";
+import { useRouter } from "next/navigation";
 
-interface ConfirmBookingProps {
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-}
+const ConfirmBookingPage = () => {
+  const router = useRouter();
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
-const ConfirmBooking = ({ setStep, step }: ConfirmBookingProps) => {
+
   return (
     <Flex
       gap="2rem"
@@ -96,7 +96,12 @@ const ConfirmBooking = ({ setStep, step }: ConfirmBookingProps) => {
           zIndex={10}
           bg="white"
         >
-          <Checkbox.Root pb="2rem" px=".6rem">
+          <Checkbox.Root
+            pb="2rem"
+            px=".6rem"
+            checked={agreeToTerms}
+            onCheckedChange={(e) => setAgreeToTerms(!!e.checked)}
+          >
             <Checkbox.HiddenInput />
             <Checkbox.Control scale={1.5}>
               <Checkbox.Indicator />
@@ -119,11 +124,11 @@ const ConfirmBooking = ({ setStep, step }: ConfirmBookingProps) => {
               borderColor="black"
               color="black"
               w="50%"
-              onClick={() => setStep(step - 1)}
+              onClick={() => router.back()}
             >
               Prev
             </Button>
-            <BookingConfirmationModal />
+            <BookingConfirmationModal disabled={!agreeToTerms} />
           </HStack>
         </Box>
       </Box>
@@ -138,4 +143,4 @@ const ConfirmBooking = ({ setStep, step }: ConfirmBookingProps) => {
   );
 };
 
-export default ConfirmBooking;
+export default ConfirmBookingPage;

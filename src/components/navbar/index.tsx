@@ -108,11 +108,11 @@ const Navbar = ({ display, top, bg, color }: NavbarProps) => {
             </Link>
           </Flex>
 
-          {pathname !== "/book-appointment" && (
+          {!pathname.includes("book-appointment") && (
             <Box display={{ base: "none", sm: "block" }}>
               <Button
-                px="1.2rem"
-                py=".6rem"
+                px="2rem"
+                 py="1.9rem"
                 href="/book-appointment"
                 borderColor="yellow.150"
                 borderWidth="1.5px"
@@ -129,3 +129,4 @@ const Navbar = ({ display, top, bg, color }: NavbarProps) => {
 };
 
 export default Navbar;
+

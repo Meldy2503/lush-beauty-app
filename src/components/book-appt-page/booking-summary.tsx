@@ -28,9 +28,6 @@ const BookingSummary = () => {
   );
   const { date, time } = formatAppointmentDateTime(appointmentDateTime);
 
-  console.log(appointmentDateTime, "Appointment Date Time from store");
-  console.log(date, "date");
-  console.log(time, "time");
   return (
     <Box
       bg="white"

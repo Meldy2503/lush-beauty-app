@@ -1,4 +1,4 @@
-import BookingTypePage from "@/components/book-appt-page/booking-type";
+import SelectDateTimePage from "@/components/book-appt-page/select-date-time";
 
 export const metadata = {
   title: "Lush Beauty - Premium Beauty Products",
@@ -6,10 +6,10 @@ export const metadata = {
     "Experience luxury beauty products and services with Lush Beauty.",
 };
 
-export default function BookingType() {
+export default function SelectDateTime() {
   return (
     <>
-      <BookingTypePage />
+      <SelectDateTimePage />
     </>
   );
 }

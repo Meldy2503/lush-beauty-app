@@ -10,11 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CalendarComponent from "../ui/calendar";
 import StepNavigationBtns from "../ui/navigation-btns";
 import BookingSummary from "./booking-summary";
-
-interface SelectDateTimeProps {
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-}
+import { useRouter } from "next/navigation";
 
 const timeSlots = [
   { label: "9:00am", value: "9:00am" },
@@ -25,8 +21,10 @@ const timeSlots = [
   { label: "7:00pm", value: "7:00pm" },
 ];
 
-const SelectDateTime = ({ setStep, step }: SelectDateTimeProps) => {
+const SelectDateTimePage = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const appointmentDateTime = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.appointmentDateTime
   );
@@ -78,7 +76,7 @@ const SelectDateTime = ({ setStep, step }: SelectDateTimeProps) => {
         <Flex
           flexDir={{ base: "column-reverse", lg: "column" }}
           gap={{ base: "4rem", md: "5rem" }}
-          h={{ base: "100%", md: "60vh" }}
+          h={{ base: "100%", md: "66.8vh" }}
           pb={{ base: "5rem", md: "2rem" }}
           overflowY="auto"
         >
@@ -127,15 +125,15 @@ const SelectDateTime = ({ setStep, step }: SelectDateTimeProps) => {
         </Flex>
 
         <StepNavigationBtns
-          prevOnClick={() => setStep(step - 1)}
-          nextOnClick={() => setStep(step + 1)}
+          prevOnClick={() => router.back()}
+          nextOnClick={() => router.push("/book-appointment/confirm-booking")}
           nextDisabled={!selectedDate || !selectedTime}
         />
       </Flex>
 
       <Box
         w={{ base: "100%", md: "35%" }}
-        display={{ base: "none", md: "block" }}
+        display={{ base: "none", md: "flex" }}
       >
         <BookingSummary />
       </Box>
@@ -143,4 +141,4 @@ const SelectDateTime = ({ setStep, step }: SelectDateTimeProps) => {
   );
 };
 
-export default SelectDateTime;
+export default SelectDateTimePage;

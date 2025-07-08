@@ -90,7 +90,7 @@ const MobileNav = ({ color, bg }: MobileNavProps) => {
                   {" "}
                   Sign in
                 </Button>
-                {pathname !== "/book-appointment" && (
+                {!pathname.includes("book-appointment") && (
                   <Box mt="3rem" display={{ base: "block", sm: "none" }}>
                     <Button
                       px="2rem"

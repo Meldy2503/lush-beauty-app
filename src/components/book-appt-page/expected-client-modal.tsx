@@ -60,7 +60,6 @@ const ExpectedClientModal = ({
                 min={1}
                 onChange={(e) => {
                   setExpectedClients(Number(e.target.value));
-                  console.log("Expected clients:", e.target.value);
                 }}
               />
             </Dialog.Body>

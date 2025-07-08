@@ -36,7 +36,6 @@ const Button = ({
   fontWeight,
   onClick,
   disabled,
-  opacity,
   cursor,
   w,
   borderColor,
@@ -57,7 +56,7 @@ const Button = ({
           w={w ?? "fit-content"}
           fontFamily={fontFamily ?? "lato"}
           px={px ?? "5rem"}
-          py={py ?? "1.2rem"}
+          py={py ?? "2.2rem"}
           {...props}
           bg={bg ?? "black"}
           borderRadius="0"
@@ -66,6 +65,7 @@ const Button = ({
           display={display}
           borderColor={borderColor ?? "none"}
           disabled={disabled}
+          opacity={disabled ? 0.3 : 1}
 
           // _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
         >
@@ -83,8 +83,8 @@ const Button = ({
       w={w ?? "fit-content"}
       color={color ?? "white"}
       borderRadius="0"
-      px={px ?? "5rem"}
       textAlign={"center"}
+      px={px ?? "5rem"}
       py={py ?? "2.2rem"}
       fontSize={fontSize ?? "1.6rem"}
       borderColor={borderColor ?? "none"}
@@ -94,7 +94,7 @@ const Button = ({
       display={display}
       disabled={disabled}
       zIndex={1}
-      opacity={opacity}
+      opacity={disabled ? 0.3 : 1}
       {...props}
       // _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
     >

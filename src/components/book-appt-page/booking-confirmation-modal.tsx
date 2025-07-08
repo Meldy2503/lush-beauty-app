@@ -12,7 +12,7 @@ import Image from "next/image";
 import tick from "../../assets/images/tick.svg";
 import Button from "../ui/button";
 
-const BookingConfirmationModal = () => {
+const BookingConfirmationModal = ({ disabled }: { disabled : boolean}) => {
   return (
     <Dialog.Root
       scrollBehavior="inside"
@@ -21,7 +21,13 @@ const BookingConfirmationModal = () => {
       motionPreset="slide-in-bottom"
     >
       <Dialog.Trigger asChild>
-        <Button borderWidth="1.5px" borderColor="black" w="49%">
+        <Button
+          borderWidth="1.5px"
+          borderColor="black"
+          w="49%"
+          disabled={disabled}
+          cursor={disabled ? "not-allowed" : "pointer"}
+        >
           Confirm Booking
         </Button>
       </Dialog.Trigger>
@@ -52,9 +58,9 @@ const BookingConfirmationModal = () => {
                   w={{ base: "100%", md: "80%" }}
                   lineHeight={1.5}
                 >
-                  Thanks for booking with Lush
-                  & Luxe! <br />A confirmation email has been sent. You can pay
-                  online or in person at your appointment day ✨
+                  Thanks for booking with Lush & Luxe! <br />A confirmation
+                  email has been sent. You can pay online or in person at your
+                  appointment day ✨
                 </Text>
                 <HStack
                   gap="1.5rem"

@@ -23,15 +23,13 @@ import { useDispatch } from "react-redux";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import { updateAppointment } from "@/store/slices/appointment-slice";
+import { useRouter } from "next/navigation";
 
-interface SelectTechnicianProps {
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
+const SelectTechnicianPage = () => {
   const [isGridOrientation, setIsGridOrientation] = useState(true);
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const specialistId = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.specialistId
   );
@@ -46,11 +44,9 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
         specialistId: selectedTechnician,
       })
     );
-    setStep(step + 1);
+    router.push("/book-appointment/select-date-time");
   };
 
-  console.log(selectedTechnician, "Selected Technician state");
-  console.log(specialistId, "Specialist ID from store");
   return (
     <Flex gap="2rem" alignItems="stretch">
       <Box
@@ -187,7 +183,7 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
           })}
         </Flex>
         <StepNavigationBtns
-          prevOnClick={() => setStep(step - 1)}
+          prevOnClick={() => router.back()}
           nextOnClick={handleNextClick}
           nextDisabled={!selectedTechnician}
         />
@@ -195,7 +191,6 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
       <Box
         w={{ base: "100%", md: "35%" }}
         display={{ base: "none", md: "flex" }}
-        overflowY="auto"
       >
         <BookingSummary />
       </Box>
@@ -203,7 +198,7 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
   );
 };
 
-export default SelectTechnician;
+export default SelectTechnicianPage;
 
 export const staffs = [
   {

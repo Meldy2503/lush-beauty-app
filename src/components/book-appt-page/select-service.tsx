@@ -10,12 +10,12 @@ import {
 } from "@chakra-ui/react";
 import StepNavigationBtns from "../ui/navigation-btns";
 import BookingSummary from "./booking-summary";
+import { useRouter } from "next/navigation";
 
-interface SelectServiceProps {
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-}
-const SelectService = ({ setStep, step }: SelectServiceProps) => {
+
+const SelectServicePage = () => {
+    const router = useRouter();
+  
   return (
     <Flex gap="2rem" alignItems="stretch">
       <Box
@@ -113,8 +113,8 @@ const SelectService = ({ setStep, step }: SelectServiceProps) => {
           ))}
         </Accordion.Root>{" "}
         <StepNavigationBtns
-          prevOnClick={() => setStep(step - 1)}
-          nextOnClick={() => setStep(step + 1)}
+          prevOnClick={() => router.back()}
+          nextOnClick={() => router.push("/book-appointment/select-technician")}
         />
       </Box>
       <Box
@@ -127,7 +127,7 @@ const SelectService = ({ setStep, step }: SelectServiceProps) => {
   );
 };
 
-export default SelectService;
+export default SelectServicePage;
 
 const items = [
   {

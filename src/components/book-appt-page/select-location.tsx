@@ -8,11 +8,9 @@ import { useDispatch } from "react-redux";
 import { updateAppointment } from "../../store/slices/appointment-slice";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import { useRouter } from "next/navigation";
 
-interface SelectLocationProps {
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-}
+
 
 interface Branch {
   id: string;
@@ -23,8 +21,9 @@ interface Branch {
   value: string;
 }
 
-const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
+const SelectLocationPage = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const branchId = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.branchId
   );
@@ -45,7 +44,7 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
           branchId: selectedBranchObj.id,
         })
       );
-      setStep(step + 1);
+      router.push("/book-appointment/select-service");
     }
   };
 
@@ -126,7 +125,7 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
         </RadioGroup.Root>
 
         <StepNavigationBtns
-          prevOnClick={() => setStep(step - 1)}
+          prevOnClick={() => router.back()}
           nextOnClick={handleNextClick}
           nextDisabled={!selectedBranch}
         />
@@ -142,7 +141,7 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
   );
 };
 
-export default SelectLocation;
+export default SelectLocationPage;
 
 export const branches: Branch[] = [
   {
