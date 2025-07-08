@@ -189,6 +189,7 @@ const SelectTechnician = ({ setStep, step }: SelectTechnicianProps) => {
         <StepNavigationBtns
           prevOnClick={() => setStep(step - 1)}
           nextOnClick={handleNextClick}
+          nextDisabled={!selectedTechnician}
         />
       </Box>
       <Box

@@ -9,6 +9,7 @@ import { RootState } from "@/store";
 import { branches } from "./select-location";
 import { staffs } from "./select-technician";
 import { IoIosCheckmarkCircle } from "react-icons/io";
+import { formatAppointmentDateTime } from "@/utils";
 
 const BookingSummary = () => {
   const branchId = useSelector(
@@ -22,7 +23,14 @@ const BookingSummary = () => {
     (state: RootState) => state.appointment.appointments[0]?.specialistId
   );
   const staffDetails = staffs.find((staff) => staff.id === specialistId);
+  const appointmentDateTime = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.appointmentDateTime
+  );
+  const { date, time } = formatAppointmentDateTime(appointmentDateTime);
 
+  console.log(appointmentDateTime, "Appointment Date Time from store");
+  console.log(date, "date");
+  console.log(time, "time");
   return (
     <Box
       bg="white"
@@ -159,35 +167,37 @@ const BookingSummary = () => {
           </Box>
         )}
         {/* date and time section */}
-        <Box
-          borderTopWidth={"2px"}
-          borderColor={"gray.250"}
-          mt="2rem"
-          pt="1.5rem"
-        >
-          <Text fontWeight={"bold"} mb="1rem">
-            Scheduled date and time{" "}
-          </Text>
-          <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
-            <HStack bg="white" p="1rem" rounded={"full"} shadow={"md"}>
-              <LuCalendarDays size={"2rem"} />
-            </HStack>
-            <Box>
-              <Heading
-                as="h4"
-                fontFamily="playfair"
-                mb=".5rem"
-                lineHeight={1.4}
-                fontSize="1.45rem"
-              >
-                Tue, June 02, 2025{" "}
-              </Heading>
-              <Text lineHeight={1.3} fontSize="1.35rem">
-                09:00 AM{" "}
-              </Text>
-            </Box>
-          </Flex>
-        </Box>
+        {(date || time) && (
+          <Box
+            borderTopWidth={"2px"}
+            borderColor={"gray.250"}
+            mt="2rem"
+            pt="1.5rem"
+          >
+            <Text fontWeight={"bold"} mb="1rem">
+              Scheduled date and time{" "}
+            </Text>
+            <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
+              <HStack bg="white" p="1rem" rounded={"full"} shadow={"md"}>
+                <LuCalendarDays size={"2rem"} />
+              </HStack>
+              <Box>
+                <Heading
+                  as="h4"
+                  fontFamily="playfair"
+                  mb=".5rem"
+                  lineHeight={1.4}
+                  fontSize="1.45rem"
+                >
+                  {date}
+                </Heading>
+                <Text lineHeight={1.3} fontSize="1.35rem">
+                  {time}
+                </Text>
+              </Box>
+            </Flex>
+          </Box>
+        )}
       </Box>
       {/* Booking Total Section */}
       <Flex

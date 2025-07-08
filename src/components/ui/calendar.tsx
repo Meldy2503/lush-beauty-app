@@ -1,20 +1,27 @@
-'use client';
+"use client";
 
-import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+interface CalendarComponentProps {
+  onChange: (value: Date) => void;
+  value: Date;
+}
 
-export default function CalendarComponent() {
-  const [value, setValue] = useState<Value>(new Date());
-
-  const handleChange = (newValue: Value) => {
-    setValue(newValue);
-  };
-
+export default function CalendarComponent({
+  onChange,
+  value,
+}: CalendarComponentProps) {
   return (
-      <Calendar onChange={handleChange} value={value} calendarType="gregory" />
+    <Calendar
+      onChange={(val) => {
+        if (val instanceof Date) {
+          onChange(val);
+        }
+      }}
+      value={value}
+      calendarType="gregory"
+      minDate={new Date()}
+    />
   );
 }

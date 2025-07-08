@@ -8,6 +8,8 @@ interface StepNavigationBtnsProps {
   prevOnClick?: () => void;
   nextBtnText?: string;
   nextOnClick?: () => void;
+  prevDisabled?: boolean;
+  nextDisabled?: boolean;
 }
 
 const StepNavigationBtns = ({
@@ -15,6 +17,8 @@ const StepNavigationBtns = ({
   prevOnClick,
   nextBtnText,
   nextOnClick,
+  prevDisabled,
+  nextDisabled
 }: StepNavigationBtnsProps) => {
   return (
     <HStack
@@ -27,7 +31,7 @@ const StepNavigationBtns = ({
       justifyContent="center"
       alignItems="center"
       bg="white"
-      py='2rem'
+      py="2rem"
       px={{ base: "1.5rem", md: "0" }}
       zIndex={10}
     >
@@ -36,19 +40,25 @@ const StepNavigationBtns = ({
         borderWidth="1.5px"
         borderColor="black"
         color="black"
+        disabled={prevDisabled}
+        opacity={prevDisabled ? 0.25 : 1}
+        cursor={prevDisabled ? "not-allowed" : "pointer"}
         w="48%"
         onClick={prevOnClick}
       >
-        {prevBtnText ?? 'Prev'}
+        {prevBtnText ?? "Prev"}
       </Button>
 
       <Button
         borderWidth="1.5px"
         borderColor="black"
+        disabled={nextDisabled}
+        opacity={nextDisabled ? 0.25 : 1}
+        cursor={nextDisabled ? "not-allowed" : "pointer"}
         w="48%"
         onClick={nextOnClick}
       >
-        {nextBtnText ?? 'Continue'}
+        {nextBtnText ?? "Continue"}
       </Button>
     </HStack>
   );

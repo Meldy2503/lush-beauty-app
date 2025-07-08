@@ -73,8 +73,8 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
         </Heading>
 
         <RadioGroup.Root
-          defaultValue={selectedBranch ?? ""}
           w="full"
+          defaultValue={selectedBranch ?? ""}
           value={selectedBranch ?? ""}
           onValueChange={({ value }) => {
             setSelectedBranch(value);
@@ -128,6 +128,7 @@ const SelectLocation = ({ setStep, step }: SelectLocationProps) => {
         <StepNavigationBtns
           prevOnClick={() => setStep(step - 1)}
           nextOnClick={handleNextClick}
+          nextDisabled={!selectedBranch}
         />
       </Flex>
 

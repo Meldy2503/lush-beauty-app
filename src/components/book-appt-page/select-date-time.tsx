@@ -1,7 +1,12 @@
 "use client";
 
+import { RootState } from "@/store";
+import { updateAppointment } from "@/store/slices/appointment-slice";
+import { createFormattedDateTime, parseStoredDateTime } from "@/utils";
 import { Box, Flex, Heading, HStack, RadioGroup, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import "react-calendar/dist/Calendar.css";
+import { useDispatch, useSelector } from "react-redux";
 import CalendarComponent from "../ui/calendar";
 import StepNavigationBtns from "../ui/navigation-btns";
 import BookingSummary from "./booking-summary";
@@ -11,16 +16,53 @@ interface SelectDateTimeProps {
   setStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
+const timeSlots = [
+  { label: "9:00am", value: "9:00am" },
+  { label: "11:00am", value: "11:00am" },
+  { label: "1:00pm", value: "1:00pm" },
+  { label: "3:00pm", value: "3:00pm" },
+  { label: "5:00pm", value: "5:00pm" },
+  { label: "7:00pm", value: "7:00pm" },
+];
+
 const SelectDateTime = ({ setStep, step }: SelectDateTimeProps) => {
+  const dispatch = useDispatch();
+  const appointmentDateTime = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.appointmentDateTime
+  );
+
+  const { date: initialDate, time: initialTime } = parseStoredDateTime(
+    appointmentDateTime,
+    timeSlots
+  );
+  const [selectedTime, setSelectedTime] = useState<string | null>(initialTime);
+  const [selectedDate, setSelectedDate] = useState<Date>(initialDate);
+
+  const updateAppointmentDateTime = (date: Date, time: string | ""): void => {
+    const formatted = createFormattedDateTime(date, time);
+    if (formatted) {
+      dispatch(updateAppointment({ appointmentDateTime: formatted }));
+    }
+  };
+  const handleDateChange = (newDate: Date) => {
+    setSelectedDate(newDate);
+    updateAppointmentDateTime(newDate, selectedTime || "");
+  };
+
+  const handleTimeChange = (newTime: string) => {
+    setSelectedTime(newTime);
+    updateAppointmentDateTime(selectedDate, newTime);
+  };
+
   return (
     <Flex gap="2rem" alignItems="stretch">
       <Flex
         w={{ base: "100%", md: "65%" }}
         bg="white"
-        shadow={"sm"}
+        shadow="sm"
         px="2rem"
         pt="2rem"
-        flexDir={"column"}
+        flexDir="column"
       >
         <Heading
           as="h3"
@@ -28,39 +70,39 @@ const SelectDateTime = ({ setStep, step }: SelectDateTimeProps) => {
           fontFamily="playfair"
           mb="2rem"
           lineHeight={1.3}
-          textTransform={"uppercase"}
+          textTransform="uppercase"
         >
           Select Date/Time
         </Heading>
+
         <Flex
           flexDir={{ base: "column-reverse", lg: "column" }}
           gap={{ base: "4rem", md: "5rem" }}
           h={{ base: "100%", md: "60vh" }}
           pb={{ base: "5rem", md: "2rem" }}
-          overflowY={"auto"}
+          overflowY="auto"
         >
           <Box mt="1rem">
-            <CalendarComponent />
+            <CalendarComponent
+              value={selectedDate}
+              onChange={handleDateChange}
+            />
           </Box>
 
           <Box>
-            <Text
-              pb="2rem"
-              pt={{ base: "1rem", md: "0rem" }}
-              fontWeight={"600"}
-            >
+            <Text pb="2rem" pt={{ base: "1rem", md: "0rem" }} fontWeight="600">
               Available Time
             </Text>
             <RadioGroup.Root
-              defaultValue="1"
-              gap="2rem"
+              value={selectedTime ?? ""}
+              onValueChange={({ value }) => handleTimeChange(value ?? "")}
               display="flex"
               justifyContent="space-between"
               px="2px"
             >
               <HStack
                 gap={{ base: "2rem 3rem", md: "2.5rem 4rem" }}
-                flexWrap={"wrap"}
+                flexWrap="wrap"
               >
                 {timeSlots.map((item) => (
                   <RadioGroup.Item
@@ -83,9 +125,11 @@ const SelectDateTime = ({ setStep, step }: SelectDateTimeProps) => {
             </RadioGroup.Root>
           </Box>
         </Flex>
+
         <StepNavigationBtns
           prevOnClick={() => setStep(step - 1)}
           nextOnClick={() => setStep(step + 1)}
+          nextDisabled={!selectedDate || !selectedTime}
         />
       </Flex>
 
@@ -100,12 +144,3 @@ const SelectDateTime = ({ setStep, step }: SelectDateTimeProps) => {
 };
 
 export default SelectDateTime;
-
-const timeSlots = [
-  { label: "9:00am", value: "1" },
-  { label: "11:00am", value: "2" },
-  { label: "1:00pm", value: "3" },
-  { label: "3:00pm", value: "4" },
-  { label: "5:00pm", value: "5" },
-  { label: "7:00pm", value: "6" },
-];

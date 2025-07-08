@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button as ChakraButton } from "@chakra-ui/react";
+import { Button as ChakraButton } from "@chakra-ui/react";
 import React from "react";
 import Link from "next/link";
 
@@ -49,7 +49,7 @@ const Button = ({
   if (href) {
     return (
       <Link href={href} passHref onClick={onClick}>
-        <Box
+        <ChakraButton
           color={color ?? "white"}
           textAlign={"center"}
           cursor={"pointer"}
@@ -65,11 +65,12 @@ const Button = ({
           borderWidth={borderWidth}
           display={display}
           borderColor={borderColor ?? "none"}
+          disabled={disabled}
 
           // _hover={hover ? { bg: hover } : { bg: "yellow.150" }}
         >
           {children}
-        </Box>
+        </ChakraButton>
       </Link>
     );
   }
