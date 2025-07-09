@@ -26,21 +26,25 @@ export const serviceItems = [
       "Glow starts with great skin. Hydrate, cleanse, and refresh your face with our custom facials.",
     categories: [
       {
+        id: "1",
         name: "Skin Analysis ",
         estimatedTime: "30",
         price: 20,
       },
       {
+        id: "2",
         name: "Exfoliation ",
         estimatedTime: "30",
         price: 10,
       },
       {
+        id: "3",
         name: "Hydrating Mask",
         estimatedTime: "30",
         price: 25,
       },
       {
+        id: "4",
         name: "Face & Neck Massage",
         estimatedTime: "30",
         price: 15,
@@ -68,6 +72,7 @@ export const serviceItems = [
         price: 60,
       },
       {
+        id: "4",
         name: "Aromatherapy",
         estimatedTime: "90",
         price: 70,
@@ -95,6 +100,7 @@ export const serviceItems = [
         price: 20,
       },
       {
+        id: "4",
         name: "Nail Art",
         estimatedTime: "60",
         price: 40,
@@ -108,21 +114,25 @@ export const serviceItems = [
       "Transform your look with our professional hair styling services.",
     categories: [
       {
+        id: "1",
         name: "Cut & Style",
         estimatedTime: "60",
         price: 45,
       },
       {
+        id: "2",
         name: "Color Treatment",
         estimatedTime: "120",
         price: 80,
       },
       {
+        id: "3",
         name: "Deep Conditioning",
         estimatedTime: "45",
         price: 30,
       },
       {
+        id: "4",
         name: "Styling Only",
         estimatedTime: "30",
         price: 25,

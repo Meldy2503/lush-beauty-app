@@ -7,6 +7,7 @@ import {
   Flex,
   Heading,
   HStack,
+  Span,
   Text,
 } from "@chakra-ui/react";
 import { IoLocationOutline } from "react-icons/io5";
@@ -19,7 +20,7 @@ import { staffs } from "./select-technician";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { formatAppointmentDateTime } from "@/utils";
 import { serviceItems } from "./select-service";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const BookingSummary = () => {
   const branchId = useSelector(
@@ -29,13 +30,17 @@ const BookingSummary = () => {
   const numOfClients = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.numberOfClients
   );
-  const [updateClientCount, setUpdateClientCount] = useState<number>(
-    numOfClients ?? 1
-  );
+  // const [updateClientCount, setUpdateClientCount] = useState<number>(
+  //   numOfClients ?? 1
+  // );
 
   // const [updateClientCounts, setUpdateClientCounts] = useState<number[]>(
   //   Array(numOfClients || 1).fill(1) // Initial count of 1 per client
   // );
+
+  const [updateClientCount, setUpdateClientCount] = useState<number[]>(() =>
+    Array(numOfClients).fill(numOfClients ?? 1)
+  );
   const serviceSelections = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.serviceSelections
   );
@@ -49,13 +54,13 @@ const BookingSummary = () => {
   );
   const { date, time } = formatAppointmentDateTime(appointmentDateTime);
 
-  const handleClientCountChange = (increment: boolean) => {
-    setUpdateClientCount((prevCount) =>
-      increment
-        ? Math.min(prevCount + 1, numOfClients ?? 1)
-        : Math.max(prevCount - 1, 1)
-    );
-  };
+  // const handleClientCountChange = (increment: boolean) => {
+  //   setUpdateClientCount((prevCount) =>
+  //     increment
+  //       ? Math.min(prevCount + 1, numOfClients ?? 1)
+  //       : Math.max(prevCount - 1, 1)
+  //   );
+  // };
 
   // const handleClientCountChange = useCallback(
   //   (increment: boolean, index: number) => {
@@ -69,6 +74,20 @@ const BookingSummary = () => {
   //   },
   //   [numOfClients]
   // );
+
+  const handleClientCountChange = useCallback(
+    (increment: boolean, index: number) => {
+      setUpdateClientCount((prevCounts) => {
+        const updated = [...prevCounts];
+        updated[index] = increment
+          ? Math.min(updated[index] + 1, numOfClients ?? 1)
+          : Math.max(updated[index] - 1, 1);
+        return updated;
+      });
+    },
+    [numOfClients]
+  );
+  
 
   return (
     <Box
@@ -152,7 +171,7 @@ const BookingSummary = () => {
               const selectedCategories = serviceDetail.categories.filter(
                 (cat) => selection.categoryIds.includes(cat.name)
               );
-              return selectedCategories.map((category) => (
+              return selectedCategories.map((category, index) => (
                 <Flex
                   key={`${selection.serviceId}-${category.name}`}
                   justifyContent={"space-between"}
@@ -183,24 +202,27 @@ const BookingSummary = () => {
                           <Button
                             bg="transparent"
                             color="black"
-                            onClick={() => handleClientCountChange(false)}
-                            disabled={updateClientCount === 1}
+                            onClick={() =>
+                              handleClientCountChange(false, index)
+                            }
+                            disabled={updateClientCount[index] === 1}
                             cursor={
-                              updateClientCount === 1
+                              updateClientCount[index] === 1
                                 ? "not-allowed"
                                 : "pointer"
                             }
+                            
                           >
                             <FiMinus />
                           </Button>
-                          <Text>{updateClientCount}</Text>
+                          <Span>{updateClientCount[index]}</Span>
                           <Button
                             bg="transparent"
                             color="black"
-                            onClick={() => handleClientCountChange(true)}
-                            disabled={updateClientCount === numOfClients}
+                            onClick={() => handleClientCountChange(true, index)}
+                            disabled={updateClientCount[index] === numOfClients}
                             cursor={
-                              updateClientCount === numOfClients
+                              updateClientCount[index] === numOfClients
                                 ? "not-allowed"
                                 : "pointer"
                             }

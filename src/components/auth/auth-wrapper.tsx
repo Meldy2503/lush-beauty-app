@@ -70,7 +70,7 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
           </Heading>
           <Flex
             gap="2rem"
-            w={{ base: "100%", md: "80%", xl: "70%" }}
+            w={{ base: "100%", md: "80%" }}
             direction={"column"}
             mt="3rem"
           >

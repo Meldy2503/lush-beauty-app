@@ -5,6 +5,8 @@ import LoadingIcon from "./loading-icon";
 import { Provider as ReduxProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "@/store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 
 const config = {
   ...defaultConfig,
@@ -51,6 +53,8 @@ const system = createSystem(defaultConfig, config);
 
 export function Provider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
+  const queryClient = new QueryClient();
+
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -61,12 +65,14 @@ export function Provider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <ReduxProvider store={store}>
-      <ChakraProvider value={system}>
-        <PersistGate loading={null} persistor={persistor}>
-          <>{loading ? <LoadingIcon /> : children}</>
-        </PersistGate>
-      </ChakraProvider>
-    </ReduxProvider>
+    <QueryClientProvider client={queryClient}>
+      <ReduxProvider store={store}>
+        <ChakraProvider value={system}>
+          <PersistGate loading={null} persistor={persistor}>
+            <>{loading ? <LoadingIcon /> : children}</>
+          </PersistGate>
+        </ChakraProvider>
+      </ReduxProvider>
+    </QueryClientProvider>
   );
 }

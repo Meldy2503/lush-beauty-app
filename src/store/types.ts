@@ -20,3 +20,8 @@ export interface AppointmentState {
   loading: boolean;
 }
   
+
+export interface AuthState {
+  accessToken: string | null;
+  loading: boolean;
+}

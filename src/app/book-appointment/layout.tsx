@@ -47,6 +47,7 @@ export default function RootLayout({
                     bg={isActive ? "yellow.100" : "white"}
                     color={isActive ? "white" : "black"}
                     p="1.3rem"
+                    cursor={'not-allowed'}
                   >
                     <Icon as={link.icon} boxSize="2rem" />
                     <Text> {link.title}</Text>
