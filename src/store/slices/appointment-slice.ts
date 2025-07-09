@@ -3,7 +3,6 @@ import { AppointmentState, Appointment } from "../types";
 
 const initialState: AppointmentState = {
   appointments: [],
-  loading: false,
 };
 
 const appointmentSlice = createSlice({
@@ -29,14 +28,8 @@ const appointmentSlice = createSlice({
       // Merge the new data into the first appointment
       state.appointments[0] = { ...state.appointments[0], ...action.payload };
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
-    },
   },
 });
 
-export const { updateAppointment, setLoading } = appointmentSlice.actions;
+export const { updateAppointment } = appointmentSlice.actions;
 export default appointmentSlice.reducer;
-
-
-

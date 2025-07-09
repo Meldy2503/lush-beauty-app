@@ -12,6 +12,7 @@ interface ButtonProps {
   fontWeight?: string;
   borderWidth?: string;
   color?: string;
+  type?: "button" | "submit" | "reset" 
   w?: string | object;
   opacity?: number | object;
   cursor?: string | object;
@@ -34,6 +35,7 @@ const Button = ({
   display,
   fontSize,
   fontWeight,
+  type,
   onClick,
   disabled,
   cursor,
@@ -59,6 +61,7 @@ const Button = ({
           py={py ?? "2.2rem"}
           {...props}
           bg={bg ?? "black"}
+          type={type}
           borderRadius="0"
           fontSize={fontSize ?? "1.6rem"}
           borderWidth={borderWidth}
@@ -94,6 +97,7 @@ const Button = ({
       display={display}
       disabled={disabled}
       zIndex={1}
+      type={type}
       opacity={disabled ? 0.3 : 1}
       {...props}
       // _hover={hover ? { bg: hover } : { bg: "yellow.150" }}

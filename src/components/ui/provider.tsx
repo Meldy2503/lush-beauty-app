@@ -6,6 +6,8 @@ import { Provider as ReduxProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "@/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+
 
 
 const config = {
@@ -70,6 +72,25 @@ export function Provider({ children }: { children: React.ReactNode }) {
         <ChakraProvider value={system}>
           <PersistGate loading={null} persistor={persistor}>
             <>{loading ? <LoadingIcon /> : children}</>
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                success: {
+                  style: {
+                    background: "green",
+                    color: "white",
+                    padding: "1rem",
+                  },
+                },
+                error: {
+                  style: {
+                    background: "#aa2323",
+                    color: "white",
+                    padding: "1rem",
+                  },
+                },
+              }}
+            />
           </PersistGate>
         </ChakraProvider>
       </ReduxProvider>

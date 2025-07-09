@@ -3,7 +3,6 @@ import { AuthState } from "../types";
 
 const initialState: AuthState = {
   accessToken: null,
-  loading: false,
 };
 
 const authSlice = createSlice({
@@ -13,11 +12,11 @@ const authSlice = createSlice({
     setToken: (state, action: PayloadAction<string>) => {
       state.accessToken = action.payload;
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
+    logout: (state) => {
+      state.accessToken = null;
     },
   },
 });
 
-export const { setToken, setLoading } = authSlice.actions;
+export const { setToken, logout } = authSlice.actions;
 export default authSlice.reducer;

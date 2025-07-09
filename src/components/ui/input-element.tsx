@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 import {
   Box,
@@ -23,6 +24,8 @@ interface InputElementProps {
   type?: string;
   min?: string | number;
   bg?: string;
+  register?: UseFormRegisterReturn;
+  errorMessage?: string;
   value?: string | number;
   defaultValue?: string | number;
   h?: string;
@@ -43,6 +46,8 @@ export const InputElement = ({
   type = "text",
   value,
   defaultValue,
+  register,
+  errorMessage,
   min,
   onChange,
   required = false,
@@ -113,6 +118,9 @@ export const InputElement = ({
             {...props}
           />
         </Box>
+        <Text color="red" fontSize="1.2rem" mt=".5rem">
+          {errorMessage}
+        </Text>
       </Field.Root>
     );
   }
@@ -135,11 +143,15 @@ export const InputElement = ({
           size={"xl"}
           placeholder={placeholder || label}
           {...props}
+          {...register}
           value={value}
           onChange={(e) =>
             onChange?.(e as React.ChangeEvent<HTMLTextAreaElement>)
           }
         />
+        <Text color="red" fontSize="1.2rem" mt=".5rem">
+          {errorMessage}
+        </Text>
       </Field.Root>
     );
   }
@@ -170,10 +182,14 @@ export const InputElement = ({
             required
             placeholder={placeholder || label}
             {...props}
+            {...register}
             value={value}
             onChange={onChange}
           />
         </InputGroup>
+        <Text color="red" fontSize="1.2rem" mt=".5rem">
+          {errorMessage}
+        </Text>
       </Field.Root>
     );
   }
@@ -199,10 +215,14 @@ export const InputElement = ({
         placeholder={placeholder || label}
         type={type}
         {...props}
+        {...register}
         value={value}
         defaultValue={defaultValue}
         onChange={onChange}
       />
+      <Text color="red" fontSize="1.2rem" mt=".5rem">
+        {errorMessage}
+      </Text>
     </Field.Root>
   );
 };

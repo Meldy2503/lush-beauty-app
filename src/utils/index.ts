@@ -99,3 +99,19 @@ export const formatAppointmentDateTime = (
     return { date: "", time: "" };
   }
 };
+
+
+let navigationHandler: ((path: string) => void) | null = null;
+
+export const setNavigationHandler = (handler: (path: string) => void) => {
+  navigationHandler = handler;
+};
+
+export const navigateTo = (path: string) => {
+  if (navigationHandler) {
+    navigationHandler(path);
+  } else {
+    // Fallback to window.location if router not available
+    window.location.href = path;
+  }
+};

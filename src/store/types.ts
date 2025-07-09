@@ -17,11 +17,9 @@ export interface Appointment {
 
 export interface AppointmentState {
   appointments: Appointment[];
-  loading: boolean;
 }
   
 
 export interface AuthState {
   accessToken: string | null;
-  loading: boolean;
 }
