@@ -1,4 +1,4 @@
-import ConfirmBookingPage from "@/components/book-appt-page/confirm-booking";
+import ConfirmBookingPage from "@/components/book-appointment-page/confirm-booking";
 
 export const metadata = {
   title: "Lush Beauty - Premium Beauty Products",

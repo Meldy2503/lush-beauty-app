@@ -1,4 +1,4 @@
-import SelectServicePage from "@/components/book-appt-page/select-service";
+import SelectServicePage from "@/components/book-appointment-page/select-service";
 
 export const metadata = {
   title: "Lush Beauty - Premium Beauty Products",

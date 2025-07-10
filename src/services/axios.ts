@@ -31,8 +31,8 @@ axios.interceptors.response.use(
     if (status === 401) {
       toast.error(apiMessage || "Unauthorized. Please login again.");
       store.dispatch(logout());
-      window.location.href = "/";
-      return;
+       window.location.href = "/";
+       return Promise.reject(error);
     }
 
     if ([400, 403, 404, 500].includes(status || 0)) {

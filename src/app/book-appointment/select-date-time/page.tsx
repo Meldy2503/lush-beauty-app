@@ -1,4 +1,4 @@
-import SelectDateTimePage from "@/components/book-appt-page/select-date-time";
+import SelectDateTimePage from "@/components/book-appointment-page/select-date-time";
 
 export const metadata = {
   title: "Lush Beauty - Premium Beauty Products",

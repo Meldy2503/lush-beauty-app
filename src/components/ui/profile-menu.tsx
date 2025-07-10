@@ -3,8 +3,17 @@ import { MdKeyboardArrowDown, MdLogout } from "react-icons/md";
 import Button from "./button";
 import Link from "next/link";
 import { IoPersonCircleSharp } from "react-icons/io5";
+import { useGetUserProfile } from "@/services/api/user";
+import { useDispatch } from "react-redux";
+import { logout } from "@/store/slices/auth-slice";
 
 const ProfileMenu = () => {
+  const dispatch = useDispatch();
+    const { data: user } = useGetUserProfile();
+   const firstName = user?.fullName?.split(" ")[0]
+  
+    console.log(user?.fullName, "user");
+    console.log(firstName, "firstName");
   return (
     <Menu.Root size="md">
       <Menu.Trigger asChild>
@@ -16,7 +25,7 @@ const ProfileMenu = () => {
         >
           <IoPersonCircleSharp size="2.5rem" />
 
-          <Text>Hi Emelder</Text>
+          <Text>{user ? `Hi ${firstName}` : "Sign in"}</Text>
           <Box mt=".5rem">
             <MdKeyboardArrowDown size="2.3rem" />
           </Box>
@@ -25,13 +34,17 @@ const ProfileMenu = () => {
 
       <Portal>
         <Menu.Positioner>
-          <Menu.Content p="2rem">
-            <Menu.Item value="sign in">
-              <Button w="100%" href="/login">
-                {" "}
-                Sign in
-              </Button>
-            </Menu.Item>
+          <Menu.Content p="2rem" w="25rem">
+            {!user && (
+              <Menu.Item value="sign in">
+                <Box w="full" bg="black">
+                  <Button w="100%" href="/login">
+                    {" "}
+                    Sign in
+                  </Button>
+                </Box>
+              </Menu.Item>
+            )}
             <Menu.Item
               value="settings"
               fontSize={"1.6rem"}
@@ -51,6 +64,9 @@ const ProfileMenu = () => {
               fontSize={"1.6rem"}
               p="1.2rem"
               color="red.600"
+              onClick={() => {
+                dispatch(logout());
+              }}
             >
               <HStack gap="1rem">
                 <MdLogout />

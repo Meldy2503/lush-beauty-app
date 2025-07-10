@@ -1,4 +1,4 @@
-import BookingTypePage from "@/components/book-appt-page/booking-type";
+import BookingTypePage from "@/components/book-appointment-page/booking-type";
 
 export const metadata = {
   title: "Lush Beauty - Premium Beauty Products",

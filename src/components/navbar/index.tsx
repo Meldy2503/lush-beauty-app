@@ -4,11 +4,11 @@ import { Box, Flex, HStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ContactUsModal from "../contact-us/contact-modal";
-import ProfileMenu from "../ui/profile-menu";
 import Cart from "../shop-page/cart";
-import SocialMediaIcons from "../ui/social-media-icons";
 import Button from "../ui/button";
 import Logo from "../ui/logo";
+import ProfileMenu from "../ui/profile-menu";
+import SocialMediaIcons from "../ui/social-media-icons";
 import MobileNav from "./mobile-nav";
 
 interface NavbarProps {
@@ -112,7 +112,7 @@ const Navbar = ({ display, top, bg, color }: NavbarProps) => {
             <Box display={{ base: "none", sm: "block" }}>
               <Button
                 px="2rem"
-                 py="1.9rem"
+                py="1.9rem"
                 href="/book-appointment"
                 borderColor="yellow.150"
                 borderWidth="1.5px"
@@ -129,4 +129,3 @@ const Navbar = ({ display, top, bg, color }: NavbarProps) => {
 };
 
 export default Navbar;
-
