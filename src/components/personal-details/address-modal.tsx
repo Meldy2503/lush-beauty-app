@@ -11,30 +11,45 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { InputElement } from "../shared/input-element";
-
 import { AddAddressSchema } from "@/schema/user";
-import { useAddAddressMutation } from "@/services/api/user";
-import { AddAddressType } from "@/types/user";
+import {
+  useAddAddressMutation,
+  useUpdateAddressMutation,
+} from "@/services/api/user";
+import { AddAddressType, UserAddressType } from "@/types/user";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Resolver, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
 
-const AddressModal = ({ icon }: { icon?: React.ReactNode }) => {
+interface AddressModalProps {
+  icon?: React.ReactNode;
+  isEditMode?: boolean;
+  selectedAddress?: UserAddressType;
+}
+
+const AddressModal = ({
+  icon,
+  isEditMode,
+  selectedAddress,
+}: AddressModalProps) => {
   const addAddressMutation = useAddAddressMutation();
+  const updateAddressMutation = useUpdateAddressMutation();
   const [isOpen, setIsOpen] = useState(false);
 
   const { mutateAsync: addAddress } = addAddressMutation;
-  const isLoading = addAddressMutation.isPending;
+  const { mutateAsync: updateAddress } = updateAddressMutation;
+  const isAddAddressLoading = addAddressMutation.isPending;
+  const isEditAddressLoading = updateAddressMutation.isPending;
 
   const formHook = useForm<AddAddressType>({
     resolver: yupResolver(AddAddressSchema),
     defaultValues: {
-      address: "",
-      state: "",
-      country: "",
-      isDefault: false,
+      address: selectedAddress?.address ?? "",
+      state: selectedAddress?.state ?? "",
+      country: selectedAddress?.country ?? "",
+      isDefault: selectedAddress?.isDefault ?? false,
     },
   } as { resolver: Resolver<AddAddressType> });
   const {
@@ -45,23 +60,37 @@ const AddressModal = ({ icon }: { icon?: React.ReactNode }) => {
     reset,
   } = formHook;
 
-  const submit: SubmitHandler<AddAddressType> = async (
-    data: AddAddressType
-  ) => {
+  const submit: SubmitHandler<AddAddressType> = async (data) => {
     try {
-      const result = await addAddress(data);
-      if (!result) {
-        return;
+      if (isEditMode && selectedAddress?.id) {
+        await updateAddress({
+          addressId: selectedAddress.id,
+          updateAddress: data,
+        });
+        toast.success("Address updated successfully!");
+      } else {
+        await addAddress(data);
+        toast.success("Address added successfully!");
       }
-      if (result) {
-        toast.success("Address Added Successfully!");
-        setIsOpen(false);
-        reset();
-      }
+
+      reset();
+      setIsOpen(false);
     } catch (error) {
       console.error("Error:", error);
     }
   };
+
+  // to ensure the updated default value is always displayed
+  useEffect(() => {
+    if (isOpen && selectedAddress) {
+      reset({
+        address: selectedAddress?.address,
+        state: selectedAddress?.state,
+        country: selectedAddress?.country,
+        isDefault: selectedAddress?.isDefault,
+      });
+    }
+  }, [isOpen, selectedAddress, reset]);
 
   return (
     <Dialog.Root
@@ -86,7 +115,7 @@ const AddressModal = ({ icon }: { icon?: React.ReactNode }) => {
           >
             <Dialog.Header>
               <Dialog.Title fontSize="2rem" mb="5rem">
-                Add New Address{" "}
+                {isEditMode ? "Edit Address" : "Add New Address"}
               </Dialog.Title>
             </Dialog.Header>
             {/* add address modal */}
@@ -155,18 +184,20 @@ const AddressModal = ({ icon }: { icon?: React.ReactNode }) => {
                     borderColor="black"
                     borderWidth="1.5px"
                     color="black"
-                    px={{ base: "3rem", sm: "5rem" }}
+                    px={{ base: "3rem", sm: "4rem" }}
                     type="button"
                   >
                     Close
                   </Button>
                 </Dialog.ActionTrigger>
                 <Button
-                  px={{ base: "2rem", sm: "5rem" }}
-                  disabled={isLoading}
+                  px={{ base: "2rem", sm: "3rem" }}
+                  disabled={isEditAddressLoading || isAddAddressLoading}
                   type="submit"
                 >
-                  {isLoading ? "Processing..." : "Save Changes"}
+                  {isAddAddressLoading || isEditAddressLoading
+                    ? "Processing..."
+                    : "Save Changes"}
                 </Button>
               </Dialog.Footer>
             </form>{" "}

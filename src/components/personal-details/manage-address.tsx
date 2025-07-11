@@ -75,7 +75,14 @@ const ManageAddress = () => {
                 gap="1rem"
                 alignSelf={{ base: "flex-end", md: "center" }}
               >
-                <AddressModal icon={<FaRegEdit size="2rem" />} />
+                {/* Edit address modal */}
+                <AddressModal
+                  isEditMode={true}
+                  icon={<FaRegEdit size="2rem" />}
+                  selectedAddress={userAddress?.find(
+                    (item: UserAddressType) => address?.id === item?.id
+                  )}
+                />
                 <DeleteModal
                   isLoading={isDeleteAddressLoading}
                   open={isOpen}
@@ -88,8 +95,9 @@ const ManageAddress = () => {
           ))}
         </Flex>
       )}
+      {/* Add address modal */}
       <HStack justifyContent={"center"}>
-        <AddressModal />
+        <AddressModal isEditMode={false} />
       </HStack>
     </Box>
   );

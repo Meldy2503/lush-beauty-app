@@ -1,28 +1,78 @@
 "use client";
 
 import Button from "@/components/shared/button";
-import {
-  Flex,
-  Stack,
-  Dialog,
-  Portal,
-  CloseButton,
-  Box,
-} from "@chakra-ui/react";
-import { InputElement } from "../shared/input-element";
+import { UpdateUserProfileSchema } from "@/schema/user";
+import { useUpdateUserProfileMutation } from "@/services/api/user";
+import { UpdateUserProfileType, UserProfileType } from "@/types/user";
+import { Box, CloseButton, Dialog, Portal, Stack } from "@chakra-ui/react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
+import { Resolver, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
-import { UserProfileType } from "@/types/user";
+import { InputElement } from "../shared/input-element";
 
 interface PersonalDetailsType {
   user: UserProfileType;
 }
 
 const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
-  const defaultAddress = user?.addresses?.find((address) => address?.isDefault);
+  const updateUserProfileMutation = useUpdateUserProfileMutation();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { mutateAsync: updateUserProfile } = updateUserProfileMutation;
+  const isLoading = updateUserProfileMutation.isPending;
+
+  const formHook = useForm<UpdateUserProfileType>({
+    resolver: yupResolver(UpdateUserProfileSchema),
+    defaultValues: {
+      fullName: user?.fullName,
+      phone: user?.phone,
+    },
+  } as { resolver: Resolver<UpdateUserProfileType> });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = formHook;
+
+  const submit: SubmitHandler<UpdateUserProfileType> = async (
+    data: UpdateUserProfileType
+  ) => {
+    try {
+      const result = await updateUserProfile(data);
+      console.log("Submitted data:", result);
+
+      if (!result) {
+        return;
+      }
+      if (result) {
+        toast.success("Profile Updated Successfully!");
+        setIsOpen(false);
+        reset();
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+// to ensure the updated default value is always displayed
+  useEffect(() => {
+    if (isOpen && user) {
+      reset({
+        fullName: user?.fullName,
+        phone: user?.phone,
+      });
+    }
+  }, [isOpen, user, reset]);
+
+
   return (
     <Dialog.Root
       placement={{ base: "top", md: "center" }}
       motionPreset="slide-in-bottom"
+      open={isOpen}
+      onOpenChange={(e) => setIsOpen(e.open)}
     >
       <Dialog.Trigger asChild>
         <Box color="yellow.100" cursor={"pointer"}>
@@ -45,47 +95,33 @@ const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
                 Personal details
               </Dialog.Title>
             </Dialog.Header>
-            <form>
+            <form onSubmit={handleSubmit(submit)}>
               <Dialog.Body>
                 <Stack gap="2rem">
                   <InputElement
                     label="Full name"
                     placeholder="Peter Smith"
-                    defaultValue={user?.fullName}
+                    register={register("fullName")}
+                    errorMessage={errors.fullName?.message}
                   />
                   <InputElement
                     label="Email address"
                     placeholder="peter@gmail.com"
                     type="email"
                     defaultValue={user?.email}
+                    disabled
                   />
                   <InputElement
                     label="Phone number"
                     placeholder="+447056835551"
                     type="number"
-                    defaultValue={user?.phone}
+                    register={register("phone")}
+                    errorMessage={errors.phone?.message}
                   />
-                  <InputElement
-                    label="Address/Postcode"
-                    placeholder="2 Beverley street"
-                    defaultValue={defaultAddress?.address}
-                  />
-                  <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
-                    <InputElement
-                      label="Town/City"
-                      placeholder="Manchester"
-                      defaultValue={defaultAddress?.state}
-                    />
-                    <InputElement
-                      label="Country"
-                      placeholder="United Kingdom"
-                      defaultValue={defaultAddress?.country}
-                    />
-                  </Flex>
                 </Stack>
               </Dialog.Body>
               <Dialog.Footer
-                mt="2rem"
+                mt="3rem"
                 display={"flex"}
                 flexWrap={"wrap"}
                 gap="1rem"
@@ -96,13 +132,19 @@ const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
                     borderColor="black"
                     borderWidth="1.5px"
                     color="black"
-                    px={{ base: "3rem", sm: "5rem" }}
+                    px={{ base: "3rem", sm: "4rem" }}
                     type="button"
                   >
                     Close
                   </Button>
                 </Dialog.ActionTrigger>
-                <Button px={{ base: "2rem", sm: "5rem" }}>Save Changes</Button>
+                <Button
+                  px={{ base: "2rem", sm: "3rem" }}
+                  disabled={isLoading}
+                  type="submit"
+                >
+                  {isLoading ? "Processing..." : "Save Changes"}
+                </Button>
               </Dialog.Footer>
             </form>{" "}
             <Dialog.CloseTrigger asChild bg="gray.200">

@@ -1,14 +1,15 @@
 "use client";
 
-import { Box, Flex, HStack, Spinner, Text } from "@chakra-ui/react";
-import PersonalDetailsModal from "./personal-details-modal";
 import { useGetUserProfile } from "@/services/api/user";
-import { UserAddressType, UserProfileType } from "@/types/user";
+import { UserProfileType } from "@/types/user";
+import { Box, Flex, HStack, Spinner, Text } from "@chakra-ui/react";
+import { FaCircleCheck } from "react-icons/fa6";
+import PersonalDetailsModal from "./personal-details-modal";
 
 interface DetailsWrapperType {
   title: string;
   value: string;
-  user: UserProfileType;
+  user?: UserProfileType;
 }
 const DetailsWrapper = ({ title, value, user }: DetailsWrapperType) => {
   return (
@@ -37,16 +38,19 @@ const DetailsWrapper = ({ title, value, user }: DetailsWrapperType) => {
           {value}
         </Text>
       </Flex>
-      <PersonalDetailsModal user={user} />
+      {user ? (
+        <PersonalDetailsModal user={user} />
+      ) : (
+        <Box color="yellow.100">
+          <FaCircleCheck size="2.3rem" />
+        </Box>
+      )}
     </HStack>
   );
 };
 
 const UserDetails = () => {
   const { data: userDetails, isLoading } = useGetUserProfile();
-  const defaultAddress = userDetails?.addresses?.find(
-    (address: UserAddressType) => address?.isDefault
-  );
   return (
     <Box>
       <Text mb="3rem">
@@ -54,34 +58,27 @@ const UserDetails = () => {
         easy, and see your personalised offers.
       </Text>
       {isLoading ? (
-        <Flex alignItems={'center'} justifyContent={'center'}>
+        <Flex alignItems={"center"} justifyContent={"center"}>
           <Spinner my="10rem" />
         </Flex>
       ) : (
-        <Flex gap="2rem" flexDir="column">
-          <DetailsWrapper
-            title="Name"
-            value={userDetails?.fullName}
-            user={userDetails}
-          />
-          <DetailsWrapper
-            title="Email Address"
-            value={userDetails?.email}
-            user={userDetails}
-          />
-          <DetailsWrapper
-            title="Phone Number"
-            value={userDetails?.phone}
-            user={userDetails}
-          />
-          {defaultAddress && (
+         
+          <Flex gap="2rem" flexDir="column" >
             <DetailsWrapper
-              title="Address"
-              value={`${defaultAddress.address}, ${defaultAddress.state}, ${defaultAddress.country}`}
+              title="Name"
+              value={userDetails?.fullName}
               user={userDetails}
             />
-          )}
-        </Flex>
+            <DetailsWrapper
+              title="Email Address"
+              value={userDetails?.email}
+            />
+            <DetailsWrapper
+              title="Phone Number"
+              value={userDetails?.phone}
+              user={userDetails}
+            />
+          </Flex>
       )}
     </Box>
   );

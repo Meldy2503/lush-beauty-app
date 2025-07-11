@@ -33,6 +33,7 @@ const LoginPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = formHook;
 
   const submit: SubmitHandler<LoginType> = async (data: LoginType) => {
@@ -44,6 +45,8 @@ const LoginPage = () => {
       if (result) {
         toast.success("Login Successful!");
         router.push(redirect);
+        reset();
+
       }
     } catch (error) {
       console.error("Login error:", error);

@@ -27,7 +27,7 @@ export const SignUpSchema = yup.object().shape({
   phone: yup
     .string()
     .trim()
-    .matches(/^\+?\d{7,15}$/, "Enter a valid phone number")
+    .matches(/^\+?[1-9]\d{1,14}$/, "Please provide a valid phone number")
     .required("Phone number is required!"),
 });
 

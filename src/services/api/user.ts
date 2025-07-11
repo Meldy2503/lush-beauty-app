@@ -1,5 +1,5 @@
 import { RootState } from "@/store";
-import { AddAddressType } from "@/types/user";
+import { AddAddressType, UpdateUserProfileType } from "@/types/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import axios from "../axios";
@@ -49,6 +49,58 @@ export const useAddAddressMutation = () => {
     },
     onError: (error) => {
       console.error("Add address failed:", error);
+    },
+  });
+};
+
+// to update a user profile
+export const useUpdateUserProfileMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["updateUserProfile"],
+    mutationFn: async (updateUserProfile: UpdateUserProfileType) => {
+      const res = await axios.patch(
+        urls.updateUserProfileUrl,
+        updateUserProfile
+      );
+      return res.data;
+    },
+    onSuccess: () => {
+      // Invalidate user profile so they refetch
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+    },
+    onError: (error) => {
+      console.error("User profile update failed:", error);
+    },
+  });
+};
+
+// to update an address
+export const useUpdateAddressMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["updateAddress"],
+    mutationFn: async ({
+      addressId,
+      updateAddress,
+    }: {
+      addressId: string;
+      updateAddress: AddAddressType;
+    }) => {
+      const res = await axios.patch(
+        urls.updateAddressUrl(addressId),
+        updateAddress
+      );
+      return res.data;
+    },
+    onSuccess: () => {
+      // Invalidate user addresses so they refetch
+      queryClient.invalidateQueries({ queryKey: ["userAddress"] });
+    },
+    onError: (error) => {
+      console.error("Address update failed:", error);
     },
   });
 };

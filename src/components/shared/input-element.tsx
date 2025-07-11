@@ -24,6 +24,7 @@ interface InputElementProps {
   autoComplete?: string;
   type?: string;
   min?: string | number;
+  disabled?: boolean;
   bg?: string;
   register?: UseFormRegisterReturn;
   errorMessage?: string;
@@ -48,6 +49,7 @@ export const InputElement = ({
   value,
   defaultValue,
   autoComplete,
+  disabled,
   register,
   errorMessage,
   min,
@@ -217,11 +219,10 @@ export const InputElement = ({
         value={value}
         defaultValue={defaultValue}
         autoComplete={autoComplete}
+        disabled={disabled}
         onChange={onChange}
       />
-      <Text color="red" fontSize="1.2rem" mt=".5rem">
-        {errorMessage}
-      </Text>
+      <Field.ErrorText> {errorMessage}</Field.ErrorText>
     </Field.Root>
   );
 };

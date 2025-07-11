@@ -21,8 +21,13 @@ export interface UserProfileType {
 }
 
 export interface AddAddressType {
-  address: string;
+  address?: string;
   state?: string;
   country?: string;
   isDefault?: boolean;
+}
+
+export interface UpdateUserProfileType {
+  fullName?: string;
+  phone?: string;
 }

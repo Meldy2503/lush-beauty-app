@@ -65,7 +65,7 @@ const DeleteModal = ({
                 {isLoading ? "Processing..." : "Delete"}
               </Button>
             </Dialog.Footer>
-            <Dialog.CloseTrigger asChild>
+            <Dialog.CloseTrigger asChild _hover={{bg:'gray.250'}}>
               <CloseButton size="2xl" />
             </Dialog.CloseTrigger>
           </Dialog.Content>

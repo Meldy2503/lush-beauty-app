@@ -35,6 +35,7 @@ const SignUpPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = formHook;
 
   const submit: SubmitHandler<SignUpType> = async (data: SignUpType) => {
@@ -46,6 +47,7 @@ const SignUpPage = () => {
       if (result) {
         toast.success("Account Created Successfully!");
         router.push("/login");
+        reset();
       }
       console.log(result, "result");
     } catch (error) {
