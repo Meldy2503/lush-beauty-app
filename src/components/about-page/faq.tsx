@@ -83,22 +83,23 @@ export default OurFaqSection;
 const items = [
   {
     value: "a",
-    title: "What services do you offer at Lush & Luxe?",
-    text: "We offer a full range of beauty services including hair styling, coloring, facials, waxing, manicures, pedicures, makeup, and more. Whether you're looking for a quick refresh or a full transformation, our expert team has you covered.",
+    title: "What services are available at Lush & Luxe?",
+    text: "Lush & Luxe offers a wide range of beauty services including in-salon hair styling, coloring, facials, waxing, manicures, pedicures, makeup application, and more. You can choose to book appointments online or visit us in person based on availability.",
   },
   {
     value: "b",
-    title: "Do I need to book an appointment in advance?",
-    text: "We offer a full range of beauty services including hair styling, coloring, facials, waxing, manicures, pedicures, makeup, and more. Whether you're looking for a quick refresh or a full transformation, our expert team has you covered.",
+    title: "Can I book appointments online and in person?",
+    text: "Yes! You can book appointments online through our website for convenience, or visit the salon directly to schedule in person. Online booking allows you to choose your preferred service, stylist, date, and time.",
   },
   {
     value: "c",
-    title: "What products do you use during services?",
-    text: "We only use high-quality, salon-grade, and cruelty-free products that are gentle on your skin and hair. We carefully select brands that deliver results while aligning with our values of beauty and wellness.",
+    title: "What products do we use during treatments?",
+    text: "We use only high-quality, professional-grade, and cruelty-free beauty products. All our products are carefully chosen to promote both effective results and a safe experience, whether you're receiving services in person or preparing for a home visit.",
   },
   {
     value: "d",
-    title: "What's your cancellation or rescheduling policy?",
-    text: "We understand that life happens! We kindly ask for at least 24 hours' notice for cancellations or changes. This allows us to accommodate other guests and respect everyone's time.",
+    title: "What is the cancellation and rescheduling policy?",
+    text: "We ask for at least 24 hours’ notice for any cancellations or rescheduling. This helps us manage our bookings effectively and offer available slots to other clients. You can reschedule online or by calling the salon directly.",
   },
 ];
+

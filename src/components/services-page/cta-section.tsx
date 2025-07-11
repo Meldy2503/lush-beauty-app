@@ -3,8 +3,12 @@
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 import ctaImg from "../../assets/images/services-cta.webp";
 import Button from "../ui/button";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const CtaSection = () => {
+    const token = useSelector((state: RootState) => state.auth.accessToken);
+  
   return (
     <Box
       bgImage={`url(${ctaImg.src})`}
@@ -45,7 +49,11 @@ const CtaSection = () => {
           Discover tailored treatments and expert care designed to leave you
           glowing. Your beauty journey starts here.
         </Text>
-        <Button href="/services" px="5rem" bg="yellow.100">
+        <Button
+          href={token ? "/book-appointment" : "/login"}
+          px="5rem"
+          bg="yellow.100"
+        >
           Book Now
         </Button>
       </VStack>

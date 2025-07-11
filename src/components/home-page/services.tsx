@@ -10,12 +10,13 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
-import Button from "../ui/button";
 import serviceImg1 from "../../assets/images/service-1.webp";
 import serviceImg2 from "../../assets/images/service-2.webp";
 import serviceImg3 from "../../assets/images/service-3.webp";
 import serviceImg4 from "../../assets/images/academy-2.webp";
-
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import Link from "next/link";
 interface ServiceCardData {
   id: number;
   imageUrl?: StaticImageData;
@@ -23,6 +24,7 @@ interface ServiceCardData {
 }
 
 const ServicesSection = () => {
+  const token = useSelector((state: RootState) => state.auth.accessToken);
   return (
     <Box
       width="100%"
@@ -130,9 +132,13 @@ const ServicesSection = () => {
                   {service.heading}
                 </Heading>
 
-                <Button fontSize="1.9rem" bg="transparent">
+                <Link
+                  href={token ? "/book-appointment" : "/login"}
+                  style={{ fontSize: "1.9rem" }}
+                >
                   Book Service
-                </Button>
+                </Link>
+               
               </Flex>
             </GridItem>
           );

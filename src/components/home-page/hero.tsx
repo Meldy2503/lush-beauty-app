@@ -9,6 +9,8 @@ import scissors from "../../assets/images/scissors.png";
 import heroImg2 from "../../assets/images/hero-img-2.webp";
 import heroImg3 from "../../assets/images/test.webp";
 import Button from "../ui/button";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 interface SideImageProps {
   src: string;
@@ -53,6 +55,9 @@ const SideImage = ({ src, text, side }: SideImageProps) => (
 
 const HeroSection = () => {
   const containerRef = useRef(null);
+   const token = useSelector(
+      (state: RootState) => state.auth.accessToken
+    );
   const [videoLoaded, setVideoLoaded] = useState(false);
   const isDesktop = useBreakpointValue({ base: false, lg: true }) ?? false;
   const { scrollYProgress } = useScroll({
@@ -188,9 +193,9 @@ const HeroSection = () => {
                   bg="transparent"
                   borderWidth="1px"
                   borderColor="white"
-                  href="/book-appointment"
+                  href={token ? "/book-appointment" : "/login"}
                 >
-                  BOOK NOW
+                  BOOK APPOINTMENT
                 </Button>
               </VStack>
             </Box>

@@ -9,8 +9,9 @@ import {
   List,
   Text,
 } from "@chakra-ui/react";
-
 import Button from "../ui/button";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 interface ServiceCardData {
   id: number;
@@ -20,6 +21,7 @@ interface ServiceCardData {
 }
 
 const ServiceListSection = () => {
+  const token = useSelector((state: RootState) => state.auth.accessToken);
   return (
     <Box width="100%" data-testid="services-section" pt="10rem">
       <Grid
@@ -76,6 +78,7 @@ const ServiceListSection = () => {
                   borderWidth="1px"
                   w="100%"
                   borderColor={"white"}
+                  href={token ? "/book-appointment" : "/login"}
                 >
                   Book Now
                 </Button>

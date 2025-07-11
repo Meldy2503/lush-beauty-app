@@ -1,8 +1,11 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Wrapper from "../ui/wrapper";
 import Button from "../ui/button";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const LushVideoSection = () => {
+  const token = useSelector((state: RootState) => state.auth.accessToken);
   return (
     <Wrapper>
       <Flex
@@ -30,7 +33,7 @@ const LushVideoSection = () => {
           >
             DISCOVER YOUR RADIANCE
           </Heading>
-          <Text pt="2rem" pb='3rem'>
+          <Text pt="2rem" pb="3rem">
             At Lush & Luxe Salon, we offer a thoughtfully curated selection of
             beauty treatments tailored to enhance your natural glow. From
             flawless makeup and expert brows to indulgent facials and signature
@@ -39,7 +42,9 @@ const LushVideoSection = () => {
             enjoying a well-deserved self-care day, step into a space where
             beauty meets serenity.
           </Text>
-          <Button>Book Now</Button>
+          <Button href={token ? "/book-appointment" : "/login"}>
+            Book Now
+          </Button>
         </Box>
 
         {/* Right: Image*/}

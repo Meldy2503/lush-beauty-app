@@ -17,3 +17,6 @@ export interface ChangePasswordType {
   new_password: string;
   confirm_new_password: string;
 }
+
+
+

@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import urls from "../urls";
 import axios from "../axios";
 import { useDispatch } from "react-redux";
-import { setToken } from "@/store/slices/auth-slice";
+import { setAuthData, setToken } from "@/store/slices/auth-slice";
 
 // login request
 export const useLoginMutation = () => {
@@ -15,10 +15,13 @@ export const useLoginMutation = () => {
       return res.data;
     },
     onSuccess: (data) => {
-      const token = data?.data?.token;
-      if (token) {
-        dispatch(setToken(token));
-      }
+      dispatch(
+        setAuthData({
+          token: data?.data?.token,
+          user: data?.data?.user,
+        })
+      );
+      console.log(data, 'authData')
     },
     onError: (error) => {
       console.error("Login failed:", error);

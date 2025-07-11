@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Logo from "../ui/logo";
 import Button from "../ui/button";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 interface MobileNavProps {
   color?: string;
@@ -14,6 +16,7 @@ interface MobileNavProps {
 
 const MobileNav = ({ color, bg }: MobileNavProps) => {
   const pathname = usePathname();
+  const token = useSelector((state: RootState) => state.auth.accessToken);
 
   return (
     <Drawer.Root placement={"start"} size="xl">
@@ -81,21 +84,22 @@ const MobileNav = ({ color, bg }: MobileNavProps) => {
                     Shop
                   </Link>
                 </Flex>
-                <Button
-                  w="100%"
-                  href="/login"
-                  borderColor="yellow.150"
-                  borderWidth="1px"
-                >
-                  {" "}
-                  Sign in
-                </Button>
+                {token && (
+                  <Button
+                    w="100%"
+                    href="/login"
+                    borderColor="yellow.150"
+                    borderWidth="1px"
+                  >
+                    {" "}
+                    Sign in
+                  </Button>
+                )}
                 {!pathname.includes("book-appointment") && (
-                  <Box mt="3rem" display={{ base: "block", sm: "none" }}>
+                  <Box mt="2rem" display={{ base: "block", sm: "none" }}>
                     <Button
-                      px="2rem"
-                      py="1.5rem"
-                      href="/book-appointment"
+                      px="3rem"
+                      href={token ? "/book-appointment" : "/login"}
                       bg="yellow.150"
                     >
                       Book Appointment

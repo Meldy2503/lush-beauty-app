@@ -1,3 +1,4 @@
+import ProtectedRoute from "@/components/auth/protected-route";
 import OrdersPage from "@/components/orders";
 
 export const metadata = {
@@ -8,8 +9,8 @@ export const metadata = {
 
 export default function Orders() {
   return (
-    <>
+    <ProtectedRoute>
       <OrdersPage />
-    </>
+    </ProtectedRoute>
   );
 }

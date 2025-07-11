@@ -6,7 +6,7 @@ import {
   Dialog,
   Flex,
   Heading,
-  Portal
+  Portal,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import contactBg from "../../assets/images/contact-bg.webp";
@@ -16,9 +16,10 @@ import ContactForm from "./contact-form";
 
 interface ContactUsModalProps {
   color?: string;
+  btn?: React.ReactNode;
 }
 
-const ContactUsModal = ({ color }: ContactUsModalProps) => {
+const ContactUsModal = ({ color, btn }: ContactUsModalProps) => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   return (
@@ -29,17 +30,12 @@ const ContactUsModal = ({ color }: ContactUsModalProps) => {
       closeOnInteractOutside={false}
     >
       <Dialog.Trigger asChild>
-        <Button
-          bg="transparent"
+        <Box
           color={color ?? "white"}
-          hover="transparent"
-          fontWeight="400"
-          px="0"
-          py="0"
           onClick={() => setIsContactModalOpen(true)}
         >
-          Contact Us
-        </Button>
+          {btn ?? <Button>Contact Us</Button>}
+        </Box>
       </Dialog.Trigger>
       <Portal>
         {isContactModalOpen && (
@@ -114,7 +110,6 @@ const ContactUsModal = ({ color }: ContactUsModalProps) => {
               >
                 Send Message
               </Button>
-
             </Dialog.Footer>
             <Dialog.CloseTrigger
               asChild

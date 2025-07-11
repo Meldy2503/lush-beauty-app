@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex, HStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ContactUsModal from "../contact-us/contact-modal";
@@ -10,6 +10,8 @@ import Logo from "../ui/logo";
 import ProfileMenu from "../ui/profile-menu";
 import SocialMediaIcons from "../ui/social-media-icons";
 import MobileNav from "./mobile-nav";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 interface NavbarProps {
   display?: string;
@@ -20,6 +22,7 @@ interface NavbarProps {
 
 const Navbar = ({ display, top, bg, color }: NavbarProps) => {
   const pathname = usePathname();
+  const token = useSelector((state: RootState) => state.auth.accessToken);
 
   return (
     <>
@@ -94,7 +97,13 @@ const Navbar = ({ display, top, bg, color }: NavbarProps) => {
             >
               Services
             </Link>
-            <ContactUsModal color={color} />
+            <ContactUsModal
+              btn={
+                <Text cursor="pointer" color={color}>
+                  Contact Us{" "}
+                </Text>
+              }
+            />
             <Link
               href={"/shop"}
               style={{
@@ -113,7 +122,7 @@ const Navbar = ({ display, top, bg, color }: NavbarProps) => {
               <Button
                 px="2rem"
                 py="1.9rem"
-                href="/book-appointment"
+                href={token ? "/book-appointment" : "/login"}
                 borderColor="yellow.150"
                 borderWidth="1.5px"
               >

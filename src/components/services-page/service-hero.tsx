@@ -5,6 +5,7 @@ import salonImg from "../../assets/images/salon-img.webp";
 import Wrapper from "../ui/wrapper";
 import Button from "../ui/button";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import ContactUsModal from "../contact-us/contact-modal";
 
 const ServiceHeroSection = () => {
   return (
@@ -13,10 +14,9 @@ const ServiceHeroSection = () => {
         bgImage={`url(${salonImg.src})`}
         bgPos={"center"}
         bgRepeat="no-repeat"
-        height={{base:'65vh', '2xl':'50vh'}}
+        height={{ base: "65vh", "2xl": "50vh" }}
         bgSize="cover"
       >
-   
         <VStack
           textAlign="center"
           px="2rem"
@@ -89,14 +89,7 @@ const ServiceHeroSection = () => {
                 <Text>Let&apos;s Chat</Text>
               </HStack>
             </Button>
-            <Button
-              px={{ base: "2rem", sm: "5rem" }}
-              href="/services"
-              bg="black"
-              color="white"
-            >
-              Contact Us
-            </Button>
+            <ContactUsModal />
           </Flex>
         </Box>
       </Wrapper>

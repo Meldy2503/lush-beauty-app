@@ -1,11 +1,10 @@
 "use client";
 
-import Button from "@/components/ui/button";
 import Logo from "@/components/ui/logo";
 import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import bgImage from "../../assets/images/contact-bg.webp";
 import { FaCircleArrowLeft } from "react-icons/fa6";
+import bgImage from "../../assets/images/contact-bg.webp";
 
 interface AuthWrapperProps {
   children: React.ReactNode;
@@ -40,18 +39,14 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
         rounded="md"
         my=".5rem"
       >
-        <HStack mb="1.5rem">
-          <FaCircleArrowLeft size="2.3rem" />
-          <Button
-            href="/"
-            bg="transparent"
-            color="black"
-            px={"0"}
-            hover="transparent"
-          >
-            Go to Home
-          </Button>
-        </HStack>
+      
+
+        <Link href={"/"}>
+          <HStack gap=".7rem" mb="1.5rem">
+            <FaCircleArrowLeft size="2.2rem" />
+            <Text> Go to Home</Text>
+          </HStack>
+        </Link>
         <Flex
           justifyContent={"center"}
           alignItems={"center"}

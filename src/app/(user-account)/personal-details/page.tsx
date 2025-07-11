@@ -1,3 +1,4 @@
+import ProtectedRoute from "@/components/auth/protected-route";
 import PersonalDetailsPage from "@/components/personal-details";
 
 export const metadata = {
@@ -8,8 +9,8 @@ export const metadata = {
 
 export default function PersonalDetails() {
   return (
-    <>
+    <ProtectedRoute>
       <PersonalDetailsPage />
-    </>
+    </ProtectedRoute>
   );
 }

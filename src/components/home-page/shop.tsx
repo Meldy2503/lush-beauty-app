@@ -95,8 +95,8 @@ const ShopSection = () => {
           ))}
         </Grid>
         <Flex mt="6rem" alignItems={"center"} justifyContent={"center"}>
-          <Button href="/services" bg="yellow.150">
-            See All
+          <Button href="/shop" bg="yellow.150">
+            View more
           </Button>
         </Flex>
       </Wrapper>

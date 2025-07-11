@@ -9,16 +9,9 @@ export const GoBack = () => {
   const router = useRouter();
 
   return (
-    <HStack mt="5rem" mb="1.5rem" >
-      <FaCircleArrowLeft size='2.3rem'/>
-
-      <Button
-        onClick={() => router.back()}
-        bg="transparent"
-        color="black"
-        px={"0"}
-        hover="transparent"
-      >
+    <HStack mt="5rem" mb="1.5rem" onClick={() => router.back()}>
+      <FaCircleArrowLeft size="2.3rem" />
+      <Button bg="transparent" color="black" px={"0"} hover="transparent">
         Go Back
       </Button>
     </HStack>
