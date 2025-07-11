@@ -18,6 +18,7 @@ export const useGetUserProfile = () => {
     enabled: !!accessToken,
   });
 };
+
 // to get logged in user addresses
 export const useGetUserAddresses = () => {
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
@@ -48,6 +49,26 @@ export const useAddAddressMutation = () => {
     },
     onError: (error) => {
       console.error("Add address failed:", error);
+    },
+  });
+};
+
+// to delete an address
+export const useDeleteAddress = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["deleteAddress"],
+    mutationFn: async (addressId: string) => {
+      const res = await axios.delete(urls.deleteAddressUrl(addressId));
+      return res.data;
+    },
+    onSuccess: () => {
+      // Invalidate user addresses so they refetch
+      queryClient.invalidateQueries({ queryKey: ["userAddress"] });
+    },
+    onError: (error) => {
+      console.error("Delete address failed:", error);
     },
   });
 };

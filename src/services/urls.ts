@@ -6,6 +6,7 @@ const urls = {
   getUserProfileUrl: `${baseUrl}/users/profile`,
   getUserAddressesUrl: `${baseUrl}/addresses`,
   addNewAddressUrl: `${baseUrl}/addresses`,
+  deleteAddressUrl: (addressId: string) => `${baseUrl}/addresses/${addressId}`,
   getServicesUrl: `${baseUrl}/services`,
 };
 export default urls;

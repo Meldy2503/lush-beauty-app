@@ -89,6 +89,7 @@ const AddressModal = ({ icon }: { icon?: React.ReactNode }) => {
                 Add New Address{" "}
               </Dialog.Title>
             </Dialog.Header>
+            {/* add address modal */}
             <form onSubmit={handleSubmit(submit)}>
               <Dialog.Body>
                 <Stack gap="2rem">
