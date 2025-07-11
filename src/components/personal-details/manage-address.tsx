@@ -1,11 +1,20 @@
 "use client";
 
-import { Box, Flex, HStack, RadioGroup, Text } from "@chakra-ui/react";
-import AddressModal from "./address-modal";
-import { FaRegEdit } from "react-icons/fa";
+import { useGetUserAddresses } from "@/services/api/user";
+import { UserAddressType } from "@/types/user";
+import { Box, Flex, HStack, Spinner, Text } from "@chakra-ui/react";
+import { FaDotCircle, FaRegEdit } from "react-icons/fa";
+import { MdOutlineCircle } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import AddressModal from "./address-modal";
 
 const ManageAddress = () => {
+  const { data: userAddress, isLoading } = useGetUserAddresses();
+
+  const defaultAddress = userAddress?.filter(
+    (item: UserAddressType) => item.isDefault === true
+  );
+
   return (
     <Box>
       <Text mb="3rem" mt="1rem">
@@ -13,11 +22,15 @@ const ManageAddress = () => {
         address. You can change this at any time.
       </Text>
 
-      <RadioGroup.Root defaultValue="1" mb="3rem">
-        <Flex gap="2rem" flexDir="column" w="full">
-          {items.map((item) => (
+      {isLoading ? (
+        <Flex alignItems={"center"} justifyContent={"center"}>
+          <Spinner my="10rem" />
+        </Flex>
+      ) : (
+        <Flex gap="2rem" flexDir="column" w="full" mb="3rem">
+          {userAddress.map((address: UserAddressType) => (
             <Flex
-              key={item.value}
+              key={address?.id}
               justifyContent={"space-between"}
               w="full"
               borderWidth={"1px"}
@@ -27,17 +40,23 @@ const ManageAddress = () => {
               gap="2rem"
               flexDir={{ base: "column", sm: "row" }}
             >
-              <RadioGroup.Item value={item.value} gap="1.5rem" w="80%">
-                <RadioGroup.ItemHiddenInput />
-                <RadioGroup.ItemIndicator scale="1.2" />
-                <RadioGroup.ItemText
-                  fontSize={{ base: "1.5rem", md: "1.6rem" }}
-                  lineHeight={1.4}
-                >
-                  {item.label}
-                </RadioGroup.ItemText>
-              </RadioGroup.Item>
-              <Flex cursor={"pointer"} color="yellow.100" gap="1rem" alignSelf={{base:'flex-end',md: "center"}}>
+              <HStack gap="1rem">
+                {defaultAddress[0]?.id === address?.id ? (
+                  <FaDotCircle size="1.8rem" />
+                ) : (
+                  <MdOutlineCircle size="1.8rem" />
+                )}
+                <Text>
+                  {" "}
+                  {`${address?.address}, ${address?.state}, ${address?.country}`}
+                </Text>
+              </HStack>
+              <Flex
+                cursor={"pointer"}
+                color="yellow.100"
+                gap="1rem"
+                alignSelf={{ base: "flex-end", md: "center" }}
+              >
                 <AddressModal icon={<FaRegEdit size="2rem" />} />
                 <Box
                   onClick={() => {
@@ -50,7 +69,7 @@ const ManageAddress = () => {
             </Flex>
           ))}
         </Flex>
-      </RadioGroup.Root>
+      )}
       <HStack justifyContent={"center"}>
         <AddressModal />
       </HStack>
@@ -59,8 +78,3 @@ const ManageAddress = () => {
 };
 
 export default ManageAddress;
-
-const items = [
-  { label: "25 Beverly St. London, UK", value: "1" },
-  { label: "25 Beverly St. Manchester, UK", value: "2" },
-];

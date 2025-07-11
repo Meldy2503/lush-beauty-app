@@ -1,8 +1,8 @@
 "use client";
 
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
-import Button from "../ui/button";
-import { InputElement } from "../ui/input-element";
+import Button from "../shared/button";
+import { InputElement } from "../shared/input-element";
 
 interface ClientModalProps {
   onClick: () => void;

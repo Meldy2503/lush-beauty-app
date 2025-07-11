@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Flex, Heading, RadioGroup, Text } from "@chakra-ui/react";
-import StepNavigationBtns from "../ui/navigation-btns";
+import StepNavigationBtns from "../shared/navigation-btns";
 import BookingSummary from "./booking-summary";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -9,8 +9,6 @@ import { updateAppointment } from "../../store/slices/appointment-slice";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { useRouter } from "next/navigation";
-
-
 
 interface Branch {
   id: string;

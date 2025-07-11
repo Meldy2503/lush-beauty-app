@@ -1,8 +1,8 @@
 "use client";
 
-import Button from "@/components/ui/button";
+import Button from "@/components/shared/button";
 import { Stack } from "@chakra-ui/react";
-import { InputElement } from "../ui/input-element";
+import { InputElement } from "../shared/input-element";
 import AuthWrapper from "./auth-wrapper";
 import { useLoginMutation } from "@/services/api/auth";
 import { LoginType } from "@/types/auth";
@@ -10,17 +10,20 @@ import toast from "react-hot-toast";
 import { Resolver, SubmitHandler, useForm } from "react-hook-form";
 import { LoginSchema } from "@/schema/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginPage = () => {
   const loginMutation = useLoginMutation();
-  
-    const { mutateAsync: login } = loginMutation;
-    const isLoading = loginMutation.isPending;
+
+  const { mutateAsync: login } = loginMutation;
+  const isLoading = loginMutation.isPending;
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
 
   const formHook = useForm<LoginType>({
     resolver: yupResolver(LoginSchema),
+    mode: "onSubmit",
     defaultValues: {
       email: "",
       password: "",
@@ -40,13 +43,13 @@ const LoginPage = () => {
       }
       if (result) {
         toast.success("Login Successful!");
-        router.push("/");
+        router.push(redirect);
       }
-      console.log(result, "result");
     } catch (error) {
       console.error("Login error:", error);
     }
   };
+
   return (
     <AuthWrapper authType="login">
       <form onSubmit={handleSubmit(submit)}>
@@ -55,6 +58,7 @@ const LoginPage = () => {
             label="Email address"
             placeholder="peter@gmail.com"
             type="email"
+            autoComplete="email"
             register={register("email")}
             errorMessage={errors.email?.message}
           />

@@ -7,8 +7,8 @@ import { Box, Flex, Heading, HStack, RadioGroup, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import { useDispatch, useSelector } from "react-redux";
-import CalendarComponent from "../ui/calendar";
-import StepNavigationBtns from "../ui/navigation-btns";
+import CalendarComponent from "../shared/calendar";
+import StepNavigationBtns from "../shared/navigation-btns";
 import BookingSummary from "./booking-summary";
 import { useRouter } from "next/navigation";
 

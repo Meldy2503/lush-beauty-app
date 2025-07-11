@@ -3,21 +3,18 @@ import Image from "next/image";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import academy from "../../assets/images/academy-1.webp";
-import Button from "../ui/button";
-import Wrapper from "../ui/wrapper";
+import Button from "../shared/button";
+import Wrapper from "../shared/wrapper";
 import Cart from "./cart";
 import PersonalDetailsModal from "../personal-details/personal-details-modal";
-import { GoBack } from "../ui/go-back";
+import { GoBack } from "../shared/go-back";
 
 const OrderSummaryPage = () => {
   return (
     <Wrapper bg="gray.250">
       <GoBack />
 
-      <Flex
-        gap="2rem"
-        flexDir={{ base: "column-reverse", lg: "row" }}
-      >
+      <Flex gap="2rem" flexDir={{ base: "column-reverse", lg: "row" }}>
         <Box w={{ base: "100%", lg: "70%" }}>
           {/* customer details section */}
           <Box bg="white" p="3rem 2rem ">

@@ -1,5 +1,4 @@
 import { store } from "@/store";
-import { logout } from "@/store/slices/auth-slice";
 import { APIResponse } from "@/types";
 import Axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 import toast from "react-hot-toast";
@@ -30,8 +29,6 @@ axios.interceptors.response.use(
 
     if (status === 401) {
       toast.error(apiMessage || "Unauthorized. Please login again.");
-      store.dispatch(logout());
-       window.location.href = "/";
        return Promise.reject(error);
     }
 

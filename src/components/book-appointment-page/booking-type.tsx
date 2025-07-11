@@ -7,15 +7,15 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import groupBookingImg from "../../assets/images/group-booking-img.webp";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
-import Button from "../ui/button";
+import Button from "../shared/button";
 import ExpectedClientModal from "./expected-client-modal";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
- import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const BookingTypePage = () => {
   const dispatch = useDispatch();
-   const router = useRouter();
+  const router = useRouter();
   const numOfClients = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.numberOfClients
   );
@@ -31,7 +31,7 @@ const BookingTypePage = () => {
         numberOfClients: clients,
       })
     );
-     router.push("/book-appointment/select-location");
+    router.push("/book-appointment/select-location");
   };
 
   return (

@@ -9,7 +9,7 @@ import {
   List,
   Text,
 } from "@chakra-ui/react";
-import Button from "../ui/button";
+import Button from "../shared/button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 

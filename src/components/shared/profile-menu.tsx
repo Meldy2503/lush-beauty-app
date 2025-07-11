@@ -15,9 +15,11 @@ import { IoPersonCircleSharp, IoPersonOutline } from "react-icons/io5";
 import { MdKeyboardArrowDown, MdLogout } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "./button";
+import { usePathname } from "next/navigation";
 
 const ProfileMenu = () => {
   const dispatch = useDispatch();
+  const pathname = usePathname();
   const token = useSelector((state: RootState) => state.auth.accessToken);
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const name = loggedInUser?.fullName;
@@ -62,7 +64,10 @@ const ProfileMenu = () => {
             ) : (
               <Menu.Item value="sign in">
                 <Box w="full" bg="black">
-                  <Button w="100%" href="/login">
+                  <Button
+                    w="100%"
+                    href={`/login?redirect=${encodeURIComponent(pathname)}`}
+                  >
                     {" "}
                     Sign in
                   </Button>
@@ -99,20 +104,22 @@ const ProfileMenu = () => {
                 </HStack>
               </Link>
             </Menu.Item>
-           {token && <Menu.Item
-              value="logout"
-              fontSize={"1.6rem"}
-              p="1.2rem"
-              color="red.600"
-              onClick={() => {
-                dispatch(logout());
-              }}
-             >
-              <HStack gap="1rem">
-                <MdLogout />
-                <Text>Sign out</Text>
-              </HStack>
-            </Menu.Item>}
+            {token && (
+              <Menu.Item
+                value="logout"
+                fontSize={"1.6rem"}
+                p="1.2rem"
+                color="red.600"
+                onClick={() => {
+                  dispatch(logout());
+                }}
+              >
+                <HStack gap="1rem">
+                  <MdLogout />
+                  <Text>Sign out</Text>
+                </HStack>
+              </Menu.Item>
+            )}
           </Menu.Content>
         </Menu.Positioner>
       </Portal>

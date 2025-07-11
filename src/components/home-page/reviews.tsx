@@ -7,7 +7,7 @@ import {
   Text,
   Button as ChakraButton,
 } from "@chakra-ui/react";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "../shared/wrapper";
 import Image from "next/image";
 import reviewerImg from "../../assets/images/personal-booking-img.webp";
 import reviewerImg1 from "../../assets/images/reviewImg1.jpg";

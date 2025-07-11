@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
 import academy from "../../assets/images/academy-1.webp";
-import Tag from "../ui/tag";
+import Tag from "../shared/tag";
 import ViewOrderDetailsModal from "./order-details-modal";
 
 const NewOrders = () => {

@@ -2,13 +2,13 @@
 
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 import ctaImg from "../../assets/images/services-cta.webp";
-import Button from "../ui/button";
+import Button from "../shared/button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
 const CtaSection = () => {
-    const token = useSelector((state: RootState) => state.auth.accessToken);
-  
+  const token = useSelector((state: RootState) => state.auth.accessToken);
+
   return (
     <Box
       bgImage={`url(${ctaImg.src})`}

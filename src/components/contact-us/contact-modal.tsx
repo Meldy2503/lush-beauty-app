@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import contactBg from "../../assets/images/contact-bg.webp";
-import Button from "../ui/button";
+import Button from "../shared/button";
 import ContactDetails from "./contact-details";
 import ContactForm from "./contact-form";
 

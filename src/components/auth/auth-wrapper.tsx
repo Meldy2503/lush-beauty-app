@@ -1,6 +1,6 @@
 "use client";
 
-import Logo from "@/components/ui/logo";
+import Logo from "@/components/shared/logo";
 import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { FaCircleArrowLeft } from "react-icons/fa6";
@@ -39,8 +39,6 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
         rounded="md"
         my=".5rem"
       >
-      
-
         <Link href={"/"}>
           <HStack gap=".7rem" mb="1.5rem">
             <FaCircleArrowLeft size="2.2rem" />

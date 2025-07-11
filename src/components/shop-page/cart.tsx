@@ -15,7 +15,7 @@ import Image from "next/image";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import academy1 from "../../assets/images/academy-1.webp";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import Button from "../ui/button";
+import Button from "../shared/button";
 import { GiShoppingBag } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 

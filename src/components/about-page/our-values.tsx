@@ -6,7 +6,7 @@ import valueIcon1 from "../../assets/images/about-2.svg";
 import valueIcon2 from "../../assets/images/about-3.svg";
 import valueIcon3 from "../../assets/images/about-4.svg";
 import valueIcon4 from "../../assets/images/about-5.svg";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "../shared/wrapper";
 
 interface ValueDataType {
   id: number;

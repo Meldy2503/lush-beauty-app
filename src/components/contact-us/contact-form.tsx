@@ -1,6 +1,6 @@
 import { Box, Stack } from "@chakra-ui/react";
 import React from "react";
-import { InputElement } from "../ui/input-element";
+import { InputElement } from "../shared/input-element";
 
 const ContactForm = () => {
   return (

@@ -10,9 +10,9 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import tick from "../../assets/images/tick.svg";
-import Button from "../ui/button";
+import Button from "../shared/button";
 
-const BookingConfirmationModal = ({ disabled }: { disabled? : boolean}) => {
+const BookingConfirmationModal = ({ disabled }: { disabled?: boolean }) => {
   return (
     <Dialog.Root
       scrollBehavior="inside"

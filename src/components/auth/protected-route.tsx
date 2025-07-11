@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { Box, Text, Spinner, VStack } from "@chakra-ui/react";
@@ -9,12 +9,13 @@ import { Box, Text, Spinner, VStack } from "@chakra-ui/react";
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const token = useSelector((state: RootState) => state.auth.accessToken);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!token) {
-      router.replace("/login");
+       router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
     }
-  }, [token, router]);
+  }, [token, router, pathname]);
 
   if (!token) {
     return (

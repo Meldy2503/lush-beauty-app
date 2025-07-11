@@ -2,8 +2,8 @@
 
 import { Box, Flex, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 import salonImg from "../../assets/images/salon-img.webp";
-import Wrapper from "../ui/wrapper";
-import Button from "../ui/button";
+import Wrapper from "../shared/wrapper";
+import Button from "../shared/button";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import ContactUsModal from "../contact-us/contact-modal";
 

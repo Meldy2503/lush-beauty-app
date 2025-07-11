@@ -15,9 +15,9 @@ import { IoIosStar } from "react-icons/io";
 import { IoGridSharp } from "react-icons/io5";
 import { PiUsersThree } from "react-icons/pi";
 import personalBookingImg from "../../assets/images/personal-booking-img.webp";
-import Button from "../ui/button";
-import { InputElement } from "../ui/input-element";
-import StepNavigationBtns from "../ui/navigation-btns";
+import Button from "../shared/button";
+import { InputElement } from "../shared/input-element";
+import StepNavigationBtns from "../shared/navigation-btns";
 import BookingSummary from "./booking-summary";
 import { useDispatch } from "react-redux";
 import { RootState } from "@/store";
@@ -98,7 +98,7 @@ const SelectTechnicianPage = () => {
           overflowY={"auto"}
           h={{ base: "90vh", md: "59vh" }}
           pb={{ base: "5rem", md: "2rem" }}
-          cursor={'pointer'}
+          cursor={"pointer"}
         >
           {staffs.map((staff, index) => {
             return (

@@ -8,7 +8,7 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
-import StepNavigationBtns from "../ui/navigation-btns";
+import StepNavigationBtns from "../shared/navigation-btns";
 import BookingSummary from "./booking-summary";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";

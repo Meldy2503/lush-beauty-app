@@ -4,6 +4,8 @@ const urls = {
   loginUrl: `${baseUrl}/auth/login`,
   signUpUrl: `${baseUrl}/auth/signup`,
   getUserProfileUrl: `${baseUrl}/users/profile`,
+  getUserAddressesUrl: `${baseUrl}/addresses`,
+  addNewAddressUrl: `${baseUrl}/addresses`,
   getServicesUrl: `${baseUrl}/services`,
 };
 export default urls;

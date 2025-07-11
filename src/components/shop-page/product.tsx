@@ -5,14 +5,14 @@ import Image from "next/image";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import academy1 from "../../assets/images/academy-1.webp";
-import Button from "../ui/button";
-import Wrapper from "../ui/wrapper";
+import Button from "../shared/button";
+import Wrapper from "../shared/wrapper";
 import Cart from "./cart";
-import { GoBack } from "../ui/go-back";
+import { GoBack } from "../shared/go-back";
 
 const Product = () => {
   return (
-    <Wrapper >
+    <Wrapper>
       <GoBack />
       <Flex
         direction={{ base: "column", md: "row" }}

@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import Wrapper from "../ui/wrapper";
-import Button from "../ui/button";
+import Wrapper from "../shared/wrapper";
+import Button from "../shared/button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 

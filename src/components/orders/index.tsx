@@ -1,17 +1,17 @@
 import { Box, Heading, HStack, Tabs, Text } from "@chakra-ui/react";
 import Footer from "../footer";
 import Navbar from "../navbar";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "../shared/wrapper";
 import NewOrders from "./new-orders";
 import PastOrders from "./past-orders";
-import { GoBack } from "../ui/go-back";
+import { GoBack } from "../shared/go-back";
 
 const OrdersPage = () => {
   return (
     <>
       <Navbar />
       <Wrapper bg="gray.250">
-        <GoBack/>
+        <GoBack />
         <Box mt="1rem" bg="white" p="3rem 2rem">
           <Heading
             as="h2"

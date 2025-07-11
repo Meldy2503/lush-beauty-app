@@ -2,7 +2,7 @@
 
 import { Accordion, Box, Heading, Span } from "@chakra-ui/react";
 import { useState } from "react";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "../shared/wrapper";
 import { BsPlusSquareFill } from "react-icons/bs";
 import { AiFillMinusSquare } from "react-icons/ai";
 
@@ -102,4 +102,3 @@ const items = [
     text: "We ask for at least 24 hours’ notice for any cancellations or rescheduling. This helps us manage our bookings effectively and offer available slots to other clients. You can reschedule online or by calling the salon directly.",
   },
 ];
-

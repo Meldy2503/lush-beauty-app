@@ -12,19 +12,18 @@ import {
 } from "@chakra-ui/react";
 import { FaRegCreditCard } from "react-icons/fa";
 import { usePaymentInputs } from "react-payment-inputs";
-import Button from "../ui/button";
-import CreditCards from "../ui/credit-cards";
-import { GoBack } from "../ui/go-back";
-import { InputElement } from "../ui/input-element";
-import Wrapper from "../ui/wrapper";
+import Button from "../shared/button";
+import CreditCards from "../shared/credit-cards";
+import { GoBack } from "../shared/go-back";
+import { InputElement } from "../shared/input-element";
+import Wrapper from "../shared/wrapper";
 
 const OrderConfirmationPage = () => {
   const payment = usePaymentInputs();
-  
 
   return (
     <Wrapper bg="gray.250">
-      <GoBack/>
+      <GoBack />
       <Flex gap="2rem" flexDir={{ base: "column", lg: "row" }}>
         <Box w={{ base: "100%", lg: "60%" }} bg="white" p="3rem 2rem">
           <HStack

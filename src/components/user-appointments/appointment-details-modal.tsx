@@ -1,5 +1,5 @@
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
-import Button from "../ui/button";
+import Button from "../shared/button";
 import AppointmentDetailsContent from "./appt-details-content";
 
 const ViewAppointmentDetailsModal = () => {

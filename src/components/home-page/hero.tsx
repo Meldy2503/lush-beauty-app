@@ -1,6 +1,13 @@
 "use client";
 
-import { Box, Flex, Text, VStack, chakra, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  VStack,
+  chakra,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
 import Image from "next/image";
@@ -8,7 +15,7 @@ import heroImg1 from "../../assets/images/hero-img.webp";
 import scissors from "../../assets/images/scissors.png";
 import heroImg2 from "../../assets/images/hero-img-2.webp";
 import heroImg3 from "../../assets/images/test.webp";
-import Button from "../ui/button";
+import Button from "../shared/button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
@@ -55,9 +62,7 @@ const SideImage = ({ src, text, side }: SideImageProps) => (
 
 const HeroSection = () => {
   const containerRef = useRef(null);
-   const token = useSelector(
-      (state: RootState) => state.auth.accessToken
-    );
+  const token = useSelector((state: RootState) => state.auth.accessToken);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const isDesktop = useBreakpointValue({ base: false, lg: true }) ?? false;
   const { scrollYProgress } = useScroll({

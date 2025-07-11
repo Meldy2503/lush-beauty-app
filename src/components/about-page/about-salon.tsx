@@ -5,7 +5,7 @@ import Image from "next/image";
 import aboutImg1 from "../../assets/images/about-6.webp";
 import aboutImg2 from "../../assets/images/about-7.webp";
 import aboutImg3 from "../../assets/images/about-8.webp";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "../shared/wrapper";
 
 const AboutSalonSection = () => {
   return (

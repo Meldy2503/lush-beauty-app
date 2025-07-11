@@ -21,6 +21,7 @@ interface InputElementProps {
   label?: string;
   placeholder?: string;
   border?: string;
+  autoComplete?: string;
   type?: string;
   min?: string | number;
   bg?: string;
@@ -46,6 +47,7 @@ export const InputElement = ({
   type = "text",
   value,
   defaultValue,
+  autoComplete,
   register,
   errorMessage,
   min,
@@ -112,7 +114,6 @@ export const InputElement = ({
           )}
           <Input
             type="file"
-            required
             display="none"
             onChange={handleFileChange}
             {...props}
@@ -135,7 +136,6 @@ export const InputElement = ({
         )}
         <Textarea
           p="1.5rem"
-          required
           border={border ?? "none"}
           fontSize={"1.6rem"}
           bg={bg ?? "white"}
@@ -179,7 +179,6 @@ export const InputElement = ({
             height="4.5rem"
             bg={bg ?? "white"}
             p="1.5rem"
-            required
             placeholder={placeholder || label}
             {...props}
             {...register}
@@ -211,13 +210,13 @@ export const InputElement = ({
         height="4.5rem"
         p="1.5rem"
         min={min}
-        required
         placeholder={placeholder || label}
         type={type}
         {...props}
         {...register}
         value={value}
         defaultValue={defaultValue}
+        autoComplete={autoComplete}
         onChange={onChange}
       />
       <Text color="red" fontSize="1.2rem" mt=".5rem">

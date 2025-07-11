@@ -1,7 +1,7 @@
 "use client";
 
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
-import Button from "../ui/button";
+import Button from "../shared/button";
 import OrderDetailsContent from "./order-details-content";
 
 const ViewOrderDetailsModal = () => {

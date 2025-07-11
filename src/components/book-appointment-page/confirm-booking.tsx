@@ -3,14 +3,13 @@
 import { Box, Checkbox, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import BookingSummary from "./booking-summary";
-import Button from "../ui/button";
+import Button from "../shared/button";
 import BookingConfirmationModal from "./booking-confirmation-modal";
 import { useRouter } from "next/navigation";
 
 const ConfirmBookingPage = () => {
   const router = useRouter();
   const [agreeToTerms, setAgreeToTerms] = useState(false);
-
 
   return (
     <Flex

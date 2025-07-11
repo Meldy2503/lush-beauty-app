@@ -10,6 +10,7 @@ export const useLoginMutation = () => {
   const dispatch = useDispatch();
 
   return useMutation({
+    mutationKey: ["login"],
     mutationFn: async (login: LoginType) => {
       const res = await axios.post(urls.loginUrl, login);
       return res.data;
@@ -21,7 +22,6 @@ export const useLoginMutation = () => {
           user: data?.data?.user,
         })
       );
-      console.log(data, 'authData')
     },
     onError: (error) => {
       console.error("Login failed:", error);
@@ -34,6 +34,7 @@ export const useSignUpMutation = () => {
   const dispatch = useDispatch();
 
   return useMutation({
+    mutationKey: ["signUp"],
     mutationFn: async (signUp: SignUpType) => {
       const res = await axios.post(urls.signUpUrl, signUp);
       return res.data;

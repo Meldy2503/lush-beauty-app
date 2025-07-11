@@ -3,10 +3,10 @@
 import { Box, Flex, Heading, Input, Stack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
-import SocialMediaIcons from "../ui/social-media-icons";
-import Button from "../ui/button";
-import Logo from "../ui/logo";
-import Wrapper from "../ui/wrapper";
+import SocialMediaIcons from "../shared/social-media-icons";
+import Button from "../shared/button";
+import Logo from "../shared/logo";
+import Wrapper from "../shared/wrapper";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

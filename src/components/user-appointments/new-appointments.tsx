@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import Tag from "../ui/tag";
+import Tag from "../shared/tag";
 import ViewAppointmentDetailsModal from "./appointment-details-modal";
 
 const NewAppointments = () => {

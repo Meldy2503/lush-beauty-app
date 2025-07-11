@@ -7,14 +7,14 @@ import {
   Heading,
   HStack,
   InputGroup,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
 import { usePaymentInputs } from "react-payment-inputs";
-import Button from "../ui/button";
-import { InputElement } from "../ui/input-element";
+import Button from "../shared/button";
+import { InputElement } from "../shared/input-element";
 import BookingConfirmationModal from "./booking-confirmation-modal";
 import BookingSummary from "./booking-summary";
-import CreditCards from "../ui/credit-cards";
+import CreditCards from "../shared/credit-cards";
 
 interface MakePaymentProps {
   step: number;

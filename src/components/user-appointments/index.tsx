@@ -1,11 +1,11 @@
 import React from "react";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "../shared/wrapper";
 import { Tabs, Box, HStack, Text, Heading, Span } from "@chakra-ui/react";
 import NewAppointments from "./new-appointments";
 import PastAppointments from "./past-appointments";
-import { GoBack } from "../ui/go-back";
+import { GoBack } from "../shared/go-back";
 
 const UserAppointments = () => {
   return (

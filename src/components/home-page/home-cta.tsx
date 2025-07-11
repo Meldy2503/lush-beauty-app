@@ -17,8 +17,8 @@ import academy4 from "../../assets/images/academy-4.webp";
 import academy5 from "../../assets/images/academy-5.webp";
 import academy6 from "../../assets/images/academy-6.webp";
 import academyBg from "../../assets/images/academy-bg.webp";
-import Button from "../ui/button";
-import Wrapper from "../ui/wrapper";
+import Button from "../shared/button";
+import Wrapper from "../shared/wrapper";
 
 interface CardDataType {
   id: number;
@@ -46,7 +46,12 @@ const HomeCtaSection = () => {
           >
             LUSH & LUXE
           </Heading>
-          <Text maxW="500px" mx="auto" mb="4rem" mt={{ base: "2rem", md: "4rem" }}>
+          <Text
+            maxW="500px"
+            mx="auto"
+            mb="4rem"
+            mt={{ base: "2rem", md: "4rem" }}
+          >
             Indulge in unparalleled luxury. Discover a world of exquisite beauty
             treatments tailored just for you
           </Text>

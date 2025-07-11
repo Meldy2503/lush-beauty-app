@@ -11,10 +11,10 @@ import {
   createListCollection,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import Button from "../ui/button";
-import { InputElement } from "../ui/input-element";
+import Button from "../shared/button";
+import { InputElement } from "../shared/input-element";
 import Products from "./products";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "../shared/wrapper";
 
 interface CategoriesData {
   label: string;
@@ -57,13 +57,9 @@ const ShopListSection = () => {
           >
             <Select.HiddenSelect />
 
-            <Select.Control bg='white'>
+            <Select.Control bg="white">
               <Select.Trigger fontSize="1.6rem">
-                <Select.ValueText
-                  py="1.5rem"
-                  px="1rem"
-                  placeholder="Filter"
-                />
+                <Select.ValueText py="1.5rem" px="1rem" placeholder="Filter" />
               </Select.Trigger>
               <Select.IndicatorGroup>
                 <Select.Indicator fontSize="1.6rem" p="1rem" />
@@ -152,7 +148,7 @@ const ShopListSection = () => {
             ))}
           </RadioGroup.Root>
         </Box>
-       {/* products section */}
+        {/* products section */}
         <Box w={{ base: "100%", md: "75%" }}>
           <Products />
           <Flex alignItems={"center"} justifyContent={"center"} mt="6rem">

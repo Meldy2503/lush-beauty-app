@@ -4,7 +4,7 @@ import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
-import Tag from "../ui/tag";
+import Tag from "../shared/tag";
 import academy from "../../assets/images/academy-1.webp";
 
 const OrderDetailsContent = () => {

@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/ui/button";
+import Button from "@/components/shared/button";
 import {
   Flex,
   Stack,
@@ -9,10 +9,16 @@ import {
   CloseButton,
   Box,
 } from "@chakra-ui/react";
-import { InputElement } from "../ui/input-element";
+import { InputElement } from "../shared/input-element";
 import { FaRegEdit } from "react-icons/fa";
+import { UserProfileType } from "@/types/user";
 
-const PersonalDetailsModal = () => {
+interface PersonalDetailsType {
+  user: UserProfileType;
+}
+
+const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
+  const defaultAddress = user?.addresses?.find((address) => address?.isDefault);
   return (
     <Dialog.Root
       placement={{ base: "top", md: "center" }}
@@ -42,27 +48,40 @@ const PersonalDetailsModal = () => {
             <form>
               <Dialog.Body>
                 <Stack gap="2rem">
-                  <InputElement label="Full name" placeholder="Peter Smith" />
+                  <InputElement
+                    label="Full name"
+                    placeholder="Peter Smith"
+                    defaultValue={user?.fullName}
+                  />
                   <InputElement
                     label="Email address"
                     placeholder="peter@gmail.com"
                     type="email"
+                    defaultValue={user?.email}
                   />
                   <InputElement
                     label="Phone number"
                     placeholder="+447056835551"
                     type="number"
+                    defaultValue={user?.phone}
                   />
                   <InputElement
-                    label="Address"
+                    label="Address/Postcode"
                     placeholder="2 Beverley street"
+                    defaultValue={defaultAddress?.address}
                   />
                   <Flex gap="2rem" flexDir={{ base: "column", md: "row" }}>
-                    <InputElement label="Postcode" placeholder="E13RFF" />
-                    <InputElement label="Town/City" placeholder="Manchester" />
+                    <InputElement
+                      label="Town/City"
+                      placeholder="Manchester"
+                      defaultValue={defaultAddress?.state}
+                    />
+                    <InputElement
+                      label="Country"
+                      placeholder="United Kingdom"
+                      defaultValue={defaultAddress?.country}
+                    />
                   </Flex>
-
-                  <InputElement label="Country" placeholder="United Kingdom" />
                 </Stack>
               </Dialog.Body>
               <Dialog.Footer
@@ -78,6 +97,7 @@ const PersonalDetailsModal = () => {
                     borderWidth="1.5px"
                     color="black"
                     px={{ base: "3rem", sm: "5rem" }}
+                    type="button"
                   >
                     Close
                   </Button>

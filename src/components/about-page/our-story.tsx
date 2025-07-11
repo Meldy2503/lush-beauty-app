@@ -2,7 +2,7 @@
 
 import { Box, Heading, Text } from "@chakra-ui/react";
 import aboutImg from "../../assets/images/about-1.webp";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "../shared/wrapper";
 import Image from "next/image";
 
 const OurStorySection = () => {

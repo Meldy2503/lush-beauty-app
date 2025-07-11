@@ -2,8 +2,8 @@
 
 import { Box, Stack, Text } from "@chakra-ui/react";
 import React from "react";
-import { InputElement } from "../ui/input-element";
-import Button from "../ui/button";
+import { InputElement } from "../shared/input-element";
+import Button from "../shared/button";
 
 const UpdatePassword = () => {
   return (

@@ -4,8 +4,8 @@ import { Box, CloseButton, Drawer, Flex, Icon, Portal } from "@chakra-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
-import Logo from "../ui/logo";
-import Button from "../ui/button";
+import Logo from "../shared/logo";
+import Button from "../shared/button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 

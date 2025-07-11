@@ -16,7 +16,7 @@ import { MdSchedule } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import Footer from "../footer";
 import Navbar from "../navbar";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "../shared/wrapper";
 import ManageAddress from "./manage-address";
 import UpdatePassword from "./update-password";
 import UserDetails from "./user-details";

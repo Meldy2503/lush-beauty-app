@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import salonImg from "../../assets/images/visit-us.webp";
-import Wrapper from "../ui/wrapper";
+import Wrapper from "../shared/wrapper";
 
 const VisitUsSection = () => {
   return (
