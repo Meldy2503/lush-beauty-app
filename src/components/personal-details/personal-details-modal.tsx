@@ -11,6 +11,9 @@ import { Resolver, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaRegEdit } from "react-icons/fa";
 import { InputElement } from "../shared/input-element";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthData } from "@/store/slices/auth-slice";
+import { RootState } from "@/store";
 
 interface PersonalDetailsType {
   user?: UserProfileType;
@@ -19,6 +22,11 @@ interface PersonalDetailsType {
 const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
   const updateUserProfileMutation = useUpdateUserProfileMutation();
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const token = useSelector((state: RootState) => state.auth.accessToken);
+
+  console.log(typeof token, "type");
+  console.log(token);
 
   const { mutateAsync: updateUserProfile } = updateUserProfileMutation;
   const isLoading = updateUserProfileMutation.isPending;
@@ -50,13 +58,22 @@ const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
       if (result) {
         toast.success("Profile Updated Successfully!");
         setIsOpen(false);
+        dispatch(
+          setAuthData({
+            token: token || "",
+            user: {
+              ...user,
+              fullName: data?.fullName,
+            },
+          })
+        );
         reset();
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
-// to ensure the updated default value is always displayed
+  // to ensure the updated default value is always displayed
   useEffect(() => {
     if (isOpen && user) {
       reset({
@@ -65,7 +82,6 @@ const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
       });
     }
   }, [isOpen, user, reset]);
-
 
   return (
     <Dialog.Root

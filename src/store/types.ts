@@ -1,3 +1,5 @@
+import { UserProfileType } from "@/types/user";
+
 export interface Appointment {
   id: string;
   specialistId: string;
@@ -17,18 +19,7 @@ export interface AppointmentState {
   appointments: Appointment[];
 }
 
-
-export interface LoggedInUser {
-  createdAt?: string;
-  email?: string;
-  fullName?: string;
-  id?: string;
-  imageUrl?: string;
-  phone?: string;
-  status?: boolean;
-  updatedAt?: string;
-}
 export interface AuthState {
-  accessToken: string | null;
-  user?: LoggedInUser | null;
+  accessToken?: string | null;
+  user?: UserProfileType | null;
 }

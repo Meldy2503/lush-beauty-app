@@ -9,15 +9,15 @@ export interface UserAddressType {
   userId?: string;
 }
 export interface UserProfileType {
-  addresses: UserAddressType[];
-  createdAt: string;
-  email: string;
-  fullName: string;
-  id: string;
-  imageUrl: string;
-  phone: string;
-  status: boolean;
-  updatedAt: string;
+  addresses?: UserAddressType[];
+  createdAt?: string;
+  email?: string;
+  fullName?: string;
+  id?: string;
+  imageUrl?: string;
+  phone?: string;
+  status?: boolean;
+  updatedAt?: string;
 }
 
 export interface AddAddressType {
