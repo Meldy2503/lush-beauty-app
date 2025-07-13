@@ -13,7 +13,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { InputElement } from "../shared/input-element";
 
 interface PersonalDetailsType {
-  user: UserProfileType;
+  user?: UserProfileType;
 }
 
 const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
