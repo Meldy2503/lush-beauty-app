@@ -13,10 +13,14 @@ export interface SignUpType {
 }
 
 export interface ChangePasswordType {
-  old_password: string;
-  new_password: string;
-  confirm_new_password: string;
+  oldPassword: string;
+  newPassword: string;
+}
+export interface ForgotPasswordType {
+  email: string;
 }
 
-
-
+export interface ResetPasswordType {
+  token: string;
+  newPassword: string;
+}

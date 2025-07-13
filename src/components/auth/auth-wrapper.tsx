@@ -14,6 +14,8 @@ interface AuthWrapperProps {
 const authTypes = {
   signup: "Create Your Account",
   login: "Login to Your Account",
+  forgotPassword: "Forgot your Password?",
+  resetPassword: "Reset your Password",
 };
 
 const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
@@ -69,17 +71,21 @@ const AuthWrapper = ({ children, authType }: AuthWrapperProps) => {
           >
             {children}
           </Flex>
-          <Text textAlign="center" mt={"3rem"}>
-            {authType === "signup"
-              ? "Already have an account?"
-              : "Don’t have an account? "}{" "}
-            <Link
-              href={authType === "signup" ? "/login" : "/sign-up"}
-              style={{ fontWeight: "bold", color: "#ca8317" }}
-            >
-              {authType === "signup" ? "Login" : "Sign up"}
-            </Link>
-          </Text>
+          <Link
+            href={authType === "login" ? "/sign-up" : "/login"}
+            style={{
+              fontWeight: "bold",
+              textDecoration: "underline",
+            }}
+          >
+            <Text textAlign="center" mt={"3rem"}>
+              {authType === "signup"
+                ? "Already have an account? Sign in"
+                : authType === "login"
+                ? "Don’t have an account? Sign up"
+                : "Back to Login"}
+            </Text>
+          </Link>
         </Flex>
       </Box>
     </Flex>

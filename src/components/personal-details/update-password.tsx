@@ -1,11 +1,52 @@
 "use client";
 
 import { Box, Stack, Text } from "@chakra-ui/react";
-import React from "react";
-import { InputElement } from "../shared/input-element";
 import Button from "../shared/button";
+import { InputElement } from "../shared/input-element";
+import { changePasswordSchema } from "@/schema/auth";
+import { useChangePasswordMutation } from "@/services/api/auth";
+import { ChangePasswordType } from "@/types/auth";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Resolver, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const UpdatePassword = () => {
+  const changePasswordMutation = useChangePasswordMutation();
+
+  const { mutateAsync: changePassword } = changePasswordMutation;
+  const isLoading = changePasswordMutation.isPending;
+
+  const formHook = useForm<ChangePasswordType>({
+    resolver: yupResolver(changePasswordSchema),
+    mode: "onSubmit",
+    defaultValues: {
+      oldPassword: "",
+      newPassword: "",
+    },
+  } as { resolver: Resolver<ChangePasswordType> });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = formHook;
+
+  const submit: SubmitHandler<ChangePasswordType> = async (
+    data: ChangePasswordType
+  ) => {
+    try {
+      const result = await changePassword(data);
+      if (!result) {
+        return;
+      }
+      if (result) {
+        toast.success("Password Changed Successfully!");
+        reset();
+      }
+    } catch (error) {
+      console.error("Password Change error:", error);
+    }
+  };
   return (
     <Box>
       <Text mb="3rem" mt="1rem" textAlign={"center"}>
@@ -21,13 +62,28 @@ const UpdatePassword = () => {
         py={{ base: "3rem", md: "4rem" }}
         mx="auto"
       >
-        <form>
-          <Stack gap="1.5rem" mb="3rem">
-            <InputElement type="password" placeholder="Current password*" />
-            <InputElement type="password" placeholder="New password*" />
-            <InputElement type="password" placeholder="Confirm new password*" />
+        <form onSubmit={handleSubmit(submit)}>
+          <Stack gap="2rem" mb="3rem">
+            <InputElement
+              required
+              label="Current password"
+              type="password"
+              placeholder="*****"
+              register={register("oldPassword")}
+              errorMessage={errors.oldPassword?.message}
+            />
+            <InputElement
+              required
+              label="New password"
+              type="password"
+              placeholder="*****"
+              register={register("newPassword")}
+              errorMessage={errors.newPassword?.message}
+            />
           </Stack>
-          <Button w="full">Update</Button>
+          <Button w="full" disabled={isLoading} type="submit">
+            {isLoading ? "Processing..." : "Update"}
+          </Button>
         </form>
       </Box>
     </Box>

@@ -1,16 +1,17 @@
 "use client";
 
 import Button from "@/components/shared/button";
-import { Stack } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 import { InputElement } from "../shared/input-element";
 import AuthWrapper from "./auth-wrapper";
 import { useLoginMutation } from "@/services/api/auth";
 import { LoginType } from "@/types/auth";
 import toast from "react-hot-toast";
 import { Resolver, SubmitHandler, useForm } from "react-hook-form";
-import { LoginSchema } from "@/schema/auth";
+import { loginSchema } from "@/schema/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const LoginPage = () => {
   const loginMutation = useLoginMutation();
@@ -22,7 +23,7 @@ const LoginPage = () => {
   const redirect = searchParams.get("redirect") || "/";
 
   const formHook = useForm<LoginType>({
-    resolver: yupResolver(LoginSchema),
+    resolver: yupResolver(loginSchema),
     mode: "onSubmit",
     defaultValues: {
       email: "",
@@ -46,7 +47,6 @@ const LoginPage = () => {
         toast.success("Login Successful!");
         router.push(redirect);
         reset();
-
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -61,7 +61,6 @@ const LoginPage = () => {
             label="Email address"
             placeholder="peter@gmail.com"
             type="email"
-            autoComplete="email"
             register={register("email")}
             errorMessage={errors.email?.message}
           />
@@ -72,11 +71,21 @@ const LoginPage = () => {
             register={register("password")}
             errorMessage={errors.password?.message}
           />
-          <Button w="full" disabled={isLoading} type="submit">
-            {" "}
-            {isLoading ? "Processing..." : "Sign in"}
-          </Button>
         </Stack>
+        <Flex
+          mb="4rem"
+          mt="1rem"
+          justifyContent={"flex-end"}
+          color="yellow.100"
+          textDecor={"underline"}
+          fontWeight={"600"}
+        >
+          <Link href="/forgot-password">Forgot Password?</Link>
+        </Flex>
+        <Button w="full" disabled={isLoading} type="submit">
+          {" "}
+          {isLoading ? "Processing..." : "Sign in"}
+        </Button>
       </form>
     </AuthWrapper>
   );

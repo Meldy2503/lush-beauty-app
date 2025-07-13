@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/shared/button";
-import { SignUpSchema } from "@/schema/auth";
+import { signUpSchema } from "@/schema/auth";
 import { useSignUpMutation } from "@/services/api/auth";
 import { SignUpType } from "@/types/auth";
 import { Flex, Stack } from "@chakra-ui/react";
@@ -20,7 +20,7 @@ const SignUpPage = () => {
   const router = useRouter();
 
   const formHook = useForm<SignUpType>({
-    resolver: yupResolver(SignUpSchema),
+    resolver: yupResolver(signUpSchema),
     defaultValues: {
       fullName: "",
       email: "",
@@ -61,7 +61,6 @@ const SignUpPage = () => {
           <InputElement
             label="Full name"
             placeholder="Peter Smith"
-            autoComplete="name"
             register={register("fullName")}
             errorMessage={errors.fullName?.message}
           />
@@ -69,14 +68,12 @@ const SignUpPage = () => {
             label="Email address"
             placeholder="peter@gmail.com"
             type="email"
-            autoComplete="email"
             register={register("email")}
             errorMessage={errors.email?.message}
           />
           <InputElement
             label="Phone number"
             placeholder="+447056835551"
-            autoComplete="mobile"
             type="number"
             register={register("phone")}
             errorMessage={errors.phone?.message}
@@ -84,7 +81,6 @@ const SignUpPage = () => {
           <InputElement
             label="Address/Postcode"
             placeholder="2 Beverley street, WRF3FF"
-            autoComplete="street-address"
             register={register("address")}
             errorMessage={errors.address?.message}
           />
@@ -98,7 +94,6 @@ const SignUpPage = () => {
             <InputElement
               label="Country"
               placeholder="United Kingdom"
-              autoComplete="country"
               register={register("country")}
               errorMessage={errors.country?.message}
             />

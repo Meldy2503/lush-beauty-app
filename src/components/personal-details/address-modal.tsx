@@ -11,7 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { InputElement } from "../shared/input-element";
-import { AddAddressSchema } from "@/schema/user";
+import { addAddressSchema } from "@/schema/user";
 import {
   useAddAddressMutation,
   useUpdateAddressMutation,
@@ -44,7 +44,7 @@ const AddressModal = ({
   const isEditAddressLoading = updateAddressMutation.isPending;
 
   const formHook = useForm<AddAddressType>({
-    resolver: yupResolver(AddAddressSchema),
+    resolver: yupResolver(addAddressSchema),
     defaultValues: {
       address: selectedAddress?.address ?? "",
       state: selectedAddress?.state ?? "",

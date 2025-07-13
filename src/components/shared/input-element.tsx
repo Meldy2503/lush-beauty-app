@@ -77,10 +77,10 @@ export const InputElement = ({
     };
 
     return (
-      <Field.Root required={required} w="full">
+      <Field.Root required={required} invalid={!!errorMessage} w="full">
         {label && (
           <Flex mb="1">
-            <Field.Label fontWeight="semibold" lineHeight={1.3}>
+            <Field.Label fontSize={"1.5rem"} lineHeight={1.3}>
               {label}
             </Field.Label>
             {required && <Field.RequiredIndicator color="red.500" ml="1" />}
@@ -121,21 +121,25 @@ export const InputElement = ({
             {...props}
           />
         </Box>
-        <Text color="red" fontSize="1.2rem" mt=".5rem">
+        <Field.ErrorText fontSize={"1.4rem"} mt=".3rem" lineHeight={"1.3"}>
           {errorMessage}
-        </Text>
+        </Field.ErrorText>
       </Field.Root>
     );
   }
 
   if (type === "textarea") {
     return (
-      <Field.Root required={required}>
+      <Field.Root required={required} invalid={!!errorMessage}>
         {label && (
-          <Field.Label fontSize={"1.5rem"} mb=".5rem" lineHeight={1.3}>
-            {label}
-          </Field.Label>
+          <Flex mb="1">
+            <Field.Label fontSize={"1.5rem"} lineHeight={1.3}>
+              {label}
+            </Field.Label>
+            {required && <Field.RequiredIndicator color="red.500" ml="1" />}
+          </Flex>
         )}
+
         <Textarea
           p="1.5rem"
           border={border ?? "none"}
@@ -151,20 +155,23 @@ export const InputElement = ({
             onChange?.(e as React.ChangeEvent<HTMLTextAreaElement>)
           }
         />
-        <Text color="red" fontSize="1.2rem" mt=".5rem">
+        <Field.ErrorText fontSize={"1.4rem"} mt=".3rem" lineHeight={"1.3"}>
           {errorMessage}
-        </Text>
+        </Field.ErrorText>
       </Field.Root>
     );
   }
 
   if (type === "password") {
     return (
-      <Field.Root required={required}>
+      <Field.Root required={required} invalid={!!errorMessage}>
         {label && (
-          <Field.Label fontSize={"1.5rem"} mb=".5rem" lineHeight={1.3}>
-            {label}
-          </Field.Label>
+          <Flex mb="1">
+            <Field.Label fontSize={"1.5rem"} lineHeight={1.3}>
+              {label}
+            </Field.Label>
+            {required && <Field.RequiredIndicator color="red.500" ml="1" />}
+          </Flex>
         )}
         <InputGroup
           flex="1"
@@ -188,23 +195,23 @@ export const InputElement = ({
             onChange={onChange}
           />
         </InputGroup>
-        <Text color="red" fontSize="1.2rem" mt=".5rem">
+        <Field.ErrorText fontSize={"1.4rem"} mt=".3rem" lineHeight={"1.3"}>
           {errorMessage}
-        </Text>
+        </Field.ErrorText>
       </Field.Root>
     );
   }
 
   return (
-    <Field.Root required={required}>
-      <Flex>
-        {label && (
-          <Field.Label fontSize={"1.5rem"} mb=".5rem" lineHeight={1.3}>
+    <Field.Root required={required} invalid={!!errorMessage}>
+      {label && (
+        <Flex mb="1">
+          <Field.Label fontSize={"1.5rem"} lineHeight={1.3}>
             {label}
           </Field.Label>
-        )}
-        {required && <Field.RequiredIndicator color={"black"} />}
-      </Flex>
+          {required && <Field.RequiredIndicator color="red.500" ml="1" />}
+        </Flex>
+      )}
       <Input
         border={border ?? "none"}
         bg={bg ?? "white"}
@@ -213,7 +220,7 @@ export const InputElement = ({
         p="1.5rem"
         min={min}
         placeholder={placeholder || label}
-        type={type}
+        type={type ?? "text"}
         {...props}
         {...register}
         value={value}
@@ -222,7 +229,10 @@ export const InputElement = ({
         disabled={disabled}
         onChange={onChange}
       />
-      <Field.ErrorText> {errorMessage}</Field.ErrorText>
+      <Field.ErrorText fontSize={"1.4rem"} mt=".3rem" lineHeight={"1.3"}>
+        {" "}
+        {errorMessage}
+      </Field.ErrorText>
     </Field.Root>
   );
 };

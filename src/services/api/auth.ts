@@ -1,4 +1,10 @@
-import { LoginType, SignUpType } from "@/types/auth";
+import {
+  ChangePasswordType,
+  ForgotPasswordType,
+  LoginType,
+  ResetPasswordType,
+  SignUpType,
+} from "@/types/auth";
 import { useMutation } from "@tanstack/react-query";
 import urls from "../urls";
 import axios from "../axios";
@@ -47,6 +53,47 @@ export const useSignUpMutation = () => {
     },
     onError: (error) => {
       console.error("SignUp failed:", error);
+    },
+  });
+};
+
+// change password
+export const useChangePasswordMutation = () => {
+  return useMutation({
+    mutationKey: ["changePassword"],
+    mutationFn: async (changePassword: ChangePasswordType) => {
+      const res = await axios.patch(urls.changePasswordUrl, changePassword);
+      return res.data;
+    },
+    onError: (error) => {
+      console.error("Password change failed:", error);
+    },
+  });
+};
+
+// forgot password
+export const useForgotPasswordMutation = () => {
+  return useMutation({
+    mutationKey: ["forgotPassword"],
+    mutationFn: async (forgotPassword: ForgotPasswordType) => {
+      const res = await axios.post(urls.forgotPasswordUrl, forgotPassword);
+      return res.data;
+    },
+    onError: (error) => {
+      console.error("Forgot Password failed:", error);
+    },
+  });
+};
+// reset password
+export const useResetPasswordMutation = () => {
+  return useMutation({
+    mutationKey: ["resetPassword"],
+    mutationFn: async (resetPassword: ResetPasswordType) => {
+      const res = await axios.post(urls.resetPasswordUrl, resetPassword);
+      return res.data;
+    },
+    onError: (error) => {
+      console.error("Reset Password failed:", error);
     },
   });
 };

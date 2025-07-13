@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/shared/button";
-import { UpdateUserProfileSchema } from "@/schema/user";
+import { updateUserProfileSchema } from "@/schema/user";
 import { useUpdateUserProfileMutation } from "@/services/api/user";
 import { UpdateUserProfileType, UserProfileType } from "@/types/user";
 import { Box, CloseButton, Dialog, Portal, Stack } from "@chakra-ui/react";
@@ -29,7 +29,7 @@ const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
   const isLoading = updateUserProfileMutation.isPending;
 
   const formHook = useForm<UpdateUserProfileType>({
-    resolver: yupResolver(UpdateUserProfileSchema),
+    resolver: yupResolver(updateUserProfileSchema),
     defaultValues: {
       fullName: user?.fullName,
       phone: user?.phone,

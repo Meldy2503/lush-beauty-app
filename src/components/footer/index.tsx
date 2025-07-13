@@ -62,6 +62,7 @@ const Footer = () => {
             >
               QUICK LINKS
             </Heading>
+
             <Link href="/" passHref>
               <Text
                 fontSize="1.5rem"
