@@ -25,9 +25,6 @@ const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
   const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state.auth.accessToken);
 
-  console.log(typeof token, "type");
-  console.log(token);
-
   const { mutateAsync: updateUserProfile } = updateUserProfileMutation;
   const isLoading = updateUserProfileMutation.isPending;
 
