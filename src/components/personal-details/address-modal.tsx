@@ -94,7 +94,7 @@ const AddressModal = ({
 
   return (
     <Dialog.Root
-      placement={{ base: "top", md: "center" }}
+      placement="center"
       motionPreset="slide-in-bottom"
       open={isOpen}
       onOpenChange={(e) => setIsOpen(e.open)}
@@ -103,7 +103,7 @@ const AddressModal = ({
         {icon ?? <Button fontWeight="400">Add address</Button>}
       </Dialog.Trigger>
       <Portal>
-        <Dialog.Backdrop />
+        <Dialog.Backdrop bg="backdrop" />
         <Dialog.Positioner>
           <Dialog.Content
             maxW="900px"

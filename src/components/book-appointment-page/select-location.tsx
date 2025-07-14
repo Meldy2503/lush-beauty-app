@@ -1,6 +1,13 @@
 "use client";
 
-import { Box, Flex, Heading, RadioGroup, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  RadioGroup,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import StepNavigationBtns from "../shared/navigation-btns";
 import BookingSummary from "./booking-summary";
 import { useState } from "react";
@@ -9,37 +16,33 @@ import { updateAppointment } from "../../store/slices/appointment-slice";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { useRouter } from "next/navigation";
+import { useGetBranches } from "@/services/api/book-appointment";
+import { BranchesType } from "@/types/book-appointment";
 
-interface Branch {
-  id: string;
-  name: string;
-  address: string;
-  city: string;
-  country: string;
-  value: string;
-}
+
 
 const SelectLocationPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const branchId = useSelector(
-    (state: RootState) => state.appointment.appointments[0]?.branchId
+
+  const { data: branches, isLoading } = useGetBranches();
+
+  const storedBranch = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.selectedBranch
   );
 
-  const initialSelected =
-    branches.find((branch) => branch.id === branchId)?.value || null;
   const [selectedBranch, setSelectedBranch] = useState<string | null>(
-    initialSelected ?? null
+    storedBranch?.id ?? null
   );
 
   const handleNextClick = () => {
-    const selectedBranchObj = branches.find(
-      (branch) => branch.value === selectedBranch
+    const selectedBranchObj = branches?.find(
+      (branch: BranchesType) => branch?.id === selectedBranch
     );
     if (selectedBranchObj) {
       dispatch(
         updateAppointment({
-          branchId: selectedBranchObj.id,
+          selectedBranch: selectedBranchObj,
         })
       );
       router.push("/book-appointment/select-service");
@@ -68,60 +71,66 @@ const SelectLocationPage = () => {
         >
           SELECT LOCATION
         </Heading>
-
-        <RadioGroup.Root
-          w="full"
-          defaultValue={selectedBranch ?? ""}
-          value={selectedBranch ?? ""}
-          onValueChange={({ value }) => {
-            setSelectedBranch(value);
-            const selectedBranchObj = branches.find(
-              (branch) => branch.value === value
-            );
-            if (selectedBranchObj) {
-              dispatch(
-                updateAppointment({
-                  branchId: selectedBranchObj.id,
-                })
-              );
-            }
-          }}
-        >
-          <Flex gap="2rem" flexDir="column">
-            {branches.map((branch) => (
-              <RadioGroup.Item
-                key={branch.id}
-                value={branch.value}
-                gap="1.5rem"
-                display="flex"
-                justifyContent="space-between"
-                bg="gray.250"
-                p={{ base: "1.5rem", sm: "2rem" }}
-              >
-                <RadioGroup.ItemText>
-                  <Box fontSize={{ base: "1.45rem", sm: "1.5rem" }}>
-                    <Heading
-                      as="h4"
-                      fontFamily="playfair"
-                      mb="1rem"
-                      lineHeight={1.4}
-                      textTransform="uppercase"
-                      fontSize={{ base: "1.5rem", sm: "1.6rem" }}
-                    >
-                      Lush & Luxe – {branch.name}
-                    </Heading>
-                    <Text color="gray.100" lineHeight={1.35}>
-                      {branch.address}, {branch.city}, {branch.country}
-                    </Text>
-                  </Box>
-                </RadioGroup.ItemText>
-                <RadioGroup.ItemHiddenInput />
-                <RadioGroup.ItemIndicator scale="1.7" />
-              </RadioGroup.Item>
-            ))}
+        {isLoading ? (
+          <Flex alignItems={"center"} justifyContent={"center"}>
+            <Spinner my="10rem" />
           </Flex>
-        </RadioGroup.Root>
-
+        ) : (
+          <RadioGroup.Root
+            overflowY={"auto"}
+            w="full"
+            pb="2rem"
+            defaultValue={selectedBranch ?? ""}
+            value={selectedBranch ?? ""}
+            onValueChange={({ value }) => {
+              setSelectedBranch(value);
+              const selectedBranchObj = branches?.find(
+                (branch: BranchesType) => branch?.id === value
+              );
+              if (selectedBranchObj) {
+                dispatch(
+                  updateAppointment({
+                    selectedBranch: selectedBranchObj,
+                  })
+                );
+              }
+            }}
+          >
+            <Flex gap="2rem" flexDir="column">
+              {branches?.map((branch: BranchesType) => (
+                <RadioGroup.Item
+                  key={branch.id}
+                  value={branch?.id || ''}
+                  gap="1.5rem"
+                  display="flex"
+                  justifyContent="space-between"
+                  bg="gray.250"
+                  p={{ base: "1.5rem", sm: "2rem" }}
+                >
+                  <RadioGroup.ItemText>
+                    <Box fontSize={{ base: "1.45rem", sm: "1.5rem" }}>
+                      <Heading
+                        as="h4"
+                        fontFamily="playfair"
+                        mb=".6rem"
+                        lineHeight={1.4}
+                        textTransform="uppercase"
+                        fontSize={{ base: "1.5rem", sm: "1.6rem" }}
+                      >
+                        Lush & Luxe – {branch?.name}
+                      </Heading>
+                      <Text color="gray.100" lineHeight={1.35}>
+                        {branch?.address}, {branch?.state}, {branch?.country}
+                      </Text>
+                    </Box>
+                  </RadioGroup.ItemText>
+                  <RadioGroup.ItemHiddenInput />
+                  <RadioGroup.ItemIndicator scale="1.7" />
+                </RadioGroup.Item>
+              ))}
+            </Flex>
+          </RadioGroup.Root>
+        )}
         <StepNavigationBtns
           prevOnClick={() => router.back()}
           nextOnClick={handleNextClick}
@@ -133,29 +142,10 @@ const SelectLocationPage = () => {
         w={{ base: "100%", md: "35%" }}
         display={{ base: "none", md: "flex" }}
       >
-        <BookingSummary />
+        <BookingSummary  />
       </Box>
     </Flex>
   );
 };
 
 export default SelectLocationPage;
-
-export const branches: Branch[] = [
-  {
-    id: "1001",
-    name: "Central London",
-    address: "68 Charlotte Street, Fitzrovia, W1T 4QF",
-    city: "London",
-    country: "UK",
-    value: "1",
-  },
-  {
-    id: "2001",
-    name: "West London",
-    address: "68 Charlotte Street, Fitzrovia, W1T 4QF",
-    city: "London",
-    country: "UK",
-    value: "2",
-  },
-];

@@ -15,18 +15,81 @@ import { LuCalendarDays } from "react-icons/lu";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { branches } from "./select-location";
 import { staffs } from "./select-technician";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { formatAppointmentDateTime } from "@/utils";
 import { serviceItems } from "./select-service";
 import { useCallback, useState } from "react";
 
-const BookingSummary = () => {
-  const branchId = useSelector(
-    (state: RootState) => state.appointment.appointments[0]?.branchId
+interface SummaryContainerProps {
+  title?: string;
+  fallbackName?: string;
+  img?: string;
+  heading?: React.ReactNode;
+  text?: React.ReactNode;
+  tick?: boolean;
+  icon?: React.ReactNode;
+}
+
+const SummaryContainer = ({
+  title,
+  text,
+  fallbackName,
+  img,
+  heading,
+  tick,
+  icon,
+}: SummaryContainerProps) => {
+  return (
+    <Box borderBottomWidth={"2px"} borderColor={"gray.250"} py="1.4rem">
+      <Text fontWeight={"bold"} mb=".8rem" fontSize={"1.6rem"}>
+        {title}
+      </Text>
+      <Flex
+        bg="gray.250"
+        alignItems={"center"}
+        p="1rem"
+        gap="1.5rem"
+        justifyContent={tick ? "space-between" : "flex-start"}
+      >
+        <>
+          {icon ? (
+            <HStack bg="white" p="1rem" rounded={"full"} shadow={"md"}>
+              {icon}
+            </HStack>
+          ) : (
+            <Avatar.Root size="2xl" boxSize={"5rem"} variant={"solid"}>
+              <Avatar.Fallback name={fallbackName} />
+              <Avatar.Image src={img} />
+            </Avatar.Root>
+          )}
+        </>
+        <Box>
+          <Heading
+            as="h4"
+            fontFamily="playfair"
+            mb=".5rem"
+            lineHeight={1.4}
+            textTransform={"uppercase"}
+            fontSize="1.4rem"
+          >
+            {heading}
+          </Heading>
+          <Text lineHeight={1.3} fontSize="1.35rem">
+            {text}
+          </Text>
+        </Box>
+        {tick && <IoIosCheckmarkCircle color="#DB9935" size="2.5rem" />}{" "}
+      </Flex>
+    </Box>
   );
-  const branchDetails = branches.find((branch) => branch.id === branchId);
+};
+
+const BookingSummary = () => {
+  const storedBranch = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.selectedBranch
+  );
+
   const numOfClients = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.numberOfClients
   );
@@ -87,7 +150,6 @@ const BookingSummary = () => {
     },
     [numOfClients]
   );
-  
 
   return (
     <Box
@@ -102,7 +164,6 @@ const BookingSummary = () => {
         as="h3"
         fontSize={{ base: "1.7rem", md: "1.8rem" }}
         fontFamily="playfair"
-        mb="2rem"
         px="1.5rem"
         pt="2rem"
         lineHeight={1.3}
@@ -117,36 +178,16 @@ const BookingSummary = () => {
         px="1.5rem"
       >
         {/* location section */}
-        {branchDetails && (
-          <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
-            <HStack bg="white" p=".8rem" rounded={"full"} shadow={"md"}>
-              <IoLocationOutline size={"2.3rem"} />
-            </HStack>
-            <Box>
-              <Heading
-                as="h4"
-                fontFamily="playfair"
-                mb=".5rem"
-                lineHeight={1.4}
-                textTransform={"uppercase"}
-                fontSize="1.4rem"
-              >
-                Lush & Luxe – {branchDetails.name}
-              </Heading>
-              <Text lineHeight={1.3} w="95%" fontSize="1.3rem">
-                {branchDetails.address}, {branchDetails.city},{" "}
-                {branchDetails.country}
-              </Text>
-            </Box>
-          </Flex>
+        {storedBranch && (
+          <SummaryContainer
+            icon={<IoLocationOutline size={"2.3rem"} />}
+            heading={`Lush & Luxe – ${storedBranch.name}`}
+            text={`${storedBranch.address}, ${storedBranch.city},
+                ${storedBranch.country}`}
+          />
         )}
         {/* Expected clients section */}
-        <Box
-          borderTopWidth={"2px"}
-          borderColor={"gray.250"}
-          py="1.5rem"
-          mt="1.5rem"
-        >
+        <Box py="1.5rem">
           <Flex justifyContent={"space-between"} gap="2rem" fontSize={"1.5rem"}>
             <Text>Number of Clients</Text>
             <Text>{numOfClients}</Text>
@@ -154,7 +195,7 @@ const BookingSummary = () => {
         </Box>
         {/*services section */}
         <Box
-          borderTopWidth={"2px"}
+          borderYWidth={"2px"}
           borderColor={"gray.250"}
           py=".5rem"
           fontSize={"1.5rem"}
@@ -211,7 +252,6 @@ const BookingSummary = () => {
                                 ? "not-allowed"
                                 : "pointer"
                             }
-                            
                           >
                             <FiMinus />
                           </Button>
@@ -240,71 +280,23 @@ const BookingSummary = () => {
 
         {/* technician section */}
         {staffDetails && (
-          <Box borderTopWidth={"2px"} borderColor={"gray.250"} pt="1.5rem">
-            <Text fontWeight={"bold"} mb="1rem">
-              Technician selected
-            </Text>
-            <Flex
-              bg="gray.250"
-              alignItems={"center"}
-              p="1rem"
-              gap="1.5rem"
-              justifyContent={"space-between"}
-            >
-              <Avatar.Root size="2xl" boxSize={"5rem"} variant={"solid"}>
-                <Avatar.Fallback name={staffDetails.name} />
-                <Avatar.Image src={staffDetails.img.src} />
-              </Avatar.Root>
-              <Box>
-                <Heading
-                  as="h4"
-                  fontFamily="playfair"
-                  mb=".5rem"
-                  lineHeight={1.4}
-                  textTransform={"uppercase"}
-                  fontSize="1.4rem"
-                >
-                  {staffDetails.name}
-                </Heading>
-                <Text lineHeight={1.3} fontSize="1.3rem">
-                  {staffDetails.typeOfService} - {staffDetails.age}yrs
-                </Text>
-              </Box>
-              <IoIosCheckmarkCircle color="#DB9935" size="2.5rem" />
-            </Flex>
-          </Box>
+          <SummaryContainer
+            tick
+            title="Technician Selected"
+            fallbackName={staffDetails.name}
+            img={staffDetails.img.src}
+            heading={staffDetails.name}
+            text={`${staffDetails.typeOfService} - ${staffDetails.age}yrs`}
+          />
         )}
         {/* date and time section */}
         {(date || time) && (
-          <Box
-            borderTopWidth={"2px"}
-            borderColor={"gray.250"}
-            mt="2rem"
-            pt="1.5rem"
-          >
-            <Text fontWeight={"bold"} mb="1rem">
-              Scheduled date and time{" "}
-            </Text>
-            <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
-              <HStack bg="white" p="1rem" rounded={"full"} shadow={"md"}>
-                <LuCalendarDays size={"2rem"} />
-              </HStack>
-              <Box>
-                <Heading
-                  as="h4"
-                  fontFamily="playfair"
-                  mb=".5rem"
-                  lineHeight={1.4}
-                  fontSize="1.45rem"
-                >
-                  {date}
-                </Heading>
-                <Text lineHeight={1.3} fontSize="1.35rem">
-                  {time}
-                </Text>
-              </Box>
-            </Flex>
-          </Box>
+          <SummaryContainer
+            title="Scheduled Date and Time"
+            icon={<LuCalendarDays size={"2rem"} />}
+            heading={date}
+            text={time}
+          />
         )}
       </Box>
       {/* Booking Total Section */}

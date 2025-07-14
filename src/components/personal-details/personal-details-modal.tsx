@@ -82,7 +82,7 @@ const PersonalDetailsModal = ({ user }: PersonalDetailsType) => {
 
   return (
     <Dialog.Root
-      placement={{ base: "top", md: "center" }}
+      placement="center" 
       motionPreset="slide-in-bottom"
       open={isOpen}
       onOpenChange={(e) => setIsOpen(e.open)}

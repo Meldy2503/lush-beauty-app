@@ -84,7 +84,7 @@ const MobileNav = ({ color, bg }: MobileNavProps) => {
                     Shop
                   </Link>
                 </Flex>
-                {token && (
+                {!token && (
                   <Button
                     w="100%"
                     href="/login"

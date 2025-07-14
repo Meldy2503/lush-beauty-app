@@ -158,7 +158,6 @@ const Cart = ({ children }: CartProps) => {
                     <Button
                       href="/shop/order-summary"
                       w="100%"
-                      py="1.35rem"
                       px={{ base: "3rem", sm: "5rem" }}
                     >
                       Checkout
@@ -167,7 +166,6 @@ const Cart = ({ children }: CartProps) => {
                     <Drawer.ActionTrigger asChild>
                       <Button
                         w="100%"
-                        py="1.85rem"
                         px={{ base: "3rem", sm: "5rem" }}
                       >
                         Close

@@ -23,13 +23,14 @@ const DeleteModal = ({
       motionPreset="slide-in-bottom"
       size={"xl"}
       open={open}
+      placement="center"
       onOpenChange={onOpenChange}
     >
       <Dialog.Trigger asChild>
         <RiDeleteBin6Line size="2rem" color="red" />
       </Dialog.Trigger>
       <Portal>
-        <Dialog.Backdrop />
+        <Dialog.Backdrop bg="backdrop" />
         <Dialog.Positioner>
           <Dialog.Content p="2rem" m=".5rem">
             <Dialog.Header>
@@ -65,7 +66,7 @@ const DeleteModal = ({
                 {isLoading ? "Processing..." : "Delete"}
               </Button>
             </Dialog.Footer>
-            <Dialog.CloseTrigger asChild _hover={{bg:'gray.250'}}>
+            <Dialog.CloseTrigger asChild _hover={{ bg: "gray.250" }}>
               <CloseButton size="2xl" />
             </Dialog.CloseTrigger>
           </Dialog.Content>

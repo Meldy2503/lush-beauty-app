@@ -14,7 +14,7 @@ const ViewAppointmentDetailsModal = () => {
         </Button>
       </Dialog.Trigger>
       <Portal>
-        <Dialog.Backdrop />
+        <Dialog.Backdrop bg="backdrop" />
         <Dialog.Positioner>
           <Dialog.Content
             maxW="1000px"

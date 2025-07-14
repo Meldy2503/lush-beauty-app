@@ -13,5 +13,6 @@ const urls = {
   updateAddressUrl: (addressId: string) => `${baseUrl}/addresses/${addressId}`,
   deleteAddressUrl: (addressId: string) => `${baseUrl}/addresses/${addressId}`,
   getServicesUrl: `${baseUrl}/services`,
+  getBranchesUrl: `${baseUrl}/branches`,
 };
 export default urls;
