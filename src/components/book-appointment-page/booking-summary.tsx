@@ -125,10 +125,11 @@ const BookingSummary = () => {
   const totalPrice = useMemo(
     () =>
       flatCategories?.reduce((sum, item) => {
-        const categoryId = item.category?.id;
-        const count = categoryId
-          ? serviceClientCounts?.[categoryId] || numClients || 1
-          : numClients || 1;
+        const categoryId = item?.category?.id;
+        const count =
+          categoryId && numClients !== 1
+            ? serviceClientCounts?.[categoryId] || numClients || 1
+            : numClients || 1;
         return sum + (item.category?.price || 0) * count;
       }, 0) || 0,
     [flatCategories, serviceClientCounts, numClients]
