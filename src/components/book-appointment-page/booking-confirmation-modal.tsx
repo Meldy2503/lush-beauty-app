@@ -11,8 +11,26 @@ import {
 import Image from "next/image";
 import tick from "../../assets/images/tick.svg";
 import Button from "../shared/button";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
-const BookingConfirmationModal = ({ disabled }: { disabled?: boolean }) => {
+interface ConfirmationModalProps {
+  disabled?: boolean;
+}
+
+const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
+  const totalPrice = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.totalPrice
+  );
+
+
+  const appointment = useSelector(
+    (state: RootState) => state.appointment.appointments[0]
+  );
+
+
+  console.log(appointment, "appointment");
+
   return (
     <Dialog.Root
       scrollBehavior="inside"
@@ -81,7 +99,7 @@ const BookingConfirmationModal = ({ disabled }: { disabled?: boolean }) => {
                   >
                     Go to Home
                   </Button>
-                  <Button px="2rem">Proceed to Pay £1000</Button>
+                  <Button px="2rem">Proceed to Pay £{totalPrice}</Button>
                 </HStack>
               </VStack>
             </Dialog.Body>

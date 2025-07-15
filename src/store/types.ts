@@ -6,9 +6,9 @@ export interface Appointment {
   specialistId: string;
   appointmentDateTime: string;
   selectedBranch: BranchesType | null;
-  totalCost: number;
+  totalPrice: number;
   numberOfClients: number;
-  serviceClientCounts?: Record<string, number>
+  serviceClientCounts?: Record<string, number>;
   serviceSelections: {
     serviceId: string;
     categoryIds: CategoriesType[];

@@ -18,7 +18,7 @@ import { RootState } from "@/store";
 import { staffs } from "./select-technician";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { formatAppointmentDateTime } from "@/utils";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { updateAppointment } from "@/store/slices/appointment-slice";
 
@@ -156,6 +156,17 @@ const BookingSummary = () => {
     },
     [flatCategories, serviceClientCounts, numClients, dispatch]
   );
+
+  // Only update if the totalPrice is different from what's in Redux
+  useEffect(() => {
+    if (totalPrice !== appointment?.totalPrice) {
+      dispatch(
+        updateAppointment({
+          totalPrice: totalPrice,
+        })
+      );
+    }
+  }, [totalPrice, appointment?.totalPrice, dispatch]);
 
   const isConfirmBooking = pathname.includes("confirm-booking");
 

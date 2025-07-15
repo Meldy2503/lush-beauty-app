@@ -19,7 +19,7 @@ const appointmentSlice = createSlice({
             specialistId: "",
             selectedBranch: null,
             appointmentDateTime: "",
-            totalCost: 0,
+            totalPrice: 0,
             numberOfClients: 1,
             serviceSelections: [],
             serviceClientCounts: {},

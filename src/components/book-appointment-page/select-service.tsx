@@ -30,6 +30,10 @@ const SelectServicePage = () => {
     (state: RootState) => state.appointment.appointments[0]?.serviceSelections
   );
 
+    const totalPrice = useSelector(
+      (state: RootState) => state.appointment.appointments[0]?.totalPrice
+    );
+
   // Initialize state with existing selections or empty array
   const [selectedServices, setSelectedServices] = useState<
     { serviceId: string; categoryIds: CategoriesType[] }[]
@@ -86,11 +90,14 @@ const SelectServicePage = () => {
     dispatch(
       updateAppointment({
         serviceSelections: selectedServices,
+        totalPrice: totalPrice,
       })
     );
     router.push("/book-appointment/select-technician");
   };
 
+
+  console.log(totalPrice, "totalPriceSERVICE");
   return (
     <Flex gap="2rem" alignItems="stretch">
       <Box

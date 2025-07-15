@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 const ConfirmBookingPage = () => {
   const router = useRouter();
   const [agreeToTerms, setAgreeToTerms] = useState(false);
+   
 
   return (
     <Flex
@@ -127,7 +128,9 @@ const ConfirmBookingPage = () => {
             >
               Prev
             </Button>
-            <BookingConfirmationModal disabled={!agreeToTerms} />
+            <BookingConfirmationModal
+              disabled={!agreeToTerms}
+            />
           </HStack>
         </Box>
       </Box>
