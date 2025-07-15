@@ -22,11 +22,22 @@ const appointmentSlice = createSlice({
             totalCost: 0,
             numberOfClients: 1,
             serviceSelections: [],
+            serviceClientCounts: {},
           },
         ];
       }
-      // Merge the new data into the first appointment
-      state.appointments[0] = { ...state.appointments[0], ...action.payload };
+
+      const existing = state.appointments[0];
+      const incoming = action.payload;
+
+      state.appointments[0] = {
+        ...existing,
+        ...incoming,
+        serviceClientCounts: {
+          ...existing.serviceClientCounts,
+          ...incoming.serviceClientCounts,
+        },
+      };
     },
   },
 });

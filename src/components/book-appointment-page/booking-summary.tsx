@@ -13,13 +13,14 @@ import {
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import { FiMinus, FiPlus } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
 import { staffs } from "./select-technician";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { formatAppointmentDateTime } from "@/utils";
-import { serviceItems } from "./select-service";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo } from "react";
+import { usePathname } from "next/navigation";
+import { updateAppointment } from "@/store/slices/appointment-slice";
 
 interface SummaryContainerProps {
   title?: string;
@@ -39,117 +40,123 @@ const SummaryContainer = ({
   heading,
   tick,
   icon,
-}: SummaryContainerProps) => {
-  return (
-    <Box borderBottomWidth={"2px"} borderColor={"gray.250"} py="1.4rem">
-      <Text fontWeight={"bold"} mb=".8rem" fontSize={"1.6rem"}>
-        {title}
-      </Text>
-      <Flex
-        bg="gray.250"
-        alignItems={"center"}
-        p="1rem"
-        gap="1.5rem"
-        justifyContent={tick ? "space-between" : "flex-start"}
-      >
-        <>
-          {icon ? (
-            <HStack bg="white" p="1rem" rounded={"full"} shadow={"md"}>
-              {icon}
-            </HStack>
-          ) : (
-            <Avatar.Root size="2xl" boxSize={"5rem"} variant={"solid"}>
-              <Avatar.Fallback name={fallbackName} />
-              <Avatar.Image src={img} />
-            </Avatar.Root>
-          )}
-        </>
-        <Box>
-          <Heading
-            as="h4"
-            fontFamily="playfair"
-            mb=".5rem"
-            lineHeight={1.4}
-            textTransform={"uppercase"}
-            fontSize="1.4rem"
-          >
-            {heading}
-          </Heading>
-          <Text lineHeight={1.3} fontSize="1.35rem">
-            {text}
-          </Text>
-        </Box>
-        {tick && <IoIosCheckmarkCircle color="#DB9935" size="2.5rem" />}{" "}
-      </Flex>
-    </Box>
-  );
-};
+}: SummaryContainerProps) => (
+  <Box borderBottomWidth={"2px"} borderColor={"gray.250"} py="1.4rem">
+    <Text fontWeight={"bold"} mb=".8rem" fontSize={"1.6rem"}>
+      {title}
+    </Text>
+    <Flex
+      bg="gray.250"
+      alignItems={"center"}
+      p="1rem"
+      gap="1.5rem"
+      justifyContent={tick ? "space-between" : "flex-start"}
+    >
+      {icon ? (
+        <HStack bg="white" p="1rem" rounded={"full"} shadow={"md"}>
+          {icon}
+        </HStack>
+      ) : (
+        <Avatar.Root size="2xl" boxSize={"5rem"} variant={"solid"}>
+          <Avatar.Fallback name={fallbackName} />
+          <Avatar.Image src={img} />
+        </Avatar.Root>
+      )}
+      <Box>
+        <Heading
+          as="h4"
+          fontFamily="playfair"
+          mb=".5rem"
+          lineHeight={1.4}
+          textTransform={"uppercase"}
+          fontSize="1.4rem"
+        >
+          {heading}
+        </Heading>
+        <Text lineHeight={1.3} fontSize="1.35rem">
+          {text}
+        </Text>
+      </Box>
+      {tick && <IoIosCheckmarkCircle color="#DB9935" size="2.5rem" />}
+    </Flex>
+  </Box>
+);
 
 const BookingSummary = () => {
-  const storedBranch = useSelector(
-    (state: RootState) => state.appointment.appointments[0]?.selectedBranch
+  const pathname = usePathname();
+  const dispatch = useDispatch();
+
+  // All Redux selectors
+  const appointment = useSelector(
+    (state: RootState) => state.appointment.appointments[0]
+  );
+  const {
+    selectedBranch: branch,
+    numberOfClients: numClients,
+    serviceSelections,
+    specialistId,
+    appointmentDateTime,
+    serviceClientCounts,
+  } = appointment || {};
+
+  // Memoized calculations
+  // to get each selected service category
+  const flatCategories = useMemo(
+    () =>
+      serviceSelections?.flatMap((selection) =>
+        selection?.categoryIds?.map((category) => ({
+          category,
+          serviceId: selection.serviceId,
+        }))
+      ),
+    [serviceSelections]
   );
 
-  const numOfClients = useSelector(
-    (state: RootState) => state.appointment.appointments[0]?.numberOfClients
+  const staffDetails = useMemo(
+    () => staffs.find((staff) => staff.id === specialistId),
+    [specialistId]
   );
-  // const [updateClientCount, setUpdateClientCount] = useState<number>(
-  //   numOfClients ?? 1
-  // );
-
-  // const [updateClientCounts, setUpdateClientCounts] = useState<number[]>(
-  //   Array(numOfClients || 1).fill(1) // Initial count of 1 per client
-  // );
-
-  const [updateClientCount, setUpdateClientCount] = useState<number[]>(() =>
-    Array(numOfClients).fill(numOfClients ?? 1)
-  );
-  const serviceSelections = useSelector(
-    (state: RootState) => state.appointment.appointments[0]?.serviceSelections
+  const { date, time } = useMemo(
+    () => formatAppointmentDateTime(appointmentDateTime),
+    [appointmentDateTime]
   );
 
-  const specialistId = useSelector(
-    (state: RootState) => state.appointment.appointments[0]?.specialistId
+  // total price - now defaults to numClients for each service
+  const totalPrice = useMemo(
+    () =>
+      flatCategories?.reduce((sum, item) => {
+        const categoryId = item.category?.id;
+        const count = categoryId
+          ? serviceClientCounts?.[categoryId] || numClients || 1
+          : numClients || 1;
+        return sum + (item.category?.price || 0) * count;
+      }, 0) || 0,
+    [flatCategories, serviceClientCounts, numClients]
   );
-  const staffDetails = staffs.find((staff) => staff.id === specialistId);
-  const appointmentDateTime = useSelector(
-    (state: RootState) => state.appointment.appointments[0]?.appointmentDateTime
-  );
-  const { date, time } = formatAppointmentDateTime(appointmentDateTime);
 
-  // const handleClientCountChange = (increment: boolean) => {
-  //   setUpdateClientCount((prevCount) =>
-  //     increment
-  //       ? Math.min(prevCount + 1, numOfClients ?? 1)
-  //       : Math.max(prevCount - 1, 1)
-  //   );
-  // };
-
-  // const handleClientCountChange = useCallback(
-  //   (increment: boolean, index: number) => {
-  //     setUpdateClientCounts((prevCounts) => {
-  //       const updated = [...prevCounts];
-  //       updated[index] = increment
-  //         ? Math.min(updated[index] + 1, numOfClients ?? 1)
-  //         : Math.max(updated[index] - 1, 1);
-  //       return updated;
-  //     });
-  //   },
-  //   [numOfClients]
-  // );
-
+  // Handler for client count changes
   const handleClientCountChange = useCallback(
     (increment: boolean, index: number) => {
-      setUpdateClientCount((prevCounts) => {
-        const updated = [...prevCounts];
-        updated[index] = increment
-          ? Math.min(updated[index] + 1, numOfClients ?? 1)
-          : Math.max(updated[index] - 1, 1);
-        return updated;
-      });
+      const categoryId = flatCategories?.[index]?.category?.id;
+      if (!categoryId) return;
+
+      const currentCount = serviceClientCounts?.[categoryId] || numClients || 1;
+      const newCount = increment
+        ? Math.min(currentCount + 1, numClients ?? 1)
+        : Math.max(currentCount - 1, 1);
+
+      if (newCount !== currentCount) {
+        dispatch(
+          updateAppointment({
+            serviceClientCounts: { [categoryId]: newCount },
+          })
+        );
+      }
     },
-    [numOfClients]
+    [flatCategories, serviceClientCounts, numClients, dispatch]
   );
+
+  const isConfirmBooking = pathname.includes("confirm-booking");
 
   return (
     <Box
@@ -169,153 +176,147 @@ const BookingSummary = () => {
         lineHeight={1.3}
         textTransform={"uppercase"}
       >
-        Booking summary{" "}
-      </Heading>{" "}
-      <Box
-        overflowY="auto"
-        h={{ base: "100%", md: "65vh" }}
-        pb="4rem"
-        px="1.5rem"
+        Booking summary
+      </Heading>
+
+      <Flex
+        flexDir={"column"}
+        justifyContent={"space-between"}
+        h="100%"
+        gap={"0rem"}
       >
-        {/* location section */}
-        {storedBranch && (
-          <SummaryContainer
-            icon={<IoLocationOutline size={"2.3rem"} />}
-            heading={`Lush & Luxe – ${storedBranch.name}`}
-            text={`${storedBranch.address}, ${storedBranch.city},
-                ${storedBranch.country}`}
-          />
-        )}
-        {/* Expected clients section */}
-        <Box py="1.5rem">
-          <Flex justifyContent={"space-between"} gap="2rem" fontSize={"1.5rem"}>
-            <Text>Number of Clients</Text>
-            <Text>{numOfClients}</Text>
-          </Flex>
-        </Box>
-        {/*services section */}
-        <Box
-          borderYWidth={"2px"}
-          borderColor={"gray.250"}
-          py=".5rem"
-          fontSize={"1.5rem"}
-        >
-          {serviceSelections
-            ?.filter((selection) => selection.categoryIds.length > 0)
-            .map((selection) => {
-              const serviceDetail = serviceItems.find(
-                (item) => item.value === selection.serviceId
-              );
+        <Box overflowY="auto" h={{ base: "100%", md: "65vh" }} px="1.5rem">
+          {/* Location */}
+          {branch && (
+            <SummaryContainer
+              icon={<IoLocationOutline size={"2.3rem"} />}
+              heading={`Lush & Luxe – ${branch.name}`}
+              text={`${branch.address}, ${branch.city}, ${branch.country}`}
+            />
+          )}
 
-              if (!serviceDetail) return null;
+          {/* Client count */}
+          <Box py="1.5rem">
+            <Flex
+              justifyContent={"space-between"}
+              gap="2rem"
+              fontSize={"1.5rem"}
+            >
+              <Text>Number of Clients</Text>
+              <Text>{numClients}</Text>
+            </Flex>
+          </Box>
 
-              const selectedCategories = serviceDetail.categories.filter(
-                (cat) => selection.categoryIds.includes(cat.name)
-              );
-              return selectedCategories.map((category, index) => (
+          {/* Services */}
+          <Box py=".5rem" fontSize={"1.5rem"}>
+            {flatCategories?.map((item, index) => {
+              const categoryId = item?.category?.id;
+              // Default to numClients instead of 1
+              const currentCount = categoryId
+                ? serviceClientCounts?.[categoryId] || numClients || 1
+                : numClients || 1;
+
+              return (
                 <Flex
-                  key={`${selection.serviceId}-${category.name}`}
+                  key={`${item?.serviceId}-${categoryId}`}
                   justifyContent={"space-between"}
-                  gapX="2rem"
-                  gapY="1rem"
+                  gapX="3rem"
+                  gapY="1.5rem"
                   w="full"
                   flexWrap={"wrap"}
+                  borderTopWidth={"2px"}
+                  borderColor={"gray.250"}
+                  alignItems={"center"}
                   py="1rem"
                 >
-                  <Text>{category.name}</Text>
-                  <Flex
-                    w={{ base: "100%", sm: "auto" }}
-                    gap="1rem"
-                    justifyContent={{ base: "flex-end", sm: "inherit" }}
-                    alignItems={"center"}
-                  >
-                    <Text>£{category.price}</Text>
-                    {numOfClients > 1 && (
-                      <HStack gap="1rem">
-                        <Text fontStyle="italic">x</Text>
+                  <Text>{item?.category?.name}</Text>
 
-                        <HStack
-                          justifyContent={"space-between"}
-                          border="1px solid black"
-                          fontSize={"1.5rem"}
-                          p=".2rem"
+                  {/* Quantity selector */}
+                  {numClients > 1 && isConfirmBooking && (
+                    <HStack gapX={"3rem"}>
+                      <Text>{item?.category?.price}</Text>
+                      <HStack justifyContent={"space-between"} p=".2rem">
+                        <Button
+                          bg="transparent"
+                          color="black"
+                          onClick={() => handleClientCountChange(false, index)}
+                          disabled={currentCount === 1}
+                          cursor={
+                            currentCount === 1 ? "not-allowed" : "pointer"
+                          }
                         >
-                          <Button
-                            bg="transparent"
-                            color="black"
-                            onClick={() =>
-                              handleClientCountChange(false, index)
-                            }
-                            disabled={updateClientCount[index] === 1}
-                            cursor={
-                              updateClientCount[index] === 1
-                                ? "not-allowed"
-                                : "pointer"
-                            }
-                          >
-                            <FiMinus />
-                          </Button>
-                          <Span>{updateClientCount[index]}</Span>
-                          <Button
-                            bg="transparent"
-                            color="black"
-                            onClick={() => handleClientCountChange(true, index)}
-                            disabled={updateClientCount[index] === numOfClients}
-                            cursor={
-                              updateClientCount[index] === numOfClients
-                                ? "not-allowed"
-                                : "pointer"
-                            }
-                          >
-                            <FiPlus />
-                          </Button>
-                        </HStack>
+                          <FiMinus />
+                        </Button>
+                        <Span>{currentCount}</Span>
+                        <Button
+                          bg="transparent"
+                          color="black"
+                          onClick={() => handleClientCountChange(true, index)}
+                          disabled={currentCount === numClients}
+                          cursor={
+                            currentCount === numClients
+                              ? "not-allowed"
+                              : "pointer"
+                          }
+                        >
+                          <FiPlus />
+                        </Button>
                       </HStack>
-                    )}
-                  </Flex>
+                    </HStack>
+                  )}
+
+                  {/* Price */}
+                  {item.category?.price && (
+                    <Text fontWeight={"semibold"}>
+                      £
+                      {numClients > 1 && isConfirmBooking
+                        ? item?.category?.price * currentCount
+                        : item?.category?.price}
+                    </Text>
+                  )}
                 </Flex>
-              ));
+              );
             })}
+          </Box>
+
+          {/* Technician */}
+          {staffDetails && (
+            <SummaryContainer
+              tick
+              title="Technician Selected"
+              fallbackName={staffDetails.name}
+              img={staffDetails.img.src}
+              heading={staffDetails.name}
+              text={`${staffDetails.typeOfService} - ${staffDetails.age}yrs`}
+            />
+          )}
+
+          {/* Date and time */}
+          {(date || time) && (
+            <SummaryContainer
+              title="Scheduled Date and Time"
+              icon={<LuCalendarDays size={"2rem"} />}
+              heading={date}
+              text={time}
+            />
+          )}
         </Box>
 
-        {/* technician section */}
-        {staffDetails && (
-          <SummaryContainer
-            tick
-            title="Technician Selected"
-            fallbackName={staffDetails.name}
-            img={staffDetails.img.src}
-            heading={staffDetails.name}
-            text={`${staffDetails.typeOfService} - ${staffDetails.age}yrs`}
-          />
+        {/* Booking Total */}
+        {isConfirmBooking && (
+          <HStack
+            p="2.5rem 1.5rem"
+            w="full"
+            justifyContent={"space-between"}
+            gap="2rem"
+            borderTopWidth={"2px"}
+            borderColor={"gray.250"}
+            bg="white"
+          >
+            <Text fontWeight={"400"}>Booking Total</Text>
+            <Text fontWeight={"600"}>£{totalPrice}.00</Text>
+          </HStack>
         )}
-        {/* date and time section */}
-        {(date || time) && (
-          <SummaryContainer
-            title="Scheduled Date and Time"
-            icon={<LuCalendarDays size={"2rem"} />}
-            heading={date}
-            text={time}
-          />
-        )}
-      </Box>
-      {/* Booking Total Section */}
-      <Flex
-        p="2.5rem 1.5rem"
-        w="full"
-        position="sticky"
-        bottom="0"
-        left="0"
-        justifyContent={"space-between"}
-        alignItems={"center"}
-        gap="2rem"
-        borderTopWidth={"2px"}
-        borderColor={"gray.250"}
-        bg="white"
-        zIndex={100}
-      >
-        <Text fontWeight={"400"}>Booking Total</Text>{" "}
-        <Text fontWeight={"600"}>$10.00</Text>{" "}
       </Flex>
     </Box>
   );

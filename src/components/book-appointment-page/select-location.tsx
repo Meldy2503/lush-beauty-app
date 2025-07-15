@@ -73,7 +73,7 @@ const SelectLocationPage = () => {
         </Heading>
         {isLoading ? (
           <Flex alignItems={"center"} justifyContent={"center"}>
-            <Spinner my="10rem" />
+            <Spinner my="15rem" />
           </Flex>
         ) : (
           <RadioGroup.Root
@@ -99,7 +99,7 @@ const SelectLocationPage = () => {
             <Flex gap="2rem" flexDir="column">
               {branches?.map((branch: BranchesType) => (
                 <RadioGroup.Item
-                  key={branch.id}
+                  key={branch?.id}
                   value={branch?.id || ''}
                   gap="1.5rem"
                   display="flex"

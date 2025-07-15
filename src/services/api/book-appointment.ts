@@ -17,3 +17,19 @@ export const useGetBranches = () => {
     enabled: !!accessToken,
   });
 };
+
+
+
+// to get all services
+export const useGetServices = () => {
+  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+
+  return useQuery({
+    queryKey: ["services", accessToken],
+    queryFn: async () => {
+      const res = await axios.get(urls.getServicesUrl);
+      return res.data.data.data;
+    },
+    enabled: !!accessToken,
+  });
+};

@@ -1,16 +1,17 @@
-import { BranchesType } from "@/types/book-appointment";
+import { BranchesType, CategoriesType } from "@/types/book-appointment";
 import { UserProfileType } from "@/types/user";
 
 export interface Appointment {
   id: string;
   specialistId: string;
   appointmentDateTime: string;
-  selectedBranch: BranchesType |null;
+  selectedBranch: BranchesType | null;
   totalCost: number;
   numberOfClients: number;
+  serviceClientCounts?: Record<string, number>
   serviceSelections: {
     serviceId: string;
-    categoryIds: string[];
+    categoryIds: CategoriesType[];
   }[];
   currency?: string; // e.g., "GBP", "USD"
   notes?: string;
