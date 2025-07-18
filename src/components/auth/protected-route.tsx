@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!token) {
-       router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
+       router?.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
     }
   }, [token, router, pathname]);
 

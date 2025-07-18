@@ -1,9 +1,9 @@
-import { BranchesType, CategoriesType } from "@/types/book-appointment";
+import { BranchesType, CategoriesType, SpecialistType } from "@/types/book-appointment";
 import { UserProfileType } from "@/types/user";
 
 export interface Appointment {
   id: string;
-  specialistId: string;
+  selectedSpecialist: SpecialistType | null;
   appointmentDateTime: string;
   selectedBranch: BranchesType | null;
   totalPrice: number;
@@ -25,3 +25,5 @@ export interface AuthState {
   accessToken?: string | null;
   user?: UserProfileType | null;
 }
+
+

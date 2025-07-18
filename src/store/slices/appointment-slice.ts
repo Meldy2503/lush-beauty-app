@@ -16,7 +16,7 @@ const appointmentSlice = createSlice({
         state.appointments = [
           {
             id: "",
-            specialistId: "",
+            selectedSpecialist: null,
             selectedBranch: null,
             appointmentDateTime: "",
             totalPrice: 0,

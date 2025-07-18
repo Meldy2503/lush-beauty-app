@@ -33,3 +33,33 @@ export interface ServicesType {
   updatedBy?: string;
   status?: boolean;
 }
+
+export interface SpecialistType {
+  id: string;
+  address?: string;
+  age?: number;
+  branchId?: string;
+  city?: string;
+  clientCount?: number;
+  country?: string;
+  createdAt?: string;
+  createdBy?: string;
+  description?: string;
+  email?: string;
+  imageUrl?: string;
+  name?: string;
+  phone?: string;
+  rating?: number;
+  specialties?: [
+    {
+      category?: CategoriesType[];
+      id?: string;
+    }
+  ];
+  state?: string;
+  status?: boolean;
+  totalCompletedAppointments?: number;
+  totalRatings?: number;
+  updatedAt?: string;
+  updatedBy?: string;
+}

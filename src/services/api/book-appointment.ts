@@ -19,7 +19,6 @@ export const useGetBranches = () => {
 };
 
 
-
 // to get all services
 export const useGetServices = () => {
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
@@ -28,6 +27,20 @@ export const useGetServices = () => {
     queryKey: ["services", accessToken],
     queryFn: async () => {
       const res = await axios.get(urls.getServicesUrl);
+      return res.data.data.data;
+    },
+    enabled: !!accessToken,
+  });
+};
+
+// to get all specialists
+export const useGetSpecialists = () => {
+  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+
+  return useQuery({
+    queryKey: ["specialists", accessToken],
+    queryFn: async () => {
+      const res = await axios.get(urls.getSpecilalistsUrl);
       return res.data.data.data;
     },
     enabled: !!accessToken,

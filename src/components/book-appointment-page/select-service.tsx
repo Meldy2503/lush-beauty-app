@@ -97,7 +97,6 @@ const SelectServicePage = () => {
   };
 
 
-  console.log(totalPrice, "totalPriceSERVICE");
   return (
     <Flex gap="2rem" alignItems="stretch">
       <Box

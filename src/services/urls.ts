@@ -14,5 +14,6 @@ const urls = {
   deleteAddressUrl: (addressId: string) => `${baseUrl}/addresses/${addressId}`,
   getServicesUrl: `${baseUrl}/services`,
   getBranchesUrl: `${baseUrl}/branches`,
+  getSpecilalistsUrl: `${baseUrl}/specialists`,
 };
 export default urls;

@@ -15,7 +15,6 @@ import { LuCalendarDays } from "react-icons/lu";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
-import { staffs } from "./select-technician";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { formatAppointmentDateTime } from "@/utils";
 import { useCallback, useEffect, useMemo } from "react";
@@ -94,7 +93,7 @@ const BookingSummary = () => {
     selectedBranch: branch,
     numberOfClients: numClients,
     serviceSelections,
-    specialistId,
+    selectedSpecialist,
     appointmentDateTime,
     serviceClientCounts,
   } = appointment || {};
@@ -112,16 +111,12 @@ const BookingSummary = () => {
     [serviceSelections]
   );
 
-  const staffDetails = useMemo(
-    () => staffs.find((staff) => staff.id === specialistId),
-    [specialistId]
-  );
   const { date, time } = useMemo(
     () => formatAppointmentDateTime(appointmentDateTime),
     [appointmentDateTime]
   );
 
-  // total price - now defaults to numClients for each service
+  // total price for the numClients for each service
   const totalPrice = useMemo(
     () =>
       flatCategories?.reduce((sum, item) => {
@@ -157,7 +152,7 @@ const BookingSummary = () => {
     [flatCategories, serviceClientCounts, numClients, dispatch]
   );
 
-  // Only update if the totalPrice is different from what's in Redux
+  // Only update if the totalPrice is different from what's in Redux store
   useEffect(() => {
     if (totalPrice !== appointment?.totalPrice) {
       dispatch(
@@ -292,14 +287,14 @@ const BookingSummary = () => {
           </Box>
 
           {/* Technician */}
-          {staffDetails && (
+          {selectedSpecialist && (
             <SummaryContainer
               tick
               title="Technician Selected"
-              fallbackName={staffDetails.name}
-              img={staffDetails.img.src}
-              heading={staffDetails.name}
-              text={`${staffDetails.typeOfService} - ${staffDetails.age}yrs`}
+              fallbackName={selectedSpecialist?.name}
+              img={selectedSpecialist?.imageUrl}
+              heading={selectedSpecialist?.name}
+              text={`${selectedSpecialist?.age}yrs`}
             />
           )}
 
