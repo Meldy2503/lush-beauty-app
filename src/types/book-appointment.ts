@@ -63,3 +63,17 @@ export interface SpecialistType {
   updatedAt?: string;
   updatedBy?: string;
 }
+
+export interface BookAppointmentType {
+  specialistId: string;
+  appointmentDateTime: string;
+  branchId: string;
+  totalCost: number;
+  numberOfClients: number;
+  serviceSelections: {
+    serviceId: string;
+    categoryIds: string[];
+  }[];
+  currency?: string;
+  notes?: string;
+}

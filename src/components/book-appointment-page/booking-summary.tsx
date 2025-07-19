@@ -152,6 +152,8 @@ const BookingSummary = () => {
     [flatCategories, serviceClientCounts, numClients, dispatch]
   );
 
+  console.log(selectedSpecialist, "selectedSpecialist");
+
   // Only update if the totalPrice is different from what's in Redux store
   useEffect(() => {
     if (totalPrice !== appointment?.totalPrice) {

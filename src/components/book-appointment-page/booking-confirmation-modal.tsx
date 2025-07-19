@@ -13,23 +13,78 @@ import tick from "../../assets/images/tick.svg";
 import Button from "../shared/button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import {
+  useGroupBookingMutation,
+  usePersonalBookingMutation,
+} from "@/services/api/book-appointment";
+import { BookAppointmentType } from "@/types/book-appointment";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { clearAppointments } from "@/store/slices/appointment-slice";
 
 interface ConfirmationModalProps {
   disabled?: boolean;
 }
 
 const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+
+
   const totalPrice = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.totalPrice
   );
-
 
   const appointment = useSelector(
     (state: RootState) => state.appointment.appointments[0]
   );
 
+  const personalBookingMutation = usePersonalBookingMutation();
+  const groupBookingMutation = useGroupBookingMutation();
+
+  const { mutateAsync: personalBooking } = personalBookingMutation;
+  const { mutateAsync: groupBooking } = groupBookingMutation;
+
+  const isLoading =
+    groupBookingMutation.isPending || personalBookingMutation.isPending;
+
+
+  const handleBooking = async () => {
+    if (!appointment) return;
+
+    const payload: BookAppointmentType = {
+      specialistId: appointment?.selectedSpecialist?.id || "",
+      appointmentDateTime: appointment.appointmentDateTime,
+      branchId: appointment.selectedBranch?.id || "",
+      totalCost: appointment.totalPrice,
+      numberOfClients: appointment.numberOfClients,
+      serviceSelections:
+        appointment.serviceSelections?.map((service) => ({
+          serviceId: service.serviceId,
+          categoryIds: service.categoryIds
+            .map((category) => category.id)
+            .filter((id): id is string => id !== undefined), // Filter out undefined values
+        })) || [],
+    };
+
+    try {
+      const result =
+        appointment.numberOfClients > 1
+          ? await groupBooking(payload)
+          : await personalBooking(payload);
+
+      if (result && result.success === true) {
+        dispatch(clearAppointments());
+        setIsOpen(true);
+        console.log("Booking successful:", result);
+      }
+    } catch (error) {
+      console.error("Booking failed:", error);
+    }
+  };
 
   console.log(appointment, "appointment");
+
 
   return (
     <Dialog.Root
@@ -37,16 +92,19 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
       placement={"center"}
       closeOnInteractOutside={false}
       motionPreset="slide-in-bottom"
+      open={isOpen}
+      // onOpenChange={(e) => setIsOpen(e.open)}
     >
       <Dialog.Trigger asChild>
         <Button
           borderWidth="1.5px"
           borderColor="black"
           w="49%"
-          disabled={disabled}
+          disabled={disabled || isLoading}
           cursor={disabled ? "not-allowed" : "pointer"}
+          onClick={handleBooking}
         >
-          Confirm Booking
+          {isLoading ? "Processing..." : "Confirm Booking"}
         </Button>
       </Dialog.Trigger>
       <Portal>

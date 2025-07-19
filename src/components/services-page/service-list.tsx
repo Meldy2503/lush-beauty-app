@@ -36,7 +36,7 @@ const ServiceListSection = () => {
           return (
             <GridItem
               key={service.id}
-              bg={index % 2 === 0 ? "black" : "yellow.100"}
+              bg={index % 2 === 0 ? "gray.150" : "yellow.100"}
               color="white"
             >
               <Flex
@@ -97,91 +97,74 @@ const serviceListData: ServiceCardData[] = [
   {
     id: 1,
     heading: "HAIR STYLING & CUTS",
-    text: "Glow starts with great skin. Hydrate, cleanse, and refresh your face with our custom facials.",
+    text: "Expert haircuts and styling tailored to your unique look. Stay fresh with modern trims and finishes.",
     list: [
-      {
-        item: "Skin Analysis ",
-        value: "$4",
-      },
-      { item: "Skin Consultation", value: "$7" },
-      { item: "Skin Treatment", value: "$8" },
-      { item: "Skin Therapy", value: "$15" },
-      { item: "Skin Care", value: "$12" },
+      { item: "Basic Hair Trim", value: "£10" },
+      { item: "Wash & Blow Dry", value: "£15" },
+      { item: "Layered Haircut", value: "£20" },
+      { item: "Men’s Haircut", value: "£12" },
+      { item: "Kids’ Haircut", value: "£8" },
     ],
   },
   {
     id: 2,
     heading: "HAIR COLORING",
-    text: "Glow starts with great skin. Hydrate, cleanse, and refresh your face with our custom facials.",
+    text: "Vibrant hair colours, highlights, and tones. Refresh or transform your look with expert colour work.",
     list: [
-      {
-        item: "Skin Analysis ",
-        value: "$4",
-      },
-      { item: "Skin Consultation", value: "$7" },
-      { item: "Skin Treatment", value: "$8" },
-      { item: "Skin Therapy", value: "$15" },
-      { item: "Skin Care", value: "$12" },
+      { item: "Root Touch-Up", value: "£25" },
+      { item: "Full Hair Color", value: "£40" },
+      { item: "Highlights", value: "£35" },
+      { item: "Ombre/Balayage", value: "£50" },
+      { item: "Color Correction", value: "£60" },
     ],
   },
   {
     id: 3,
     heading: "MANICURE & PEDICURE",
-    text: "Glow starts with great skin. Hydrate, cleanse, and refresh your face with our custom facials.",
+    text: "Clean, polished nails and soft feet. Enjoy relaxing hand and foot treatments in a calming space.",
     list: [
-      {
-        item: "Skin Analysis ",
-        value: "$4",
-      },
-      { item: "Skin Consultation", value: "$7" },
-      { item: "Skin Treatment", value: "$8" },
-      { item: "Skin Therapy", value: "$15" },
-      { item: "Skin Care", value: "$12" },
+      { item: "Classic Manicure", value: "£12" },
+      { item: "Gel Manicure", value: "£20" },
+      { item: "Classic Pedicure", value: "£18" },
+      { item: "Spa Pedicure", value: "£25" },
+      { item: "Nail Art Add-On", value: "£5" },
     ],
   },
   {
     id: 4,
     heading: "LASH & BROW ARTISTRY",
-    text: "Glow starts with great skin. Hydrate, cleanse, and refresh your face with our custom facials.",
+    text: "Define and enhance your eyes with custom lash and brow treatments. Subtle to bold looks available.",
     list: [
-      {
-        item: "Skin Analysis ",
-        value: "$4",
-      },
-      { item: "Skin Consultation", value: "$7" },
-      { item: "Skin Treatment", value: "$8" },
-      { item: "Skin Therapy", value: "$15" },
-      { item: "Skin Care", value: "$12" },
+      { item: "Eyebrow Shaping", value: "£10" },
+      { item: "Brow Tinting", value: "£12" },
+      { item: "Lash Tinting", value: "£14" },
+      { item: "Classic Lash Extensions", value: "£35" },
+      { item: "Volume Lash Extensions", value: "£45" },
     ],
   },
   {
     id: 5,
     heading: "WAX & HAIR REMOVAL",
-    text: "Glow starts with great skin. Hydrate, cleanse, and refresh your face with our custom facials.",
+    text: "Smooth, hair-free skin with gentle waxing. Ideal for face, legs, arms, underarms, and bikini line.",
     list: [
-      {
-        item: "Skin Analysis ",
-        value: "$4",
-      },
-      { item: "Skin Consultation", value: "$7" },
-      { item: "Skin Treatment", value: "$8" },
-      { item: "Skin Therapy", value: "$15" },
-      { item: "Skin Care", value: "$12" },
+      { item: "Eyebrow Wax", value: "£8" },
+      { item: "Upper Lip Wax", value: "£6" },
+      { item: "Underarm Wax", value: "£12" },
+      { item: "Full Leg Wax", value: "£25" },
+      { item: "Bikini Wax", value: "£20" },
     ],
   },
   {
     id: 6,
     heading: "FACIAL TREATMENTS",
-    text: "Glow starts with great skin. Hydrate, cleanse, and refresh your face with our custom facials.",
+    text: "Deep-cleanse, hydrate, and renew your skin. Custom facials for all skin types and concerns.",
     list: [
-      {
-        item: "Skin Analysis ",
-        value: "$4",
-      },
-      { item: "Skin Consultation", value: "$7" },
-      { item: "Skin Treatment", value: "$8" },
-      { item: "Skin Therapy", value: "$15" },
-      { item: "Skin Care", value: "$12" },
+      { item: "Express Facial", value: "£25" },
+      { item: "Deep Cleansing Facial", value: "£35" },
+      { item: "Anti-Aging Facial", value: "£45" },
+      { item: "Hydrating Facial", value: "£30" },
+      { item: "Acne Treatment Facial", value: "£40" },
     ],
   },
 ];
+

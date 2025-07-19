@@ -39,8 +39,12 @@ const appointmentSlice = createSlice({
         },
       };
     },
+    // to clear appointments list
+    clearAppointments: (state) => {
+      state.appointments = [];
+    },
   },
 });
 
-export const { updateAppointment } = appointmentSlice.actions;
+export const { updateAppointment, clearAppointments } = appointmentSlice.actions;
 export default appointmentSlice.reducer;

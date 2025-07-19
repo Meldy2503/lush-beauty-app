@@ -1,8 +1,10 @@
 import { RootState } from "@/store";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import axios from "../axios";
 import urls from "../urls";
+// import { useDispatch } from "react-redux";
+import { BookAppointmentType } from "@/types/book-appointment";
 
 // to get all branches/locations
 export const useGetBranches = () => {
@@ -44,5 +46,53 @@ export const useGetSpecialists = () => {
       return res.data.data.data;
     },
     enabled: !!accessToken,
+  });
+};
+
+
+// to book a personal appointment
+export const usePersonalBookingMutation = () => {
+  // const dispatch = useDispatch();
+
+  return useMutation({
+    mutationKey: ["personalBooking"],
+    mutationFn: async (personalBooking: BookAppointmentType) => {
+      const res = await axios.post(
+        urls.bookPersonalAppointment,
+        personalBooking
+      );
+      return res.data;
+    },
+    // onSuccess: (data) => {
+    //   const token = data?.data?.token;
+    //   if (token) {
+    //     dispatch(setToken(token));
+    //   }
+    // },
+    onError: (error) => {
+      console.error("Booking failed:", error);
+    },
+  });
+};
+
+// to book a group appointment
+export const useGroupBookingMutation = () => {
+  // const dispatch = useDispatch();
+
+  return useMutation({
+    mutationKey: ["groupBooking"],
+    mutationFn: async (groupBooking: BookAppointmentType) => {
+      const res = await axios.post(urls.bookGroupAppointment, groupBooking);
+      return res.data;
+    },
+    // onSuccess: (data) => {
+    //   const token = data?.data?.token;
+    //   if (token) {
+    //     dispatch(setToken(token));
+    //   }
+    // },
+    onError: (error) => {
+      console.error("Booking failed:", error);
+    },
   });
 };
