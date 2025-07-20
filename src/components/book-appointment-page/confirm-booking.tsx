@@ -36,103 +36,112 @@ const ConfirmBookingPage = () => {
         >
           CONFIRM BOOKING{" "}
         </Heading>{" "}
-        <Box h={{ base: "100%", md: "62vh" }} overflowY={"auto"} pb="3rem">
-          <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
-            Cancellation Policy:
-          </Text>
-          <Text mb="1.5rem">
-            We understand plans can change — cancellations are accepted up to 48
-            hours before your appointment.
-          </Text>
-
-          <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
-            Payment Information:
-          </Text>
-          <Text mb="1.5rem">
-            Please note that we are a cash-free business. You can pay securely
-            online during booking or in person via bank transfer or card on the
-            day of your appointment.
-          </Text>
-
-          <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
-            Arrival Time:
-          </Text>
-          <Text mb="1.5rem">
-            We operate by appointment only. Kindly arrive at least 10 minutes
-            early. We offer a 15-minute grace period, but arriving later may
-            result in a shorter or rescheduled appointment, depending on
-            availability.
-          </Text>
-
-          <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
-            Group Bookings:
-          </Text>
-          <Text mb="1.5rem">
-            Booking for four or more? A deposit of £20 per person is required to
-            secure the group appointment. This will go toward your final bill.
-          </Text>
-
-          <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
-            Children’s Appointments:
-          </Text>
-          <Text mb="1.5rem">
-            At the moment, we’re able to welcome children aged 7–15.
-            Unfortunately, we’re unable to accommodate children under 7 at this
-            time.
-          </Text>
-
-          <Text>
-            Thank you for your understanding — we look forward to welcoming you!
-          </Text>
-        </Box>
-        <Box
-          mt="auto"
-          position={{ base: "fixed", md: "sticky" }}
-          bottom="0"
-          left="0"
-          w="full"
-          py="2rem"
-          px={{ base: "2rem", md: "0" }}
-          zIndex={10}
-          bg="white"
+        <Flex
+          flexDir={"column"}
+          justifyContent={"space-between"}
+          h={{ base: "90vh", md: "78.2vh" }}
+          overflowY={"auto"}
+          // h={{ base: "100%", md: "62.5vh" }}
+          // overflowY={"auto"}
         >
-          <Checkbox.Root
-            pb="2rem"
-            px=".6rem"
-            checked={agreeToTerms}
-            onCheckedChange={(e) => setAgreeToTerms(!!e.checked)}
-          >
-            <Checkbox.HiddenInput />
-            <Checkbox.Control scale={1.5}>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
+          <Box pb="3rem">
+            <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
+              Cancellation Policy:
+            </Text>
+            <Text mb="1.5rem">
+              We understand plans can change — cancellations are accepted up to
+              48 hours before your appointment.
+            </Text>
 
-            <Checkbox.Label
-              fontSize={{ base: "1.5rem", md: "1.6rem" }}
-              ml=".5rem"
+            <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
+              Payment Information:
+            </Text>
+            <Text mb="1.5rem">
+              Please note that we are a cash-free business. You can pay securely
+              online during booking or in person via bank transfer or card on
+              the day of your appointment.
+            </Text>
+
+            <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
+              Arrival Time:
+            </Text>
+            <Text mb="1.5rem">
+              We operate by appointment only. Kindly arrive at least 10 minutes
+              early. We offer a 15-minute grace period, but arriving later may
+              result in a shorter or rescheduled appointment, depending on
+              availability.
+            </Text>
+
+            <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
+              Group Bookings:
+            </Text>
+            <Text mb="1.5rem">
+              Booking for four or more? A deposit of £20 per person is required
+              to secure the group appointment. This will go toward your final
+              bill.
+            </Text>
+
+            <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
+              Children’s Appointments:
+            </Text>
+            <Text mb="1.5rem">
+              At the moment, we’re able to welcome children aged 7–15.
+              Unfortunately, we’re unable to accommodate children under 7 at
+              this time.
+            </Text>
+
+            <Text>
+              Thank you for your understanding — we look forward to welcoming
+              you!
+            </Text>
+          </Box>
+          <Box
+            mt="auto"
+            position={{ base: "fixed", md: "sticky" }}
+            bottom="0"
+            left="0"
+            w="full"
+            py="2rem"
+            px={{ base: "2rem", md: "0" }}
+            zIndex={10}
+            bg="white"
+          >
+            <Checkbox.Root
+              pb="2rem"
+              px=".6rem"
+              checked={agreeToTerms}
+              onCheckedChange={(e) => setAgreeToTerms(!!e.checked)}
             >
-              {" "}
-              <Text lineHeight={1.35}>
-                I agree to the terms and conditions{" "}
-              </Text>
-            </Checkbox.Label>
-          </Checkbox.Root>
-          <HStack gap="1rem" justifyContent="center" alignItems="center">
-            <Button
-              bg="transparent"
-              borderWidth="1.5px"
-              borderColor="black"
-              color="black"
-              w="50%"
-              onClick={() => router.back()}
-            >
-              Prev
-            </Button>
-            <BookingConfirmationModal
-              disabled={!agreeToTerms}
-            />
-          </HStack>
-        </Box>
+              <Checkbox.HiddenInput />
+              <Checkbox.Control scale={1.5}>
+                <Checkbox.Indicator />
+              </Checkbox.Control>
+
+              <Checkbox.Label
+                fontSize={{ base: "1.5rem", md: "1.6rem" }}
+                ml=".5rem"
+              >
+                {" "}
+                <Text lineHeight={1.35}>
+                  I agree to the terms and conditions{" "}
+                </Text>
+              </Checkbox.Label>
+            </Checkbox.Root>
+            <HStack gap="1rem" justifyContent="center" alignItems="center">
+              <Button
+                bg="transparent"
+                borderWidth="1.5px"
+                borderColor="black"
+                color="black"
+                w="49%"
+                onClick={() => router.back()}
+              >
+                Prev
+              </Button>
+              <BookingConfirmationModal disabled={!agreeToTerms} />
+            </HStack>
+          </Box>
+        </Flex>
       </Box>
 
       <Box

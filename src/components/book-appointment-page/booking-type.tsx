@@ -40,7 +40,7 @@ const BookingTypePage = () => {
       shadow={"sm"}
       justifyContent={"center"}
       flexDir={"column"}
-      h={{ base: "100%", md: "80vh" }}
+      h={{ base: "100%", md: "85vh" }}
       overflowY={"auto"}
       p={{ base: "2rem", sm: "3rem" }}
     >

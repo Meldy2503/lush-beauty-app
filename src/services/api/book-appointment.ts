@@ -5,6 +5,7 @@ import axios from "../axios";
 import urls from "../urls";
 // import { useDispatch } from "react-redux";
 import { BookAppointmentType } from "@/types/book-appointment";
+import { Params } from "@/types";
 
 // to get all branches/locations
 export const useGetBranches = () => {
@@ -19,7 +20,6 @@ export const useGetBranches = () => {
     enabled: !!accessToken,
   });
 };
-
 
 // to get all services
 export const useGetServices = () => {
@@ -36,19 +36,18 @@ export const useGetServices = () => {
 };
 
 // to get all specialists
-export const useGetSpecialists = () => {
+export const useGetSpecialists = (params?: Params) => {
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
 
   return useQuery({
-    queryKey: ["specialists", accessToken],
+    queryKey: ["specialists", params, accessToken],
     queryFn: async () => {
-      const res = await axios.get(urls.getSpecilalistsUrl);
+      const res = await axios.get(urls.getSpecilalistsUrl, { params });
       return res.data.data.data;
     },
     enabled: !!accessToken,
   });
 };
-
 
 // to book a personal appointment
 export const usePersonalBookingMutation = () => {

@@ -72,63 +72,70 @@ const SelectDateTimePage = () => {
         >
           Select Date/Time
         </Heading>
-
         <Flex
-          flexDir={{ base: "column-reverse", lg: "column" }}
-          gap={{ base: "4rem", md: "5rem" }}
-          h={{ base: "100%", md: "66.8vh" }}
-          pb={{ base: "5rem", md: "2rem" }}
-          overflowY="auto"
+          flexDir={"column"}
+          justifyContent={"space-between"}
+          h={{ base: "90vh", md: "78.2vh" }}
+          overflowY={"auto"}
         >
-          <Box mt="1rem">
-            <CalendarComponent
-              value={selectedDate}
-              onChange={handleDateChange}
-            />
-          </Box>
+          <Flex
+            flexDir={{ base: "column-reverse", lg: "column" }}
+            gap={{ base: "4rem", md: "5rem" }}
+            pb={{ base: "5rem", md: "2rem" }}
+          >
+            <Box mt="1rem">
+              <CalendarComponent
+                value={selectedDate}
+                onChange={handleDateChange}
+              />
+            </Box>
 
-          <Box>
-            <Text pb="2rem" pt={{ base: "1rem", md: "0rem" }} fontWeight="600">
-              Available Time
-            </Text>
-            <RadioGroup.Root
-              value={selectedTime ?? ""}
-              onValueChange={({ value }) => handleTimeChange(value ?? "")}
-              display="flex"
-              justifyContent="space-between"
-              px="2px"
-            >
-              <HStack
-                gap={{ base: "2rem 3rem", md: "2.5rem 4rem" }}
-                flexWrap="wrap"
+            <Box>
+              <Text
+                pb="2rem"
+                pt={{ base: "1rem", md: "0rem" }}
+                fontWeight="600"
               >
-                {timeSlots.map((item) => (
-                  <RadioGroup.Item
-                    key={item.value}
-                    value={item.value}
-                    display="flex"
-                    justifyContent="space-between"
-                  >
-                    <RadioGroup.ItemHiddenInput />
-                    <RadioGroup.ItemIndicator scale="1.2" />
-                    <RadioGroup.ItemText
-                      fontSize={{ base: "1.5rem", sm: "1.6rem" }}
-                      ml=".2rem"
+                Available Time
+              </Text>
+              <RadioGroup.Root
+                value={selectedTime ?? ""}
+                onValueChange={({ value }) => handleTimeChange(value ?? "")}
+                display="flex"
+                justifyContent="space-between"
+                px="2px"
+              >
+                <HStack
+                  gap={{ base: "2rem 3rem", md: "2.5rem 4rem" }}
+                  flexWrap="wrap"
+                >
+                  {timeSlots.map((item) => (
+                    <RadioGroup.Item
+                      key={item.value}
+                      value={item.value}
+                      display="flex"
+                      justifyContent="space-between"
                     >
-                      {item.label}
-                    </RadioGroup.ItemText>
-                  </RadioGroup.Item>
-                ))}
-              </HStack>
-            </RadioGroup.Root>
-          </Box>
+                      <RadioGroup.ItemHiddenInput />
+                      <RadioGroup.ItemIndicator scale="1.2" />
+                      <RadioGroup.ItemText
+                        fontSize={{ base: "1.5rem", sm: "1.6rem" }}
+                        ml=".2rem"
+                      >
+                        {item.label}
+                      </RadioGroup.ItemText>
+                    </RadioGroup.Item>
+                  ))}
+                </HStack>
+              </RadioGroup.Root>
+            </Box>
+          </Flex>
+          <StepNavigationBtns
+            prevOnClick={() => router.back()}
+            nextOnClick={() => router.push("/book-appointment/confirm-booking")}
+            nextDisabled={!selectedDate || !selectedTime}
+          />
         </Flex>
-
-        <StepNavigationBtns
-          prevOnClick={() => router.back()}
-          nextOnClick={() => router.push("/book-appointment/confirm-booking")}
-          nextDisabled={!selectedDate || !selectedTime}
-        />
       </Flex>
 
       <Box

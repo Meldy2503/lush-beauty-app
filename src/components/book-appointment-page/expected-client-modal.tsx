@@ -52,6 +52,7 @@ const ExpectedClientModal = ({
             </Dialog.Header>
             <Dialog.Body>
               <InputElement
+                inputItem
                 type="number"
                 label="Please enter the number of expected clients"
                 placeholder="1"

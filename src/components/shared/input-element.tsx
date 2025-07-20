@@ -21,7 +21,6 @@ interface InputElementProps {
   label?: string;
   placeholder?: string;
   border?: string;
-  autoComplete?: string;
   type?: string;
   min?: string | number;
   disabled?: boolean;
@@ -31,6 +30,7 @@ interface InputElementProps {
   value?: string | number;
   defaultValue?: string | number;
   h?: string;
+  inputItem?: boolean
   onChange?: (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -48,8 +48,8 @@ export const InputElement = ({
   type = "text",
   value,
   defaultValue,
-  autoComplete,
   disabled,
+  inputItem,
   register,
   errorMessage,
   min,
@@ -150,10 +150,6 @@ export const InputElement = ({
           placeholder={placeholder || label}
           {...props}
           {...register}
-          value={value}
-          onChange={(e) =>
-            onChange?.(e as React.ChangeEvent<HTMLTextAreaElement>)
-          }
         />
         <Field.ErrorText fontSize={"1.4rem"} mt=".3rem" lineHeight={"1.3"}>
           {errorMessage}
@@ -191,11 +187,42 @@ export const InputElement = ({
             placeholder={placeholder || label}
             {...props}
             {...register}
-            value={value}
-            onChange={onChange}
           />
         </InputGroup>
         <Field.ErrorText fontSize={"1.4rem"} mt=".3rem" lineHeight={"1.3"}>
+          {errorMessage}
+        </Field.ErrorText>
+      </Field.Root>
+    );
+  }
+
+  if (inputItem) {
+    return (
+      <Field.Root required={required} invalid={!!errorMessage}>
+        {label && (
+          <Flex mb="1">
+            <Field.Label fontSize={"1.5rem"} lineHeight={1.3}>
+              {label}
+            </Field.Label>
+            {required && <Field.RequiredIndicator color="red.500" ml="1" />}
+          </Flex>
+        )}
+        <Input
+          border={border ?? "none"}
+          bg={bg ?? "white"}
+          fontSize={"1.6rem"}
+          height="4.5rem"
+          p="1.5rem"
+          min={min}
+          placeholder={placeholder || label}
+          type={type ?? "text"}
+          {...props}
+          {...register}
+          onChange={onChange}
+          value={value}
+        />
+        <Field.ErrorText fontSize={"1.4rem"} mt=".3rem" lineHeight={"1.3"}>
+          {" "}
           {errorMessage}
         </Field.ErrorText>
       </Field.Root>
@@ -223,11 +250,8 @@ export const InputElement = ({
         type={type ?? "text"}
         {...props}
         {...register}
-        value={value}
         defaultValue={defaultValue}
-        autoComplete={autoComplete}
         disabled={disabled}
-        onChange={onChange}
       />
       <Field.ErrorText fontSize={"1.4rem"} mt=".3rem" lineHeight={"1.3"}>
         {" "}

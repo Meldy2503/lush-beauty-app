@@ -24,7 +24,6 @@ const LoginPage = () => {
 
   const formHook = useForm<LoginType>({
     resolver: yupResolver(loginSchema),
-    mode: "onSubmit",
     defaultValues: {
       email: "",
       password: "",

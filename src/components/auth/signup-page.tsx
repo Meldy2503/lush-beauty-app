@@ -74,7 +74,7 @@ const SignUpPage = () => {
           <InputElement
             label="Phone number"
             placeholder="+447056835551"
-            type="number"
+            type="tel"
             register={register("phone")}
             errorMessage={errors.phone?.message}
           />

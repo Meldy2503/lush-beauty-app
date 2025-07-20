@@ -31,7 +31,6 @@ const ShopListSection = () => {
   const [value, setValue] = useState<string[]>([]);
   const [params, setParams] = useState<Params>({
     page: 1,
-    //  limit: 9
   });
   const [allProducts, setAllProducts] = useState<ProductsType[]>([]);
 
@@ -41,7 +40,6 @@ const ShopListSection = () => {
   const { data, isLoading } = useGetProducts({
     ...(debouncedSearchQuery && { term: debouncedSearchQuery }),
     page: params?.page,
-    // limit: params?.limit
   });
   const hasMoreProducts = data?.meta?.totalPages > params?.page;
 
@@ -65,12 +63,22 @@ const ShopListSection = () => {
   };
 
   // Handle show less
+  // const handleShowLess = () => {
+  //   setParams((prevState) => ({ ...prevState, page: 1 }));
+  //   // Scroll to the beginning of the section
+  //   sectionRef.current?.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "start",
+  //   });
+  // };
+
+
   const handleShowLess = () => {
-    setParams((prevState) => ({ ...prevState, page: 1 }));
-    // Scroll to the beginning of the section
-    sectionRef.current?.scrollIntoView({
+    setParams((prev) => ({ ...prev, page: 1 }));
+    const top = sectionRef.current?.offsetTop || 0;
+    window.scrollTo({
+      top,
       behavior: "smooth",
-      block: "start",
     });
   };
 
@@ -91,6 +99,7 @@ const ShopListSection = () => {
       >
         <Box w={{ base: "100%", sm: "65%", md: "74%" }}>
           <InputElement
+            inputItem
             placeholder="Search Item...."
             border="1px solid gray.100"
             onChange={(e) => {

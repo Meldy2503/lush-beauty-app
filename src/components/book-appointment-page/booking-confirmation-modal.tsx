@@ -83,8 +83,6 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
     }
   };
 
-  console.log(appointment, "appointment");
-
 
   return (
     <Dialog.Root
@@ -93,7 +91,6 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
       closeOnInteractOutside={false}
       motionPreset="slide-in-bottom"
       open={isOpen}
-      // onOpenChange={(e) => setIsOpen(e.open)}
     >
       <Dialog.Trigger asChild>
         <Button

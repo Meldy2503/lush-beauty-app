@@ -106,6 +106,7 @@ const SelectServicePage = () => {
         pt="2rem"
         shadow={"sm"}
       >
+        
         <Heading
           as="h3"
           fontSize={{ base: "1.7rem", md: "1.8rem" }}
@@ -116,105 +117,110 @@ const SelectServicePage = () => {
         >
           SELECT SERVICES
         </Heading>
-        {isLoading ? (
-          <Flex alignItems={"center"} justifyContent={"center"}>
-            <Spinner my="15rem" />
-          </Flex>
-        ) : (
-          <Accordion.Root
-            collapsible
-            variant={"plain"}
-            h={{ base: "90vh", md: "66vh" }}
-            pb={{ base: "5rem", md: "2rem" }}
-            overflowY={"auto"}
-          >
-            {services?.map((service: ServicesType) => (
-              <Accordion.Item
-                key={service?.id}
-                value={service?.id || ""}
-                py=".4rem"
-              >
-                <Accordion.ItemTrigger
-                  bg="gray.250"
-                  py="2.5rem"
-                  px={{ base: "1.5rem", sm: "2.5rem" }}
-                  borderRadius={"0rem"}
+        <Flex
+          flexDir={"column"}
+          justifyContent={"space-between"}
+          h={{ base: "90vh", md: "78.2vh" }}
+          overflowY={"auto"}
+        >
+          {isLoading ? (
+            <Flex alignItems={"center"} justifyContent={"center"}>
+              <Spinner my="20rem" />
+            </Flex>
+          ) : (
+            <Accordion.Root
+              collapsible
+              variant={"plain"}
+              pb={{ base: "5rem", md: "2rem" }}
+            >
+              {services?.map((service: ServicesType) => (
+                <Accordion.Item
+                  key={service?.id}
+                  value={service?.id || ""}
+                  py=".4rem"
                 >
-                  <Box mr="1rem" flex="1">
-                    <Text
-                      fontSize={{ base: "1.5rem", md: "1.6rem" }}
-                      lineHeight={1.4}
-                      textTransform={"uppercase"}
-                      fontFamily="playfair"
-                      mb=".7rem"
-                    >
-                      {service?.name}
-                    </Text>
-                    <Text
-                      fontSize={{ base: "1.4rem", md: "1.5rem" }}
-                      lineHeight={1.4}
-                      color="gray.100"
-                    >
-                      {service?.description}
-                    </Text>
-                  </Box>
-                  <Accordion.ItemIndicator fontSize={"2rem"} color="black" />
-                </Accordion.ItemTrigger>
-                <Accordion.ItemContent
-                  bg="gray.250"
-                  borderRadius={"0rem"}
-                  pb="1rem"
-                >
-                  {service?.categories?.map((category: CategoriesType) => {
-                    return (
-                      <Accordion.ItemBody
-                        key={category?.id}
-                        px={{ base: "1.7rem", sm: "2.5rem" }}
-                        pb="2rem"
+                  <Accordion.ItemTrigger
+                    bg="gray.250"
+                    py="2.5rem"
+                    px={{ base: "1.5rem", sm: "2.5rem" }}
+                    borderRadius={"0rem"}
+                  >
+                    <Box mr="1rem" flex="1">
+                      <Text
+                        fontSize={{ base: "1.5rem", md: "1.6rem" }}
+                        lineHeight={1.4}
+                        textTransform={"uppercase"}
+                        fontFamily="playfair"
+                        mb=".7rem"
                       >
-                        <Checkbox.Root
-                          size="lg"
-                          checked={isServiceSelected(
-                            service?.id || "",
-                            category?.id || ""
-                          )}
-                          onCheckedChange={() =>
-                            handleServiceToggle(service?.id || "", category)
-                          }
+                        {service?.name}
+                      </Text>
+                      <Text
+                        fontSize={{ base: "1.4rem", md: "1.5rem" }}
+                        lineHeight={1.4}
+                        color="gray.100"
+                      >
+                        {service?.description}
+                      </Text>
+                    </Box>
+                    <Accordion.ItemIndicator fontSize={"2rem"} color="black" />
+                  </Accordion.ItemTrigger>
+                  <Accordion.ItemContent
+                    bg="gray.250"
+                    borderRadius={"0rem"}
+                    pb="1rem"
+                  >
+                    {service?.categories?.map((category: CategoriesType) => {
+                      return (
+                        <Accordion.ItemBody
+                          key={category?.id}
+                          px={{ base: "1.7rem", sm: "2.5rem" }}
+                          pb="2rem"
                         >
-                          <Checkbox.HiddenInput />
-                          <Checkbox.Control scale={"1.25"}>
-                            <Checkbox.Indicator />
-                          </Checkbox.Control>
-                          <Checkbox.Label ml=".6rem">
-                            <Text
-                              fontSize={{ base: "1.4rem", sm: "1.45rem" }}
-                              fontWeight={"600"}
-                            >
-                              {category?.name}
-                            </Text>
-                            <Text
-                              fontSize={{ base: "1.35rem", sm: "1.4rem" }}
-                              mt=".7rem"
-                            >
-                              {category?.estimatedTime} mins - £
-                              {category?.price}
-                            </Text>
-                          </Checkbox.Label>
-                        </Checkbox.Root>
-                      </Accordion.ItemBody>
-                    );
-                  })}
-                </Accordion.ItemContent>
-              </Accordion.Item>
-            ))}
-          </Accordion.Root>
-        )}
-        <StepNavigationBtns
-          prevOnClick={() => router.back()}
-          nextOnClick={handleNextClick}
-          nextDisabled={selectedServices.length === 0}
-        />
+                          <Checkbox.Root
+                            size="lg"
+                            checked={isServiceSelected(
+                              service?.id || "",
+                              category?.id || ""
+                            )}
+                            onCheckedChange={() =>
+                              handleServiceToggle(service?.id || "", category)
+                            }
+                          >
+                            <Checkbox.HiddenInput />
+                            <Checkbox.Control scale={"1.25"}>
+                              <Checkbox.Indicator />
+                            </Checkbox.Control>
+                            <Checkbox.Label ml=".6rem">
+                              <Text
+                                fontSize={{ base: "1.4rem", sm: "1.45rem" }}
+                                fontWeight={"600"}
+                              >
+                                {category?.name}
+                              </Text>
+                              <Text
+                                fontSize={{ base: "1.35rem", sm: "1.4rem" }}
+                                mt=".7rem"
+                              >
+                                {category?.estimatedTime} mins - £
+                                {category?.price}
+                              </Text>
+                            </Checkbox.Label>
+                          </Checkbox.Root>
+                        </Accordion.ItemBody>
+                      );
+                    })}
+                  </Accordion.ItemContent>
+                </Accordion.Item>
+              ))}
+            </Accordion.Root>
+          )}
+          <StepNavigationBtns
+            prevOnClick={() => router.back()}
+            nextOnClick={handleNextClick}
+            nextDisabled={selectedServices.length === 0}
+          />
+        </Flex>
       </Box>
       <Box
         w={{ base: "100%", md: "35%" }}

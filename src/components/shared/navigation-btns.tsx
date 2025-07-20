@@ -43,7 +43,7 @@ const StepNavigationBtns = ({
         disabled={prevDisabled}
         opacity={prevDisabled ? 0.25 : 1}
         cursor={prevDisabled ? "not-allowed" : "pointer"}
-        w="48%"
+        w="49%"
         onClick={prevOnClick}
       >
         {prevBtnText ?? "Prev"}
@@ -55,7 +55,7 @@ const StepNavigationBtns = ({
         disabled={nextDisabled}
         opacity={nextDisabled ? 0.25 : 1}
         cursor={nextDisabled ? "not-allowed" : "pointer"}
-        w="48%"
+        w="49%"
         onClick={nextOnClick}
       >
         {nextBtnText ?? "Continue"}

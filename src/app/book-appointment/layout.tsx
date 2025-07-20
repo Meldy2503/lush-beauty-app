@@ -62,9 +62,9 @@ export default function RootLayout({
           <Box
             ml={{ base: "0", lg: "23rem" }}
             w={{ base: "100%", lg: "calc(100% - 23rem)" }}
-            px="2rem"
-            pt={{ base: "3rem", lg: "4.7rem" }}
-            pb="2rem"
+            px="1.5rem"
+            pt={{ base: "2.5rem", lg: "3.5rem" }}
+            pb="1.5rem"
           >
             {/* Render all child contents */}
             {children}
