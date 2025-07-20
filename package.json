@@ -30,6 +30,7 @@
     "react-payment-inputs": "^1.2.0",
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
+    "use-debounce": "^10.0.5",
     "yup": "^1.6.1"
   },
   "devDependencies": {

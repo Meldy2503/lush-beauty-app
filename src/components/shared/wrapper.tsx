@@ -11,20 +11,25 @@ interface WrapperProps {
   color?: string;
 }
 
-const Wrapper = ({ children, pt, bg, pb, color}: WrapperProps) => {
-  return (
-    <Box
-      w="100%"
-      pt={pt ?? { base: "7rem", md: "10rem" }}
-      pb={pb ?? { base: "7rem", md: "10rem" }}
-      bg={bg ?? "white"}
-      color={color ?? "black"}
-    >
-      <Box maxW="1200px" w="90%" mx="auto">
-        {children}
+const Wrapper = React.forwardRef<HTMLDivElement, WrapperProps>(
+  ({ children, pt, bg, pb, color }, ref) => {
+    return (
+      <Box
+        ref={ref}
+        w="100%"
+        pt={pt ?? { base: "7rem", md: "10rem" }}
+        pb={pb ?? { base: "7rem", md: "10rem" }}
+        bg={bg ?? "white"}
+        color={color ?? "black"}
+      >
+        <Box maxW="1200px" w="90%" mx="auto">
+          {children}
+        </Box>
       </Box>
-    </Box>
-  );
-};
+    );
+  }
+);
+
+Wrapper.displayName = "Wrapper";
 
 export default Wrapper;

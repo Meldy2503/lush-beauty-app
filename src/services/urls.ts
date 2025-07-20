@@ -17,6 +17,7 @@ const urls = {
   getSpecilalistsUrl: `${baseUrl}/specialists`,
   bookPersonalAppointment: `${baseUrl}/appointments/book-personal`,
   bookGroupAppointment: `${baseUrl}/appointments/book-group`,
+  getAllProducts: `${baseUrl}/products`,
 };
 export default urls;
 

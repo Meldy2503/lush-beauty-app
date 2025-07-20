@@ -7,14 +7,19 @@ import {
   Portal,
   RadioGroup,
   Select,
+  Spinner,
   Text,
   createListCollection,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDebounce } from "use-debounce";
 import Button from "../shared/button";
 import { InputElement } from "../shared/input-element";
-import Products from "./products";
 import Wrapper from "../shared/wrapper";
+import Products from "./products";
+import { useGetProducts } from "@/services/api/products";
+import { Params } from "@/types";
+import { ProductsType } from "@/types/products";
 
 interface CategoriesData {
   label: string;
@@ -24,14 +29,60 @@ interface CategoriesData {
 
 const ShopListSection = () => {
   const [value, setValue] = useState<string[]>([]);
+  const [params, setParams] = useState<Params>({
+    page: 1,
+    //  limit: 9
+  });
+  const [allProducts, setAllProducts] = useState<ProductsType[]>([]);
+
+  const [debouncedSearchQuery] = useDebounce(params?.term, 500);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const { data, isLoading } = useGetProducts({
+    ...(debouncedSearchQuery && { term: debouncedSearchQuery }),
+    page: params?.page,
+    // limit: params?.limit
+  });
+  const hasMoreProducts = data?.meta?.totalPages > params?.page;
+
+  // to update the product list when data changes
+  useEffect(() => {
+    if (data?.data) {
+      if (params.page === 1) {
+        setAllProducts(data?.data);
+      } else {
+        setAllProducts((prev) => [...prev, ...data.data]);
+      }
+    }
+  }, [data, params.page]);
+
+  // Handle load more
+  const handleLoadMore = () => {
+    setParams((prevState) => ({
+      ...prevState,
+      page: prevState?.page + 1,
+    }));
+  };
+
+  // Handle show less
+  const handleShowLess = () => {
+    setParams((prevState) => ({ ...prevState, page: 1 }));
+    // Scroll to the beginning of the section
+    sectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   const categoriesCollection = createListCollection({
     items: categories,
   });
 
+
+  console.log(data, 'data')
   return (
-    <Wrapper bg="gray.250" pt="5rem">
-      {/* search and filter section */}
+    <Wrapper bg="gray.250" pt="5rem" ref={sectionRef}>
+      {/* search section */}
       <Flex
         mb="3rem"
         justifyContent={{ base: "space-between", md: "flex-end" }}
@@ -43,8 +94,17 @@ const ShopListSection = () => {
           <InputElement
             placeholder="Search Item...."
             border="1px solid gray.100"
+            onChange={(e) => {
+              setAllProducts([]);
+              setParams((prevState) => ({
+                ...prevState,
+                term: e.target.value,
+                page: 1,
+              }));
+            }}
           />
         </Box>
+        {/* Filter section */}
         <Box
           width={{ base: "100%", sm: "35%" }}
           display={{ base: "block", md: "none" }}
@@ -56,7 +116,6 @@ const ShopListSection = () => {
             onValueChange={(e) => setValue(e.value)}
           >
             <Select.HiddenSelect />
-
             <Select.Control bg="white">
               <Select.Trigger fontSize="1.6rem">
                 <Select.ValueText py="1.5rem" px="1rem" placeholder="Filter" />
@@ -85,7 +144,6 @@ const ShopListSection = () => {
           </Select.Root>
         </Box>
       </Flex>
-
       <Flex gap="2rem" direction={{ base: "column", md: "row" }}>
         <Box
           w={{ base: "100%", md: "25%" }}
@@ -150,17 +208,54 @@ const ShopListSection = () => {
         </Box>
         {/* products section */}
         <Box w={{ base: "100%", md: "75%" }}>
-          <Products />
-          <Flex alignItems={"center"} justifyContent={"center"} mt="6rem">
-            <Button
-              bg="transparent"
-              borderWidth="1px"
-              borderColor="black"
-              color="black"
-              w={{ base: "100%", sm: "fit-content" }}
-            >
-              Load More
-            </Button>
+          {isLoading && params.page === 1 ? (
+            <Flex alignItems="center" justifyContent="center">
+              <Spinner my="15rem" />
+            </Flex>
+          ) : !isLoading && data?.data?.length === 0 ? (
+            <Flex alignItems="center" justifyContent="center" my="5rem">
+              <Text fontSize="1.6rem">
+                {`No results found for "${params.term}"`}
+              </Text>
+            </Flex>
+          ) : (
+            <>
+              <Products data={{ ...data, data: allProducts }} />
+              {isLoading && params.page > 1 && (
+                <Flex alignItems="center" justifyContent="center" mt="5rem">
+                  <Spinner />
+                </Flex>
+              )}
+            </>
+          )}
+          <Flex
+            alignItems={"center"}
+            justifyContent={"center"}
+            my="6rem"
+            gap="1.5rem"
+            flexWrap={"wrap"}
+          >
+            {allProducts?.length > (data?.meta?.perPage || 0) &&
+              params?.page !== 1 && (
+                <Button
+                  bg="transparent"
+                  px={{ base: "2rem", md: "5rem" }}
+                  borderWidth="1px"
+                  borderColor="black"
+                  color="black"
+                  onClick={handleShowLess}
+                >
+                  Show Less
+                </Button>
+              )}
+            {hasMoreProducts && (
+              <Button
+                onClick={handleLoadMore}
+                px={{ base: "2rem", md: "5rem" }}
+              >
+                Load More
+              </Button>
+            )}
           </Flex>
         </Box>
       </Flex>

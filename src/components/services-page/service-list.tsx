@@ -22,6 +22,7 @@ interface ServiceCardData {
 
 const ServiceListSection = () => {
   const token = useSelector((state: RootState) => state.auth.accessToken);
+
   return (
     <Box width="100%" data-testid="services-section" pt="10rem">
       <Grid
@@ -167,4 +168,3 @@ const serviceListData: ServiceCardData[] = [
     ],
   },
 ];
-
