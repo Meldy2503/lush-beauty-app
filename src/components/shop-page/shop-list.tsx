@@ -72,15 +72,27 @@ const ShopListSection = () => {
   //   });
   // };
 
-
   const handleShowLess = () => {
-    setParams((prev) => ({ ...prev, page: 1 }));
-    const top = sectionRef.current?.offsetTop || 0;
-    window.scrollTo({
-      top,
-      behavior: "smooth",
-    });
+    setParams((prevState) => ({ ...prevState, page: 1 }));
+
+    // Wait for React to update the DOM
+    setTimeout(() => {
+      sectionRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100); 
   };
+
+
+  // const handleShowLess = () => {
+  //   setParams((prev) => ({ ...prev, page: 1 }));
+  //   const top = sectionRef.current?.offsetTop || 0;
+  //   window.scrollTo({
+  //     top,
+  //     behavior: "smooth",
+  //   });
+  // };
 
   const categoriesCollection = createListCollection({
     items: categories,
