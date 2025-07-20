@@ -63,15 +63,6 @@ const ShopListSection = () => {
   };
 
   // Handle show less
-  // const handleShowLess = () => {
-  //   setParams((prevState) => ({ ...prevState, page: 1 }));
-  //   // Scroll to the beginning of the section
-  //   sectionRef.current?.scrollIntoView({
-  //     behavior: "smooth",
-  //     block: "start",
-  //   });
-  // };
-
   const handleShowLess = () => {
     setParams((prevState) => ({ ...prevState, page: 1 }));
 
@@ -81,23 +72,12 @@ const ShopListSection = () => {
         behavior: "smooth",
         block: "start",
       });
-    }, 100); 
+    }, 100);
   };
-
-
-  // const handleShowLess = () => {
-  //   setParams((prev) => ({ ...prev, page: 1 }));
-  //   const top = sectionRef.current?.offsetTop || 0;
-  //   window.scrollTo({
-  //     top,
-  //     behavior: "smooth",
-  //   });
-  // };
 
   const categoriesCollection = createListCollection({
     items: categories,
   });
-
 
   return (
     <Wrapper bg="gray.250" pt="5rem" ref={sectionRef}>
