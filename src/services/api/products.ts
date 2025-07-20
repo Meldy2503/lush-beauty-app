@@ -13,3 +13,15 @@ export const useGetProducts = (params?: Params) => {
     },
   });
 };
+
+// to get a single product by Id
+export const useGetProductById = (productId: string) => {
+  return useQuery({
+    queryKey: ["product", productId],
+    queryFn: async () => {
+      const res = await axios.get(urls.getProductById(productId));
+      return res.data.data;
+    },
+    enabled: !!productId,
+  });
+};

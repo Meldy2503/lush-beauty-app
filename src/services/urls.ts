@@ -18,11 +18,9 @@ const urls = {
   bookPersonalAppointment: `${baseUrl}/appointments/book-personal`,
   bookGroupAppointment: `${baseUrl}/appointments/book-group`,
   getAllProducts: `${baseUrl}/products`,
+  getProductById: (productId: string) => `${baseUrl}/products/${productId}`,
 };
 export default urls;
-
-
-
 
 // {
 //   "success": true,

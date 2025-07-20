@@ -61,7 +61,7 @@ const LushVideoSection = () => {
               muted
               playsInline
               style={{ height: "100%", width: "100%", objectFit: "cover" }}
-              poster="/images/video-img.jpg"
+              poster="/videos/video-img.jpg"
             >
               <source src="/videos/video.mp4" type="video/mp4" />
               <source src="/videos/video.webm" type="video/webm" />

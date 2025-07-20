@@ -118,9 +118,8 @@ export function Provider({ children }: { children: React.ReactNode }) {
               >
                 <Box
                   as={FaWhatsapp}
-                  color="white"
-                  boxSize="3.5rem"
-                  _hover={{ color: "yellow.50" }}
+                  color="yellow.50"
+                  boxSize={{base:'3.5rem', md: '3.7rem'}}
                 />
               </Flex>
             </a>
