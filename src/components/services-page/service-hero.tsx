@@ -1,11 +1,10 @@
 "use client";
 
 import { Box, Flex, Heading, HStack, Text, VStack } from "@chakra-ui/react";
-import salonImg from "../../assets/images/salon-img.webp";
-import Wrapper from "../shared/wrapper";
-import Button from "../shared/button";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import salonImg from "../../assets/images/salon-img.webp";
 import ContactUsModal from "../contact-us/contact-modal";
+import Wrapper from "../shared/wrapper";
 
 const ServiceHeroSection = () => {
   return (
@@ -74,21 +73,26 @@ const ServiceHeroSection = () => {
           </Text>
           <Flex
             alignItems={"center"}
-            gap={{ base: "1rem", sm: "3rem" }}
+            gap={{ base: "1rem", sm: "2rem" }}
             mt="3rem"
             justifyContent={"center"}
           >
-            <Button
-              href="/services"
-              bg="black"
-              color="white"
-              px={{ base: "2rem", sm: "5rem" }}
+            <a
+              href="https://wa.me/447881172787?text=Hello%2C%20welcome%20to%20Lush%20%26%20Luxe%20Beauty%20Salon.%20How%20can%20we%20help%20you%3F"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <HStack gap={{ base: ".5rem", sm: "1rem" }}>
+              <HStack
+                gap={{ base: ".5rem", sm: "1rem" }}
+                bg="black"
+                px={{ base: "2rem", sm: "4rem" }}
+                py="1rem"
+                color="white"
+              >
                 <IoChatbubbleEllipsesOutline />
                 <Text>Let&apos;s Chat</Text>
               </HStack>
-            </Button>
+            </a>
             <ContactUsModal />
           </Flex>
         </Box>

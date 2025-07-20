@@ -77,25 +77,43 @@ const Navbar = ({ display, top, bg, color }: NavbarProps) => {
           >
             <Link
               href={"/about-us"}
+              className={pathname !== "/about-us" ? "nav-links" : ""}
               style={{
                 color: color ?? "white",
                 fontWeight: pathname === "/about-us" ? "500" : "400",
                 borderBottom:
                   pathname === "/about-us" ? "2px solid #DB9935" : "none",
+                position: "relative",
               }}
             >
               About Us
             </Link>
             <Link
               href={"/services"}
+              className={pathname !== "/services" ? "nav-links" : ""}
               style={{
                 color: color ?? "white",
                 fontWeight: pathname === "/services" ? "500" : "400",
                 borderBottom:
                   pathname === "/services" ? "2px solid #DB9935" : "none",
+                position: "relative",
               }}
             >
               Services
+            </Link>
+
+            <Link
+              href={"/shop"}
+              className={pathname !== "/shop" ? "nav-links" : ""}
+              style={{
+                color: color ?? "white",
+                fontWeight: pathname === "/services" ? "500" : "400",
+                borderBottom:
+                  pathname === "/shop" ? "2px solid #DB9935" : "none",
+                position: "relative",
+              }}
+            >
+              Shop
             </Link>
             <ContactUsModal
               btn={
@@ -104,17 +122,6 @@ const Navbar = ({ display, top, bg, color }: NavbarProps) => {
                 </Text>
               }
             />
-            <Link
-              href={"/shop"}
-              style={{
-                color: color ?? "white",
-                fontWeight: pathname === "/services" ? "500" : "400",
-                borderBottom:
-                  pathname === "/shop" ? "2px solid #DB9935" : "none",
-              }}
-            >
-              Shop
-            </Link>
           </Flex>
 
           {!pathname.includes("book-appointment") && (

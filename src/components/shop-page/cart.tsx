@@ -114,13 +114,13 @@ const Cart = ({ children }: CartProps) => {
                     fontSize={"1.2rem"}
                   >
                     <Box>
-                      <Text mb=".5rem">Quantity*</Text>
+                      <Text mb=".6rem">Quantity*</Text>
                       <Flex
                         alignItems={"center"}
                         justifyContent={"space-between"}
-                        w="8rem"
-                        border="1px solid black"
-                        p=".5rem"
+                        w="10rem"
+                        border="1.5px solid orange"
+                        p=".8rem"
                       >
                         <Box>
                           <FiMinus />

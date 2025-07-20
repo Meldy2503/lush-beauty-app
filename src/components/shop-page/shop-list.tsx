@@ -79,7 +79,6 @@ const ShopListSection = () => {
   });
 
 
-  console.log(data, 'data')
   return (
     <Wrapper bg="gray.250" pt="5rem" ref={sectionRef}>
       {/* search section */}
