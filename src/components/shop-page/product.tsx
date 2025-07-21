@@ -34,30 +34,24 @@ const Product = () => {
   const [itemQuantity, setItemQuantity] = useState(1);
   const { data: product, isLoading } = useGetProductById(id as string);
   const addToCartMutation = useAddToCartMutation();
-  // const accessToken = useSelector((state: RootState) => state.auth.accessToken);
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
 
   const { mutateAsync: addToCart } = addToCartMutation;
 
-  console.log(loggedInUser?.id, "loggedInUser");
-
   const handleAddTocart = async () => {
     let guestId: string;
 
-    if (loggedInUser?.id) {
-      guestId = loggedInUser.id;
+    if (existingGuestId) {
+      guestId = existingGuestId;
     } else {
-      if (existingGuestId) {
-        guestId = existingGuestId;
-      } else {
-        guestId = uuidv4();
-        dispatch(setGuestId(guestId));
-      }
+      guestId = uuidv4();
+      dispatch(setGuestId(guestId));
     }
 
     const payload = {
-      guestId: guestId,
+      ...(guestId && { guestId: guestId }),
+      ...(loggedInUser?.id && { userId: loggedInUser.id }),
       productId: product?.id,
       quantity: itemQuantity,
     };

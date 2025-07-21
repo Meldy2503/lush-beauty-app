@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetCartItems } from "@/services/api/cart";
+import { useDeleteCartItem, useGetCartItems } from "@/services/api/cart";
 import { RootState } from "@/store";
 import { CartItemsType } from "@/types/cart";
 import {
@@ -23,6 +23,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import Button from "../shared/button";
 import EmptyCart from "../shared/empty-cart";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 interface CartProps {
   children?: React.ReactNode;
@@ -31,15 +33,40 @@ interface CartProps {
 const Cart = ({ children }: CartProps) => {
   const pathname = usePathname();
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
-  const loggedInUser = useSelector((state: RootState) => state.auth.user);
-  const id = loggedInUser?.id ?? existingGuestId;
-  const { data: items, isLoading } = useGetCartItems(id);
+  const [deletingItemId, setDeletingItemId] = useState<string | null>(null);
 
-  const totalPrice = items?.reduce((acc: number, item: CartItemsType) => {
+  const loggedInUser = useSelector((state: RootState) => state.auth.user);
+  const { data: cartItems, isLoading } = useGetCartItems({
+    guestId: existingGuestId,
+    userId: loggedInUser?.id,
+  });
+
+  const { mutateAsync: deleteCartItem } = useDeleteCartItem();
+
+  const totalPrice = cartItems?.reduce((acc: number, item: CartItemsType) => {
     const itemPrice = item?.productItem?.price || 0;
     const quantity = item?.quantity || 0;
     return acc + itemPrice * quantity;
   }, 0);
+
+  const handleCartItemDelete = async (productId: string) => {
+    try {
+      setDeletingItemId(productId);
+      const result = await deleteCartItem({
+        productId,
+        guestId: existingGuestId,
+        userId: loggedInUser?.id,
+      });
+
+      if (result) {
+        toast.success("Item Deleted Successfully!");
+      }
+    } catch (error) {
+      console.error("Delete Cart Item error:", error);
+    } finally {
+      setDeletingItemId(null);
+    }
+  };
 
   return (
     <Drawer.Root size="xl" placement={"end"}>
@@ -61,7 +88,7 @@ const Cart = ({ children }: CartProps) => {
               pointerEvents="none"
               fontWeight={"bold"}
             >
-              {items?.length ?? 0}
+              {cartItems?.length ?? 0}
             </Flex>
           </Box>
         )}
@@ -77,7 +104,7 @@ const Cart = ({ children }: CartProps) => {
                 fontSize={"2rem"}
                 color="white"
               >
-                Cart: {items?.length ?? 0} Items
+                Cart: {cartItems?.length ?? 0} Items
               </Drawer.Title>
             </Drawer.Header>
             <Drawer.Body p="2rem">
@@ -85,11 +112,11 @@ const Cart = ({ children }: CartProps) => {
                 <Flex alignItems="center" justifyContent="center">
                   <Spinner my="20rem" />
                 </Flex>
-              ) : !items ? (
+              ) : !cartItems ? (
                 <EmptyCart />
               ) : (
-                items &&
-                items.map((item: CartItemsType) => {
+                cartItems &&
+                cartItems.map((item: CartItemsType) => {
                   return (
                     <Flex
                       key={item?.id}
@@ -134,9 +161,18 @@ const Cart = ({ children }: CartProps) => {
                               {item?.productItem?.description}
                             </Text>
                           </Box>
-                          <Box>
-                            <RiDeleteBin6Line color="red" size={20} />
-                          </Box>
+                          {deletingItemId === item?.id ? (
+                            <Spinner />
+                          ) : (
+                            <Box
+                              onClick={() =>
+                                handleCartItemDelete(item?.id ?? "")
+                              }
+                              cursor="pointer"
+                            >
+                              <RiDeleteBin6Line color="red" size={20} />
+                            </Box>
+                          )}
                         </Flex>
 
                         <Flex
@@ -184,7 +220,7 @@ const Cart = ({ children }: CartProps) => {
               )}
             </Drawer.Body>
 
-            {items && (
+            {cartItems && (
               <Drawer.Footer bg="white" p="2rem" borderTop="1px solid #e1e5e5">
                 <Flex flexDirection={"column"} w="full" gap="3rem">
                   <HStack

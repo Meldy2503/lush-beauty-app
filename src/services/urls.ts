@@ -20,8 +20,21 @@ const urls = {
   getAllProducts: `${baseUrl}/products`,
   getProductById: (productId: string) => `${baseUrl}/products/${productId}`,
   addToCart: `${baseUrl}/cart/items/add`,
-  getCartItems: (guestId: string) => `${baseUrl}/cart/items?guestId=${guestId}`,
+  getCartItems: ({
+    guestId,
+    userId,
+  }: {
+    guestId?: string;
+    userId?: string;
+  }) => {
+    if (guestId) return `${baseUrl}/cart/items?guestId=${guestId}`;
+    if (userId) return `${baseUrl}/cart/items?userId=${userId}`;
+    return `${baseUrl}/cart/items`; // fallback if needed
+  },
+
   getProductCategories: `${baseUrl}/products/categories`,
+  deleteCartItemUrl: (productId: string) =>
+    `${baseUrl}/cart/items/${productId}/remove`,
 };
 export default urls;
 

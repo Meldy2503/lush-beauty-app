@@ -21,7 +21,6 @@ export interface ProductsType {
   category: CategoryItemsType;
 }
 
-
 export interface ProductCategoryType {
   id: string;
   name: string;
@@ -33,9 +32,16 @@ export interface ProductCategoryType {
 }
 
 export interface AddToCartType {
-  guestId: string;
+  guestId?: string | null;
+  userId?: string | null;
   productId: string;
   quantity: number;
+}
+
+export interface DeleteCartItemType {
+  guestId?: string | null;
+  userId?: string | null;
+  productId: string;
 }
 export interface CartItemsType {
   createdAt?: string;
@@ -47,6 +53,3 @@ export interface CartItemsType {
   userId?: string;
   quantity?: number;
 }
-
-
-
