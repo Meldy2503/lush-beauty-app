@@ -19,6 +19,8 @@ const urls = {
   bookGroupAppointment: `${baseUrl}/appointments/book-group`,
   getAllProducts: `${baseUrl}/products`,
   getProductById: (productId: string) => `${baseUrl}/products/${productId}`,
+  addToCart: `${baseUrl}/cart/items/add`,
+  getCartItems: (guestId: string) => `${baseUrl}/cart/items?guestId=${guestId}`,
 };
 export default urls;
 

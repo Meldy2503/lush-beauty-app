@@ -4,6 +4,7 @@ import { UserProfileType } from "@/types/user";
 
 const initialState: AuthState = {
   accessToken: null,
+  user: null,
 };
 
 const authSlice = createSlice({

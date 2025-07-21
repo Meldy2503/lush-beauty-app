@@ -26,6 +26,9 @@ const ProfileMenu = () => {
   const userImg = loggedInUser?.imageUrl;
   const firstName = name?.split(" ")[0];
 
+
+  console.log(loggedInUser, "loggedInUser");
+
   return (
     <Menu.Root size="md">
       <Menu.Trigger asChild>

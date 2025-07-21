@@ -7,7 +7,7 @@ import rootReducer from "./root-reducer";
 const persistConfig = {
   key: "root",
   storage: storageSession,
-  whitelist: ["appointment", "auth"], // to persist appointments, auth
+  whitelist: ["appointment", "auth", "cart"], // to persist appointments, auth and cart
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

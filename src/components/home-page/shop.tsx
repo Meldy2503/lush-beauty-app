@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetProducts } from "@/services/api/products";
+import { useGetProducts } from "@/services/api/cart";
 import { Box, Flex, Heading, Spinner, Text, VStack } from "@chakra-ui/react";
 import academyBg from "../../assets/images/academy-bg.webp";
 import Button from "../shared/button";

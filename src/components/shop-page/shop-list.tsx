@@ -17,9 +17,9 @@ import Button from "../shared/button";
 import { InputElement } from "../shared/input-element";
 import Wrapper from "../shared/wrapper";
 import Products from "./products";
-import { useGetProducts } from "@/services/api/products";
+import { useGetProducts } from "@/services/api/cart";
 import { Params } from "@/types";
-import { ProductsType } from "@/types/products";
+import { ProductsType } from "@/types/cart";
 
 interface CategoriesData {
   label: string;
