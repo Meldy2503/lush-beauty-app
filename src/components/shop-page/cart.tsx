@@ -239,7 +239,7 @@ const Cart = ({ children }: CartProps) => {
                   >
                     {pathname !== "/shop/order-summary" ? (
                       <Button
-                        href="/shop/order-summary"
+                        href={loggedInUser ? "/shop/order-summary" : "/login"}
                         w="100%"
                         px={{ base: "3rem", sm: "5rem" }}
                       >
