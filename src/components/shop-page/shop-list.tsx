@@ -1,5 +1,8 @@
 "use client";
 
+import { useGetProductCategories, useGetProducts } from "@/services/api/cart";
+import { Params } from "@/types";
+import { ProductCategoryType, ProductsType } from "@/types/cart";
 import {
   Box,
   Flex,
@@ -17,20 +20,17 @@ import Button from "../shared/button";
 import { InputElement } from "../shared/input-element";
 import Wrapper from "../shared/wrapper";
 import Products from "./products";
-import { useGetProducts } from "@/services/api/cart";
-import { Params } from "@/types";
-import { ProductsType } from "@/types/cart";
 
-interface CategoriesData {
+type CategoryItem = {
   label: string;
   value: string;
-  count?: number;
-}
+  count: number;
+};
 
 const ShopListSection = () => {
-  const [value, setValue] = useState<string[]>([]);
   const [params, setParams] = useState<Params>({
     page: 1,
+    categoryId: "", // Empty string represents "All"
   });
   const [allProducts, setAllProducts] = useState<ProductsType[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -38,10 +38,16 @@ const ShopListSection = () => {
   const [debouncedSearchQuery] = useDebounce(params?.term, 500);
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  // to fetch all products data
   const { data, isLoading } = useGetProducts({
     ...(debouncedSearchQuery && { term: debouncedSearchQuery }),
+    ...(params?.categoryId && { categoryId: params?.categoryId }),
     page: params?.page,
   });
+
+  // to fetch all categories data
+  const { data: categoriesData, isLoading: isLoadingCategory } =
+    useGetProductCategories();
   const hasMoreProducts = data?.meta?.totalPages > params?.page;
 
   // to update the product list when data changes
@@ -59,7 +65,7 @@ const ShopListSection = () => {
   const handleLoadMore = async () => {
     if (!hasMoreProducts || isLoadingMore) return;
     setIsLoadingMore(true);
-    // Wait a little for UX even if data is fast
+    // Wait a little for UI to fully load
     await new Promise((resolve) => setTimeout(resolve, 600));
 
     setParams((prev) => ({
@@ -80,9 +86,26 @@ const ShopListSection = () => {
     }, 100);
   };
 
+  const categories: CategoryItem[] =
+    categoriesData?.map((category: ProductCategoryType) => ({
+      label: category?.name,
+      value: category?.id,
+      count: category?.items?.length,
+    })) || [];
+
+  // Create categories with "All" option
+  const categoriesWithAll: CategoryItem[] = [
+    { label: "All", value: "", count: data?.meta?.total || 0 },
+    ...categories,
+  ];
+
   const categoriesCollection = createListCollection({
-    items: categories,
+    items: categoriesWithAll,
   });
+
+  console.log(categoriesCollection, "categoriesCollectionItem");
+  console.log(categories, "categories");
+  console.log(categoriesData, "categoriesData");
 
   return (
     <Wrapper bg="gray.250" pt="5rem" ref={sectionRef}>
@@ -116,13 +139,22 @@ const ShopListSection = () => {
         >
           <Select.Root
             collection={categoriesCollection}
-            value={value}
-            onValueChange={(e) => setValue(e.value)}
+            value={params?.categoryId ? [params?.categoryId] : [""]} // Default to "All" (empty string)
+            onValueChange={(details) => {
+              console.log(details, "details");
+              console.log([params.categoryId], "[params.categoryId]");
+              setAllProducts([]);
+              setParams((prevState) => ({
+                ...prevState,
+                categoryId: details.value[0] || "",
+                page: 1,
+              }));
+            }}
           >
             <Select.HiddenSelect />
             <Select.Control bg="white">
               <Select.Trigger fontSize="1.6rem">
-                <Select.ValueText py="1.5rem" px="1rem" placeholder="Filter" />
+                <Select.ValueText py="1.5rem" px="1rem" placeholder="All" />
               </Select.Trigger>
               <Select.IndicatorGroup>
                 <Select.Indicator fontSize="1.6rem" p="1rem" />
@@ -131,14 +163,14 @@ const ShopListSection = () => {
             <Portal>
               <Select.Positioner>
                 <Select.Content>
-                  {categoriesCollection.items.map((category) => (
+                  {categoriesCollection?.items?.map((category) => (
                     <Select.Item
                       item={category}
-                      key={category.value}
+                      key={category?.value || "All"}
                       p="1rem"
                       fontSize="1.6rem"
                     >
-                      {category.label}
+                      {category?.label}
                       <Select.ItemIndicator />
                     </Select.Item>
                   ))}
@@ -172,7 +204,16 @@ const ShopListSection = () => {
             borderBottomColor={"black"}
             py="2rem"
             size="lg"
-            defaultValue={categories[0].value}
+            value={params?.categoryId || ""} // Default to "All" (empty string)
+            onValueChange={(e) => {
+              console.log(e, "e");
+              setAllProducts([]);
+              setParams((prevState) => ({
+                ...prevState,
+                categoryId: e.value || "",
+                page: 1,
+              }));
+            }}
             w={{ base: "100%", lg: "90%" }}
           >
             <Heading
@@ -185,38 +226,38 @@ const ShopListSection = () => {
             >
               Category
             </Heading>
-            {categories.map((item) => (
+            {categoriesCollection?.items?.map((category) => (
               <Flex
                 justify={"space-between"}
                 gap="2rem"
-                key={item.label}
+                key={category?.value || "all"} // Handle empty value for "All"
                 mt="1rem"
                 w="95%"
               >
                 <Box>
-                  <RadioGroup.Item value={item.value}>
+                  <RadioGroup.Item value={category?.value}>
                     <RadioGroup.ItemHiddenInput />
                     <RadioGroup.ItemIndicator />
                     <RadioGroup.ItemText
                       fontSize={{ base: "1.6rem", md: "1.7rem" }}
                       ml=".5rem"
                     >
-                      {item.label}
+                      {category?.label}
                     </RadioGroup.ItemText>
                   </RadioGroup.Item>
                 </Box>
-                <Text as="span">{item.count}</Text>
+                <Text as="span">{category?.count}</Text>
               </Flex>
             ))}
           </RadioGroup.Root>
         </Box>
         {/* products section */}
         <Box w={{ base: "100%", md: "75%" }}>
-          {isLoading && params.page === 1 ? (
+          {(isLoading || isLoadingCategory) && params.page === 1 ? (
             <Flex alignItems="center" justifyContent="center">
               <Spinner my="15rem" />
             </Flex>
-          ) : !isLoading && data?.data?.length === 0 ? (
+          ) : (!isLoading || !isLoadingCategory) && data?.data?.length === 0 ? (
             <Flex alignItems="center" justifyContent="center" my="5rem">
               <Text fontSize="1.6rem">
                 {`No results found for "${params.term}"`}
@@ -269,10 +310,3 @@ const ShopListSection = () => {
 };
 
 export default ShopListSection;
-
-const categories: CategoriesData[] = [
-  { label: "All", value: "All", count: 145 },
-  { label: "Cosmetics", value: "Cosmetics", count: 12 },
-  { label: "Lotion", value: "Lotion", count: 18 },
-  { label: "Nails", value: "Nails", count: 15 },
-];

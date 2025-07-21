@@ -1,3 +1,10 @@
+export interface CategoryItemsType {
+  id: string;
+  name: string;
+  description: string;
+  code: string;
+}
+
 export interface ProductsType {
   id: string;
   name: string;
@@ -11,12 +18,18 @@ export interface ProductsType {
   imageUrl: string;
   heading: string;
   price?: number;
-  category: {
-    id: string;
-    name: string;
-    description: string;
-    code: string;
-  };
+  category: CategoryItemsType;
+}
+
+
+export interface ProductCategoryType {
+  id: string;
+  name: string;
+  description: string;
+  code: string;
+  createdAt: string;
+  updatedAt: string;
+  items: CategoryItemsType[];
 }
 
 export interface AddToCartType {
@@ -34,3 +47,6 @@ export interface CartItemsType {
   userId?: string;
   quantity?: number;
 }
+
+
+

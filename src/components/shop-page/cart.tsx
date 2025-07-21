@@ -41,8 +41,6 @@ const Cart = ({ children }: CartProps) => {
     return acc + itemPrice * quantity;
   }, 0);
 
-  console.log(items, "items");
-
   return (
     <Drawer.Root size="xl" placement={"end"}>
       <Drawer.Trigger asChild>

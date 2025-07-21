@@ -21,6 +21,7 @@ const urls = {
   getProductById: (productId: string) => `${baseUrl}/products/${productId}`,
   addToCart: `${baseUrl}/cart/items/add`,
   getCartItems: (guestId: string) => `${baseUrl}/cart/items?guestId=${guestId}`,
+  getProductCategories: `${baseUrl}/products/categories`,
 };
 export default urls;
 

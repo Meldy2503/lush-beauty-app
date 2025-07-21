@@ -63,3 +63,14 @@ export const useAddToCartMutation = () => {
     },
   });
 };
+
+// to get all product categories
+export const useGetProductCategories = () => {
+  return useQuery({
+    queryKey: ["productCategories"],
+    queryFn: async () => {
+      const res = await axios.get(urls.getProductCategories);
+      return res.data.data.data;
+    },
+  });
+};

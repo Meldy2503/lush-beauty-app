@@ -21,5 +21,6 @@ export interface Params {
   term?: string;
   page: number;
   pageSize?: number;
-  limit?: number
+  limit?: number;
+  categoryId?: string;
 }
