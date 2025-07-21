@@ -1,6 +1,6 @@
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
 import Button from "../shared/button";
-import AppointmentDetailsContent from "./appointment-details-content";
+import AppointmentDetailsContent from "./appointment-content";
 
 const ViewAppointmentDetailsModal = () => {
   return (
@@ -9,8 +9,8 @@ const ViewAppointmentDetailsModal = () => {
       motionPreset="slide-in-bottom"
     >
       <Dialog.Trigger asChild>
-        <Button px="1rem" fontSize="1.4rem">
-          VIEW DETAILS
+        <Button px="2rem" fontSize="1.4rem" py={{ base: "1.5rem", sm: "2rem" }}>
+          View Details
         </Button>
       </Dialog.Trigger>
       <Portal>
@@ -36,16 +36,17 @@ const ViewAppointmentDetailsModal = () => {
                   borderColor="black"
                   borderWidth="2px"
                   color="black"
-                  py="2rem"
+                  py="1.9rem"
                   px={{ base: "3rem", sm: "5rem" }}
                 >
                   Close
                 </Button>
               </Dialog.ActionTrigger>
+
               <Button
-                py="1.6rem"
                 href="/book-appointment"
-                px={{ base: "2rem", sm: "5rem" }}
+                py="2rem"
+                px={{ base: "2rem", sm: "3rem" }}
               >
                 Book again
               </Button>

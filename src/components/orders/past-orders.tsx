@@ -45,7 +45,7 @@ const PastOrders = () => {
               rechargeable face mask{" "}
             </Heading>
             <Text lineHeight={1.3}>Order no - 1979784172 </Text>
-            <Text lineHeight={1.3} fontWeight={"400"} py=".5rem">
+            <Text lineHeight={1.3} fontWeight={"500"} py=".5rem">
               $40
             </Text>
             <Text lineHeight={1.3} fontSize="1.4rem" pt=".5rem">
@@ -94,7 +94,7 @@ const PastOrders = () => {
               rechargeable face mask{" "}
             </Heading>
             <Text lineHeight={1.3}>Order no - 1979784172 </Text>
-            <Text lineHeight={1.3} fontWeight={"400"} py=".5rem">
+            <Text lineHeight={1.3} fontWeight={"500"} py=".5rem">
               $40
             </Text>
             <Text lineHeight={1.3} fontSize="1.4rem" pt=".5rem">

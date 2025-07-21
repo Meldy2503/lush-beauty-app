@@ -78,9 +78,8 @@ const HeroSection = () => {
 
   return (
     <Box ref={containerRef} bg="white" position="relative" overflow="hidden">
-      <Box
+      <Flex
         height={{ base: "90vh", "2xl": "60vh" }}
-        display="flex"
         justifyContent="center"
         alignItems="center"
       >
@@ -193,7 +192,7 @@ const HeroSection = () => {
               <Text fontSize="2.5rem" py="3rem" letterSpacing={".5rem"}>
                 BEAUTY SALON
               </Text>
-              <VStack>
+              <VStack pointerEvents="auto">
                 <Button
                   bg="transparent"
                   borderWidth="1px"
@@ -206,7 +205,7 @@ const HeroSection = () => {
             </Box>
           </Flex>
         </MotionBox>
-      </Box>
+      </Flex>
     </Box>
   );
 };

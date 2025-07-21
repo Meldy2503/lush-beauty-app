@@ -32,7 +32,6 @@ const OurFaqSection = () => {
       </Heading>
       <Accordion.Root
         collapsible
-        multiple
         variant={"plain"}
         pt={{ base: "1.5rem", md: "3rem" }}
         value={openItems}
@@ -64,9 +63,10 @@ const OurFaqSection = () => {
             </Accordion.ItemTrigger>
             <Accordion.ItemContent bg="white" borderRadius={"0rem"}>
               <Accordion.ItemBody
-                w="95%"
+                w={{base:'95%', lg: '90%'}}
                 px={{ base: "1.7rem", sm: "2.5rem" }}
                 pb="2rem"
+                color='gray.100'
               >
                 {item.text}
               </Accordion.ItemBody>

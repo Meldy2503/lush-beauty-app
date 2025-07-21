@@ -2,7 +2,7 @@
 
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
 import Button from "../shared/button";
-import OrderDetailsContent from "./order-details-content";
+import OrderDetailsContent from "./order-content";
 
 const ViewOrderDetailsModal = () => {
   return (
@@ -11,8 +11,8 @@ const ViewOrderDetailsModal = () => {
       motionPreset="slide-in-bottom"
     >
       <Dialog.Trigger asChild>
-        <Button px="2rem" fontSize="1.4rem">
-          VIEW DETAILS
+        <Button px="2rem" fontSize="1.4rem" py={{ base: "1.5rem", sm: "2rem" }}>
+          View Details
         </Button>
       </Dialog.Trigger>
       <Portal>
@@ -26,7 +26,7 @@ const ViewOrderDetailsModal = () => {
             fontSize="1.6rem"
           >
             <Dialog.Header>
-              <Dialog.Title fontSize="2rem">Order details</Dialog.Title>
+              <Dialog.Title fontSize="1.8rem">Order details</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>
               <OrderDetailsContent />
@@ -38,17 +38,13 @@ const ViewOrderDetailsModal = () => {
                   borderColor="black"
                   borderWidth="2px"
                   color="black"
-                  py="2rem"
+                  py="1.9rem"
                   px={{ base: "3rem", sm: "5rem" }}
                 >
                   Close
                 </Button>
               </Dialog.ActionTrigger>
-              <Button
-                href="/shop"
-                py="1.6rem"
-                px={{ base: "2rem", sm: "5rem" }}
-              >
+              <Button href="/shop" py="2rem" px={{ base: "2rem", sm: "3rem" }}>
                 Shop again
               </Button>
             </Dialog.Footer>

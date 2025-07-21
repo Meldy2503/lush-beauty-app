@@ -33,6 +33,7 @@ const ShopListSection = () => {
     page: 1,
   });
   const [allProducts, setAllProducts] = useState<ProductsType[]>([]);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const [debouncedSearchQuery] = useDebounce(params?.term, 500);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -50,22 +51,26 @@ const ShopListSection = () => {
         setAllProducts(data?.data);
       } else {
         setAllProducts((prev) => [...prev, ...data.data]);
+        setIsLoadingMore(false);
       }
     }
   }, [data, params.page]);
 
-  // Handle load more
-  const handleLoadMore = () => {
-    setParams((prevState) => ({
-      ...prevState,
-      page: prevState?.page + 1,
+  const handleLoadMore = async () => {
+    if (!hasMoreProducts || isLoadingMore) return;
+    setIsLoadingMore(true);
+    // Wait a little for UX even if data is fast
+    await new Promise((resolve) => setTimeout(resolve, 600));
+
+    setParams((prev) => ({
+      ...prev,
+      page: prev.page + 1,
     }));
   };
 
   // Handle show less
   const handleShowLess = () => {
     setParams((prevState) => ({ ...prevState, page: 1 }));
-
     // Wait for React to update the DOM
     setTimeout(() => {
       sectionRef.current?.scrollIntoView({
@@ -85,9 +90,9 @@ const ShopListSection = () => {
       <Flex
         mb="3rem"
         justifyContent={{ base: "space-between", md: "flex-end" }}
-        gap="1rem"
+        gap="1.5rem"
         alignItems={"center"}
-        flexDir={{ base: "column", sm: "row" }}
+        flexDir={{ base: "column-reverse", sm: "row" }}
       >
         <Box w={{ base: "100%", sm: "65%", md: "74%" }}>
           <InputElement
@@ -108,7 +113,6 @@ const ShopListSection = () => {
         <Box
           width={{ base: "100%", sm: "35%" }}
           display={{ base: "block", md: "none" }}
-          mt=".5rem"
         >
           <Select.Root
             collection={categoriesCollection}
@@ -221,7 +225,7 @@ const ShopListSection = () => {
           ) : (
             <>
               <Products data={{ ...data, data: allProducts }} />
-              {isLoading && params.page > 1 && (
+              {isLoadingMore && (
                 <Flex alignItems="center" justifyContent="center" mt="5rem">
                   <Spinner />
                 </Flex>
@@ -252,8 +256,9 @@ const ShopListSection = () => {
               <Button
                 onClick={handleLoadMore}
                 px={{ base: "2rem", md: "5rem" }}
+                disabled={isLoadingMore}
               >
-                Load More
+                {isLoadingMore ? "Loading..." : "Load More"}
               </Button>
             )}
           </Flex>

@@ -21,13 +21,48 @@ import ManageAddress from "./manage-address";
 import UpdatePassword from "./update-password";
 import UserDetails from "./user-details";
 import Link from "next/link";
+import { ReactNode } from "react";
+
+interface CardProps {
+  href: string;
+  icon: ReactNode;
+  title: string;
+  text: string;
+}
+
+const Card = ({ href, icon, title, text }: CardProps) => {
+  return (
+    <Link href={href}>
+      <HStack
+        borderWidth={"1px"}
+        borderColor="gray.200"
+        borderRadius={"sm"}
+        p={{ base: "1.5rem", sm: "3rem" }}
+        flex="1"
+        gap="2rem"
+        flexDir={{ base: "column", sm: "row" }}
+        alignItems={{ base: "flex-start", sm: "center" }}
+      >
+        <Box bg="yellow.100" rounded={"full"} p="1.5rem" color="white">
+          {icon}
+        </Box>
+        <Box>
+          <Text mb=".5rem" fontWeight={"600"}>
+            {title}
+          </Text>
+          <Text color="gray.700">{text}</Text>
+        </Box>
+      </HStack>
+    </Link>
+  );
+};
 
 const UserDetailsPage = () => {
   return (
     <>
       <Navbar />
       <Wrapper bg="gray.250">
-        <Box mt="6rem" bg="white" p="3rem 2rem">
+        <Box mt="6rem" bg="white" p={{ base: "3rem 1.5rem", md: "3rem 2rem" }}>
           <Heading
             as="h2"
             fontSize={{ base: "1.8rem", md: "1.9rem" }}
@@ -55,7 +90,7 @@ const UserDetailsPage = () => {
                 <Accordion.ItemTrigger
                   bg="gray.250"
                   py="2.5rem"
-                  px={{ base: "1.5rem", sm: "2.5rem" }}
+                  px={{ base: "1.3rem", sm: "2.5rem" }}
                   display={"flex"}
                   justifyContent={"space-between"}
                 >
@@ -75,7 +110,7 @@ const UserDetailsPage = () => {
                 </Accordion.ItemTrigger>
                 <Accordion.ItemContent
                   bg="gray.250"
-                  px={{ base: "1.8rem", sm: "2.9rem" }}
+                  px={{ base: "1.5rem", sm: "2.9rem" }}
                 >
                   <Accordion.ItemBody pb="2rem">
                     {item.content}
@@ -86,7 +121,7 @@ const UserDetailsPage = () => {
           </Accordion.Root>
         </Box>
         {/* order and appointment section */}
-        <Box mt="3rem" bg="white" p="4rem 2rem">
+        <Box mt="3rem" bg="white" p={{ base: "4rem 1.5rem", md: "4rem 2rem" }}>
           <Heading
             as="h2"
             fontSize={{ base: "1.8rem", md: "1.9rem" }}
@@ -103,60 +138,23 @@ const UserDetailsPage = () => {
           </Text>
           <Flex gap="2rem" flexDir={{ base: "column", xl: "row" }}>
             {/* Orders Card */}
-            <Link href="/orders">
-              <HStack
-                borderWidth={"1px"}
-                borderColor="gray.200"
-                borderRadius={"sm"}
-                p={{ base: "1.5rem", sm: "3rem" }}
-                flex="1"
-                gap="2rem"
-                flexDir={{ base: "column", sm: "row" }}
-                alignItems={{ base: "flex-start", sm: "center" }}
-              >
-                <Box bg="yellow.100" rounded={"full"} p="1.5rem" color="white">
-                  <TbTruckDelivery size="3.5rem" />
-                </Box>
-                <Box>
-                  <Text mb=".5rem" fontWeight={"600"}>
-                    Your Orders
-                  </Text>
-                  <Text color="gray.700">
-                    Easily track your purchases and check order status. Reorder
+            <Card
+              href="/orders"
+              title="Your Orders"
+              icon={<TbTruckDelivery size="3.5rem" />}
+              text="Easily track your purchases and check order status. Reorder
                     items quickly or request support when needed. Keep all your
-                    shopping history in one place.
-                  </Text>
-                </Box>
-              </HStack>
-            </Link>
+                    shopping history in one place."
+            />
             {/* Appointments Card */}
-            <Link href="/appointments">
-              <HStack
-                borderWidth={"1px"}
-                borderColor="gray.200"
-                borderRadius={"sm"}
-                p={{ base: "1.5rem", sm: "3rem" }}
-                flex="1"
-                gap="2rem"
-                flexDir={{ base: "column", sm: "row" }}
-                alignItems={{ base: "flex-start", sm: "center" }}
-              >
-                <Box bg="yellow.100" rounded={"full"} p="1.5rem" color="white">
-                  <MdSchedule size="3.5rem" />
-                </Box>{" "}
-                <Box>
-                  <Text mb=".5rem" fontWeight={"600"}>
-                    Your Appointments
-                  </Text>
-                  <Text color="gray.700">
-                    {" "}
-                    Manage all your upcoming appointments with ease. Reschedule
+            <Card
+              href="/appointments"
+              title="Your Appointments"
+              icon={<MdSchedule size="3.5rem" />}
+              text="Manage all your upcoming appointments with ease. Reschedule
                     or cancel sessions and get timely reminders. Stay organized
-                    and never miss a booking.
-                  </Text>
-                </Box>
-              </HStack>
-            </Link>
+                    and never miss a booking."
+            />
           </Flex>
         </Box>
       </Wrapper>

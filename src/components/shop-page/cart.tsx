@@ -32,8 +32,8 @@ const Cart = ({ children }: CartProps) => {
   const pathname = usePathname();
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
-  const id = loggedInUser ?? existingGuestId;
-  const { data: items, isLoading } = useGetCartItems(id as string);
+  const id = loggedInUser?.id ?? existingGuestId;
+  const { data: items, isLoading } = useGetCartItems(id);
 
   const totalPrice = items?.reduce((acc: number, item: CartItemsType) => {
     const itemPrice = item?.productItem?.price || 0;

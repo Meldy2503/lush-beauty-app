@@ -106,7 +106,7 @@ const SelectDateTimePage = () => {
                 px="2px"
               >
                 <HStack
-                  gap={{ base: "2rem 3rem", md: "2.5rem 4rem" }}
+                  gap={{ base: "3rem", md: "3rem 4rem" }}
                   flexWrap="wrap"
                 >
                   {timeSlots.map((item) => (
@@ -117,7 +117,7 @@ const SelectDateTimePage = () => {
                       justifyContent="space-between"
                     >
                       <RadioGroup.ItemHiddenInput />
-                      <RadioGroup.ItemIndicator scale="1.2" />
+                      <RadioGroup.ItemIndicator scale="1.4" />
                       <RadioGroup.ItemText
                         fontSize={{ base: "1.5rem", sm: "1.6rem" }}
                         ml=".2rem"

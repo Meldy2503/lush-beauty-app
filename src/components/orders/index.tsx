@@ -12,7 +12,11 @@ const OrdersPage = () => {
       <Navbar />
       <Wrapper bg="gray.250">
         <GoBack />
-        <Box mt="1rem" bg="white" p="3rem 2rem">
+        <Box
+          mt="1rem"
+          bg="white"
+          p={{ base: "3rem 1.5rem", md: "3rem 2rem" }}
+        >
           <Heading
             as="h2"
             fontSize={{ base: "1.8rem", md: "1.9rem" }}

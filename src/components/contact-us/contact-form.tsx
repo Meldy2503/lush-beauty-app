@@ -17,7 +17,7 @@ const ContactForm = () => {
           <InputElement
             label="Phone number"
             placeholder="+447056835551"
-            type="number"
+            type="tel"
           />
           <InputElement
             label="How can we help you?"

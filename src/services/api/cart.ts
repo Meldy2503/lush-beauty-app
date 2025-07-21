@@ -31,10 +31,13 @@ export const useGetProductById = (productId: string) => {
 };
 
 // to get all items in the cart
-export const useGetCartItems = (guestId: string) => {
+export const useGetCartItems = (guestId: string | null) => {
   return useQuery({
     queryKey: ["cartItems", guestId],
     queryFn: async () => {
+      if (!guestId) {
+        return []; // Return empty array if no guestId
+      }
       const res = await axios.get(urls.getCartItems(guestId));
       return res.data.data.data;
     },
