@@ -16,20 +16,25 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { setRedirectToOrderSummary } from "@/store/slices/cart-slice";
+// import { useMergeCartItemsMutation } from "@/services/api/cart";
 
 const LoginPage = () => {
-  const loginMutation = useLoginMutation();
   const dispatch = useDispatch();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const loginMutation = useLoginMutation();
+  // const mergeCartItemsMutation = useMergeCartItemsMutation();
+  const redirect = searchParams.get("redirect") || "/";
+
+  const { mutateAsync: login } = loginMutation;
+  // const { mutateAsync: mergeCartItems } = mergeCartItemsMutation;
+  const isLoading = loginMutation.isPending;
 
   const redirectToOrderSummary = useSelector(
     (state: RootState) => state.cart.redirectToOrderSummary
   );
 
-  const { mutateAsync: login } = loginMutation;
-  const isLoading = loginMutation.isPending;
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/";
+  // const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
 
   const formHook = useForm<LoginType>({
     resolver: yupResolver(loginSchema),
@@ -54,8 +59,8 @@ const LoginPage = () => {
       if (result) {
         toast.success("Login Successful!");
         if (redirectToOrderSummary) {
-          dispatch(setRedirectToOrderSummary(false));
           router.push("/shop/order-summary");
+          dispatch(setRedirectToOrderSummary(false));
         } else {
           router.push(redirect); // fallback to default (?redirect=...)
         }

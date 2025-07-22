@@ -103,10 +103,6 @@ const ShopListSection = () => {
     items: categoriesWithAll,
   });
 
-  console.log(categoriesCollection, "categoriesCollectionItem");
-  console.log(categories, "categories");
-  console.log(categoriesData, "categoriesData");
-
   return (
     <Wrapper bg="gray.250" pt="5rem" ref={sectionRef}>
       {/* search section */}
@@ -141,8 +137,6 @@ const ShopListSection = () => {
             collection={categoriesCollection}
             value={params?.categoryId ? [params?.categoryId] : [""]} // Default to "All" (empty string)
             onValueChange={(details) => {
-              console.log(details, "details");
-              console.log([params.categoryId], "[params.categoryId]");
               setAllProducts([]);
               setParams((prevState) => ({
                 ...prevState,
@@ -206,7 +200,6 @@ const ShopListSection = () => {
             size="lg"
             value={params?.categoryId || ""} // Default to "All" (empty string)
             onValueChange={(e) => {
-              console.log(e, "e");
               setAllProducts([]);
               setParams((prevState) => ({
                 ...prevState,

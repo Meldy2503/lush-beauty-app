@@ -4,8 +4,9 @@ import { CartItem, CartState, CheckoutItemsState } from "../types";
 const initialState: CartState = {
   cartItems: [],
   guestId: null,
-  redirectToOrderSummary: false,
   checkoutCartItems: null,
+  redirectToOrderSummary: false,
+  hasMergedIds: false,
 };
 
 const cartSlice = createSlice({
@@ -27,6 +28,9 @@ const cartSlice = createSlice({
     setRedirectToOrderSummary: (state, action: PayloadAction<boolean>) => {
       state.redirectToOrderSummary = action.payload;
     },
+    setHasMergedIds: (state, action: PayloadAction<boolean>) => {
+      state.hasMergedIds = action.payload;
+    },
   },
 });
 
@@ -35,5 +39,6 @@ export const {
   setGuestId,
   setRedirectToOrderSummary,
   setCheckoutCartItems,
+  setHasMergedIds
 } = cartSlice.actions;
 export default cartSlice.reducer;

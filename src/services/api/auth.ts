@@ -14,7 +14,6 @@ import { setAuthData, setToken } from "@/store/slices/auth-slice";
 // login request
 export const useLoginMutation = () => {
   const dispatch = useDispatch();
-
   return useMutation({
     mutationKey: ["login"],
     mutationFn: async (login: LoginType) => {

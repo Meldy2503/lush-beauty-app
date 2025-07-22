@@ -125,7 +125,7 @@ const Cart = ({ children }: CartProps) => {
                 <Flex alignItems="center" justifyContent="center">
                   <Spinner my="20rem" />
                 </Flex>
-              ) : !cartItems ? (
+              ) : !cartItems || cartItems?.length === 0 ? (
                 <EmptyCart />
               ) : (
                 cartItems &&
@@ -233,7 +233,7 @@ const Cart = ({ children }: CartProps) => {
               )}
             </Drawer.Body>
 
-            {cartItems && (
+            {cartItems && cartItems?.length !== 0 && (
               <Drawer.Footer bg="white" p="2rem" borderTop="1px solid #e1e5e5">
                 <Flex flexDirection={"column"} w="full" gap="3rem">
                   <HStack

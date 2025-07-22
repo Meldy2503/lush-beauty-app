@@ -6,6 +6,7 @@ import {
   AddToCartType,
   CheckoutItemsType,
   DeleteCartItemType,
+  MergeCartItems,
 } from "@/types/cart";
 
 // to get all products
@@ -121,7 +122,26 @@ export const useCheckoutCartItemsMutation = () => {
       return res.data;
     },
     onError: (error) => {
-      console.error(" Item checkou Failed:", error);
+      console.error(" Item checkout Failed:", error);
+    },
+  });
+};
+
+// to merge cart items selected as a guest user to cart items selected as a login user
+export const useMergeCartItemsMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["mergeCartItems"],
+    mutationFn: async (mergeCartItems: MergeCartItems) => {
+      const res = await axios.post(urls.mergeCartItemsUrl, mergeCartItems);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cartItems"] });
+    },
+    onError: (error) => {
+      console.error(" Item merge Failed:", error);
     },
   });
 };

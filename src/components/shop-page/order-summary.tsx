@@ -2,26 +2,25 @@
 
 import {
   useCheckoutCartItemsMutation,
-  useGetCartItems,
+  useGetCartItems
 } from "@/services/api/cart";
 import { useGetUserAddresses, useGetUserProfile } from "@/services/api/user";
 import { RootState } from "@/store";
+import { setCheckoutCartItems } from "@/store/slices/cart-slice";
 import { CartItemsType } from "@/types/cart";
 import { UserAddressType } from "@/types/user";
 import { Box, Flex, Heading, HStack, Spinner, Text } from "@chakra-ui/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { IoIosCheckmarkCircle } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddressModal from "../personal-details/address-modal";
 import Button from "../shared/button";
 import { GoBack } from "../shared/go-back";
 import Wrapper from "../shared/wrapper";
 import Cart from "./cart";
-import { useDispatch } from "react-redux";
-import { setCheckoutCartItems } from "@/store/slices/cart-slice";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
 const OrderSummaryPage = () => {
   const dispatch = useDispatch();
@@ -30,8 +29,9 @@ const OrderSummaryPage = () => {
   const { data: userDetails, isLoading: isUserDetailsLoading } =
     useGetUserProfile();
   const checkoutCartMutation = useCheckoutCartItemsMutation();
-  const { mutateAsync: checkoutCartItems } = checkoutCartMutation;
   const isCheckoutCartLoading = checkoutCartMutation.isPending;
+  const { mutateAsync: checkoutCartItems } = checkoutCartMutation;
+
 
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
 

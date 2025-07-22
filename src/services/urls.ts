@@ -29,13 +29,14 @@ const urls = {
   }) => {
     if (guestId) return `${baseUrl}/cart/items?guestId=${guestId}`;
     if (userId) return `${baseUrl}/cart/items?userId=${userId}`;
-    return `${baseUrl}/cart/items`; // fallback if needed
+    return `${baseUrl}/cart/items`; // fallback url
   },
-  
+
   getProductCategories: `${baseUrl}/products/categories`,
   deleteCartItemUrl: (productId: string) =>
     `${baseUrl}/cart/items/${productId}/remove`,
   checkoutCartItemsUrl: `${baseUrl}/cart/items/checkout`,
+  mergeCartItemsUrl: `${baseUrl}/cart/items/merge`,
 };
 export default urls;
 

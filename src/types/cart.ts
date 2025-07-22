@@ -54,9 +54,13 @@ export interface CartItemsType {
   quantity?: number;
 }
 
-
 export interface CheckoutItemsType {
   cartItemIds: string[];
   totalAmount: number;
   note?: string;
+}
+
+export interface MergeCartItems {
+  guestId?: string | null;
+  userId?: string | null;
 }
