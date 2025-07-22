@@ -1,5 +1,8 @@
 "use client";
 
+import { RootState } from "@/store";
+import { updateAppointment } from "@/store/slices/appointment-slice";
+import { formatAppointmentDateTime } from "@/utils";
 import {
   Avatar,
   Box,
@@ -10,16 +13,13 @@ import {
   Span,
   Text,
 } from "@chakra-ui/react";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useMemo } from "react";
+import { FiMinus, FiPlus } from "react-icons/fi";
+import { IoIosCheckmarkCircle } from "react-icons/io";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
-import { FiMinus, FiPlus } from "react-icons/fi";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store";
-import { IoIosCheckmarkCircle } from "react-icons/io";
-import { formatAppointmentDateTime } from "@/utils";
-import { useCallback, useEffect, useMemo } from "react";
-import { usePathname } from "next/navigation";
-import { updateAppointment } from "@/store/slices/appointment-slice";
+import { useDispatch, useSelector } from "react-redux";
 
 interface SummaryContainerProps {
   title?: string;
@@ -168,166 +168,168 @@ const BookingSummary = () => {
   const isConfirmBooking = pathname.includes("confirm-booking");
 
   return (
-    <Box
-      bg="white"
-      position={"relative"}
-      display="flex"
-      flexDirection="column"
-      shadow={"sm"}
-      w="full"
-    >
-      <Heading
-        as="h3"
-        fontSize={{ base: "1.7rem", md: "1.8rem" }}
-        fontFamily="playfair"
-        px="1.5rem"
-        pt="2rem"
-        lineHeight={1.3}
-        textTransform={"uppercase"}
+      <Box
+        bg="white"
+        position={"relative"}
+        display="flex"
+        flexDirection="column"
+        shadow={"sm"}
+        w="full"
       >
-        Booking summary
-      </Heading>
+        <Heading
+          as="h3"
+          fontSize={{ base: "1.7rem", md: "1.8rem" }}
+          fontFamily="playfair"
+          px="1.5rem"
+          pt="2rem"
+          lineHeight={1.3}
+          textTransform={"uppercase"}
+        >
+          Booking summary
+        </Heading>
 
-      <Flex
-        flexDir={"column"}
-        justifyContent={"space-between"}
-        h="100%"
-        gap={"0rem"}
-      >
-        <Box overflowY="auto" h={{ base: "100%", md: "65vh" }} px="1.5rem">
-          {/* Location */}
-          {branch && (
-            <SummaryContainer
-              icon={<IoLocationOutline size={"2.3rem"} />}
-              heading={`Lush & Luxe – ${branch.name}`}
-              text={`${branch.address}, ${branch.city}, ${branch.country}`}
-            />
-          )}
+        <Flex
+          flexDir={"column"}
+          justifyContent={"space-between"}
+          h="100%"
+          gap={"0rem"}
+        >
+          <Box overflowY="auto" h={{ base: "100%", md: "65vh" }} px="1.5rem">
+            {/* Location */}
+            {branch && (
+              <SummaryContainer
+                icon={<IoLocationOutline size={"2.3rem"} />}
+                heading={`Lush & Luxe – ${branch.name}`}
+                text={`${branch.address}, ${branch.city}, ${branch.country}`}
+              />
+            )}
 
-          {/* Client count */}
-          <Box py="1.5rem">
-            <Flex
+            {/* Client count */}
+            <Box py="1.5rem">
+              <Flex
+                justifyContent={"space-between"}
+                gap="2rem"
+                fontSize={"1.5rem"}
+              >
+                <Text>Number of Clients</Text>
+                <Text>{numClients}</Text>
+              </Flex>
+            </Box>
+
+            {/* Services */}
+            <Box py=".5rem" fontSize={"1.5rem"}>
+              {flatCategories?.map((item, index) => {
+                const categoryId = item?.category?.id;
+                // Default to numClients instead of 1
+                const currentCount = categoryId
+                  ? serviceClientCounts?.[categoryId] || numClients || 1
+                  : numClients || 1;
+
+                return (
+                  <Flex
+                    key={`${item?.serviceId}-${categoryId}`}
+                    justifyContent={"space-between"}
+                    gapX="3rem"
+                    gapY="1.5rem"
+                    w="full"
+                    flexWrap={"wrap"}
+                    borderTopWidth={"2px"}
+                    borderColor={"gray.250"}
+                    alignItems={"center"}
+                    py="1rem"
+                  >
+                    <Text>{item?.category?.name}</Text>
+
+                    {/* Quantity selector */}
+                    {numClients > 1 && isConfirmBooking && (
+                      <HStack gapX={"3rem"}>
+                        <Text>{item?.category?.price}</Text>
+                        <HStack justifyContent={"space-between"} p=".2rem">
+                          <Button
+                            bg="transparent"
+                            color="black"
+                            onClick={() =>
+                              handleClientCountChange(false, index)
+                            }
+                            disabled={currentCount === 1}
+                            cursor={
+                              currentCount === 1 ? "not-allowed" : "pointer"
+                            }
+                          >
+                            <FiMinus />
+                          </Button>
+                          <Span>{currentCount}</Span>
+                          <Button
+                            bg="transparent"
+                            color="black"
+                            onClick={() => handleClientCountChange(true, index)}
+                            disabled={currentCount === numClients}
+                            cursor={
+                              currentCount === numClients
+                                ? "not-allowed"
+                                : "pointer"
+                            }
+                          >
+                            <FiPlus />
+                          </Button>
+                        </HStack>
+                      </HStack>
+                    )}
+
+                    {/* Price */}
+                    {item.category?.price && (
+                      <Text fontWeight={"semibold"}>
+                        £
+                        {numClients > 1 && isConfirmBooking
+                          ? item?.category?.price * currentCount
+                          : item?.category?.price}
+                      </Text>
+                    )}
+                  </Flex>
+                );
+              })}
+            </Box>
+
+            {/* Technician */}
+            {selectedSpecialist && (
+              <SummaryContainer
+                tick
+                title="Technician Selected"
+                fallbackName={selectedSpecialist?.name}
+                img={selectedSpecialist?.imageUrl}
+                heading={selectedSpecialist?.name}
+                text={`${selectedSpecialist?.age}yrs`}
+              />
+            )}
+
+            {/* Date and time */}
+            {(date || time) && (
+              <SummaryContainer
+                title="Scheduled Date and Time"
+                icon={<LuCalendarDays size={"2rem"} />}
+                heading={date}
+                text={time}
+              />
+            )}
+          </Box>
+
+          {/* Booking Total */}
+          {isConfirmBooking && (
+            <HStack
+              p="2.5rem 1.5rem"
+              w="full"
               justifyContent={"space-between"}
               gap="2rem"
-              fontSize={"1.5rem"}
+              borderTopWidth={"2px"}
+              borderColor={"gray.250"}
+              bg="white"
             >
-              <Text>Number of Clients</Text>
-              <Text>{numClients}</Text>
-            </Flex>
-          </Box>
-
-          {/* Services */}
-          <Box py=".5rem" fontSize={"1.5rem"}>
-            {flatCategories?.map((item, index) => {
-              const categoryId = item?.category?.id;
-              // Default to numClients instead of 1
-              const currentCount = categoryId
-                ? serviceClientCounts?.[categoryId] || numClients || 1
-                : numClients || 1;
-
-              return (
-                <Flex
-                  key={`${item?.serviceId}-${categoryId}`}
-                  justifyContent={"space-between"}
-                  gapX="3rem"
-                  gapY="1.5rem"
-                  w="full"
-                  flexWrap={"wrap"}
-                  borderTopWidth={"2px"}
-                  borderColor={"gray.250"}
-                  alignItems={"center"}
-                  py="1rem"
-                >
-                  <Text>{item?.category?.name}</Text>
-
-                  {/* Quantity selector */}
-                  {numClients > 1 && isConfirmBooking && (
-                    <HStack gapX={"3rem"}>
-                      <Text>{item?.category?.price}</Text>
-                      <HStack justifyContent={"space-between"} p=".2rem">
-                        <Button
-                          bg="transparent"
-                          color="black"
-                          onClick={() => handleClientCountChange(false, index)}
-                          disabled={currentCount === 1}
-                          cursor={
-                            currentCount === 1 ? "not-allowed" : "pointer"
-                          }
-                        >
-                          <FiMinus />
-                        </Button>
-                        <Span>{currentCount}</Span>
-                        <Button
-                          bg="transparent"
-                          color="black"
-                          onClick={() => handleClientCountChange(true, index)}
-                          disabled={currentCount === numClients}
-                          cursor={
-                            currentCount === numClients
-                              ? "not-allowed"
-                              : "pointer"
-                          }
-                        >
-                          <FiPlus />
-                        </Button>
-                      </HStack>
-                    </HStack>
-                  )}
-
-                  {/* Price */}
-                  {item.category?.price && (
-                    <Text fontWeight={"semibold"}>
-                      £
-                      {numClients > 1 && isConfirmBooking
-                        ? item?.category?.price * currentCount
-                        : item?.category?.price}
-                    </Text>
-                  )}
-                </Flex>
-              );
-            })}
-          </Box>
-
-          {/* Technician */}
-          {selectedSpecialist && (
-            <SummaryContainer
-              tick
-              title="Technician Selected"
-              fallbackName={selectedSpecialist?.name}
-              img={selectedSpecialist?.imageUrl}
-              heading={selectedSpecialist?.name}
-              text={`${selectedSpecialist?.age}yrs`}
-            />
+              <Text fontWeight={"400"}>Booking Total</Text>
+              <Text fontWeight={"600"}>£{totalPrice}.00</Text>
+            </HStack>
           )}
-
-          {/* Date and time */}
-          {(date || time) && (
-            <SummaryContainer
-              title="Scheduled Date and Time"
-              icon={<LuCalendarDays size={"2rem"} />}
-              heading={date}
-              text={time}
-            />
-          )}
-        </Box>
-
-        {/* Booking Total */}
-        {isConfirmBooking && (
-          <HStack
-            p="2.5rem 1.5rem"
-            w="full"
-            justifyContent={"space-between"}
-            gap="2rem"
-            borderTopWidth={"2px"}
-            borderColor={"gray.250"}
-            bg="white"
-          >
-            <Text fontWeight={"400"}>Booking Total</Text>
-            <Text fontWeight={"600"}>£{totalPrice}.00</Text>
-          </HStack>
-        )}
-      </Flex>
-    </Box>
+        </Flex>
+      </Box>
   );
 };
 

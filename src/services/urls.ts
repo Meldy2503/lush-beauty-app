@@ -37,6 +37,8 @@ const urls = {
     `${baseUrl}/cart/items/${productId}/remove`,
   checkoutCartItemsUrl: `${baseUrl}/cart/items/checkout`,
   mergeCartItemsUrl: `${baseUrl}/cart/items/merge`,
+  updateItemQuantityUrl: (productId: string) =>
+    `${baseUrl}/cart/items/${productId}/quantity`,
 };
 export default urls;
 

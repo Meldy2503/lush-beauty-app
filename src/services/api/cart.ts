@@ -6,7 +6,7 @@ import {
   AddToCartType,
   CheckoutItemsType,
   DeleteCartItemType,
-  MergeCartItems,
+  MergeCartItemsType,
 } from "@/types/cart";
 
 // to get all products
@@ -127,13 +127,46 @@ export const useCheckoutCartItemsMutation = () => {
   });
 };
 
+// to update a cart item quantity
+export const useUpdateItemQuantityMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["updateItemQuantity"],
+    mutationFn: async ({
+      productId,
+      quantity,
+      guestId,
+      userId,
+    }: {
+      productId: string;
+      quantity: number;
+      guestId?: string | null;
+      userId?: string | null;
+    }) => {
+      const res = await axios.patch(urls.updateItemQuantityUrl(productId), {
+        quantity,
+        guestId,
+        userId,
+      });
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cartItems"] });
+    },
+    onError: (error) => {
+      console.error("Item quantity update failed:", error);
+    },
+  });
+};
+
 // to merge cart items selected as a guest user to cart items selected as a login user
 export const useMergeCartItemsMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ["mergeCartItems"],
-    mutationFn: async (mergeCartItems: MergeCartItems) => {
+    mutationFn: async (mergeCartItems: MergeCartItemsType) => {
       const res = await axios.post(urls.mergeCartItemsUrl, mergeCartItems);
       return res.data;
     },

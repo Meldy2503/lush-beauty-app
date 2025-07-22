@@ -17,18 +17,12 @@ import Wrapper from "../shared/wrapper";
 import Cart from "./cart";
 import { GoBack } from "../shared/go-back";
 import { useParams } from "next/navigation";
-import {
-  useAddToCartMutation,
-  useGetProductById,
-} from "@/services/api/cart";
+import { useAddToCartMutation, useGetProductById } from "@/services/api/cart";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
-import {
-  addCartItems,
-  setGuestId,
-} from "@/store/slices/cart-slice";
+import { addCartItems, setGuestId } from "@/store/slices/cart-slice";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 

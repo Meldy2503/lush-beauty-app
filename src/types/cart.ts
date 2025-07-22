@@ -60,7 +60,15 @@ export interface CheckoutItemsType {
   note?: string;
 }
 
-export interface MergeCartItems {
+export interface MergeCartItemsType {
   guestId?: string | null;
   userId?: string | null;
 }
+
+export interface UpdateCartItemsQtyType {
+  guestId?: string | null;
+  userId?: string | null;
+  quantity: number;
+  productId: number
+}
+

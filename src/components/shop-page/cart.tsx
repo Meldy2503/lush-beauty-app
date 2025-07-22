@@ -1,6 +1,10 @@
 "use client";
 
-import { useDeleteCartItem, useGetCartItems } from "@/services/api/cart";
+import {
+  useDeleteCartItem,
+  useGetCartItems,
+  useUpdateItemQuantityMutation,
+} from "@/services/api/cart";
 import { RootState } from "@/store";
 import { CartItemsType } from "@/types/cart";
 import {
@@ -36,6 +40,10 @@ const Cart = ({ children }: CartProps) => {
   const pathname = usePathname();
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const updateItemQuantityMutation = useUpdateItemQuantityMutation();
+
+  const { mutateAsync: updateItemQuantity } = updateItemQuantityMutation;
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
   const [deletingItemId, setDeletingItemId] = useState<string | null>(null);
 
@@ -80,6 +88,29 @@ const Cart = ({ children }: CartProps) => {
       router.push("/shop/order-summary");
     }
   };
+
+
+  const handleUpdateItemQuantity = async (
+    productId: string,
+    newQuantity: number
+  ) => {
+    try {
+      const result = await updateItemQuantity({
+        productId,
+        quantity: newQuantity,
+        ...(existingGuestId && { guestId: existingGuestId }),
+        ...(loggedInUser?.id && { userId: loggedInUser?.id }),
+      });
+
+      if (result) {
+        toast.success("Item quantity updated Successfully!");
+      }
+    } catch (error) {
+      console.error("Update Cart Item quantity error:", error);
+    }
+  };
+
+  console.log(cartItems, "cartItems");
 
   return (
     <Drawer.Root size="xl" placement={"end"}>
@@ -202,11 +233,31 @@ const Cart = ({ children }: CartProps) => {
                               border="1.5px solid orange"
                               p=".8rem"
                             >
-                              <Box>
+                              <Box
+                                cursor={"pointer"}
+                                onClick={() => {
+                                  const currentQty = item?.quantity ?? 1;
+                                  const newQty =
+                                    currentQty === 1 ? 1 : currentQty - 1;
+                                  if (newQty >= 1) {
+                                    handleUpdateItemQuantity(item?.id ?? '', newQty);
+                                  }
+                                }}
+                              >
                                 <FiMinus />
                               </Box>
                               <Text>{item?.quantity}</Text>
-                              <Box>
+                              <Box
+                                cursor={"pointer"}
+                                onClick={() => {
+                                  const currentQty = item?.quantity ?? 1;
+                                  const newQty = currentQty + 1;
+                                  if (newQty >= 1) {
+                                    handleUpdateItemQuantity(item?.id ?? '', newQty);
+                                  }
+                                }}
+                              >
+                                {" "}
                                 <FiPlus />
                               </Box>
                             </Flex>
@@ -266,17 +317,32 @@ const Cart = ({ children }: CartProps) => {
                         </Button>
                       </Drawer.ActionTrigger>
                     )}
-                    <Button
-                      href="/shop"
-                      bg="transparent"
-                      borderWidth="1px"
-                      borderColor="black"
-                      color="black"
-                      w="100%"
-                      px={{ base: "1rem", sm: "5rem" }}
-                    >
-                      Add More Items
-                    </Button>
+                    {pathname === "/shop" ? (
+                      <Drawer.ActionTrigger asChild>
+                        <Button
+                          bg="transparent"
+                          borderWidth="1px"
+                          borderColor="black"
+                          color="black"
+                          w="100%"
+                          px={{ base: "1rem", sm: "5rem" }}
+                        >
+                          Add More Items
+                        </Button>
+                      </Drawer.ActionTrigger>
+                    ) : (
+                      <Button
+                        href="/shop"
+                        bg="transparent"
+                        borderWidth="1px"
+                        borderColor="black"
+                        color="black"
+                        w="100%"
+                        px={{ base: "1rem", sm: "5rem" }}
+                      >
+                        Add More Items
+                      </Button>
+                    )}
                   </Grid>
                 </Flex>
               </Drawer.Footer>
