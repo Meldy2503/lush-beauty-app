@@ -217,7 +217,7 @@ const Cart = ({ children }: CartProps) => {
                             gap="1rem"
                           >
                             {item?.productItem?.price && item?.quantity && (
-                              <Text fontWeight={"600"} fontSize={"1.8rem"} >
+                              <Text fontWeight={"600"} fontSize={"1.8rem"}>
                                 £{item?.productItem?.price * item?.quantity}
                               </Text>
                             )}
@@ -250,7 +250,8 @@ const Cart = ({ children }: CartProps) => {
                     gap="1rem"
                     w="full"
                   >
-                    {pathname !== "/shop/order-summary" ? (
+                    {pathname !== "/shop/order-summary" &&
+                    pathname !== "/shop/order-confirmation" ? (
                       <Button
                         w="100%"
                         px={{ base: "3rem", sm: "5rem" }}
@@ -274,7 +275,7 @@ const Cart = ({ children }: CartProps) => {
                       w="100%"
                       px={{ base: "1rem", sm: "5rem" }}
                     >
-                      Shop More
+                      Add More Items
                     </Button>
                   </Grid>
                 </Flex>

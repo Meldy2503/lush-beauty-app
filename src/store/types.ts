@@ -3,6 +3,7 @@ import {
   CategoriesType,
   SpecialistType,
 } from "@/types/book-appointment";
+import { CartItemsType } from "@/types/cart";
 import { UserProfileType } from "@/types/user";
 
 export interface Appointment {
@@ -36,8 +37,15 @@ export interface CartItem {
   guestId: string;
 }
 
+export interface CheckoutItemsState {
+  cartItems: CartItemsType[];
+  totalAmount: number;
+  note?: string;
+}
+
 export interface CartState {
   cartItems: CartItem[];
   guestId: string | null;
   redirectToOrderSummary: boolean;
+  checkoutCartItems: CheckoutItemsState | null;
 }

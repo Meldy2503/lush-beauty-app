@@ -96,7 +96,6 @@ const LoginPage = () => {
           <Link href="/forgot-password">Forgot Password?</Link>
         </Flex>
         <Button w="full" disabled={isLoading} type="submit">
-          {" "}
           {isLoading ? "Processing..." : "Sign in"}
         </Button>
       </form>

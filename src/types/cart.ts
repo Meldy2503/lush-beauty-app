@@ -53,3 +53,10 @@ export interface CartItemsType {
   userId?: string;
   quantity?: number;
 }
+
+
+export interface CheckoutItemsType {
+  cartItemIds: string[];
+  totalAmount: number;
+  note?: string;
+}

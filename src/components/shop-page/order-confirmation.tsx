@@ -17,9 +17,14 @@ import CreditCards from "../shared/credit-cards";
 import { GoBack } from "../shared/go-back";
 import { InputElement } from "../shared/input-element";
 import Wrapper from "../shared/wrapper";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const OrderConfirmationPage = () => {
   const payment = usePaymentInputs();
+  const storedCartItems = useSelector(
+    (state: RootState) => state.cart.checkoutCartItems
+  );
 
   return (
     <Wrapper bg="gray.250">
@@ -86,24 +91,28 @@ const OrderConfirmationPage = () => {
             <Text> Cart Items</Text>
           </Box>
 
-          <HStack
-            justifyContent={"space-between"}
-            gap="2rem"
-            borderTopWidth="2px"
-            borderTopColor={"gray.250"}
-            py="1.3rem"
-          >
-            <Text>Rechargeable face mask</Text> <Text>Qty: 1</Text>{" "}
-          </HStack>
-          <HStack
-            justifyContent={"space-between"}
-            gap="2rem"
-            borderTopWidth="2px"
-            borderTopColor={"gray.250"}
-            py="1.3rem"
-          >
-            <Text>Chebe hair butter</Text> <Text>Qty: 2</Text>{" "}
-          </HStack>
+          {storedCartItems &&
+            storedCartItems?.cartItems?.map((items) => (
+              <HStack
+                key={items?.id}
+                justifyContent={"space-between"}
+                gap="2rem"
+                borderTopWidth="2px"
+                borderTopColor={"gray.250"}
+                py="1.3rem"
+              >
+                <Box>
+                  <Text>{items?.productItem?.name}</Text>{" "}
+                  <Text fontSize={"1.3rem"} color="yellow.100">
+                    Qty: {items?.quantity}
+                  </Text>{" "}
+                </Box>
+                {items?.productItem?.price && items?.quantity && (
+                  <Text>{items?.productItem?.price * items?.quantity}</Text>
+                )}
+              </HStack>
+            ))}
+
           <HStack
             justifyContent={"space-between"}
             gap="2rem"
@@ -114,7 +123,7 @@ const OrderConfirmationPage = () => {
           >
             <Text fontWeight={"400"}>Subtotal</Text>{" "}
             <Text fontWeight={"600"} fontSize={"1.8rem"}>
-              $50.00
+              {storedCartItems?.totalAmount?.toFixed(2) ?? 0}
             </Text>{" "}
           </HStack>
           <HStack
@@ -126,7 +135,7 @@ const OrderConfirmationPage = () => {
           >
             <Text fontWeight={"400"}>Shipping fee</Text>{" "}
             <Text fontWeight={"600"} fontSize={"1.8rem"}>
-              $5.00
+              0.00
             </Text>{" "}
           </HStack>
           <Box bg="gray.250" p=".5rem" fontSize={"1.5rem"} mt="5rem">
@@ -140,7 +149,7 @@ const OrderConfirmationPage = () => {
           >
             <Text>TOTAL TO PAY</Text>{" "}
             <Text fontSize={"2rem"} color="yellow.150">
-              $55.00
+              £{storedCartItems?.totalAmount?.toFixed(2) ?? 0}
             </Text>{" "}
           </HStack>
         </Box>

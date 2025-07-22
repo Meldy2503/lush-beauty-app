@@ -1,11 +1,12 @@
-// import { RootState } from "@/store";
 import { Params } from "@/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-// import { useSelector } from "react-redux";
 import axios from "../axios";
 import urls from "../urls";
-import { AddToCartType, DeleteCartItemType } from "@/types/cart";
-// import { useDispatch } from "react-redux";
+import {
+  AddToCartType,
+  CheckoutItemsType,
+  DeleteCartItemType,
+} from "@/types/cart";
 
 // to get all products
 export const useGetProducts = (params?: Params) => {
@@ -104,6 +105,23 @@ export const useDeleteCartItem = () => {
     },
     onError: (error) => {
       console.error("Delete Cart Item failed:", error);
+    },
+  });
+};
+
+// to checkout all the items in the cart
+export const useCheckoutCartItemsMutation = () => {
+  return useMutation({
+    mutationKey: ["checkoutCartItems"],
+    mutationFn: async (checkoutCartItems: CheckoutItemsType) => {
+      const res = await axios.post(
+        urls.checkoutCartItemsUrl,
+        checkoutCartItems
+      );
+      return res.data;
+    },
+    onError: (error) => {
+      console.error(" Item checkou Failed:", error);
     },
   });
 };

@@ -3,7 +3,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import axios from "../axios";
 import urls from "../urls";
-// import { useDispatch } from "react-redux";
 import { BookAppointmentType } from "@/types/book-appointment";
 import { Params } from "@/types";
 

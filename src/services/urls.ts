@@ -31,10 +31,11 @@ const urls = {
     if (userId) return `${baseUrl}/cart/items?userId=${userId}`;
     return `${baseUrl}/cart/items`; // fallback if needed
   },
-
+  
   getProductCategories: `${baseUrl}/products/categories`,
   deleteCartItemUrl: (productId: string) =>
     `${baseUrl}/cart/items/${productId}/remove`,
+  checkoutCartItemsUrl: `${baseUrl}/cart/items/checkout`,
 };
 export default urls;
 

@@ -38,6 +38,7 @@ const Product = () => {
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
 
   const { mutateAsync: addToCart } = addToCartMutation;
+  const isAddToCartLoading = addToCartMutation.isPending;
 
   const handleAddTocart = async () => {
     let guestId: string;
@@ -148,8 +149,13 @@ const Product = () => {
               </Box>
 
               <Cart>
-                <Button bg="yellow.100" w="full" onClick={handleAddTocart}>
-                  ADD TO CART
+                <Button
+                  bg="yellow.100"
+                  w="full"
+                  onClick={handleAddTocart}
+                  disabled={isAddToCartLoading}
+                >
+                  {isAddToCartLoading ? "Processing..." : "Add To Cart"}
                 </Button>
               </Cart>
               <Box mt="4rem">

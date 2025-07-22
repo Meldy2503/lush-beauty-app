@@ -1,6 +1,9 @@
 "use client";
 
-import { useGetCartItems } from "@/services/api/cart";
+import {
+  useCheckoutCartItemsMutation,
+  useGetCartItems,
+} from "@/services/api/cart";
 import { useGetUserAddresses, useGetUserProfile } from "@/services/api/user";
 import { RootState } from "@/store";
 import { CartItemsType } from "@/types/cart";
@@ -15,11 +18,21 @@ import Button from "../shared/button";
 import { GoBack } from "../shared/go-back";
 import Wrapper from "../shared/wrapper";
 import Cart from "./cart";
+import { useDispatch } from "react-redux";
+import { setCheckoutCartItems } from "@/store/slices/cart-slice";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const OrderSummaryPage = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const { data: userAddress } = useGetUserAddresses();
   const { data: userDetails, isLoading: isUserDetailsLoading } =
     useGetUserProfile();
+  const checkoutCartMutation = useCheckoutCartItemsMutation();
+  const { mutateAsync: checkoutCartItems } = checkoutCartMutation;
+  const isCheckoutCartLoading = checkoutCartMutation.isPending;
+
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
 
   const { data: cartItems, isLoading: isLoadingCartItems } = useGetCartItems({
@@ -34,6 +47,29 @@ const OrderSummaryPage = () => {
     const quantity = item?.quantity || 0;
     return acc + itemPrice * quantity;
   }, 0);
+
+  const handleConfirmOrder = async () => {
+    const payload = {
+      cartItemIds: cartItems?.map((itemIds: CartItemsType) => itemIds?.id),
+      totalAmount: totalPrice,
+    };
+    try {
+      const result = await checkoutCartItems(payload);
+      if (result) {
+        toast.success("Order created Successfully!. Proceed to payment");
+        router.push("/shop/order-confirmation");
+      }
+    } catch (error) {
+      console.error("Create order error:", error);
+    }
+    // to update the checkoutCart redux state
+    dispatch(
+      setCheckoutCartItems({
+        cartItems: cartItems,
+        totalAmount: totalPrice,
+      })
+    );
+  };
 
   return (
     <Wrapper bg="gray.250">
@@ -120,7 +156,6 @@ const OrderSummaryPage = () => {
                       (item: UserAddressType) => defaultAddress?.id === item?.id
                     )}
                   />
-                  {/* <PersonalDetailsModal /> */}
                 </Flex>
               </Flex>
             )}
@@ -269,8 +304,12 @@ const OrderSummaryPage = () => {
             <Text>Total</Text>
             <Text fontSize={"1.8rem"}>£{totalPrice?.toFixed(2)}</Text>
           </HStack>
-          <Button w="full" href="/shop/order-confirmation">
-            Confirm Order
+          <Button
+            w="full"
+            onClick={handleConfirmOrder}
+            disabled={isCheckoutCartLoading}
+          >
+            {isCheckoutCartLoading ? "Processing..." : "Confirm Order"}
           </Button>
         </Box>
       </Flex>
