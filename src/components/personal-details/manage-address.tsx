@@ -46,7 +46,7 @@ const ManageAddress = () => {
         </Flex>
       ) : (
         <Flex gap="2rem" flexDir="column" w="full" mb="3rem">
-          {userAddress.map((address: UserAddressType) => (
+          {userAddress?.map((address: UserAddressType) => (
             <Flex
               key={address?.id}
               justifyContent={"space-between"}
@@ -78,7 +78,7 @@ const ManageAddress = () => {
                 {/* Edit address modal */}
                 <AddressModal
                   isEditMode={true}
-                  icon={<FaRegEdit size="2rem" />}
+                  triggeritem={<FaRegEdit size="2rem" />}
                   selectedAddress={userAddress?.find(
                     (item: UserAddressType) => address?.id === item?.id
                   )}

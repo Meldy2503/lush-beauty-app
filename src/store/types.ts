@@ -39,4 +39,5 @@ export interface CartItem {
 export interface CartState {
   cartItems: CartItem[];
   guestId: string | null;
+  redirectToOrderSummary: boolean;
 }

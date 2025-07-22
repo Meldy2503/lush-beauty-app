@@ -4,6 +4,7 @@ import { CartItem, CartState } from "../types";
 const initialState: CartState = {
   cartItems: [],
   guestId: null,
+  redirectToOrderSummary: false,
 };
 
 const cartSlice = createSlice({
@@ -16,8 +17,12 @@ const cartSlice = createSlice({
     setGuestId: (state, action: PayloadAction<string>) => {
       state.guestId = action.payload;
     },
+    setRedirectToOrderSummary: (state, action: PayloadAction<boolean>) => {
+      state.redirectToOrderSummary = action.payload;
+    },
   },
 });
 
-export const { addCartItems, setGuestId } = cartSlice.actions;
+export const { addCartItems, setGuestId, setRedirectToOrderSummary } =
+  cartSlice.actions;
 export default cartSlice.reducer;

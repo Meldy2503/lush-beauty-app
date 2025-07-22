@@ -98,6 +98,7 @@ export const useUpdateAddressMutation = () => {
     onSuccess: () => {
       // Invalidate user addresses so they refetch
       queryClient.invalidateQueries({ queryKey: ["userAddress"] });
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
     },
     onError: (error) => {
       console.error("Address update failed:", error);

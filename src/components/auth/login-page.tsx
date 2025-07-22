@@ -12,9 +12,18 @@ import { loginSchema } from "@/schema/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { setRedirectToOrderSummary } from "@/store/slices/cart-slice";
 
 const LoginPage = () => {
   const loginMutation = useLoginMutation();
+  const dispatch = useDispatch();
+
+  const redirectToOrderSummary = useSelector(
+    (state: RootState) => state.cart.redirectToOrderSummary
+  );
 
   const { mutateAsync: login } = loginMutation;
   const isLoading = loginMutation.isPending;
@@ -44,7 +53,12 @@ const LoginPage = () => {
       }
       if (result) {
         toast.success("Login Successful!");
-        router.push(redirect);
+        if (redirectToOrderSummary) {
+          dispatch(setRedirectToOrderSummary(false));
+          router.push("/shop/order-summary");
+        } else {
+          router.push(redirect); // fallback to default (?redirect=...)
+        }
         reset();
       }
     } catch (error) {

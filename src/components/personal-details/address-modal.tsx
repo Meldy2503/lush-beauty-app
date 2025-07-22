@@ -24,13 +24,13 @@ import { useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
 
 interface AddressModalProps {
-  icon?: React.ReactNode;
+  triggeritem?: React.ReactNode;
   isEditMode?: boolean;
   selectedAddress?: UserAddressType;
 }
 
 const AddressModal = ({
-  icon,
+  triggeritem,
   isEditMode,
   selectedAddress,
 }: AddressModalProps) => {
@@ -100,7 +100,7 @@ const AddressModal = ({
       onOpenChange={(e) => setIsOpen(e.open)}
     >
       <Dialog.Trigger asChild onClick={() => setIsOpen(true)}>
-        {icon ?? <Button fontWeight="400">Add address</Button>}
+        {triggeritem ?? <Button fontWeight="400">Add address</Button>}
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop bg="backdrop" />

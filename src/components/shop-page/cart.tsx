@@ -16,7 +16,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { GiShoppingBag } from "react-icons/gi";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -25,6 +25,8 @@ import Button from "../shared/button";
 import EmptyCart from "../shared/empty-cart";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setRedirectToOrderSummary } from "@/store/slices/cart-slice";
 
 interface CartProps {
   children?: React.ReactNode;
@@ -32,6 +34,8 @@ interface CartProps {
 
 const Cart = ({ children }: CartProps) => {
   const pathname = usePathname();
+  const dispatch = useDispatch();
+  const router = useRouter();
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
   const [deletingItemId, setDeletingItemId] = useState<string | null>(null);
 
@@ -65,6 +69,15 @@ const Cart = ({ children }: CartProps) => {
       console.error("Delete Cart Item error:", error);
     } finally {
       setDeletingItemId(null);
+    }
+  };
+
+  const handleCheckout = () => {
+    if (!loggedInUser) {
+      dispatch(setRedirectToOrderSummary(true));
+      router.push("/login");
+    } else {
+      router.push("/shop/order-summary");
     }
   };
 
@@ -116,7 +129,7 @@ const Cart = ({ children }: CartProps) => {
                 <EmptyCart />
               ) : (
                 cartItems &&
-                cartItems.map((item: CartItemsType) => {
+                cartItems?.map((item: CartItemsType) => {
                   return (
                     <Flex
                       key={item?.id}
@@ -201,10 +214,10 @@ const Cart = ({ children }: CartProps) => {
                           <Flex
                             alignItems={"flex-end"}
                             flexDir={"column"}
-                            gap=".5rem"
+                            gap="1rem"
                           >
                             {item?.productItem?.price && item?.quantity && (
-                              <Text fontWeight={"600"} fontSize={"1.8rem"}>
+                              <Text fontWeight={"600"} fontSize={"1.8rem"} >
                                 £{item?.productItem?.price * item?.quantity}
                               </Text>
                             )}
@@ -239,9 +252,9 @@ const Cart = ({ children }: CartProps) => {
                   >
                     {pathname !== "/shop/order-summary" ? (
                       <Button
-                        href={loggedInUser ? "/shop/order-summary" : "/login"}
                         w="100%"
                         px={{ base: "3rem", sm: "5rem" }}
+                        onClick={handleCheckout}
                       >
                         Checkout
                       </Button>
