@@ -30,8 +30,8 @@ const OrderSummaryPage = () => {
   const { data: userDetails, isLoading: isUserDetailsLoading } =
     useGetUserProfile();
   const checkoutCartMutation = useCheckoutCartItemsMutation();
-  const isCheckoutCartLoading = checkoutCartMutation.isPending;
-  const { mutateAsync: checkoutCartItems } = checkoutCartMutation;
+  const { mutateAsync: checkoutCartItems, isPending: isCheckoutCartLoading } =
+    checkoutCartMutation;
 
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
 
@@ -56,8 +56,8 @@ const OrderSummaryPage = () => {
     try {
       const result = await checkoutCartItems(payload);
       if (result) {
-        toast.success("Order created Successfully!");
         router.push("/shop/order-confirmation");
+        toast.success("Order created Successfully!");
       }
     } catch (error) {
       console.error("Create order error:", error);

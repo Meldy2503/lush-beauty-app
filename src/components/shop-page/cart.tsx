@@ -42,8 +42,12 @@ const Cart = ({ children }: CartProps) => {
   const router = useRouter();
 
   const updateItemQuantityMutation = useUpdateItemQuantityMutation();
+  const [updatingItemIds, setUpdatingItemIds] = useState<Set<string>>(
+    new Set()
+  );
 
-  const { mutateAsync: updateItemQuantity } = updateItemQuantityMutation;
+  const { mutateAsync: updateItemQuantity } =
+    updateItemQuantityMutation;
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
   const [deletingItemId, setDeletingItemId] = useState<string | null>(null);
 
@@ -89,24 +93,32 @@ const Cart = ({ children }: CartProps) => {
     }
   };
 
-
   const handleUpdateItemQuantity = async (
     productId: string,
     newQuantity: number
   ) => {
     try {
-      const result = await updateItemQuantity({
+      // Add item to updating set
+      setUpdatingItemIds((prev) => new Set(prev).add(productId));
+
+      //Add artificial delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 200)); // 300ms delay
+
+      await updateItemQuantity({
         productId,
         quantity: newQuantity,
         ...(existingGuestId && { guestId: existingGuestId }),
         ...(loggedInUser?.id && { userId: loggedInUser?.id }),
       });
-
-      if (result) {
-        toast.success("Item quantity updated Successfully!");
-      }
     } catch (error) {
       console.error("Update Cart Item quantity error:", error);
+    } finally {
+      // Remove item from updating set
+      setUpdatingItemIds((prev) => {
+        const updated = new Set(prev);
+        updated.delete(productId);
+        return updated;
+      });
     }
   };
 
@@ -240,20 +252,30 @@ const Cart = ({ children }: CartProps) => {
                                   const newQty =
                                     currentQty === 1 ? 1 : currentQty - 1;
                                   if (newQty >= 1) {
-                                    handleUpdateItemQuantity(item?.id ?? '', newQty);
+                                    handleUpdateItemQuantity(
+                                      item?.id ?? "",
+                                      newQty
+                                    );
                                   }
                                 }}
                               >
                                 <FiMinus />
                               </Box>
-                              <Text>{item?.quantity}</Text>
+                              {updatingItemIds.has(item?.id ?? "") ? (
+                                <Spinner />
+                              ) : (
+                                <Text>{item?.quantity}</Text>
+                              )}
                               <Box
                                 cursor={"pointer"}
                                 onClick={() => {
                                   const currentQty = item?.quantity ?? 1;
                                   const newQty = currentQty + 1;
                                   if (newQty >= 1) {
-                                    handleUpdateItemQuantity(item?.id ?? '', newQty);
+                                    handleUpdateItemQuantity(
+                                      item?.id ?? "",
+                                      newQty
+                                    );
                                   }
                                 }}
                               >
