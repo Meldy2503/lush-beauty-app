@@ -19,6 +19,7 @@ export interface DataType<T>  {
 
 export interface Params {
   term?: string;
+  branchId?: string | undefined;
   page: number;
   pageSize?: number;
   limit?: number;

@@ -24,7 +24,13 @@ const SelectServicePage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { data: services, isLoading } = useGetServices();
+  const storedSelectedLocation = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.selectedBranch
+  );
+
+  const { data: services, isLoading } = useGetServices(
+    storedSelectedLocation?.id ?? ""
+  );
 
   const storedService = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.serviceSelections

@@ -31,16 +31,22 @@ import { Params } from "@/types";
 
 const SelectTechnicianPage = () => {
   const [isGridOrientation, setIsGridOrientation] = useState(true);
+  const storedSelectedLocation = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.selectedBranch
+  );
   const [params, setParams] = useState<Params>({
     page: 1,
+    branchId: storedSelectedLocation?.id ?? ''
   });
   const dispatch = useDispatch();
   const router = useRouter();
   const [debouncedSearchQuery] = useDebounce(params?.term, 500);
 
+
   const { data: specialists, isLoading } = useGetSpecialists({
     ...(debouncedSearchQuery && { term: debouncedSearchQuery }),
     page: params?.page,
+    branchId: params?.branchId,
   });
 
   const storedSpecialist = useSelector(

@@ -21,13 +21,17 @@ export const useGetBranches = () => {
 };
 
 // to get all services
-export const useGetServices = () => {
+export const useGetServices = (branchId?: string) => {
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
 
   return useQuery({
-    queryKey: ["services", accessToken],
+    queryKey: ["services", branchId, accessToken],
     queryFn: async () => {
-      const res = await axios.get(urls.getServicesUrl);
+      const res = await axios.get(urls.getServicesUrl, {
+        params: {
+          branchId,
+        }
+      });
       return res.data.data.data;
     },
     enabled: !!accessToken,

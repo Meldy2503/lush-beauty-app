@@ -44,7 +44,7 @@ const ServiceListSection = () => {
                 direction="column"
                 h="100%"
                 py="5rem"
-                px={{ base: "2.5rem", sm: "4rem", xl: "8rem" }}
+                px={{ base: "2.5rem", sm: "4rem", xl: "7rem" }}
               >
                 <Heading
                   as="h3"
@@ -110,7 +110,7 @@ const serviceListData: ServiceCardData[] = [
   {
     id: 2,
     heading: "HAIR COLORING",
-    text: "Vibrant hair colours, highlights, and tones. Refresh or transform your look with expert colour work.",
+    text: "Vibrant hair colours, highlights and tones. Refresh or transform your look with our unique hair colours.",
     list: [
       { item: "Root Touch-Up", value: "£25" },
       { item: "Full Hair Color", value: "£40" },
@@ -128,31 +128,31 @@ const serviceListData: ServiceCardData[] = [
       { item: "Gel Manicure", value: "£20" },
       { item: "Classic Pedicure", value: "£18" },
       { item: "Spa Pedicure", value: "£25" },
-      { item: "Nail Art Add-On", value: "£5" },
+      { item: "Nail Art Add-On", value: "£13" },
     ],
   },
   {
     id: 4,
-    heading: "LASH & BROW ARTISTRY",
-    text: "Define and enhance your eyes with custom lash and brow treatments. Subtle to bold looks available.",
+    heading: "WAX & LASH EXTENSIONS",
+    text: "Expert lash, brow, and waxing treatments for smooth skin and beautifully defined eyes and brows.",
     list: [
-      { item: "Eyebrow Shaping", value: "£10" },
-      { item: "Brow Tinting", value: "£12" },
-      { item: "Lash Tinting", value: "£14" },
-      { item: "Classic Lash Extensions", value: "£35" },
-      { item: "Volume Lash Extensions", value: "£45" },
+      { item: "Eyebrow Shaping", value: "£12" },
+      { item: "Lash Extensions", value: "£25" },
+      { item: "Full Leg Wax", value: "£30" },
+      { item: "Bikini Wax", value: "£25" },
+      { item: "Underarm Wax", value: "£20" },
     ],
   },
   {
     id: 5,
-    heading: "WAX & HAIR REMOVAL",
-    text: "Smooth, hair-free skin with gentle waxing. Ideal for face, legs, arms, underarms, and bikini line.",
+    heading: "BRAIDS & HAIR EXTENSIONS",
+    text: "Protective, stylish braids and extensions for added length, volume, and low-maintenance hairstyles.",
     list: [
-      { item: "Eyebrow Wax", value: "£8" },
-      { item: "Upper Lip Wax", value: "£6" },
-      { item: "Underarm Wax", value: "£12" },
-      { item: "Full Leg Wax", value: "£25" },
-      { item: "Bikini Wax", value: "£20" },
+      { item: "Cornrows (Straight Back)", value: "£25" },
+      { item: "Box Braids (Small)", value: "£90" },
+      { item: "Box Braids (Medium)", value: "£80" },
+      { item: "Box Braids (large)", value: "£70" },
+      { item: "Sew-In Weave", value: "£60" },
     ],
   },
   {
