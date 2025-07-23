@@ -63,7 +63,7 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
           serviceId: service.serviceId,
           categoryIds: service.categoryIds
             .map((category) => category.id)
-            .filter((id): id is string => id !== undefined), // to Filter out undefined values
+            .filter((id): id is string => id !== undefined), // to filter out undefined values
         })) || [],
     };
 
