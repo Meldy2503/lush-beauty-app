@@ -66,12 +66,12 @@ const SelectLocationPage = () => {
           lineHeight={1.3}
           textTransform="uppercase"
         >
-          SELECT LOCATION
+          select location
         </Heading>
         <Flex
           flexDir={"column"}
           justifyContent={"space-between"}
-          h={{ base: "90vh", md: "78.2vh" }}
+          h={{ base: "100%", md: "78.2vh" }}
           overflow={"auto"}
         >
           {isLoading ? (

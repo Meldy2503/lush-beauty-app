@@ -118,7 +118,7 @@ const SelectTechnicianPage = () => {
         <Flex
           flexDir={"column"}
           justifyContent={"space-between"}
-          h={{ base: "90vh", md: "71vh" }}
+          h={{ base: "100%", md: "71vh" }}
           overflowY={"auto"}
         >
           {isLoading ? (

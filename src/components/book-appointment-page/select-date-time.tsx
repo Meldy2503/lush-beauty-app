@@ -75,7 +75,7 @@ const SelectDateTimePage = () => {
         <Flex
           flexDir={"column"}
           justifyContent={"space-between"}
-          h={{ base: "90vh", md: "78.2vh" }}
+          h={{ base: "100%", md: "78.2vh" }}
           overflowY={"auto"}
         >
           <Flex
@@ -105,10 +105,7 @@ const SelectDateTimePage = () => {
                 justifyContent="space-between"
                 px="2px"
               >
-                <HStack
-                  gap={{ base: "3rem", md: "3rem 4rem" }}
-                  flexWrap="wrap"
-                >
+                <HStack gap={{ base: "3rem", md: "3rem 4rem" }} flexWrap="wrap">
                   {timeSlots.map((item) => (
                     <RadioGroup.Item
                       key={item.value}

@@ -30,9 +30,9 @@ const SelectServicePage = () => {
     (state: RootState) => state.appointment.appointments[0]?.serviceSelections
   );
 
-    const totalPrice = useSelector(
-      (state: RootState) => state.appointment.appointments[0]?.totalPrice
-    );
+  const totalPrice = useSelector(
+    (state: RootState) => state.appointment.appointments[0]?.totalPrice
+  );
 
   // Initialize state with existing selections or empty array
   const [selectedServices, setSelectedServices] = useState<
@@ -96,7 +96,6 @@ const SelectServicePage = () => {
     router.push("/book-appointment/select-technician");
   };
 
-
   return (
     <Flex gap="2rem" alignItems="stretch">
       <Box
@@ -106,7 +105,6 @@ const SelectServicePage = () => {
         pt="2rem"
         shadow={"sm"}
       >
-        
         <Heading
           as="h3"
           fontSize={{ base: "1.7rem", md: "1.8rem" }}
@@ -120,7 +118,7 @@ const SelectServicePage = () => {
         <Flex
           flexDir={"column"}
           justifyContent={"space-between"}
-          h={{ base: "90vh", md: "78.2vh" }}
+          h={{ base: "100%", md: "78.2vh" }}
           overflowY={"auto"}
         >
           {isLoading ? (

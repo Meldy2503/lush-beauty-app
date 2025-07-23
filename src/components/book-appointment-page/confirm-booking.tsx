@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 const ConfirmBookingPage = () => {
   const router = useRouter();
   const [agreeToTerms, setAgreeToTerms] = useState(false);
-   
 
   return (
     <Flex
@@ -39,10 +38,8 @@ const ConfirmBookingPage = () => {
         <Flex
           flexDir={"column"}
           justifyContent={"space-between"}
-          h={{ base: "90vh", md: "78.2vh" }}
+          h={{ base: "100%", md: "78.2vh" }}
           overflowY={"auto"}
-          // h={{ base: "100%", md: "62.5vh" }}
-          // overflowY={"auto"}
         >
           <Box pb="3rem">
             <Text fontSize="1.7rem" mb=".3rem" fontWeight={"bold"}>
