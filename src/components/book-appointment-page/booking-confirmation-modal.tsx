@@ -21,6 +21,7 @@ import { BookAppointmentType } from "@/types/book-appointment";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { clearAppointments } from "@/store/slices/appointment-slice";
+import { useRouter } from "next/navigation";
 
 interface ConfirmationModalProps {
   disabled?: boolean;
@@ -29,7 +30,7 @@ interface ConfirmationModalProps {
 const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-
+  const router = useRouter();
 
   const totalPrice = useSelector(
     (state: RootState) => state.appointment.appointments[0]?.totalPrice
@@ -48,7 +49,6 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
   const isLoading =
     groupBookingMutation.isPending || personalBookingMutation.isPending;
 
-
   const handleBooking = async () => {
     if (!appointment) return;
 
@@ -63,7 +63,7 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
           serviceId: service.serviceId,
           categoryIds: service.categoryIds
             .map((category) => category.id)
-            .filter((id): id is string => id !== undefined), // Filter out undefined values
+            .filter((id): id is string => id !== undefined), // to Filter out undefined values
         })) || [],
     };
 
@@ -74,15 +74,12 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
           : await personalBooking(payload);
 
       if (result && result.success === true) {
-        dispatch(clearAppointments());
         setIsOpen(true);
-        console.log("Booking successful:", result);
       }
     } catch (error) {
       console.error("Booking failed:", error);
     }
   };
-
 
   return (
     <Dialog.Root
@@ -105,7 +102,7 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
         </Button>
       </Dialog.Trigger>
       <Portal>
-        <Dialog.Backdrop bg="backdrop" />
+        <Dialog.Backdrop bg="rgb(0,0,0,0.8)" />
         <Dialog.Positioner>
           <Dialog.Content
             maxW="600px"
@@ -151,6 +148,10 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
                     color="black"
                     px={{ base: "5.5rem", sm: "2rem" }}
                     href="/"
+                    onClick={() => {
+                      router.push("/");
+                      dispatch(clearAppointments());
+                    }}
                   >
                     Go to Home
                   </Button>
