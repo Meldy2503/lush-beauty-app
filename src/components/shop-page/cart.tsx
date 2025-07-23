@@ -46,12 +46,14 @@ const Cart = ({ children }: CartProps) => {
     new Set()
   );
 
-  const { mutateAsync: updateItemQuantity } =
-    updateItemQuantityMutation;
+  const { mutateAsync: updateItemQuantity } = updateItemQuantityMutation;
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
   const [deletingItemId, setDeletingItemId] = useState<string | null>(null);
 
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
+  const storedCartItems = useSelector(
+    (state: RootState) => state.cart.cartItems
+  );
   const { data: cartItems, isLoading } = useGetCartItems({
     guestId: existingGuestId,
     userId: loggedInUser?.id,
@@ -160,7 +162,7 @@ const Cart = ({ children }: CartProps) => {
                 fontSize={"2rem"}
                 color="white"
               >
-                Cart: {cartItems?.length ?? 0} Items
+                Cart: {cartItems?.length || storedCartItems?.length || 0} Items
               </Drawer.Title>
             </Drawer.Header>
             <Drawer.Body p="2rem">
