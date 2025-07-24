@@ -124,8 +124,6 @@ const Cart = ({ children }: CartProps) => {
     }
   };
 
-  console.log(cartItems, "cartItems");
-
   return (
     <Drawer.Root size="xl" placement={"end"}>
       <Drawer.Trigger asChild>

@@ -50,6 +50,7 @@ const config = {
           200: { value: "#ccc" },
           250: { value: "#F5F6F7" },
           300: { value: "#e2e3e3" },
+          350: { value: "#999" },
         },
         backdrop: { value: "rgba(0,0,0,.7)" },
       },

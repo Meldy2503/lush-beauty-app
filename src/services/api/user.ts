@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import axios from "../axios";
 import urls from "../urls";
+import { Params } from "@/types";
 
 // to get logged in user details
 export const useGetUserProfile = () => {
@@ -123,5 +124,34 @@ export const useDeleteAddress = () => {
     onError: (error) => {
       console.error("Delete address failed:", error);
     },
+  });
+};
+
+// to get all appointments booked by a user
+export const useGetUserAppointments = (params?: Params) => {
+  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+
+  return useQuery({
+    queryKey: ["userAppointments", params, accessToken],
+    queryFn: async () => {
+      const res = await axios.get(urls.getUserAppointmentUrl, { params });
+      return res.data.data.data;
+    },
+    enabled: !!accessToken,
+  });
+};
+
+
+// to get all user orders
+export const useGetUserOrders = (params?: Params) => {
+  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+
+  return useQuery({
+    queryKey: ["userOrders", params, accessToken],
+    queryFn: async () => {
+      const res = await axios.get(urls.getUserOrdersUrl, { params });
+      return res.data.data.data;
+    },
+    enabled: !!accessToken,
   });
 };

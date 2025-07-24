@@ -1,15 +1,33 @@
+"use client";
+
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
 import Button from "../shared/button";
-import AppointmentDetailsContent from "./appointment-content";
+import OrderDetailsContent from "./order-content";
 
-const ViewAppointmentDetailsModal = () => {
+
+interface OrderDetailsProp {
+  onClick?: () => void;
+  viewOrderDetailsId?: string;
+}
+
+const ViewOrderDetailsModal = ({
+  onClick,
+  viewOrderDetailsId,
+}: OrderDetailsProp) => {
+  console.log(viewOrderDetailsId, "ViewAppointmentDetailsId");
+
   return (
     <Dialog.Root
       placement={{ base: "top", md: "center" }}
       motionPreset="slide-in-bottom"
     >
       <Dialog.Trigger asChild>
-        <Button px="2rem" fontSize="1.4rem" py={{ base: "1.5rem", sm: "2rem" }}>
+        <Button
+          px="2rem"
+          fontSize="1.4rem"
+          py={{ base: "1.5rem", sm: "2rem" }}
+          onClick={onClick}
+        >
           View Details
         </Button>
       </Dialog.Trigger>
@@ -24,10 +42,10 @@ const ViewAppointmentDetailsModal = () => {
             fontSize="1.6rem"
           >
             <Dialog.Header>
-              <Dialog.Title fontSize="2rem">Appointment details</Dialog.Title>
+              <Dialog.Title fontSize="1.8rem">Order details</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>
-              <AppointmentDetailsContent />
+              <OrderDetailsContent />
             </Dialog.Body>
             <Dialog.Footer mt="2rem">
               <Dialog.ActionTrigger asChild>
@@ -42,13 +60,8 @@ const ViewAppointmentDetailsModal = () => {
                   Close
                 </Button>
               </Dialog.ActionTrigger>
-
-              <Button
-                href="/book-appointment"
-                py="2rem"
-                px={{ base: "2rem", sm: "3rem" }}
-              >
-                Book again
+              <Button href="/shop" py="2rem" px={{ base: "2rem", sm: "3rem" }}>
+                Shop again
               </Button>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild bg="gray.200">
@@ -61,4 +74,4 @@ const ViewAppointmentDetailsModal = () => {
   );
 };
 
-export default ViewAppointmentDetailsModal;
+export default ViewOrderDetailsModal;

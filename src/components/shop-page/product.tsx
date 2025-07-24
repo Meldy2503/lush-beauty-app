@@ -34,67 +34,12 @@ const Product = () => {
   const [itemQuantity, setItemQuantity] = useState(1);
   const { data: product, isLoading } = useGetProductById(id as string);
   const addToCartMutation = useAddToCartMutation();
-  // const mergeCartItemsMutation = useMergeCartItemsMutation();
-  // const { mutateAsync: mergeCartItems } = mergeCartItemsMutation;
 
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
   const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
-  const hasMergedIds = useSelector(
-    (state: RootState) => state.cart.hasMergedIds
-  );
 
   const { mutateAsync: addToCart } = addToCartMutation;
   const isAddToCartLoading = addToCartMutation.isPending;
-
-  console.log(hasMergedIds, "hasMergedIds");
-  console.log(existingGuestId, "existingGuestId");
-  console.log(loggedInUser?.id, "loggedInUser?.id");
-
-  // const handleAddTocart = async () => {
-  //   let guestId: string;
-
-  //   if (existingGuestId) {
-  //     guestId = existingGuestId;
-  //   } else {
-  //     guestId = uuidv4();
-  //     dispatch(setGuestId(guestId));
-  //   }
-  //   console.log(guestId, "guestId");
-
-  //   // Only merge after login ONCE to get all cartItems
-  //   if (loggedInUser?.id && guestId && !hasMergedIds) {
-  //     try {
-  //       await mergeCartItems(guestId);
-  //       dispatch(setHasMergedIds(true));
-  //     } catch (error) {
-  //       console.error("Error merging cart:", error);
-  //     }
-  //   }
-
-  //   const payload = {
-  //     ...(guestId && { guestId: guestId }),
-  //     ...(loggedInUser?.id && { userId: loggedInUser.id }),
-  //     productId: product?.id,
-  //     quantity: itemQuantity,
-  //   };
-
-  //   try {
-  //     const result = await addToCart(payload);
-
-  //     if (result) {
-  //       toast.success("Item Added Successfully!");
-  //     }
-  //   } catch (error) {
-  //     console.error("Add to cart error:", error);
-  //   }
-  //   dispatch(
-  //     addCartItems({
-  //       guestId: guestId,
-  //       productId: product?.id,
-  //       quantity: itemQuantity,
-  //     })
-  //   );
-  // };
 
   const handleAddTocart = async () => {
     try {
@@ -107,21 +52,6 @@ const Product = () => {
         guestId = uuidv4();
         dispatch(setGuestId(guestId));
       }
-
-      console.log(guestId, "guestId");
-
-      // Only merge after login ONCE to get all cartItems
-      // if (loggedInUser?.id && guestId && !hasMergedIds) {
-      //   try {
-      //     await mergeCartItems({
-      //       guestId: guestId,
-      //       userId: loggedInUser?.id,
-      //     });
-      //     dispatch(setHasMergedIds(true));
-      //   } catch (error) {
-      //     console.error("Error merging cart:", error);
-      //   }
-      // }
 
       const payload = {
         ...(guestId && { guestId: guestId }),

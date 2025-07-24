@@ -1,5 +1,5 @@
 import ProtectedRoute from "@/components/auth/protected-route";
-import UserAppointmentsPage from "@/components/user-appointments";
+import UserAppointmentsPage from "@/components/user-appointments/appointments";
 
 export const metadata = {
   title: "Lush Beauty - Premium Beauty Products",

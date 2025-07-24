@@ -77,3 +77,4 @@ export interface BookAppointmentType {
   currency?: string;
   notes?: string;
 }
+
