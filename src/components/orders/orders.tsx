@@ -113,9 +113,9 @@ const OrdersPage = () => {
                                   height={100}
                                 />
 
-                                {/* {orders?.imageUrl && (
+                                {/* {item?.imageUrl && (
                         <Image
-                          src={orders?.imageUrl}
+                          src={item?.imageUrl}
                           alt="product image"
                           style={{
                             objectFit: "cover",

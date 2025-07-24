@@ -5,7 +5,7 @@ import Button from "../shared/button";
 import OrderDetailsContent from "./order-content";
 
 
-interface OrderDetailsProp {
+interface OrderDetailsProps {
   onClick?: () => void;
   viewOrderDetailsId?: string;
 }
@@ -13,8 +13,8 @@ interface OrderDetailsProp {
 const ViewOrderDetailsModal = ({
   onClick,
   viewOrderDetailsId,
-}: OrderDetailsProp) => {
-  console.log(viewOrderDetailsId, "ViewAppointmentDetailsId");
+}: OrderDetailsProps) => {
+  
 
   return (
     <Dialog.Root
@@ -45,7 +45,7 @@ const ViewOrderDetailsModal = ({
               <Dialog.Title fontSize="1.8rem">Order details</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>
-              <OrderDetailsContent />
+              <OrderDetailsContent viewOrderDetailsId={viewOrderDetailsId} />
             </Dialog.Body>
             <Dialog.Footer mt="2rem">
               <Dialog.ActionTrigger asChild>

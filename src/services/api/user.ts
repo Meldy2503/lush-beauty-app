@@ -141,6 +141,18 @@ export const useGetUserAppointments = (params?: Params) => {
   });
 };
 
+// to get a single user appointment by Id
+export const useGetUserAppointmentById = (appointmentId: string) => {
+  return useQuery({
+    queryKey: ["userAppointment", appointmentId],
+    queryFn: async () => {
+      const res = await axios.get(urls.getUserAppointmentById(appointmentId));
+      return res.data.data;
+    },
+    enabled: !!appointmentId,
+  });
+};
+
 
 // to get all user orders
 export const useGetUserOrders = (params?: Params) => {
@@ -153,5 +165,19 @@ export const useGetUserOrders = (params?: Params) => {
       return res.data.data.data;
     },
     enabled: !!accessToken,
+  });
+};
+
+
+
+// to get a single user order by Id
+export const useGetUserOrderById = (orderId: string) => {
+  return useQuery({
+    queryKey: ["userOrder", orderId],
+    queryFn: async () => {
+      const res = await axios.get(urls.getUserOrderById(orderId));
+      return res.data.data;
+    },
+    enabled: !!orderId,
   });
 };

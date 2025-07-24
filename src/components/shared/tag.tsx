@@ -20,7 +20,6 @@ const Tag = ({ label }: TagProps) => {
       color="white"
       w="fit-content"
       rounded="sm"
-      mb=".5rem"
     >
       <Text
         fontSize={"1.2rem"}

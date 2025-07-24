@@ -41,5 +41,8 @@ const urls = {
     `${baseUrl}/cart/items/${productId}/quantity`,
   getUserAppointmentUrl: `${baseUrl}/appointments`,
   getUserOrdersUrl: `${baseUrl}/orders`,
+  getUserOrderById: (orderId: string) => `${baseUrl}/orders/${orderId}`,
+  getUserAppointmentById: (appointmentId: string) =>
+    `${baseUrl}/appointments/${appointmentId}`,
 };
 export default urls;

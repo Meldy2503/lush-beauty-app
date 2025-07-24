@@ -30,7 +30,7 @@ export const useGetServices = (branchId?: string) => {
       const res = await axios.get(urls.getServicesUrl, {
         params: {
           branchId,
-        }
+        },
       });
       return res.data.data.data;
     },
@@ -65,12 +65,6 @@ export const usePersonalBookingMutation = () => {
       );
       return res.data;
     },
-    // onSuccess: (data) => {
-    //   const token = data?.data?.token;
-    //   if (token) {
-    //     dispatch(setToken(token));
-    //   }
-    // },
     onError: (error) => {
       console.error("Booking failed:", error);
     },
@@ -87,12 +81,6 @@ export const useGroupBookingMutation = () => {
       const res = await axios.post(urls.bookGroupAppointment, groupBooking);
       return res.data;
     },
-    // onSuccess: (data) => {
-    //   const token = data?.data?.token;
-    //   if (token) {
-    //     dispatch(setToken(token));
-    //   }
-    // },
     onError: (error) => {
       console.error("Booking failed:", error);
     },

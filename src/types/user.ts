@@ -74,25 +74,27 @@ export interface UserAppointmentType {
   };
 }
 
+export interface OrderItems {
+  createdAt?: string;
+  id?: string;
+  orderId?: string;
+  price?: number;
+  productId?: string;
+  quantity?: number;
+  updatedAt?: string;
+}
+
 export interface UserOrderType {
   cancelReason?: string;
   code?: string;
   createdAt?: string;
   currency?: string;
   id?: string;
-  items: {
-    createdAt?: string;
-    id?: string;
-    orderId?: string;
-    price?: number;
-    productId?: string;
-    quantity?: number;
-    updatedAt?: string;
-  }[];
+  items: OrderItems[];
   note?: string;
   status?: string;
   totalAmount?: number;
   updatedAt?: string;
   userId?: string;
-  imageUrl?:string
+  imageUrl?: string;
 }
