@@ -1,18 +1,17 @@
 "use client";
 
+import { useGetUserOrders } from "@/services/api/user";
+import { UserOrderType } from "@/types/user";
+import { formatAppointmentDateTime } from "@/utils";
 import { Box, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import React, { useState } from "react";
-import academy from "../../assets/images/academy-1.webp";
-import Tag from "../shared/tag";
-import ViewOrderDetailsModal from "./view-order-modal";
-import Navbar from "../navbar";
-import Wrapper from "../shared/wrapper";
-import { GoBack } from "../shared/go-back";
+import { useState } from "react";
 import Footer from "../footer";
-import { useGetUserOrders } from "@/services/api/user";
-import { formatAppointmentDateTime } from "@/utils";
-import { UserOrderType } from "@/types/user";
+import Navbar from "../navbar";
+import { GoBack } from "../shared/go-back";
+import Tag from "../shared/tag";
+import Wrapper from "../shared/wrapper";
+import ViewOrderDetailsModal from "./view-order-modal";
 
 const ItemDetails = ({
   title,
@@ -32,7 +31,9 @@ const ItemDetails = ({
           £{text}
         </Text>
       ) : (
-        <Text lineHeight={1.3}>{text}</Text>
+        <Text fontSize={"1.6rem"} lineHeight={1.3}>
+          {text}
+        </Text>
       )}
     </Box>
   );
@@ -42,7 +43,6 @@ const OrdersPage = () => {
   const { data: userOrders, isLoading } = useGetUserOrders();
   const [viewOrderDetailsId, setViewOrderDetailsId] = useState("");
 
-  console.log(userOrders, "userOrders");
   return (
     <>
       <Navbar />
@@ -70,13 +70,8 @@ const OrdersPage = () => {
                   orders?.createdAt
                 );
                 return (
-                  <Box
-                    key={orders?.id}
-                    borderWidth={"2px"}
-                    borderColor={"gray.250"}
-                    mb="2rem"
-                  >
-                    <Box bg="gray.250" p="1.5rem" color="gray.100">
+                  <Box key={orders?.id} mb="2rem" bg="gray.250">
+                    <Box p="1.5rem" color="gray.100">
                       <Tag label={orders?.status} />
                       <Flex
                         alignItems={"center"}
@@ -97,33 +92,25 @@ const OrdersPage = () => {
                     <Flex
                       justifyContent={"space-between"}
                       flexDir={{ base: "column", md: "row" }}
+                      borderTopWidth={"1px"}
+                      borderColor={"gray.300"}
                     >
                       <Flex gap="1rem" mt=".5rem" flexDir={"column"} p="1.5rem">
                         {orders?.items &&
                           orders?.items?.map((item) => {
                             return (
-                              <Flex key={item?.id} gap="2rem" mt="1rem">
-                                <Image
-                                  src={academy}
-                                  alt="product image"
-                                  style={{
-                                    objectFit: "cover",
-                                  }}
-                                  width={100}
-                                  height={100}
-                                />
-
-                                {/* {item?.imageUrl && (
-                        <Image
-                          src={item?.imageUrl}
-                          alt="product image"
-                          style={{
-                            objectFit: "cover",
-                          }}
-                          width={100}
-                          height={100}
-                        />
-                       )} */}
+                              <Flex key={item?.id} gap="2rem">
+                                {item?.product?.imageUrl && (
+                                  <Image
+                                    src={item?.product?.imageUrl}
+                                    alt="product image"
+                                    style={{
+                                      objectFit: "cover",
+                                    }}
+                                    width={100}
+                                    height={100}
+                                  />
+                                )}
                                 <Box>
                                   <Heading
                                     as="h4"
@@ -133,7 +120,7 @@ const OrdersPage = () => {
                                     textTransform={"uppercase"}
                                     fontSize="1.6rem"
                                   >
-                                    rechargeable face mask
+                                    {item?.product?.name}
                                   </Heading>
                                   <Text lineHeight={1.3}>
                                     Qty: {item?.quantity}

@@ -79,6 +79,19 @@ export interface OrderItems {
   id?: string;
   orderId?: string;
   price?: number;
+  product?: {
+    categoryId: string;
+    code: string;
+    createdAt: string;
+    currency: string;
+    description: string;
+    id: string;
+    imageUrl: string;
+    name: string;
+    price: number;
+    status: boolean;
+    updatedAt: string;
+  };
   productId?: string;
   quantity?: number;
   updatedAt?: string;

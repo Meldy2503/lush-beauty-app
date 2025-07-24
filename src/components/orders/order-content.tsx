@@ -5,7 +5,6 @@ import Image from "next/image";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
 import Tag from "../shared/tag";
-import academy from "../../assets/images/academy-1.webp";
 import { useGetUserAddresses, useGetUserOrderById } from "@/services/api/user";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
@@ -28,10 +27,8 @@ const OrderDetailsContent = ({ viewOrderDetailsId }: OrderContentProps) => {
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
 
   const { date, time } = formatAppointmentDateTime(orderDetails?.createdAt);
-
-  console.log(viewOrderDetailsId, "ViewAppointmentDetailsId");
   console.log(loggedInUser, "loggedInUser");
-  console.log(defaultAddress, "defaultAddress");
+  console.log(orderDetails, "orderDetails");
 
   return (
     <>
@@ -56,36 +53,27 @@ const OrderDetailsContent = ({ viewOrderDetailsId }: OrderContentProps) => {
             <Text lineHeight={1.3} mt="1rem">
               Order no - {orderDetails?.code}{" "}
             </Text>
-            <Box>
+            <Box bg="gray.250" p="1rem" mt="1rem">
               {orderDetails?.items?.map((item: OrderItems) => {
                 return (
                   <Flex
-                    mt="2rem"
+                    mb="1rem"
                     key={item?.id}
                     alignItems={{ base: "flex-start", md: "center" }}
                     gap=".5rem 1.5rem"
                     flexDir={{ base: "column", sm: "row" }}
                   >
-                    {/* {item?.imageUrl && (
-                        <Image
-                          src={item?.imageUrl}
-                          alt="product image"
-                          style={{
-                            objectFit: "cover",
-                          }}
-                          width={100}
-                          height={100}
-                        />
-                       )} */}
-                    <Image
-                      src={academy}
-                      alt="product image"
-                      style={{
-                        objectFit: "cover",
-                      }}
-                      width={100}
-                      height={100}
-                    />{" "}
+                    {item?.product?.imageUrl && (
+                      <Image
+                        src={item?.product?.imageUrl}
+                        alt="product image"
+                        style={{
+                          objectFit: "cover",
+                        }}
+                        width={100}
+                        height={100}
+                      />
+                    )}
                     <Box fontSize="1.6rem">
                       <Heading
                         as="h4"
@@ -93,9 +81,9 @@ const OrderDetailsContent = ({ viewOrderDetailsId }: OrderContentProps) => {
                         mb=".2rem"
                         lineHeight={1.4}
                         textTransform={"uppercase"}
-                        fontSize="1.8rem"
+                        fontSize="1.7rem"
                       >
-                        rechargeable face mask{" "}
+                        {item?.product?.name}
                       </Heading>
                       <Text lineHeight={1.3}>Qty: {item?.quantity}</Text>
                       <Text lineHeight={1.3} fontWeight={"600"} pt=".5rem">
