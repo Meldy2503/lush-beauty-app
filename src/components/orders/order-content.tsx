@@ -27,8 +27,6 @@ const OrderDetailsContent = ({ viewOrderDetailsId }: OrderContentProps) => {
   const loggedInUser = useSelector((state: RootState) => state.auth.user);
 
   const { date, time } = formatAppointmentDateTime(orderDetails?.createdAt);
-  console.log(loggedInUser, "loggedInUser");
-  console.log(orderDetails, "orderDetails");
 
   return (
     <>
@@ -46,21 +44,30 @@ const OrderDetailsContent = ({ viewOrderDetailsId }: OrderContentProps) => {
         >
           <Box w={{ base: "100%", md: "59%" }} bg="white" p="2rem">
             <HStack>
-              <Text>Payment Status:</Text>
+              <Text color="gray.350" lineHeight={1.3}>
+                Payment Status:
+              </Text>
               <Tag label={orderDetails?.status} />
             </HStack>
-
-            <Text lineHeight={1.3} mt="1rem">
-              Order no - {orderDetails?.code}{" "}
-            </Text>
-            <Box bg="gray.250" p="1rem" mt="1rem">
+            <HStack mt="1rem">
+              <Text color="gray.350" lineHeight={1.3}>
+                Order no:
+              </Text>
+              <Text lineHeight={1.3}>{orderDetails?.code} </Text>
+            </HStack>
+            <Flex
+              gap={{ base: "2rem", sm: "1rem" }}
+              mt="1rem"
+              flexDir={"column"}
+              p="1rem"
+              bg="gray.250"
+            >
               {orderDetails?.items?.map((item: OrderItems) => {
                 return (
                   <Flex
-                    mb="1rem"
                     key={item?.id}
                     alignItems={{ base: "flex-start", md: "center" }}
-                    gap=".5rem 1.5rem"
+                    gap=".5rem 2rem"
                     flexDir={{ base: "column", sm: "row" }}
                   >
                     {item?.product?.imageUrl && (
@@ -77,23 +84,27 @@ const OrderDetailsContent = ({ viewOrderDetailsId }: OrderContentProps) => {
                     <Box fontSize="1.6rem">
                       <Heading
                         as="h4"
-                        fontFamily="playfair"
-                        mb=".2rem"
                         lineHeight={1.4}
                         textTransform={"uppercase"}
-                        fontSize="1.7rem"
+                        fontSize={{ base: "1.6rem", md: "1.7rem" }}
                       >
                         {item?.product?.name}
                       </Heading>
-                      <Text lineHeight={1.3}>Qty: {item?.quantity}</Text>
-                      <Text lineHeight={1.3} fontWeight={"600"} pt=".5rem">
+                      <Text
+                        lineHeight={1.3}
+                        my=".3rem"
+                        fontSize="1.5rem"
+                      >
+                        Qty: {item?.quantity}
+                      </Text>
+                      <Text lineHeight={1.3} fontWeight={"500"}>
                         £{item?.price}
                       </Text>
                     </Box>
                   </Flex>
                 );
               })}
-            </Box>
+            </Flex>
             <Box mt="5rem">
               <Text fontWeight={"bold"} mb="1.5rem">
                 Shipping Address{" "}
@@ -107,7 +118,7 @@ const OrderDetailsContent = ({ viewOrderDetailsId }: OrderContentProps) => {
                     {`${defaultAddress[0]?.address}, ${defaultAddress[0]?.state}, ${defaultAddress[0]?.country}`}
                   </Text>
                   <Text lineHeight={1.3} w="95%" fontSize="1.4rem">
-                    +1 30241481957{" "}
+                    {loggedInUser?.phone}
                   </Text>
                 </Box>
               </Flex>

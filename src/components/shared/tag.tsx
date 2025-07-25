@@ -1,5 +1,5 @@
 "use client";
-import { Box, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
 interface TagProps {
@@ -8,7 +8,7 @@ interface TagProps {
 
 const Tag = ({ label }: TagProps) => {
   return (
-    <Box
+    <Flex
       bg={
         label === "canceled" || label === "returned"
           ? "red.600"
@@ -16,10 +16,12 @@ const Tag = ({ label }: TagProps) => {
           ? "green.600"
           : "yellow.100"
       }
-      p=".1rem .4rem"
+      p=".2rem .4rem"
       color="white"
       w="fit-content"
       rounded="sm"
+      alignItems={'center'}
+      justifyContent={'center'}
     >
       <Text
         fontSize={"1.2rem"}
@@ -29,7 +31,7 @@ const Tag = ({ label }: TagProps) => {
       >
         {label}
       </Text>
-    </Box>
+    </Flex>
   );
 };
 

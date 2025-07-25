@@ -44,7 +44,9 @@ const ViewAppointmentDetailsModal = ({
               <Dialog.Title fontSize="2rem">Appointment details</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>
-              <AppointmentDetailsContent />
+              <AppointmentDetailsContent
+                viewAppointmentDetailsId={viewAppointmentDetailsId}
+              />
             </Dialog.Body>
             <Dialog.Footer mt="2rem">
               <Dialog.ActionTrigger asChild>

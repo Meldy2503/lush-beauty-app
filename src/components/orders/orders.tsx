@@ -77,6 +77,7 @@ const OrdersPage = () => {
                         alignItems={"center"}
                         gap="1.5rem 4rem"
                         flexWrap={"wrap"}
+                        mt='.5rem'
                       >
                         <ItemDetails title="Order no" text={orders?.code} />
                         <ItemDetails
@@ -95,11 +96,20 @@ const OrdersPage = () => {
                       borderTopWidth={"1px"}
                       borderColor={"gray.300"}
                     >
-                      <Flex gap="1rem" mt=".5rem" flexDir={"column"} p="1.5rem">
+                      <Flex
+                        gap={{ base: "2rem", sm: "1rem" }}
+                        mt=".5rem"
+                        flexDir={"column"}
+                        p="1.5rem"
+                      >
                         {orders?.items &&
                           orders?.items?.map((item) => {
                             return (
-                              <Flex key={item?.id} gap="2rem">
+                              <Flex
+                                key={item?.id}
+                                gap=".5rem 2rem"
+                                flexDir={{ base: "column", sm: "row" }}
+                              >
                                 {item?.product?.imageUrl && (
                                   <Image
                                     src={item?.product?.imageUrl}
@@ -114,22 +124,20 @@ const OrdersPage = () => {
                                 <Box>
                                   <Heading
                                     as="h4"
-                                    fontFamily="playfair"
-                                    mb=".5rem"
                                     lineHeight={1.4}
                                     textTransform={"uppercase"}
-                                    fontSize="1.6rem"
+                                    fontSize={{ base: "1.6rem", md: "1.7rem" }}
                                   >
                                     {item?.product?.name}
                                   </Heading>
-                                  <Text lineHeight={1.3}>
-                                    Qty: {item?.quantity}
-                                  </Text>
                                   <Text
                                     lineHeight={1.3}
-                                    fontWeight={"600"}
-                                    py=".5rem"
+                                    fontSize="1.5rem"
+                                    py=".3rem"
                                   >
+                                    Qty: {item?.quantity}
+                                  </Text>
+                                  <Text lineHeight={1.3} fontWeight={"500"}>
                                     £{item?.price}
                                   </Text>
                                 </Box>

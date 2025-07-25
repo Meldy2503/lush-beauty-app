@@ -59,13 +59,17 @@ const UserAppointmentsPage = () => {
                     <Box fontSize="1.6rem">
                       <Tag label={appointment?.status} />
                       {appointment?.numberOfClients && (
-                        <Flex mt="1rem" flexWrap={"wrap"} gap=".2rem 1rem">
+                        <Flex
+                          mt="1rem"
+                          flexWrap={"wrap"}
+                          gap=".2rem 1rem"
+                          alignItems={"center"}
+                        >
                           <Heading
                             as="h4"
-                            fontFamily="playfair"
                             lineHeight={1.4}
                             textTransform={"uppercase"}
-                            fontSize="1.6rem"
+                            fontSize={{ base: "1.6rem", md: "1.7rem" }}
                           >
                             {appointment?.type} Appointment
                           </Heading>

@@ -79,7 +79,7 @@ const HeroSection = () => {
   return (
     <Box ref={containerRef} bg="white" position="relative" overflow="hidden">
       <Flex
-        height={{ base: "90vh", "2xl": "60vh" }}
+        height={{ base: "90vh", "2xl": "80vh" }}
         justifyContent="center"
         alignItems="center"
       >
