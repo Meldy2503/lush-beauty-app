@@ -2,7 +2,7 @@
 
 import { useGetUserOrders } from "@/services/api/user";
 import { UserOrderType } from "@/types/user";
-import { formatAppointmentDateTime } from "@/utils";
+import { formatAppointmentDateTime, scrollToTop } from "@/utils";
 import { Box, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { useState } from "react";
@@ -12,6 +12,8 @@ import { GoBack } from "../shared/go-back";
 import Tag from "../shared/tag";
 import Wrapper from "../shared/wrapper";
 import ViewOrderDetailsModal from "./view-order-modal";
+import Pagination from "../shared/pagination";
+import { Params } from "@/types";
 
 const ItemDetails = ({
   title,
@@ -40,8 +42,29 @@ const ItemDetails = ({
 };
 
 const OrdersPage = () => {
-  const { data: userOrders, isLoading } = useGetUserOrders();
   const [viewOrderDetailsId, setViewOrderDetailsId] = useState("");
+  const [params, setParams] = useState<Params>({
+    page: 1,
+  });
+  const { data, isLoading } = useGetUserOrders({
+    page: params?.page,
+  });
+
+  const userOrders = data?.data;
+
+  const handleNext = () => {
+    if (data?.meta?.page < data?.meta?.totalPages) {
+      setParams((prev) => ({ ...prev, page: prev.page + 1 }));
+      scrollToTop();
+    }
+  };
+
+  const handlePrevious = () => {
+    if (data?.meta?.page > 1) {
+      setParams((prev) => ({ ...prev, page: prev.page - 1 }));
+      scrollToTop();
+    }
+  };
 
   return (
     <>
@@ -77,7 +100,7 @@ const OrdersPage = () => {
                         alignItems={"center"}
                         gap="1.5rem 4rem"
                         flexWrap={"wrap"}
-                        mt='.5rem'
+                        mt=".5rem"
                       >
                         <ItemDetails title="Order no" text={orders?.code} />
                         <ItemDetails
@@ -125,8 +148,8 @@ const OrdersPage = () => {
                                   <Heading
                                     as="h4"
                                     lineHeight={1.4}
-                                    textTransform={"uppercase"}
                                     fontSize={{ base: "1.6rem", md: "1.7rem" }}
+                                    color="gray.100"
                                   >
                                     {item?.product?.name}
                                   </Heading>
@@ -164,6 +187,14 @@ const OrdersPage = () => {
             </Box>
           )}
         </Box>
+        <Pagination
+          totalCount={data?.meta?.total}
+          currentPage={data?.meta?.page}
+          pageSize={data?.meta?.pageSize}
+          totalPages={data?.meta?.totalPages}
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+        />
       </Wrapper>
       <Footer />
     </>

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
 import Button from "../shared/button";
@@ -6,15 +6,13 @@ import AppointmentDetailsContent from "./modal-content";
 
 interface AppointmentDetailsProp {
   onClick?: () => void;
-  viewAppointmentDetailsId?: string
+  viewAppointmentDetailsId?: string;
 }
 
 const ViewAppointmentDetailsModal = ({
   onClick,
   viewAppointmentDetailsId,
 }: AppointmentDetailsProp) => {
-
-  console.log(viewAppointmentDetailsId, "ViewAppointmentDetailsId");
   return (
     <Dialog.Root
       placement={{ base: "top", md: "center" }}

@@ -129,7 +129,7 @@ const AppointmentDetailsContent = ({
                     fontFamily="playfair"
                     mb=".5rem"
                     lineHeight={1.4}
-                    textTransform={"uppercase"}
+                    color="gray.100"
                     fontSize="1.5rem"
                   >
                     {appointmentDetails?.specialist?.name}

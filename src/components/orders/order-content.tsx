@@ -85,16 +85,12 @@ const OrderDetailsContent = ({ viewOrderDetailsId }: OrderContentProps) => {
                       <Heading
                         as="h4"
                         lineHeight={1.4}
-                        textTransform={"uppercase"}
                         fontSize={{ base: "1.6rem", md: "1.7rem" }}
+                        color="gray.100"
                       >
                         {item?.product?.name}
                       </Heading>
-                      <Text
-                        lineHeight={1.3}
-                        my=".3rem"
-                        fontSize="1.5rem"
-                      >
+                      <Text lineHeight={1.3} my=".3rem" fontSize="1.5rem">
                         Qty: {item?.quantity}
                       </Text>
                       <Text lineHeight={1.3} fontWeight={"500"}>

@@ -135,7 +135,7 @@ export const useGetUserAppointments = (params?: Params) => {
     queryKey: ["userAppointments", params, accessToken],
     queryFn: async () => {
       const res = await axios.get(urls.getUserAppointmentUrl, { params });
-      return res.data.data.data;
+      return res.data.data;
     },
     enabled: !!accessToken,
   });
@@ -162,7 +162,7 @@ export const useGetUserOrders = (params?: Params) => {
     queryKey: ["userOrders", params, accessToken],
     queryFn: async () => {
       const res = await axios.get(urls.getUserOrdersUrl, { params });
-      return res.data.data.data;
+      return res.data.data;
     },
     enabled: !!accessToken,
   });

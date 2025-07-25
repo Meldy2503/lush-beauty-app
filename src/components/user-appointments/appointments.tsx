@@ -9,12 +9,34 @@ import { GoBack } from "../shared/go-back";
 import Footer from "../footer";
 import { useGetUserAppointments } from "@/services/api/user";
 import { UserAppointmentType } from "@/types/user";
-import { formatAppointmentDateTime } from "@/utils";
+import { formatAppointmentDateTime, scrollToTop } from "@/utils";
 import { useState } from "react";
+import Pagination from "../shared/pagination";
+import { Params } from "@/types";
 
 const UserAppointmentsPage = () => {
-  const { data: userAppointments, isLoading } = useGetUserAppointments();
   const [viewAppointmentDetailsId, setViewAppointmentDetailsId] = useState("");
+  const [params, setParams] = useState<Params>({
+    page: 1,
+  });
+  const { data, isLoading } = useGetUserAppointments({
+    page: params?.page,
+  });
+  const userAppointments = data?.data;
+
+  const handleNext = () => {
+    if (data?.meta?.page < data?.meta?.totalPages) {
+      setParams((prev) => ({ ...prev, page: prev.page + 1 }));
+      scrollToTop();
+    }
+  };
+
+  const handlePrevious = () => {
+    if (data?.meta?.page > 1) {
+      setParams((prev) => ({ ...prev, page: prev.page - 1 }));
+      scrollToTop();
+    }
+  };
 
   return (
     <>
@@ -68,8 +90,8 @@ const UserAppointmentsPage = () => {
                           <Heading
                             as="h4"
                             lineHeight={1.4}
-                            textTransform={"uppercase"}
                             fontSize={{ base: "1.6rem", md: "1.7rem" }}
+                            color="gray.100"
                           >
                             {appointment?.type} Appointment
                           </Heading>
@@ -132,6 +154,14 @@ const UserAppointmentsPage = () => {
             </Box>
           )}
         </Box>
+        <Pagination
+          totalCount={data?.meta?.total}
+          currentPage={data?.meta?.page}
+          pageSize={data?.meta?.pageSize}
+          totalPages={data?.meta?.totalPages}
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+        />
       </Wrapper>
       <Footer />
     </>

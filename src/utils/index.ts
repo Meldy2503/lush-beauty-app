@@ -115,3 +115,12 @@ export const navigateTo = (path: string) => {
     window.location.href = path;
   }
 };
+
+
+// function to scroll to top
+export const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
