@@ -29,7 +29,7 @@ axios.interceptors.response.use(
 
     if (status === 401) {
       toast.error(apiMessage || "Unauthorized. Please login again.");
-       return Promise.reject(error);
+      return Promise.reject(error);
     }
 
     if ([400, 403, 404, 500].includes(status || 0)) {

@@ -13,6 +13,7 @@ import { formatAppointmentDateTime, scrollToTop } from "@/utils";
 import { useState } from "react";
 import Pagination from "../shared/pagination";
 import { Params } from "@/types";
+import EmptyState from "../shared/empty-state";
 
 const UserAppointmentsPage = () => {
   const [viewAppointmentDetailsId, setViewAppointmentDetailsId] = useState("");
@@ -53,12 +54,14 @@ const UserAppointmentsPage = () => {
             lineHeight={1.3}
             textTransform={"uppercase"}
           >
-            Appointments
+            My Appointments
           </Heading>
           {isLoading ? (
             <Flex alignItems={"center"} justifyContent={"center"}>
               <Spinner my="20rem" />
             </Flex>
+          ) : !userAppointments ? (
+            <EmptyState />
           ) : (
             <Box mt="3rem">
               {userAppointments?.map((appointment: UserAppointmentType) => {
@@ -154,14 +157,16 @@ const UserAppointmentsPage = () => {
             </Box>
           )}
         </Box>
-        <Pagination
-          totalCount={data?.meta?.total}
-          currentPage={data?.meta?.page}
-          pageSize={data?.meta?.pageSize}
-          totalPages={data?.meta?.totalPages}
-          onNext={handleNext}
-          onPrevious={handlePrevious}
-        />
+        {userAppointments && (
+          <Pagination
+            totalCount={data?.meta?.total}
+            currentPage={data?.meta?.page}
+            pageSize={data?.meta?.pageSize}
+            totalPages={data?.meta?.totalPages}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+          />
+        )}
       </Wrapper>
       <Footer />
     </>

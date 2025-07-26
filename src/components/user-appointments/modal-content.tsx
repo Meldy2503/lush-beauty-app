@@ -4,7 +4,6 @@ import { Box, Flex, Heading, HStack, Spinner, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuCalendarDays } from "react-icons/lu";
-import personalBookingImg from "../../assets/images/personal-booking-img.webp";
 import Tag from "../shared/tag";
 import { useGetUserAppointmentById } from "@/services/api/user";
 import { formatAppointmentDateTime } from "@/utils";
@@ -42,7 +41,7 @@ const AppointmentDetailsContent = ({
         >
           <Box w={{ base: "100%", md: "49%" }} bg="white" p="2rem">
             <Box>
-              <Tag label="ongoing" />
+              <Tag label={appointmentDetails?.status} />
               {appointmentDetails?.numberOfClients && (
                 <Flex
                   my="1rem"
@@ -111,18 +110,20 @@ const AppointmentDetailsContent = ({
                 Technician selected
               </Text>
               <Flex bg="gray.250" alignItems={"center"} p="1rem" gap="1.5rem">
-                <Image
-                  src={personalBookingImg}
-                  alt="a lush & luxe staff"
-                  style={{
-                    borderRadius: "50%",
-                    height: "6rem",
-                    width: "6rem",
-                    objectFit: "cover",
-                  }}
-                  width={100}
-                  height={100}
-                />{" "}
+                {appointmentDetails?.specialist?.imageUrl && (
+                  <Image
+                    src={appointmentDetails?.specialist?.imageUrl}
+                    alt="a lush & luxe staff"
+                    style={{
+                      borderRadius: "50%",
+                      height: "6rem",
+                      width: "6rem",
+                      objectFit: "cover",
+                    }}
+                    width={100}
+                    height={100}
+                  />
+                )}
                 <Box>
                   <Heading
                     as="h4"
@@ -135,7 +136,7 @@ const AppointmentDetailsContent = ({
                     {appointmentDetails?.specialist?.name}
                   </Heading>
                   <Text lineHeight={1.3} fontSize="1.4rem">
-                    Facial expert - 35yrs{" "}
+                    Beauty expert
                   </Text>
                 </Box>
               </Flex>

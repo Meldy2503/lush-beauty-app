@@ -26,11 +26,12 @@ import { GiShoppingBag } from "react-icons/gi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import Button from "../shared/button";
-import EmptyCart from "../shared/empty-cart";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setRedirectToOrderSummary } from "@/store/slices/cart-slice";
+import EmptyState from "../shared/empty-state";
+import { PiShoppingCartThin } from "react-icons/pi";
 
 interface CartProps {
   children?: React.ReactNode;
@@ -169,7 +170,12 @@ const Cart = ({ children }: CartProps) => {
                   <Spinner my="20rem" />
                 </Flex>
               ) : !cartItems || cartItems?.length === 0 ? (
-                <EmptyCart />
+                <EmptyState
+                  isCart
+                  icon={<PiShoppingCartThin size={120} />}
+                  title="Your cart is empty"
+                  text="Explore our products and add items to your cart"
+                />
               ) : (
                 cartItems &&
                 cartItems?.map((item: CartItemsType) => {

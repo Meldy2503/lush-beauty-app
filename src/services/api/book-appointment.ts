@@ -1,5 +1,5 @@
 import { RootState } from "@/store";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import axios from "../axios";
 import urls from "../urls";
@@ -54,7 +54,7 @@ export const useGetSpecialists = (params?: Params) => {
 
 // to book a personal appointment
 export const usePersonalBookingMutation = () => {
-  // const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ["personalBooking"],
@@ -65,6 +65,10 @@ export const usePersonalBookingMutation = () => {
       );
       return res.data;
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userAppointments"] });
+      queryClient.invalidateQueries({ queryKey: ["userAppointment"] });
+    },
     onError: (error) => {
       console.error("Booking failed:", error);
     },
@@ -73,13 +77,17 @@ export const usePersonalBookingMutation = () => {
 
 // to book a group appointment
 export const useGroupBookingMutation = () => {
-  // const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ["groupBooking"],
     mutationFn: async (groupBooking: BookAppointmentType) => {
       const res = await axios.post(urls.bookGroupAppointment, groupBooking);
       return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userAppointments"] });
+      queryClient.invalidateQueries({ queryKey: ["userAppointment"] });
     },
     onError: (error) => {
       console.error("Booking failed:", error);

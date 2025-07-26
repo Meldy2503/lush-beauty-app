@@ -112,6 +112,8 @@ export const useDeleteCartItem = () => {
 
 // to checkout all the items in the cart
 export const useCheckoutCartItemsMutation = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["checkoutCartItems"],
     mutationFn: async (checkoutCartItems: CheckoutItemsType) => {
@@ -120,6 +122,10 @@ export const useCheckoutCartItemsMutation = () => {
         checkoutCartItems
       );
       return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userOrders"] });
+      queryClient.invalidateQueries({ queryKey: ["userOrder"] });
     },
     onError: (error) => {
       console.error(" Item checkout Failed:", error);

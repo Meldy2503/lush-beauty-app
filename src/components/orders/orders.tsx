@@ -14,6 +14,7 @@ import Wrapper from "../shared/wrapper";
 import ViewOrderDetailsModal from "./view-order-modal";
 import Pagination from "../shared/pagination";
 import { Params } from "@/types";
+import EmptyState from "../shared/empty-state";
 
 const ItemDetails = ({
   title,
@@ -80,12 +81,14 @@ const OrdersPage = () => {
             lineHeight={1.3}
             textTransform={"uppercase"}
           >
-            Orders{" "}
+            My Orders{" "}
           </Heading>
           {isLoading ? (
             <Flex alignItems={"center"} justifyContent={"center"}>
               <Spinner my="20rem" />
             </Flex>
+          ) : !userOrders ? (
+            <EmptyState />
           ) : (
             <Box mt="3rem">
               {userOrders?.map((orders: UserOrderType) => {
@@ -187,14 +190,16 @@ const OrdersPage = () => {
             </Box>
           )}
         </Box>
-        <Pagination
-          totalCount={data?.meta?.total}
-          currentPage={data?.meta?.page}
-          pageSize={data?.meta?.pageSize}
-          totalPages={data?.meta?.totalPages}
-          onNext={handleNext}
-          onPrevious={handlePrevious}
-        />
+        {userOrders && (
+          <Pagination
+            totalCount={data?.meta?.total}
+            currentPage={data?.meta?.page}
+            pageSize={data?.meta?.pageSize}
+            totalPages={data?.meta?.totalPages}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+          />
+        )}
       </Wrapper>
       <Footer />
     </>
