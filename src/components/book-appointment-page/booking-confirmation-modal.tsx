@@ -19,8 +19,8 @@ import {
 } from "@/services/api/book-appointment";
 import { BookAppointmentType } from "@/types/book-appointment";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { clearAppointments } from "@/store/slices/appointment-slice";
+// import { useDispatch } from "react-redux";
+// import { clearAppointments } from "@/store/slices/appointment-slice";
 import { useRouter } from "next/navigation";
 
 interface ConfirmationModalProps {
@@ -29,7 +29,7 @@ interface ConfirmationModalProps {
 
 const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const router = useRouter();
 
   const totalPrice = useSelector(
@@ -150,7 +150,7 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
                     href="/"
                     onClick={() => {
                       router.push("/");
-                      dispatch(clearAppointments());
+                      // dispatch(clearAppointments());
                     }}
                   >
                     Go to Home
