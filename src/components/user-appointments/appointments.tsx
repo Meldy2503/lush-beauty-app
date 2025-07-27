@@ -95,6 +95,7 @@ const UserAppointmentsPage = () => {
                             lineHeight={1.4}
                             fontSize={{ base: "1.6rem", md: "1.7rem" }}
                             color="gray.100"
+                            textTransform={"uppercase"}
                           >
                             {appointment?.type} Appointment
                           </Heading>
@@ -114,21 +115,20 @@ const UserAppointmentsPage = () => {
                         my=".6rem"
                         flexWrap={"wrap"}
                       >
-                        {appointment?.services &&
-                          appointment?.services?.map((service) => {
-                            return (
-                              <Text
-                                key={service?.id}
-                                lineHeight={1.3}
-                                bg="gray.250"
-                                p=".5rem 1rem"
-                                rounded={"md"}
-                                color="gray.100"
-                              >
-                                {service?.service?.name}
-                              </Text>
-                            );
-                          })}
+                        {appointment?.services?.map((serviceItem) =>
+                          serviceItem?.categories?.map((categoryItem) => (
+                            <Text
+                              key={categoryItem?.id}
+                              lineHeight={1.3}
+                              bg="gray.250"
+                              p=".5rem 1rem"
+                              rounded={"md"}
+                              color="gray.100"
+                            >
+                              {categoryItem?.category?.name}
+                            </Text>
+                          ))
+                        )}
                       </Flex>
                       <HStack fontSize="1.4rem" pt="1rem">
                         <Text lineHeight={1.3}>

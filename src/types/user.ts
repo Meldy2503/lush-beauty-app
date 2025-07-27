@@ -31,6 +31,24 @@ export interface UpdateUserProfileType {
   fullName?: string;
   phone?: string;
 }
+export interface userApptServiceCategoryType {
+  estimatedTime?: number;
+  description?: string;
+  name?: string;
+  price?: number;
+}
+export interface userApptServiceType {
+  categories?: {
+    category?: userApptServiceCategoryType;
+    appointmentServiceId?: string;
+    id?: string;
+  }[];
+  service?: {
+    name?: string;
+    id?: string;
+    description?: string;
+  };
+}
 
 export interface UserAppointmentType {
   appointmentDate?: string;
@@ -54,18 +72,7 @@ export interface UserAppointmentType {
   totalCost?: number;
   type?: string;
   updatedAt?: string;
-  services?: {
-    appointmentId?: string;
-    createdAt?: string;
-    id?: string;
-    service?: {
-      name?: string;
-      id?: string;
-      description?: string;
-    };
-    serviceId?: string;
-    updatedAt?: string;
-  }[];
+  services?: userApptServiceType[];
   specialist?: {
     email?: string;
     id?: string;

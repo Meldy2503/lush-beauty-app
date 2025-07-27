@@ -7,6 +7,7 @@ import { LuCalendarDays } from "react-icons/lu";
 import Tag from "../shared/tag";
 import { useGetUserAppointmentById } from "@/services/api/user";
 import { formatAppointmentDateTime } from "@/utils";
+import { userApptServiceType } from "@/types/user";
 
 interface AppointmentContentProps {
   viewAppointmentDetailsId?: string;
@@ -22,8 +23,6 @@ const AppointmentDetailsContent = ({
   const { date, time } = formatAppointmentDateTime(
     appointmentDetails?.appointmentDate
   );
-
-  console.log(appointmentDetails, "appointmentDetails");
 
   return (
     <>
@@ -66,21 +65,30 @@ const AppointmentDetailsContent = ({
                   </Text>
                 </Flex>
               )}
-              <Flex pb="1.5rem" justifyContent={"space-between"} gap="2rem">
-                <Text>Skin Analysis </Text>
-                <Text>$4</Text>
-              </Flex>
-              <Flex pb="1.5rem" justifyContent={"space-between"} gap="2rem">
-                <Text>Skin Analysis </Text>
-                <Text>$4</Text>
-              </Flex>
+
+              {appointmentDetails?.services?.map(
+                (serviceItem: userApptServiceType) =>
+                  serviceItem?.categories?.map((categoryItem) => (
+                    <Flex
+                      justifyContent={"space-between"}
+                      gap="2rem"
+                      key={categoryItem?.id}
+                      pt="2rem"
+                    >
+                      <Text lineHeight={1.3}>
+                        {categoryItem?.category?.name}
+                      </Text>
+                      <Text>£{categoryItem?.category?.price}</Text>
+                    </Flex>
+                  ))
+              )}
             </Box>
             <Flex
               bg="gray.250"
               alignItems={"center"}
               p="1rem"
               gap="1.5rem"
-              mt="5rem"
+              mt="4rem"
             >
               <HStack bg="white" p=".8rem" rounded={"full"} shadow={"md"}>
                 <IoLocationOutline size={"2.3rem"} />
