@@ -15,6 +15,9 @@ import ViewOrderDetailsModal from "./view-order-modal";
 import Pagination from "../shared/pagination";
 import { Params } from "@/types";
 import EmptyState from "../shared/empty-state";
+import Button from "../shared/button";
+import { useDispatch } from "react-redux";
+import { setOrderId } from "@/store/slices/cart-slice";
 
 const ItemDetails = ({
   title,
@@ -47,6 +50,7 @@ const OrdersPage = () => {
   const [params, setParams] = useState<Params>({
     page: 1,
   });
+  const dispatch = useDispatch();
   const { data, isLoading } = useGetUserOrders({
     page: params?.page,
   });
@@ -121,6 +125,7 @@ const OrdersPage = () => {
                       flexDir={{ base: "column", md: "row" }}
                       borderTopWidth={"1px"}
                       borderColor={"gray.300"}
+                      gap='2rem'
                     >
                       <Flex
                         gap={{ base: "2rem", sm: "1rem" }}
@@ -173,8 +178,10 @@ const OrdersPage = () => {
                       </Flex>
                       <Flex
                         alignSelf={{ base: "flex-end", md: "center" }}
+                        gap="1rem"
                         px="1.5rem"
                         pb="1.5rem"
+                        flexWrap={"wrap"}
                       >
                         <ViewOrderDetailsModal
                           onClick={() =>
@@ -182,6 +189,20 @@ const OrdersPage = () => {
                           }
                           viewOrderDetailsId={viewOrderDetailsId}
                         />
+                        {orders?.status === "PENDING" && (
+                          <Button
+                            href="/shop/order-confirmation"
+                            px="1.5rem"
+                            fontSize="1.5rem"
+                            py={{ base: "1.6rem", sm: "2rem" }}
+                            onClick={() => {
+                              const orderId = orders?.id ?? "";
+                              dispatch(setOrderId(orderId));
+                            }}
+                          >
+                            Pay for Order
+                          </Button>
+                        )}
                       </Flex>
                     </Flex>
                   </Box>
