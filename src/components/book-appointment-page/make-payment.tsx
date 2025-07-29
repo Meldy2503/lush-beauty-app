@@ -6,15 +6,13 @@ import {
   Group,
   Heading,
   HStack,
-  InputGroup,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import { usePaymentInputs } from "react-payment-inputs";
 import Button from "../shared/button";
 import { InputElement } from "../shared/input-element";
 import BookingConfirmationModal from "./booking-confirmation-modal";
 import BookingSummary from "./booking-summary";
-import CreditCards from "../shared/credit-cards";
 
 interface MakePaymentProps {
   step: number;
@@ -51,7 +49,7 @@ const MakePayment = ({ setStep, step }: MakePaymentProps) => {
             bg="gray.250"
             placeholder="Edward Martins"
           />
-          <InputGroup
+          {/* <InputGroup
             zIndex={{ _focusWithin: "1" }}
             endElement={<CreditCards {...payment} />}
           >
@@ -60,7 +58,7 @@ const MakePayment = ({ setStep, step }: MakePaymentProps) => {
               bg="gray.250"
               {...payment.getCardNumberProps()}
             />
-          </InputGroup>
+          </InputGroup> */}
           <Group w="full">
             <InputElement
               label="Expiration date"

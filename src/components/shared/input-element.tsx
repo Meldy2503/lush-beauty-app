@@ -148,6 +148,9 @@ export const InputElement = ({
           height={h ?? "10rem"}
           size={"xl"}
           placeholder={placeholder || label}
+          _placeholder={{
+            color: "gray.200",
+          }}
           {...props}
           {...register}
         />
@@ -181,10 +184,13 @@ export const InputElement = ({
             type={show ? "text" : "password"}
             border={border ?? "none"}
             fontSize={"1.6rem"}
-            height="4.5rem"
+            height="4.7rem"
             bg={bg ?? "white"}
             p="1.5rem"
             placeholder={placeholder || label}
+            _placeholder={{
+              color: "gray.200",
+            }}
             {...props}
             {...register}
           />
@@ -211,10 +217,13 @@ export const InputElement = ({
           border={border ?? "none"}
           bg={bg ?? "white"}
           fontSize={"1.6rem"}
-          height="4.5rem"
+          height="4.7rem"
           p="1.5rem"
           min={min}
           placeholder={placeholder || label}
+          _placeholder={{
+            color: "gray.200",
+          }}
           type={type ?? "text"}
           {...props}
           {...register}
@@ -243,10 +252,13 @@ export const InputElement = ({
         border={border ?? "none"}
         bg={bg ?? "white"}
         fontSize={"1.6rem"}
-        height="4.5rem"
+        height="4.7rem"
         p="1.5rem"
         min={min}
         placeholder={placeholder || label}
+        _placeholder={{
+          color: "gray.200", 
+        }}
         type={type ?? "text"}
         {...props}
         {...register}

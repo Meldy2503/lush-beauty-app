@@ -1,157 +1,30 @@
-// "use client";
-
-// import {
-//   Box,
-//   Group,
-//   Heading,
-//   HStack,
-//   InputGroup,
-//   VStack,
-// } from "@chakra-ui/react";
-// import { FaRegCreditCard } from "react-icons/fa";
-// import { usePaymentInputs } from "react-payment-inputs";
-// import Button from "../shared/button";
-// import CreditCards from "../shared/credit-cards";
-// import { InputElement } from "../shared/input-element";
-// import { Elements } from "@stripe/react-stripe-js";
-// import { loadStripe } from "@stripe/stripe-js";
-// import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-// import { useMakeOrderPaymentMutation } from "@/services/api/cart";
-// import { Resolver, SubmitHandler, useForm } from "react-hook-form";
-// import { MakeOrderPaymentType } from "@/types/cart";
-
-// const stripePromise = loadStripe(
-//   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-// );
-
-// const OrderPayment = () => {
-//     const stripe = useStripe();
-//     const elements = useElements();
-//   const payment = usePaymentInputs();
-//     const makeOrderPaymentMutation = useMakeOrderPaymentMutation();
-//     const { mutateAsync: makeOrderPayment, isPending } =
-//       makeOrderPaymentMutation;
-
-//       const formHook = useForm<MakeOrderPaymentType>({
-//         resolver: yupResolver(MakeOrderPaymentSchema),
-//         defaultValues: {
-//           email: "",
-//           password: "",
-//         },
-//       } as { resolver: Resolver<LoginType> });
-//       const {
-//         register,
-//         handleSubmit,
-//         formState: { errors },
-//         reset,
-//       } = formHook;
-
-//       const submit: SubmitHandler<LoginType> = async (data: LoginType) => {
-//         try {
-//           const result = await login(data);
-//           if (!result) {
-//             return;
-//           }
-//           if (result) {
-//             toast.success("Login Successful!");
-//             if (redirectToOrderSummary) {
-//               router.push("/shop/order-summary");
-//               dispatch(setRedirectToOrderSummary(false));
-//             } else {
-//               router.push(redirect); // fallback to default (?redirect=...)
-//             }
-//             reset();
-//           }
-//         } catch (error) {
-//           console.error("Login error:", error);
-//         }
-//       };
-
-//   return (
-//     <Elements stripe={stripePromise}>
-//       <Box w={{ base: "100%", lg: "60%" }} bg="white" p="3rem 2rem">
-//         <HStack
-//           pb="2rem"
-//           borderBottomWidth={"2px"}
-//           borderBottomColor={"gray.250"}
-//           gap="1rem"
-//         >
-//           <FaRegCreditCard size={"2.5rem"} color="orange" />
-//           <Heading
-//             as="h3"
-//             fontSize={{ base: "1.7rem", md: "1.8rem" }}
-//             fontFamily="playfair"
-//             lineHeight={1.3}
-//             textTransform={"uppercase"}
-//           >
-//             MAKE PAYMENT
-//           </Heading>
-//         </HStack>
-//         <form action="">
-//           <VStack spaceY="30px" my="4rem">
-//             <InputElement
-//               label="Card name"
-//               bg="gray.250"
-//               placeholder="Edward Martins"
-//             />
-//             <InputGroup
-//               zIndex={{ _focusWithin: "1" }}
-//               endElement={<CreditCards {...payment} />}
-//             >
-//               <InputElement
-//                 label="Card number"
-//                 bg="gray.250"
-//                 {...payment.getCardNumberProps()}
-//               />
-//             </InputGroup>
-//             <Group w="full">
-//               <InputElement
-//                 label="Expiration date"
-//                 bg="gray.250"
-//                 {...payment.getExpiryDateProps()}
-//               />
-//               <InputElement
-//                 label="Security code"
-//                 bg="gray.250"
-//                 {...payment.getCVCProps()}
-//               />
-//             </Group>
-//           </VStack>
-//           <Button w="full">Pay Now</Button>
-//         </form>
-//       </Box>
-//     </Elements>
-//   );
-// };
-
-// export default OrderPayment;
-
 "use client";
 
-import { Box, Heading, HStack, VStack, Text } from "@chakra-ui/react";
-import { FaRegCreditCard } from "react-icons/fa";
+import { useMakeOrderPaymentMutation } from "@/services/api/cart";
+import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import {
-  Elements,
-  CardElement,
-  useStripe,
-  useElements,
-  CardNumberElement,
-  CardExpiryElement,
   CardCvcElement,
+  CardElement,
+  CardExpiryElement,
+  CardNumberElement,
+  Elements,
+  useElements,
+  useStripe,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import Button from "../shared/button";
-import { useMakeOrderPaymentMutation } from "@/services/api/cart";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { FaRegCreditCard } from "react-icons/fa";
+import Button from "../shared/button";
+import CreditCards from "../shared/credit-cards";
+import { InputElement } from "../shared/input-element";
 
 const cardStyle = {
   style: {
     base: {
-      fontSize: "16px",
-      color: "#424770",
+      fontSize: "15px",
       "::placeholder": {
-        color: "#aab7c4",
+        color: "#ccc",
       },
     },
     invalid: {
@@ -181,11 +54,9 @@ const CheckoutForm = ({ orderId }: { orderId: string }) => {
     }
 
     try {
-      // Call backend with orderId only
       await makeOrderPayment({ orderId });
-      toast.success("Payment Successful!");
+      toast.success("Order Payment made Successfully!");
 
-      // Optional: redirect or clear cart
     } catch (error) {
       console.error("Payment failed:", error);
     }
@@ -210,32 +81,67 @@ const CheckoutForm = ({ orderId }: { orderId: string }) => {
           MAKE PAYMENT
         </Heading>
       </HStack>
-
       <form onSubmit={handleSubmit(onSubmit)}>
-        <VStack align="start" gap="1.5rem" my="4rem">
-          <Text>Card Info</Text>
-          <Box p="1rem" w="100%" borderWidth="1px" borderRadius="md">
-            {/* <CardElement /> */}
-            {/* <CardNumberElement /> */}
-
-            <Box
-              border="1px solid"
-              borderColor="gray.200"
-              p="1rem"
-              borderRadius="md"
-              _focusWithin={{
-                borderColor: "orange.400",
-                boxShadow: "0 0 0 1px orange",
-              }}
+        <Flex
+          w="full"
+          flexDir={"column"}
+          gap="2rem"
+          borderWidth="1px"
+          borderRadius="md"
+          p={{ base: "1rem", md: "1.5rem" }}
+          mb="5rem"
+        >
+          <InputElement
+            label="Card name"
+            bg="gray.250"
+            placeholder="Edward Martins"
+          />
+          {/* Card Number Field with Icons */}
+          <Box>
+            <Text fontSize={"1.5rem"} lineHeight={1.3} mb=".5rem">
+              Card Number
+            </Text>
+            <Flex
+              alignItems="center"
+              bg="gray.250"
+              p="1.5rem"
+              height="4.7rem"
+              rounded={"sm"}
             >
-              <CardNumberElement options={cardStyle} />
-            </Box>
+              {/* Stripe Card Number */}
+              <Box flex="1">
+                <CardNumberElement options={cardStyle} />
+              </Box>
 
-            <CardExpiryElement />
-            {/* <label>CVC</label> */}
-            <CardCvcElement />
+              {/* Your card icons component */}
+              <CreditCards />
+            </Flex>
           </Box>
-        </VStack>
+
+          {/* Expiry and CVC */}
+          <Flex
+            w="full"
+            gap="2rem 1rem"
+            flexDir={{ base: "column", sm: "row" }}
+          >
+            <Box flex={"1"}>
+              <Text fontSize={"1.5rem"} lineHeight={1.3} mb=".5rem">
+                Expiration date
+              </Text>
+              <Box p="1.5rem" h="4.7rem" bg="gray.250" rounded={"sm"}>
+                <CardExpiryElement options={cardStyle} />
+              </Box>
+            </Box>
+            <Box flex={"1"}>
+              <Text fontSize={"1.5rem"} lineHeight={1.3} mb=".5rem">
+                Security code
+              </Text>
+              <Box p="1.5rem" h="4.7rem" bg="gray.250" rounded={"sm"}>
+                <CardCvcElement options={cardStyle} />
+              </Box>
+            </Box>
+          </Flex>
+        </Flex>
 
         <Button w="full" disabled={isPending} type="submit">
           {isPending ? "Processing..." : "Pay Now"}
