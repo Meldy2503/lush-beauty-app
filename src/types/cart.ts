@@ -72,3 +72,8 @@ export interface UpdateCartItemsQtyType {
   productId: number
 }
 
+
+export interface MakeOrderPaymentType {
+  orderId?: string | null;
+}
+

@@ -60,7 +60,7 @@ const OrderConfirmationPage = () => {
         <GoBack />
         <Flex gap="2rem" flexDir={{ base: "column", lg: "row" }}>
           {/* cart payment form section */}
-          <OrderPayment />
+          <OrderPayment orderId={orderDetails?.id || storedOrderId} />
           {/* cart details section */}
           <Box w={{ base: "100%", lg: "40%" }} bg="white" p="2rem">
             <Text fontWeight={"600"} pb="2rem">

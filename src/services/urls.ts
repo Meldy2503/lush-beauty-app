@@ -44,5 +44,6 @@ const urls = {
   getUserOrderById: (orderId: string) => `${baseUrl}/orders/${orderId}`,
   getUserAppointmentById: (appointmentId: string) =>
     `${baseUrl}/appointments/${appointmentId}`,
+  makeOrderPaymentUrl: `${baseUrl}/make-payment`,
 };
 export default urls;

@@ -16,25 +16,20 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { setRedirectToOrderSummary } from "@/store/slices/cart-slice";
-// import { useMergeCartItemsMutation } from "@/services/api/cart";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
   const loginMutation = useLoginMutation();
-  // const mergeCartItemsMutation = useMergeCartItemsMutation();
   const redirect = searchParams.get("redirect") || "/";
 
   const { mutateAsync: login } = loginMutation;
-  // const { mutateAsync: mergeCartItems } = mergeCartItemsMutation;
   const isLoading = loginMutation.isPending;
 
   const redirectToOrderSummary = useSelector(
     (state: RootState) => state.cart.redirectToOrderSummary
   );
-
-  // const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
 
   const formHook = useForm<LoginType>({
     resolver: yupResolver(loginSchema),
