@@ -187,17 +187,12 @@ export const useMergeCartItemsMutation = () => {
 };
 // to make payment for ordered items in the cart
 export const useMakeOrderPaymentMutation = () => {
-  const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ["makeOrderPayment"],
     mutationFn: async (makeOrderPayment: MakeOrderPaymentType) => {
       const res = await axios.post(urls.makeOrderPaymentUrl, makeOrderPayment);
       return res.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["userOrders"] });
-      queryClient.invalidateQueries({ queryKey: ["userOrder"] });
     },
     onError: (error) => {
       console.error("Order Payment Failed:", error);

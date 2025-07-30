@@ -17,7 +17,9 @@ import { Params } from "@/types";
 import EmptyState from "../shared/empty-state";
 import Button from "../shared/button";
 import { useDispatch } from "react-redux";
-import { setOrderId } from "@/store/slices/cart-slice";
+import { setClientSecretKey, setOrderId } from "@/store/slices/cart-slice";
+import { useMakeOrderPaymentMutation } from "@/services/api/cart";
+import { useRouter } from "next/navigation";
 
 const ItemDetails = ({
   title,
@@ -50,6 +52,9 @@ const OrdersPage = () => {
   const [params, setParams] = useState<Params>({
     page: 1,
   });
+  const router = useRouter();
+
+  const { mutateAsync: makeOrderPayment } = useMakeOrderPaymentMutation();
   const dispatch = useDispatch();
   const { data, isLoading } = useGetUserOrders({
     page: params?.page,
@@ -68,6 +73,23 @@ const OrdersPage = () => {
     if (data?.meta?.page > 1) {
       setParams((prev) => ({ ...prev, page: prev.page - 1 }));
       scrollToTop();
+    }
+  };
+
+  const handlePayForOrder = async (orderId: string) => {
+    try {
+      const response = await makeOrderPayment({ orderId });
+      const clientSecret = response?.data?.clientSecret;
+
+      if (!clientSecret) {
+        console.error("No client secret returned");
+        return;
+      }
+      router.push("/shop/order-confirmation");
+      dispatch(setClientSecretKey(clientSecret));
+      dispatch(setOrderId(orderId));
+    } catch (error) {
+      console.error("Payment failed:", error);
     }
   };
 
@@ -125,7 +147,7 @@ const OrdersPage = () => {
                       flexDir={{ base: "column", md: "row" }}
                       borderTopWidth={"1px"}
                       borderColor={"gray.300"}
-                      gap='2rem'
+                      gap="2rem"
                     >
                       <Flex
                         gap={{ base: "2rem", sm: "1rem" }}
@@ -177,7 +199,7 @@ const OrdersPage = () => {
                           })}
                       </Flex>
                       <Flex
-                        alignSelf={{ base: "flex-end", md: "center" }}
+                        alignSelf="flex-end"
                         gap="1rem"
                         px="1.5rem"
                         pb="1.5rem"
@@ -191,14 +213,10 @@ const OrdersPage = () => {
                         />
                         {orders?.status === "PENDING" && (
                           <Button
-                            href="/shop/order-confirmation"
-                            px="1.5rem"
+                            px={{ base: "1rem", md: "1.5rem" }}
+                            py="1.9rem"
                             fontSize="1.5rem"
-                            py={{ base: "1.6rem", sm: "2rem" }}
-                            onClick={() => {
-                              const orderId = orders?.id ?? "";
-                              dispatch(setOrderId(orderId));
-                            }}
+                            onClick={() => handlePayForOrder(orders?.id || "")}
                           >
                             Pay for Order
                           </Button>

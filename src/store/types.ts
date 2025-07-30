@@ -47,6 +47,7 @@ export interface CartState {
   cartItems: CartItem[];
   guestId: string | null;
   orderId: string | null;
+  clientSecretKey: string | null;
   redirectToOrderSummary: boolean;
   hasMergedIds: boolean;
   checkoutCartItems: CheckoutItemsState | null;

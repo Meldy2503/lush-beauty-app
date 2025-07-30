@@ -1,10 +1,8 @@
 "use client";
 
-import { useMakeOrderPaymentMutation } from "@/services/api/cart";
 import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import {
   CardCvcElement,
-  CardElement,
   CardExpiryElement,
   CardNumberElement,
   Elements,
@@ -12,11 +10,14 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegCreditCard } from "react-icons/fa";
 import Button from "../shared/button";
 import CreditCards from "../shared/credit-cards";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { useRouter } from "next/navigation";
 import { InputElement } from "../shared/input-element";
 
 const cardStyle = {
@@ -37,28 +38,68 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
-const CheckoutForm = ({ orderId }: { orderId: string }) => {
+const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const { mutateAsync: makeOrderPayment, isPending } =
-    useMakeOrderPaymentMutation();
+  const router = useRouter();
+  const [cardName, setCardName] = useState("");
+  const [isPending, setIsPending] = useState(false);
 
-  const { handleSubmit } = useForm();
+  const clientSecretKey = useSelector(
+    (state: RootState) => state.cart.clientSecretKey
+  );
 
-  const onSubmit = async () => {
-    if (!stripe || !elements) return;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    const cardElement = elements.getElement(CardElement);
-    if (!cardElement) {
+    if (!stripe || !elements) {
+      toast.error("Payment gateway not loaded yet. Please try again.");
       return;
     }
 
-    try {
-      await makeOrderPayment({ orderId });
-      toast.success("Order Payment made Successfully!");
+    const cardElement = elements.getElement(CardNumberElement);
+    if (!cardElement) {
+      toast.error("Card details are incomplete.");
+      return;
+    }
 
+    if (!clientSecretKey) {
+      console.log("Missing client secret key");
+      return;
+    }
+
+    if (!cardName.trim()) {
+      toast.error("Please enter the cardholder's name.");
+      return;
+    }
+
+    setIsPending(true);
+
+    try {
+      const result = await stripe.confirmCardPayment(clientSecretKey, {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            name: cardName.trim(),
+          },
+        },
+      });
+
+      if (result.error) {
+        toast.error(result.error.message || "Payment failed.");
+        return;
+      }
+
+      if (result.paymentIntent?.status === "succeeded") {
+        router.push("/orders");
+        toast.success("Payment successful!");
+      } else {
+        toast.error("Payment incomplete. Please try again.");
+      }
     } catch (error) {
       console.error("Payment failed:", error);
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -81,7 +122,8 @@ const CheckoutForm = ({ orderId }: { orderId: string }) => {
           MAKE PAYMENT
         </Heading>
       </HStack>
-      <form onSubmit={handleSubmit(onSubmit)}>
+
+      <form onSubmit={handleSubmit}>
         <Flex
           w="full"
           flexDir={"column"}
@@ -91,10 +133,15 @@ const CheckoutForm = ({ orderId }: { orderId: string }) => {
           p={{ base: "1rem", md: "1.5rem" }}
           mb="5rem"
         >
+          {/* Card Name Field */}
           <InputElement
-            label="Card name"
+            inputItem
+            label="Card Name"
             bg="gray.250"
             placeholder="Edward Martins"
+            value={cardName}
+            disabled={isPending}
+            onChange={(e) => setCardName(e.target.value)}
           />
           {/* Card Number Field with Icons */}
           <Box>
@@ -110,7 +157,12 @@ const CheckoutForm = ({ orderId }: { orderId: string }) => {
             >
               {/* Stripe Card Number */}
               <Box flex="1">
-                <CardNumberElement options={cardStyle} />
+                <CardNumberElement
+                  options={{
+                    ...cardStyle,
+                    disabled: isPending,
+                  }}
+                />
               </Box>
 
               {/* Your card icons component */}
@@ -126,24 +178,34 @@ const CheckoutForm = ({ orderId }: { orderId: string }) => {
           >
             <Box flex={"1"}>
               <Text fontSize={"1.5rem"} lineHeight={1.3} mb=".5rem">
-                Expiration date
+                Expiration Date
               </Text>
               <Box p="1.5rem" h="4.7rem" bg="gray.250" rounded={"sm"}>
-                <CardExpiryElement options={cardStyle} />
+                <CardExpiryElement
+                  options={{
+                    ...cardStyle,
+                    disabled: isPending,
+                  }}
+                />
               </Box>
             </Box>
             <Box flex={"1"}>
               <Text fontSize={"1.5rem"} lineHeight={1.3} mb=".5rem">
-                Security code
+                Security Code
               </Text>
               <Box p="1.5rem" h="4.7rem" bg="gray.250" rounded={"sm"}>
-                <CardCvcElement options={cardStyle} />
+                <CardCvcElement
+                  options={{
+                    ...cardStyle,
+                    disabled: isPending,
+                  }}
+                />
               </Box>
             </Box>
           </Flex>
         </Flex>
 
-        <Button w="full" disabled={isPending} type="submit">
+        <Button w="full" disabled={isPending || !stripe} type="submit">
           {isPending ? "Processing..." : "Pay Now"}
         </Button>
       </form>
@@ -151,9 +213,9 @@ const CheckoutForm = ({ orderId }: { orderId: string }) => {
   );
 };
 
-const OrderPayment = ({ orderId }: { orderId: string }) => (
+const OrderPayment = () => (
   <Elements stripe={stripePromise}>
-    <CheckoutForm orderId={orderId} />
+    <CheckoutForm />
   </Elements>
 );
 

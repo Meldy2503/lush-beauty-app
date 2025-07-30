@@ -69,11 +69,9 @@ export interface UpdateCartItemsQtyType {
   guestId?: string | null;
   userId?: string | null;
   quantity: number;
-  productId: number
+  productId: number;
 }
-
 
 export interface MakeOrderPaymentType {
   orderId?: string | null;
 }
-

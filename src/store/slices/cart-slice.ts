@@ -8,6 +8,7 @@ const initialState: CartState = {
   redirectToOrderSummary: false,
   hasMergedIds: false,
   orderId: null,
+  clientSecretKey: null,
 };
 
 const cartSlice = createSlice({
@@ -35,6 +36,9 @@ const cartSlice = createSlice({
     setOrderId: (state, action: PayloadAction<string>) => {
       state.orderId = action.payload;
     },
+    setClientSecretKey: (state, action: PayloadAction<string>) => {
+      state.clientSecretKey = action.payload;
+    },
   },
 });
 
@@ -44,6 +48,7 @@ export const {
   setRedirectToOrderSummary,
   setCheckoutCartItems,
   setHasMergedIds,
-  setOrderId
+  setOrderId,
+  setClientSecretKey
 } = cartSlice.actions;
 export default cartSlice.reducer;

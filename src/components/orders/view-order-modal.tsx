@@ -24,11 +24,11 @@ const ViewOrderDetailsModal = ({
       <Dialog.Trigger asChild>
         <Button
           fontSize="1.5rem"
-          px={{ base: "1.5rem", sm: "2rem" }}
-          py={{ base: "1.5rem", sm: "1.9rem" }}
-          bg='transparent'
-          color='black'
-          borderWidth='2px'
+          px={{ base: "1rem", md: "1.5rem" }}
+          py="1.8rem"
+          bg="transparent"
+          color="black"
+          borderWidth="2px"
           borderColor="black"
           onClick={onClick}
         >
