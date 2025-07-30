@@ -17,7 +17,7 @@ import { Params } from "@/types";
 import EmptyState from "../shared/empty-state";
 import Button from "../shared/button";
 import { useDispatch } from "react-redux";
-import { setClientSecretKey, setOrderId } from "@/store/slices/cart-slice";
+import { setOrderClientSecretKey, setOrderId } from "@/store/slices/cart-slice";
 import { useMakeOrderPaymentMutation } from "@/services/api/cart";
 import { useRouter } from "next/navigation";
 
@@ -53,9 +53,9 @@ const OrdersPage = () => {
     page: 1,
   });
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const { mutateAsync: makeOrderPayment } = useMakeOrderPaymentMutation();
-  const dispatch = useDispatch();
   const { data, isLoading } = useGetUserOrders({
     page: params?.page,
   });
@@ -86,7 +86,7 @@ const OrdersPage = () => {
         return;
       }
       router.push("/shop/order-confirmation");
-      dispatch(setClientSecretKey(clientSecret));
+      dispatch(setOrderClientSecretKey(clientSecret));
       dispatch(setOrderId(orderId));
     } catch (error) {
       console.error("Payment failed:", error);

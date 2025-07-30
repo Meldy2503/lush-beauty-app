@@ -14,15 +14,30 @@ import { useState } from "react";
 import Pagination from "../shared/pagination";
 import { Params } from "@/types";
 import EmptyState from "../shared/empty-state";
+import { useMakeAppointmentPaymentMutation } from "@/services/api/book-appointment";
+import {
+  setAppointmentId,
+  setApptClientSecretKey,
+} from "@/store/slices/appointment-slice";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import Button from "../shared/button";
 
 const UserAppointmentsPage = () => {
   const [viewAppointmentDetailsId, setViewAppointmentDetailsId] = useState("");
   const [params, setParams] = useState<Params>({
     page: 1,
   });
+
+  const router = useRouter();
+  const dispatch = useDispatch();
   const { data, isLoading } = useGetUserAppointments({
     page: params?.page,
   });
+
+  const { mutateAsync: makeAppointmentPayment } =
+    useMakeAppointmentPaymentMutation();
+
   const userAppointments = data?.data;
 
   const handleNext = () => {
@@ -39,12 +54,28 @@ const UserAppointmentsPage = () => {
     }
   };
 
+  const handlePayForAppointment = async (appointmentId: string) => {
+    try {
+      const response = await makeAppointmentPayment({ appointmentId });
+      const clientSecret = response?.data?.clientSecret;
+
+      if (!clientSecret) {
+        console.error("No client secret returned");
+        return;
+      }
+      router.push("/appointment-payment");
+      dispatch(setApptClientSecretKey(clientSecret));
+      dispatch(setAppointmentId(appointmentId));
+    } catch (error) {
+      console.error("Payment failed:", error);
+    }
+  };
+
   return (
     <>
       <Navbar />
       <Wrapper bg="gray.250">
         <GoBack />
-
         <Box mt="1rem" bg="white" p={{ base: "3rem 1.5rem", md: "3rem 2rem" }}>
           <Heading
             as="h2"
@@ -143,13 +174,25 @@ const UserAppointmentsPage = () => {
                         £{appointment?.totalCost}
                       </Text>
                     </Box>
-                    <Flex alignSelf={{ base: "flex-end", md: "center" }}>
+                    <Flex alignSelf="flex-end" flexWrap={"wrap"} gap="1rem">
                       <ViewAppointmentDetailsModal
                         onClick={() =>
                           setViewAppointmentDetailsId(appointment?.id ?? "")
                         }
                         viewAppointmentDetailsId={viewAppointmentDetailsId}
                       />
+                      {appointment?.status === "PENDING" && (
+                        <Button
+                          px={{ base: "1rem", md: "1.5rem" }}
+                          py="1.9rem"
+                          fontSize="1.5rem"
+                          onClick={() =>
+                            handlePayForAppointment(appointment?.id || "")
+                          }
+                        >
+                          Pay for Order
+                        </Button>
+                      )}
                     </Flex>
                   </Flex>
                 );

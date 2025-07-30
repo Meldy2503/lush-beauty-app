@@ -56,7 +56,7 @@ const OrderSummaryPage = () => {
     try {
       const result = await checkoutCartItems(payload);
       if (result) {
-        router.push("/shop/order-confirmation");
+        router.push("/orders");
         toast.success("Order created Successfully!");
       }
     } catch (error) {

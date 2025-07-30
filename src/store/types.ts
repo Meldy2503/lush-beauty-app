@@ -24,6 +24,8 @@ export interface Appointment {
 
 export interface AppointmentState {
   appointments: Appointment[];
+  appointmentId: string | null;
+  apptClientSecretKey: string | null;
 }
 
 export interface AuthState {
@@ -47,7 +49,7 @@ export interface CartState {
   cartItems: CartItem[];
   guestId: string | null;
   orderId: string | null;
-  clientSecretKey: string | null;
+  orderClientSecretKey: string | null;
   redirectToOrderSummary: boolean;
   hasMergedIds: boolean;
   checkoutCartItems: CheckoutItemsState | null;

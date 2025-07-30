@@ -78,3 +78,7 @@ export interface BookAppointmentType {
   notes?: string;
 }
 
+export interface MakeAppointmentPaymentType {
+  appointmentId?: string | null;
+}
+

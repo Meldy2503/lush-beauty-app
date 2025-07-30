@@ -8,7 +8,7 @@ const initialState: CartState = {
   redirectToOrderSummary: false,
   hasMergedIds: false,
   orderId: null,
-  clientSecretKey: null,
+  orderClientSecretKey: null,
 };
 
 const cartSlice = createSlice({
@@ -33,22 +33,31 @@ const cartSlice = createSlice({
     setHasMergedIds: (state, action: PayloadAction<boolean>) => {
       state.hasMergedIds = action.payload;
     },
+    clearCart: (state) => {
+      state.cartItems = [];
+    },
     setOrderId: (state, action: PayloadAction<string>) => {
       state.orderId = action.payload;
     },
-    setClientSecretKey: (state, action: PayloadAction<string>) => {
-      state.clientSecretKey = action.payload;
+    setOrderClientSecretKey: (state, action: PayloadAction<string>) => {
+      state.orderClientSecretKey = action.payload;
+    },
+    // to remove the secret key
+    removeOrderClientSecretKey: (state) => {
+      state.orderClientSecretKey = null;
     },
   },
 });
 
 export const {
   addCartItems,
+  clearCart,
   setGuestId,
   setRedirectToOrderSummary,
   setCheckoutCartItems,
   setHasMergedIds,
   setOrderId,
-  setClientSecretKey
+  setOrderClientSecretKey,
+  removeOrderClientSecretKey,
 } = cartSlice.actions;
 export default cartSlice.reducer;

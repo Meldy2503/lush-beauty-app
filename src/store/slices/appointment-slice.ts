@@ -3,6 +3,8 @@ import { AppointmentState, Appointment } from "../types";
 
 const initialState: AppointmentState = {
   appointments: [],
+  appointmentId: null,
+  apptClientSecretKey: null,
 };
 
 const appointmentSlice = createSlice({
@@ -43,9 +45,24 @@ const appointmentSlice = createSlice({
     clearAppointments: (state) => {
       state.appointments = [];
     },
+    setAppointmentId: (state, action: PayloadAction<string>) => {
+      state.appointmentId = action.payload;
+    },
+    setApptClientSecretKey: (state, action: PayloadAction<string>) => {
+      state.apptClientSecretKey = action.payload;
+    },
+    // to remove the secret key
+    removeApptClientSecretKey: (state) => {
+      state.apptClientSecretKey = null;
+    },
   },
 });
 
-export const { updateAppointment, clearAppointments } =
-  appointmentSlice.actions;
+export const {
+  updateAppointment,
+  clearAppointments,
+  setAppointmentId,
+  setApptClientSecretKey,
+  removeApptClientSecretKey,
+} = appointmentSlice.actions;
 export default appointmentSlice.reducer;

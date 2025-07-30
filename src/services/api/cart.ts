@@ -187,7 +187,6 @@ export const useMergeCartItemsMutation = () => {
 };
 // to make payment for ordered items in the cart
 export const useMakeOrderPaymentMutation = () => {
-
   return useMutation({
     mutationKey: ["makeOrderPayment"],
     mutationFn: async (makeOrderPayment: MakeOrderPaymentType) => {

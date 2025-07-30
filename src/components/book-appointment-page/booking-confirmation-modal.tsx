@@ -19,9 +19,9 @@ import {
 } from "@/services/api/book-appointment";
 import { BookAppointmentType } from "@/types/book-appointment";
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { clearAppointments } from "@/store/slices/appointment-slice";
 import { useRouter } from "next/navigation";
+import { clearAppointments } from "@/store/slices/appointment-slice";
+import { useDispatch } from "react-redux";
 
 interface ConfirmationModalProps {
   disabled?: boolean;
@@ -29,12 +29,9 @@ interface ConfirmationModalProps {
 
 const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  // const dispatch = useDispatch();
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  const totalPrice = useSelector(
-    (state: RootState) => state.appointment.appointments[0]?.totalPrice
-  );
 
   const appointment = useSelector(
     (state: RootState) => state.appointment.appointments[0]
@@ -132,30 +129,16 @@ const BookingConfirmationModal = ({ disabled }: ConfirmationModalProps) => {
                   email has been sent. You can pay online or in person at your
                   appointment day ✨
                 </Text>
-                <HStack
-                  gap="1.5rem"
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  flexWrap={"wrap"}
-                  pt="3rem"
-                  w="full"
-                  flexDir={{ base: "column-reverse", sm: "row" }}
-                >
+                <HStack pt="3rem">
                   <Button
-                    bg="transparent"
-                    borderWidth="1.5px"
-                    borderColor="black"
-                    color="black"
-                    px={{ base: "5.5rem", sm: "2rem" }}
-                    href="/"
                     onClick={() => {
-                      router.push("/");
-                      // dispatch(clearAppointments());
+                      router.push("/appointments");
+                      dispatch(clearAppointments());
+
                     }}
                   >
-                    Go to Home
+                    Ok
                   </Button>
-                  <Button px="2rem">Proceed to Pay £{totalPrice}</Button>
                 </HStack>
               </VStack>
             </Dialog.Body>

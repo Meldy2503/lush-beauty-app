@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import axios from "../axios";
 import urls from "../urls";
-import { BookAppointmentType } from "@/types/book-appointment";
+import { BookAppointmentType, MakeAppointmentPaymentType } from "@/types/book-appointment";
 import { Params } from "@/types";
 
 // to get all branches/locations
@@ -91,6 +91,24 @@ export const useGroupBookingMutation = () => {
     },
     onError: (error) => {
       console.error("Booking failed:", error);
+    },
+  });
+};
+
+
+// to make payment for a booked appointment
+export const useMakeAppointmentPaymentMutation = () => {
+  return useMutation({
+    mutationKey: ["makeAppointmentPayment"],
+    mutationFn: async (makeAppointmentPayment: MakeAppointmentPaymentType) => {
+      const res = await axios.post(
+        urls.makeAppointmentPaymentUrl,
+        makeAppointmentPayment
+      );
+      return res.data;
+    },
+    onError: (error) => {
+      console.error("Appointment Payment Failed:", error);
     },
   });
 };

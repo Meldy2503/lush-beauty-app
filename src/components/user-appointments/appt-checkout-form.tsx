@@ -1,6 +1,8 @@
 "use client";
 
-import { Box, Flex, Heading, HStack, Text } from "@chakra-ui/react";
+import { RootState } from "@/store";
+
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import {
   CardCvcElement,
   CardExpiryElement,
@@ -9,33 +11,15 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-
+import { loadStripe } from "@stripe/stripe-js";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { FaRegCreditCard } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import Button from "../shared/button";
 import CreditCards from "../shared/credit-cards";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { useRouter } from "next/navigation";
 import { InputElement } from "../shared/input-element";
-import { loadStripe } from "@stripe/stripe-js";
-import { useDispatch } from "react-redux";
-import { clearCart } from "@/store/slices/cart-slice";
-
-export const cardStyle = {
-  style: {
-    base: {
-      fontSize: "15px",
-      "::placeholder": {
-        color: "#ccc",
-      },
-    },
-    invalid: {
-      color: "#c23d4b",
-    },
-  },
-};
+import { cardStyle } from "../shop-page/order-payment";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -45,12 +29,11 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
-  const dispatch = useDispatch();
   const [cardName, setCardName] = useState("");
   const [isPending, setIsPending] = useState(false);
 
   const clientSecretKey = useSelector(
-    (state: RootState) => state.cart.orderClientSecretKey
+    (state: RootState) => state.appointment.apptClientSecretKey
   );
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -96,8 +79,7 @@ const CheckoutForm = () => {
 
       if (result.paymentIntent?.status === "succeeded") {
         toast.success("Payment successful!");
-        router.push("/orders");
-        dispatch(clearCart());
+        router.push("/appointments");
       } else {
         toast.error("Payment incomplete. Please try again.");
       }
@@ -109,24 +91,25 @@ const CheckoutForm = () => {
   };
 
   return (
-    <Box w={{ base: "100%", lg: "60%" }} bg="white" p="3rem 2rem">
-      <HStack
-        pb="2rem"
-        borderBottomWidth={"2px"}
-        borderBottomColor={"gray.250"}
-        gap="1rem"
+    <Flex
+      w={{ base: "100%", md: "65%" }}
+      bg="white"
+      p="2rem"
+      shadow={"sm"}
+      minH={{ base: "80vh", md: "70vh" }}
+      position="relative"
+      flexDir={"column"}
+    >
+      <Heading
+        as="h3"
+        fontSize={{ base: "1.7rem", md: "1.8rem" }}
+        fontFamily="playfair"
+        mb="2rem"
+        lineHeight={1.3}
+        textTransform={"uppercase"}
       >
-        <FaRegCreditCard size={"2.5rem"} color="orange" />
-        <Heading
-          as="h3"
-          fontSize={{ base: "1.7rem", md: "1.8rem" }}
-          fontFamily="playfair"
-          lineHeight={1.3}
-          textTransform={"uppercase"}
-        >
-          MAKE PAYMENT
-        </Heading>
-      </HStack>
+        Make Payment
+      </Heading>
 
       <form onSubmit={handleSubmit}>
         <Flex
@@ -214,14 +197,14 @@ const CheckoutForm = () => {
           {isPending ? "Processing..." : "Pay Now"}
         </Button>
       </form>
-    </Box>
+    </Flex>
   );
 };
 
-const OrderPayment = () => (
+const ApptCheckoutForm = () => (
   <Elements stripe={stripePromise}>
     <CheckoutForm />
   </Elements>
 );
 
-export default OrderPayment;
+export default ApptCheckoutForm;
