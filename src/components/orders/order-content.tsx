@@ -110,9 +110,11 @@ const OrderDetailsContent = ({ viewOrderDetailsId }: OrderContentProps) => {
                   <IoLocationOutline size={"2.3rem"} />
                 </HStack>
                 <Box>
-                  <Text mb=".5rem" lineHeight={1.4} fontSize="1.6rem">
-                    {`${defaultAddress[0]?.address}, ${defaultAddress[0]?.state}, ${defaultAddress[0]?.country}`}
-                  </Text>
+                  {defaultAddress?.length > 0 && (
+                    <Text mb=".5rem" lineHeight={1.4} fontSize="1.6rem">
+                      {`${defaultAddress[0]?.address}, ${defaultAddress[0]?.state}, ${defaultAddress[0]?.country}`}
+                    </Text>
+                  )}
                   <Text lineHeight={1.3} w="95%" fontSize="1.4rem">
                     {loggedInUser?.phone}
                   </Text>
