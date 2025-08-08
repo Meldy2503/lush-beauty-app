@@ -186,11 +186,11 @@ const UserAppointmentsPage = () => {
                           px={{ base: "1rem", md: "1.5rem" }}
                           py="1.9rem"
                           fontSize="1.5rem"
-                          onClick={() =>
+                          onClick={() => 
                             handlePayForAppointment(appointment?.id || "")
                           }
                         >
-                          Pay for Order
+                          Make Payment
                         </Button>
                       )}
                     </Flex>

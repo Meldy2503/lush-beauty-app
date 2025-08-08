@@ -55,10 +55,10 @@ const OrdersPage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const { mutateAsync: makeOrderPayment } = useMakeOrderPaymentMutation();
   const { data, isLoading } = useGetUserOrders({
     page: params?.page,
   });
+  const { mutateAsync: makeOrderPayment } = useMakeOrderPaymentMutation();
 
   const userOrders = data?.data;
 

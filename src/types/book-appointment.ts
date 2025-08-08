@@ -19,6 +19,12 @@ export interface CategoriesType {
   price?: number;
   specialists?: string[];
   type?: string;
+  category?: {
+    price?: number;
+    name?: string;
+    description?: string;
+    estimatedTime?: number;
+  };
 }
 export interface ServicesType {
   id?: string;
@@ -82,3 +88,37 @@ export interface MakeAppointmentPaymentType {
   appointmentId?: string | null;
 }
 
+export interface AppointmentDetailsType {
+  id: string;
+  specialistId: string;
+  appointmentDate: string;
+  branch: BranchesType | null;
+  branchId: string;
+  cancelReason?: string | null;
+  currency?: string; // e.g., "GBP", "USD"
+  totalCost: number;
+  numberOfClients: number;
+  services: [
+    {
+      service: {
+        description?: string;
+        id?: string;
+        name?: string;
+      };
+      categories?: CategoriesType[];
+    }
+  ];
+  payment?: {
+    amount: number;
+    currency: string;
+    id: string;
+    status: "PENDING" | "CONFIRMED" | "CANCELLED" | "PAID";
+  } | null;
+  notes?: string | null;
+  status: "PENDING" | "CONFIRMED" | "CANCELLED" | "PAID";
+  createdAt: string;
+  updatedAt: string;
+  specialist?: SpecialistType | null;
+  type: string;
+  userId: string;
+}

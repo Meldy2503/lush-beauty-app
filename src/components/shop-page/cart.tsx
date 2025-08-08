@@ -145,7 +145,7 @@ const Cart = ({ children }: CartProps) => {
               pointerEvents="none"
               fontWeight={"bold"}
             >
-              {cartItems?.length ?? 0}
+              {cartItems?.length || 0}
             </Flex>
           </Box>
         )}
