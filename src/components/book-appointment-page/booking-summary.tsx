@@ -90,8 +90,6 @@ const BookingSummary = ({ appointmentDetails }: BookingSummaryProps) => {
   const pathname = usePathname();
   const dispatch = useDispatch();
 
-  console.log(appointmentDetails, "appointmentDetails");
-
   // All Redux selectors
   const appointment = useSelector(
     (state: RootState) => state.appointment.appointments[0]
@@ -104,19 +102,6 @@ const BookingSummary = ({ appointmentDetails }: BookingSummaryProps) => {
     appointmentDateTime,
     serviceClientCounts,
   } = appointment || {};
-
-  // Memoized calculations
-  // to get each selected service category
-  // const flatCategories = useMemo(
-  //   () =>
-  //     appointmentDetails?.services || serviceSelections?.flatMap((selection) =>
-  //       selection?.categoryIds?.map((category) => ({
-  //         category,
-  //         serviceId: selection.serviceId,
-  //       }))
-  //     ),
-  //   [serviceSelections, appointmentDetails?.services]
-  // );
 
   const flatCategories = useMemo(() => {
     // If appointmentDetails.services exists, flatten it
@@ -249,7 +234,11 @@ const BookingSummary = ({ appointmentDetails }: BookingSummaryProps) => {
               fontSize={"1.5rem"}
             >
               <Text>Number of Clients</Text>
-              <Text>{numClients || appointmentDetails?.numberOfClients}</Text>
+              <Text>
+                {!appointmentDetails
+                  ? numClients
+                  : appointmentDetails?.numberOfClients}
+              </Text>
             </Flex>
           </Box>
 
@@ -257,8 +246,6 @@ const BookingSummary = ({ appointmentDetails }: BookingSummaryProps) => {
           <Box py=".5rem" fontSize={"1.5rem"}>
             {flatCategories?.map((item, index) => {
               const categoryId = item?.category?.id;
-
-              console.log("categoryGG:", item?.category?.category);
 
               // Default to numClients instead of 1
               const currentCount = categoryId
@@ -317,16 +304,6 @@ const BookingSummary = ({ appointmentDetails }: BookingSummaryProps) => {
                   )}
 
                   {/* Price */}
-                  {/* {(item.category?.price || appointmentDetails) && (
-                    <Text fontWeight={"semibold"}>
-                      £
-                      {numClients > 1 && isConfirmBooking
-                        ? item?.category?.price * currentCount
-                        : item?.category?.price ||
-                          item?.category?.category?.price}
-                    </Text>
-                  )} */}
-
                   {(item.category?.price ||
                     item.category?.category?.price ||
                     appointmentDetails) && (
