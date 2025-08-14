@@ -35,6 +35,7 @@ const urls = {
   getProductCategories: `${baseUrl}/products/categories`,
   deleteCartItemUrl: (productId: string) =>
     `${baseUrl}/cart/items/${productId}/remove`,
+  clearAllCartItemsUrl: `${baseUrl}/cart/items/clear`,
   checkoutCartItemsUrl: `${baseUrl}/cart/items/checkout`,
   mergeCartItemsUrl: `${baseUrl}/cart/items/merge`,
   updateItemQuantityUrl: (productId: string) =>
@@ -46,5 +47,8 @@ const urls = {
     `${baseUrl}/appointments/${appointmentId}`,
   makeOrderPaymentUrl: `${baseUrl}/make-payment/order`,
   makeAppointmentPaymentUrl: `${baseUrl}/make-payment/appointment`,
+  cancelOrderUrl: (orderId: string) => `${baseUrl}/orders/${orderId}/cancel`,
+  cancelAppointmentUrl: (appointmentId: string) =>
+    `${baseUrl}/appointments/${appointmentId}/cancel`,
 };
 export default urls;

@@ -151,12 +151,6 @@ const OrderDetailsContent = ({ viewOrderDetailsId }: OrderContentProps) => {
                     {date} / {time}
                   </Text>
                 </Box>
-
-                {orderDetails?.status !== "PENDING" && (
-                  <Text lineHeight={1.3}>
-                    Delivery between 09 June and June 12{" "}
-                  </Text>
-                )}
               </Flex>
             </Box>
             <Box

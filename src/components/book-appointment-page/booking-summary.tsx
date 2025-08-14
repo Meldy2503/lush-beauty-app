@@ -264,8 +264,7 @@ const BookingSummary = ({ appointmentDetails }: BookingSummaryProps) => {
                   borderColor={"gray.250"}
                   alignItems={"center"}
                   py="1rem"
-                >
-                  <Text>
+                > <Text>
                     {item?.category?.name || item?.category?.category?.name}
                   </Text>
 

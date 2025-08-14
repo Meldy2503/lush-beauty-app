@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { setRedirectToOrderSummary } from "@/store/slices/cart-slice";
+import { useMergeCartItemsMutation } from "@/services/api/cart";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -23,9 +24,12 @@ const LoginPage = () => {
   const searchParams = useSearchParams();
   const loginMutation = useLoginMutation();
   const redirect = searchParams.get("redirect") || "/";
+  const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
 
   const { mutateAsync: login } = loginMutation;
   const isLoading = loginMutation.isPending;
+  const mergeCartItemsMutation = useMergeCartItemsMutation();
+  const { mutateAsync: mergeCartItems } = mergeCartItemsMutation;
 
   const redirectToOrderSummary = useSelector(
     (state: RootState) => state.cart.redirectToOrderSummary
@@ -51,16 +55,24 @@ const LoginPage = () => {
       if (!result) {
         return;
       }
-      if (result) {
-        toast.success("Login Successful!");
-        if (redirectToOrderSummary) {
-          router.push("/shop/order-summary");
-          dispatch(setRedirectToOrderSummary(false));
-        } else {
-          router.push(redirect); // fallback to default (?redirect=...)
-        }
-        reset();
+
+      // Only run mergeCartItems if we have a logged-in user and guest user
+      if (result?.data?.user?.id && existingGuestId) {
+        await mergeCartItems({
+          guestId: existingGuestId,
+          userId: result?.data?.user?.id,
+        });
       }
+
+      toast.success("Login Successful!");
+
+      if (redirectToOrderSummary) {
+        router.push("/shop/order-summary");
+        dispatch(setRedirectToOrderSummary(false));
+      } else {
+        router.push(redirect); // fallback to default (?redirect=...)
+      }
+      reset();
     } catch (error) {
       console.error("Login error:", error);
     }

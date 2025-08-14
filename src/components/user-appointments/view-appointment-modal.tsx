@@ -20,13 +20,10 @@ const ViewAppointmentDetailsModal = ({
     >
       <Dialog.Trigger asChild>
         <Button
-          fontSize="1.5rem"
-          px={{ base: "1rem", md: "1.5rem" }}
           py="1.8rem"
           bg="transparent"
           color="black"
-          borderWidth="2px"
-          borderColor="black"
+          w="100%"
           onClick={onClick}
         >
           View Details

@@ -10,7 +10,7 @@ const Tag = ({ label }: TagProps) => {
   return (
     <Flex
       bg={
-        label === "CANCELED" || label === "RETURNED"
+        label === "CANCELLED" || label === "RETURNED"
           ? "red.600"
           : label === "COMPLETED" || label === "DELIVERED" || label === "PAID"
           ? "green.600"

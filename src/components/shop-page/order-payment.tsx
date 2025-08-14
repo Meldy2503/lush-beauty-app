@@ -22,6 +22,7 @@ import { InputElement } from "../shared/input-element";
 import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch } from "react-redux";
 import { clearCart } from "@/store/slices/cart-slice";
+import { useClearAllCartItems } from "@/services/api/cart";
 
 export const cardStyle = {
   style: {
@@ -44,6 +45,7 @@ const stripePromise = loadStripe(
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+
   const router = useRouter();
   const dispatch = useDispatch();
   const [cardName, setCardName] = useState("");
@@ -52,6 +54,9 @@ const CheckoutForm = () => {
   const clientSecretKey = useSelector(
     (state: RootState) => state.cart.orderClientSecretKey
   );
+  const existingGuestId = useSelector((state: RootState) => state.cart.guestId);
+
+  const { mutateAsync: clearCartItems } = useClearAllCartItems();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,8 +101,11 @@ const CheckoutForm = () => {
 
       if (result.paymentIntent?.status === "succeeded") {
         toast.success("Payment successful!");
-        router.push("/orders");
+        await clearCartItems({
+          guestId: existingGuestId,
+        });
         dispatch(clearCart());
+        router.push("/orders");
       } else {
         toast.error("Payment incomplete. Please try again.");
       }
@@ -169,7 +177,6 @@ const CheckoutForm = () => {
                   }}
                 />
               </Box>
-
               {/* Your card icons component */}
               <CreditCards />
             </Flex>

@@ -47,7 +47,7 @@ const Navbar = ({ display, top, bg, color }: NavbarProps) => {
             <SocialMediaIcons boxSize="2rem" />
           </Box>
           <HStack gap="1.5rem">
-            {pathname !== "/shop/order-confirmation" && <Cart />}
+            {pathname !== "/shop/order-confirmation" && pathname !== "/orders" && <Cart />}
             <ProfileMenu />
           </HStack>
         </Flex>

@@ -45,9 +45,6 @@ const renderItemRow = (
 };
 
 const OrderConfirmationPage = () => {
-  const storedCartItems = useSelector(
-    (state: RootState) => state.cart.checkoutCartItems
-  );
   const storedOrderId = useSelector((state: RootState) => state.cart.orderId);
 
   const { data: orderDetails } = useGetUserOrderById(storedOrderId as string);
@@ -67,13 +64,9 @@ const OrderConfirmationPage = () => {
             <Box bg="gray.250" p=".5rem" fontSize={"1.5rem"}>
               <Text> Cart Items</Text>
             </Box>
-            {storedCartItems?.cartItems?.length
-              ? storedCartItems.cartItems.map((item) =>
-                  renderItemRow(item, undefined, true)
-                )
-              : orderDetails?.items?.map((item: OrderItems) =>
-                  renderItemRow(undefined, item, false)
-                )}
+            {orderDetails?.items?.map((item: OrderItems) =>
+              renderItemRow(undefined, item, false)
+            )}
 
             <HStack
               justifyContent={"space-between"}
@@ -85,9 +78,7 @@ const OrderConfirmationPage = () => {
             >
               <Text fontWeight={"400"}>Subtotal</Text>{" "}
               <Text fontWeight={"600"} fontSize={"1.8rem"}>
-                {storedCartItems?.totalAmount?.toFixed(2) ||
-                  orderDetails?.totalAmount?.toFixed(2) ||
-                  0}
+                {orderDetails?.totalAmount?.toFixed(2) || 0}
               </Text>{" "}
             </HStack>
             <HStack
@@ -113,10 +104,7 @@ const OrderConfirmationPage = () => {
             >
               <Text>TOTAL TO PAY</Text>{" "}
               <Text fontSize={"2rem"} color="yellow.150">
-                £
-                {storedCartItems?.totalAmount?.toFixed(2) ||
-                  orderDetails?.totalAmount?.toFixed(2) ||
-                  0}
+                £{orderDetails?.totalAmount?.toFixed(2) || 0}
               </Text>{" "}
             </HStack>
           </Box>

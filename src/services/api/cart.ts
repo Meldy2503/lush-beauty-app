@@ -5,6 +5,7 @@ import urls from "../urls";
 import {
   AddToCartType,
   CheckoutItemsType,
+  ClearCartItemsType,
   DeleteCartItemType,
   MakeOrderPaymentType,
   MergeCartItemsType,
@@ -107,6 +108,27 @@ export const useDeleteCartItem = () => {
     },
     onError: (error) => {
       console.error("Delete Cart Item failed:", error);
+    },
+  });
+};
+
+// to delete all items from the cart
+export const useClearAllCartItems = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["clearAllCartItems"],
+    mutationFn: async ({ userId, guestId }: ClearCartItemsType) => {
+      const res = await axios.delete(urls.clearAllCartItemsUrl, {
+        data: { userId, guestId },
+      });
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cartItems"] });
+    },
+    onError: (error) => {
+      console.error("Clear Cart Items failed:", error);
     },
   });
 };

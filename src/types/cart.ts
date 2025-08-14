@@ -43,6 +43,11 @@ export interface DeleteCartItemType {
   userId?: string | null;
   productId: string;
 }
+
+export interface ClearCartItemsType {
+  guestId?: string | null;
+  userId?: string | null;
+}
 export interface CartItemsType {
   createdAt?: string;
   guestId?: string;

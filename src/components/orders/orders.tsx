@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetUserOrders } from "@/services/api/user";
+import { Params } from "@/types";
 import { UserOrderType } from "@/types/user";
 import { formatAppointmentDateTime, scrollToTop } from "@/utils";
 import { Box, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
@@ -8,18 +9,12 @@ import Image from "next/image";
 import { useState } from "react";
 import Footer from "../footer";
 import Navbar from "../navbar";
+import EmptyState from "../shared/empty-state";
 import { GoBack } from "../shared/go-back";
+import Pagination from "../shared/pagination";
 import Tag from "../shared/tag";
 import Wrapper from "../shared/wrapper";
-import ViewOrderDetailsModal from "./view-order-modal";
-import Pagination from "../shared/pagination";
-import { Params } from "@/types";
-import EmptyState from "../shared/empty-state";
-import Button from "../shared/button";
-import { useDispatch } from "react-redux";
-import { setOrderClientSecretKey, setOrderId } from "@/store/slices/cart-slice";
-import { useMakeOrderPaymentMutation } from "@/services/api/cart";
-import { useRouter } from "next/navigation";
+import OrderActions from "./order-actions";
 
 const ItemDetails = ({
   title,
@@ -52,13 +47,10 @@ const OrdersPage = () => {
   const [params, setParams] = useState<Params>({
     page: 1,
   });
-  const router = useRouter();
-  const dispatch = useDispatch();
 
   const { data, isLoading } = useGetUserOrders({
     page: params?.page,
   });
-  const { mutateAsync: makeOrderPayment } = useMakeOrderPaymentMutation();
 
   const userOrders = data?.data;
 
@@ -73,23 +65,6 @@ const OrdersPage = () => {
     if (data?.meta?.page > 1) {
       setParams((prev) => ({ ...prev, page: prev.page - 1 }));
       scrollToTop();
-    }
-  };
-
-  const handlePayForOrder = async (orderId: string) => {
-    try {
-      const response = await makeOrderPayment({ orderId });
-      const clientSecret = response?.data?.clientSecret;
-
-      if (!clientSecret) {
-        console.error("No client secret returned");
-        return;
-      }
-      router.push("/shop/order-confirmation");
-      dispatch(setOrderClientSecretKey(clientSecret));
-      dispatch(setOrderId(orderId));
-    } catch (error) {
-      console.error("Payment failed:", error);
     }
   };
 
@@ -199,28 +174,14 @@ const OrdersPage = () => {
                           })}
                       </Flex>
                       <Flex
-                        alignSelf="flex-end"
-                        gap="1rem"
-                        px="1.5rem"
-                        pb="1.5rem"
-                        flexWrap={"wrap"}
+                        alignSelf={{ base: "flex-end", md: "flex-start" }}
+                        p="1.5rem"
                       >
-                        <ViewOrderDetailsModal
-                          onClick={() =>
-                            setViewOrderDetailsId(orders?.id ?? "")
-                          }
+                        <OrderActions
                           viewOrderDetailsId={viewOrderDetailsId}
+                          setViewOrderDetailsId={setViewOrderDetailsId}
+                          orders={orders}
                         />
-                        {orders?.status === "PENDING" && (
-                          <Button
-                            px={{ base: "1rem", md: "1.5rem" }}
-                            py="1.9rem"
-                            fontSize="1.5rem"
-                            onClick={() => handlePayForOrder(orders?.id || "")}
-                          >
-                            Pay for Order
-                          </Button>
-                        )}
                       </Flex>
                     </Flex>
                   </Box>

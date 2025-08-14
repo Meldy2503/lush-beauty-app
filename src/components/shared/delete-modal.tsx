@@ -4,18 +4,22 @@ import Button from "./button";
 
 interface DeleteModalProps {
   text?: string;
+  btnText?: string;
   onClick?: () => void;
   open?: boolean;
   isLoading?: boolean;
   onOpenChange?: (e: { open: boolean }) => void;
+  triggerItem?: React.ReactNode;
 }
 
 const DeleteModal = ({
   text,
+  btnText,
   onClick,
   open,
   isLoading,
   onOpenChange,
+  triggerItem,
 }: DeleteModalProps) => {
   return (
     <Dialog.Root
@@ -27,7 +31,7 @@ const DeleteModal = ({
       onOpenChange={onOpenChange}
     >
       <Dialog.Trigger asChild>
-        <RiDeleteBin6Line size="2rem" color="red" />
+        {triggerItem ?? <RiDeleteBin6Line size="2rem" color="red" />}
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop bg="backdrop" />
@@ -63,7 +67,7 @@ const DeleteModal = ({
                 px="3rem"
                 py="1.9rem"
               >
-                {isLoading ? "Processing..." : "Delete"}
+                {isLoading ? "Processing..." : btnText ?? "Delete"}
               </Button>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild _hover={{ bg: "gray.250" }}>

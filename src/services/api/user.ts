@@ -153,7 +153,6 @@ export const useGetUserAppointmentById = (appointmentId: string) => {
   });
 };
 
-
 // to get all user orders
 export const useGetUserOrders = (params?: Params) => {
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
@@ -168,7 +167,6 @@ export const useGetUserOrders = (params?: Params) => {
   });
 };
 
-
 // to get a single user order by Id
 export const useGetUserOrderById = (orderId: string) => {
   return useQuery({
@@ -178,5 +176,47 @@ export const useGetUserOrderById = (orderId: string) => {
       return res.data.data;
     },
     enabled: !!orderId,
+  });
+};
+
+// to cancel a user order
+export const useCancelUserOrder = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["cancelUserOrder"],
+    mutationFn: async (orderId: string) => {
+      const res = await axios.patch(urls.cancelOrderUrl(orderId));
+      return res.data;
+    },
+    onSuccess: () => {
+      // Invalidate user orders so they refetch
+      queryClient.invalidateQueries({ queryKey: ["userOrders"] });
+      queryClient.invalidateQueries({ queryKey: ["userOrder"] });
+    },
+    onError: (error) => {
+      console.error("Cancel order failed:", error);
+    },
+  });
+};
+
+// to cancel a user appointment
+export const useCancelUserAppointment = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["cancelUserAppointment"],
+    mutationFn: async (appointmentId: string) => {
+      const res = await axios.patch(urls.cancelAppointmentUrl(appointmentId));
+      return res.data;
+    },
+    onSuccess: () => {
+      // Invalidate user appointments so they refetch
+      queryClient.invalidateQueries({ queryKey: ["userAppointments"] });
+      queryClient.invalidateQueries({ queryKey: ["userAppointment"] });
+    },
+    onError: (error) => {
+      console.error("Cancel appointment failed:", error);
+    },
   });
 };

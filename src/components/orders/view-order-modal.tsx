@@ -4,7 +4,6 @@ import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
 import Button from "../shared/button";
 import OrderDetailsContent from "./order-content";
 
-
 interface OrderDetailsProps {
   onClick?: () => void;
   viewOrderDetailsId?: string;
@@ -14,8 +13,6 @@ const ViewOrderDetailsModal = ({
   onClick,
   viewOrderDetailsId,
 }: OrderDetailsProps) => {
-  
-
   return (
     <Dialog.Root
       placement={{ base: "top", md: "center" }}
@@ -23,13 +20,10 @@ const ViewOrderDetailsModal = ({
     >
       <Dialog.Trigger asChild>
         <Button
-          fontSize="1.5rem"
-          px={{ base: "1rem", md: "1.5rem" }}
           py="1.8rem"
           bg="transparent"
           color="black"
-          borderWidth="2px"
-          borderColor="black"
+          w="100%"
           onClick={onClick}
         >
           View Details

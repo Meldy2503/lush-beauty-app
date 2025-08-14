@@ -1,27 +1,20 @@
 "use client";
 
-import { Box, Flex, Heading, HStack, Spinner, Text } from "@chakra-ui/react";
-import Tag from "../shared/tag";
-import ViewAppointmentDetailsModal from "./view-appointment-modal";
-import Navbar from "../navbar";
-import Wrapper from "../shared/wrapper";
-import { GoBack } from "../shared/go-back";
-import Footer from "../footer";
 import { useGetUserAppointments } from "@/services/api/user";
+import { Params } from "@/types";
 import { UserAppointmentType } from "@/types/user";
 import { formatAppointmentDateTime, scrollToTop } from "@/utils";
+import { Box, Flex, Heading, HStack, Spinner, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import Pagination from "../shared/pagination";
-import { Params } from "@/types";
+import Footer from "../footer";
+import Navbar from "../navbar";
 import EmptyState from "../shared/empty-state";
-import { useMakeAppointmentPaymentMutation } from "@/services/api/book-appointment";
-import {
-  setAppointmentId,
-  setApptClientSecretKey,
-} from "@/store/slices/appointment-slice";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import Button from "../shared/button";
+import { GoBack } from "../shared/go-back";
+import Pagination from "../shared/pagination";
+import Tag from "../shared/tag";
+import Wrapper from "../shared/wrapper";
+
+import AppointmentActions from "./appointment-actions";
 
 const UserAppointmentsPage = () => {
   const [viewAppointmentDetailsId, setViewAppointmentDetailsId] = useState("");
@@ -29,14 +22,9 @@ const UserAppointmentsPage = () => {
     page: 1,
   });
 
-  const router = useRouter();
-  const dispatch = useDispatch();
   const { data, isLoading } = useGetUserAppointments({
     page: params?.page,
   });
-
-  const { mutateAsync: makeAppointmentPayment } =
-    useMakeAppointmentPaymentMutation();
 
   const userAppointments = data?.data;
 
@@ -51,23 +39,6 @@ const UserAppointmentsPage = () => {
     if (data?.meta?.page > 1) {
       setParams((prev) => ({ ...prev, page: prev.page - 1 }));
       scrollToTop();
-    }
-  };
-
-  const handlePayForAppointment = async (appointmentId: string) => {
-    try {
-      const response = await makeAppointmentPayment({ appointmentId });
-      const clientSecret = response?.data?.clientSecret;
-
-      if (!clientSecret) {
-        console.error("No client secret returned");
-        return;
-      }
-      router.push("/appointment-payment");
-      dispatch(setApptClientSecretKey(clientSecret));
-      dispatch(setAppointmentId(appointmentId));
-    } catch (error) {
-      console.error("Payment failed:", error);
     }
   };
 
@@ -174,25 +145,17 @@ const UserAppointmentsPage = () => {
                         £{appointment?.totalCost}
                       </Text>
                     </Box>
-                    <Flex alignSelf="flex-end" flexWrap={"wrap"} gap="1rem">
-                      <ViewAppointmentDetailsModal
-                        onClick={() =>
-                          setViewAppointmentDetailsId(appointment?.id ?? "")
+                    <Flex
+                      alignSelf={{ base: "flex-end", md: "flex-start" }}
+                      p="1.5rem"
+                    >
+                      <AppointmentActions
+                        setViewAppointmentDetailsId={
+                          setViewAppointmentDetailsId
                         }
                         viewAppointmentDetailsId={viewAppointmentDetailsId}
+                        appointment={appointment}
                       />
-                      {appointment?.status === "PENDING" && (
-                        <Button
-                          px={{ base: "1rem", md: "1.5rem" }}
-                          py="1.9rem"
-                          fontSize="1.5rem"
-                          onClick={() => 
-                            handlePayForAppointment(appointment?.id || "")
-                          }
-                        >
-                          Make Payment
-                        </Button>
-                      )}
                     </Flex>
                   </Flex>
                 );
