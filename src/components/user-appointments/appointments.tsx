@@ -62,7 +62,7 @@ const UserAppointmentsPage = () => {
             <Flex alignItems={"center"} justifyContent={"center"}>
               <Spinner my="20rem" />
             </Flex>
-          ) : !userAppointments ? (
+          ) : userAppointments?.length === 0 ? (
             <EmptyState />
           ) : (
             <Box mt="3rem">
@@ -78,7 +78,7 @@ const UserAppointmentsPage = () => {
                     borderColor={"gray.250"}
                     alignItems={{ base: "flex-start", md: "center" }}
                     flexDir={{ base: "column", md: "row" }}
-                    gap="2rem 4rem"
+                    gap="2rem"
                     justifyContent={"space-between"}
                     p="1.5rem"
                     mb="1rem"
@@ -146,8 +146,7 @@ const UserAppointmentsPage = () => {
                       </Text>
                     </Box>
                     <Flex
-                      alignSelf={{ base: "flex-end", md: "flex-start" }}
-                      p="1.5rem"
+                      alignSelf={{ base: "flex-end", md: "center" }}
                     >
                       <AppointmentActions
                         setViewAppointmentDetailsId={

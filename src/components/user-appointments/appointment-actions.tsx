@@ -65,7 +65,7 @@ const AppointmentActions = ({
   return (
     <Menu.Root positioning={{ placement: "bottom-end" }}>
       <Menu.Trigger asChild>
-        <Button bg="gray.150" px="2rem">
+        <Button bg="gray.150" px="3rem">
           <BsThreeDotsVertical size={30} />
           Actions
         </Button>

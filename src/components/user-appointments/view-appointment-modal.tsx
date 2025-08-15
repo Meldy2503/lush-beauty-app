@@ -18,7 +18,7 @@ const ViewAppointmentDetailsModal = ({
       placement={{ base: "top", md: "center" }}
       motionPreset="slide-in-bottom"
     >
-      <Dialog.Trigger asChild>
+      <Dialog.Trigger asChild focusRingWidth={0}>
         <Button
           py="1.8rem"
           bg="transparent"

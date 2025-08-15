@@ -88,7 +88,7 @@ const OrdersPage = () => {
             <Flex alignItems={"center"} justifyContent={"center"}>
               <Spinner my="20rem" />
             </Flex>
-          ) : !userOrders ? (
+          ) : userOrders?.length === 0 ? (
             <EmptyState />
           ) : (
             <Box mt="3rem">
@@ -122,7 +122,7 @@ const OrdersPage = () => {
                       flexDir={{ base: "column", md: "row" }}
                       borderTopWidth={"1px"}
                       borderColor={"gray.300"}
-                      gap="2rem"
+                      gapX="2rem"
                     >
                       <Flex
                         gap={{ base: "2rem", sm: "1rem" }}
@@ -174,7 +174,7 @@ const OrdersPage = () => {
                           })}
                       </Flex>
                       <Flex
-                        alignSelf={{ base: "flex-end", md: "flex-start" }}
+                        alignSelf={{ base: "flex-end", md: "center" }}
                         p="1.5rem"
                       >
                         <OrderActions
