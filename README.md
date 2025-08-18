@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Booking and Customer Support App for Beauty Salons (Lush & Luxe)
 
-## Getting Started
+This is a **web-based booking and customer support application** for beauty salons, built with **Next.js**. The platform provides a seamless experience for customers to book appointments, purchase beauty products, and connect with salon staff via WhatsApp chat.
 
-First, run the development server:
+## ✨ Features
+
+- 🔐 **User Authentication** – Secure login and registration system.
+- 🛍 **E-Commerce** – Customers can browse and purchase beauty products.
+- 💳 **Online Payment** – Integrated payment gateway for services and product purchases.
+- 📅 **Online Appointment Booking** – Book individual or group appointments, select preferred branch, select services, select staff, choose preferred date and time.
+- 💬 **WhatsApp Chat Support** – Direct communication with salon representatives.
+- 🔔 **Notifications & Reminders** – Keep customers updated about bookings and offers.
+- 📱 **Responsive Design** – Optimized for desktop and mobile devices.
+
+## 🛠 Tech Stack
+
+- **Frontend:** [Next.js](https://nextjs.org) (React framework)
+- **Styling:** [Chakra UI](https://chakra-ui.com)
+- **Backend:** Node.js (Express)
+- **Database:** PostgreSQL / MongoDB (to be implemented)
+- **Authentication:** NextAuth / JWT
+- **Payments:** PayPal / Stripe integration
+- **Notifications:** Email & in-app reminders
+- **Chat:** WhatsApp API integration
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (>=18)
+- npm / yarn / pnpm
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Meldy2503/lush-beauty-app.git
+cd lush-beauty-app
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [https://lush-beauty-app.vercel.app/](https://lush-beauty-app.vercel.app/) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📖 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+.
+├── app/               # Next.js app directory
+├── components/        # Reusable UI components
+├── assets/            # Static assets
+├── styles/            # Global styles
+└── package.json       # Dependencies and scripts
+```
 
-## Learn More
+## 📌 Future Improvements
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- AI-powered booking recommendations.
+- Loyalty & rewards program for frequent customers.
+- Analytics dashboard for salon administrators.
