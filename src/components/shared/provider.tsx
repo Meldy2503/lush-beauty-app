@@ -1,19 +1,13 @@
 "use client";
 import { persistor, store } from "@/store";
-import {
-  Box,
-  ChakraProvider,
-  createSystem,
-  defaultConfig,
-  Flex,
-} from "@chakra-ui/react";
+import { ChakraProvider, createSystem, defaultConfig } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { FaWhatsapp } from "react-icons/fa";
 import { Provider as ReduxProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import LoadingIcon from "./loading-icon";
+import FloatingChat from "./floating-chat";
 
 const config = {
   ...defaultConfig,
@@ -26,6 +20,7 @@ const config = {
       xl: "1280px",
       "2xl": "1536px",
     },
+
     tokens: {
       fonts: {
         body: { value: "'Lato', sans-serif" },
@@ -98,33 +93,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
               }}
             />
           </PersistGate>
-          {!loading && (
-            <a
-              href="https://wa.me/447881172787?text=Hello%2C%20welcome%20to%20Lush%20%26%20Luxe%20Beauty%20Salon.%20How%20can%20we%20help%20you%3F"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Flex
-                position={"fixed"}
-                align={"center"}
-                justify={"center"}
-                right={{ base: "1rem", md: "2rem" }}
-                bottom={{ base: "1rem", md: "2rem" }}
-                bg="black"
-                border={"1px solid #a3a3a3"}
-                p=".4rem"
-                borderRadius={"50%"}
-                cursor={"pointer"}
-                zIndex={100}
-              >
-                <Box
-                  as={FaWhatsapp}
-                  color="yellow.50"
-                  boxSize={{base:'3.5rem', md: '3.7rem'}}
-                />
-              </Flex>
-            </a>
-          )}
+          {!loading && <FloatingChat />}
         </ChakraProvider>
       </ReduxProvider>
     </QueryClientProvider>

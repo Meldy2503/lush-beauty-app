@@ -11,6 +11,7 @@ const ShopHeroSection = () => {
       bgRepeat="no-repeat"
       height={{ base: "60vh", "2xl": "50vh" }}
       bgSize="cover"
+      mt={"5rem"}
     >
       <VStack
         textAlign="center"

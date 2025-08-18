@@ -77,11 +77,12 @@ const HeroSection = () => {
   const handleVideoLoad = useCallback(() => setVideoLoaded(true), []);
 
   return (
-    <Box ref={containerRef} bg="white" position="relative" overflow="hidden">
+    <Box ref={containerRef} bg="white" position="relative" overflow="hidden" mt='5rem'>
       <Flex
         height={{ base: "90vh", "2xl": "80vh" }}
         justifyContent="center"
         alignItems="center"
+       
       >
         <SideImage src={heroImg1.src} text="GLAM" side="left" />
         <SideImage src={heroImg2.src} text="GLOW" side="right" />
@@ -89,7 +90,7 @@ const HeroSection = () => {
         <MotionBox
           position="relative"
           width={{ base: "100%", lg: "38%" }}
-          height="95%"
+          height="100%"
           boxShadow={{
             base: "none",
             lg: "0 22px 10px -13px rgba(0,0,0,0.8), 0 15px 10px -25px rgba(0,0,0,0.8)",
@@ -131,6 +132,7 @@ const HeroSection = () => {
           />
           <Flex
             position="absolute"
+            
             inset="0"
             width="100%"
             height="100%"
