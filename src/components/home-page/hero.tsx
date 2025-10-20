@@ -33,7 +33,7 @@ const VIDEO_URL =
 
 const SideImage = ({ src, text, side }: SideImageProps) => (
   <Flex
-    backgroundImage={`linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url(${src})`}
+    backgroundImage={`linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(${src})`}
     position="absolute"
     {...(side === "left" ? { left: "0" } : { right: "0" })}
     top="0"
@@ -79,7 +79,7 @@ const HeroSection = () => {
   return (
     <Box ref={containerRef} bg="white" position="relative" overflow="hidden" mt='5rem'>
       <Flex
-        height={{ base: "90vh", "2xl": "80vh" }}
+        height={{ base: "85vh", "2xl": "75vh" }}
         justifyContent="center"
         alignItems="center"
        

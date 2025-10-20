@@ -6,6 +6,7 @@ import {
   Heading,
   HStack,
   List,
+  Skeleton,
   Spinner,
   Text,
 } from "@chakra-ui/react";
@@ -32,6 +33,7 @@ const Product = () => {
 
   const { "product-id": id } = params;
   const [itemQuantity, setItemQuantity] = useState(1);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { data: product, isLoading } = useGetProductById(id as string);
   const addToCartMutation = useAddToCartMutation();
 
@@ -40,6 +42,13 @@ const Product = () => {
 
   const { mutateAsync: addToCart } = addToCartMutation;
   const isAddToCartLoading = addToCartMutation.isPending;
+
+  const handleImageLoad = () => {
+    // Add a small delay before hiding skeleton for smoother transition
+    setTimeout(() => {
+      setImageLoaded(true);
+    }, 600);
+  };
 
   const handleAddTocart = async () => {
     try {
@@ -99,13 +108,27 @@ const Product = () => {
             {/* Left: Image*/}
             {product?.imageUrl && (
               <Box w={{ base: "100%", md: "45%" }}>
-                <Image
-                  src={product?.imageUrl}
-                  alt="beauty salon product images"
-                  width={1500}
-                  height={1000}
-                  priority
-                />
+                <Skeleton
+                  loading={!imageLoaded}
+                  w="100%"
+                  aspectRatio={1}
+                  borderRadius="md"
+                  animationDuration="0.6s"
+                >
+                  <Box
+                    opacity={imageLoaded ? 1 : 0}
+                    transition="all 0.4s linear"
+                  >
+                    <Image
+                      src={product?.imageUrl}
+                      alt="beauty salon product images"
+                      width={1500}
+                      height={1000}
+                      priority
+                      onLoad={handleImageLoad}
+                    />
+                  </Box>
+                </Skeleton>
               </Box>
             )}
 

@@ -31,119 +31,114 @@ const ServicesSection = () => {
       data-testid="services-section"
       pt={{ base: "5rem", md: "8rem" }}
     >
-      <VStack gap={{ base: "2rem", md: "3rem" }} textAlign="center">
-        <Heading
-          as="h2"
-          fontSize={{ base: "10rem", md: "13rem", lg: "16rem" }}
-          color="yellow.100"
-          fontFamily="allura"
-          fontWeight="300"
-          lineHeight={ 0.4}
+      <Link href={token ? "/book-appointment" : "/login"}>
+        <VStack gap={{ base: "2rem", md: "3rem" }} textAlign="center">
+          <Heading
+            as="h2"
+            fontSize={{ base: "10rem", md: "13rem", lg: "16rem" }}
+            color="yellow.100"
+            fontFamily="allura"
+            fontWeight="300"
+            lineHeight={0.4}
+          >
+            Services
+          </Heading>
+          <Text
+            mx="auto"
+            mb="3.5rem"
+            fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
+            fontFamily={"playfair"}
+          >
+            SERVICE MENU
+          </Text>
+        </VStack>
+        <Grid
+          templateColumns={{
+            base: "repeat(1, 1fr)",
+            sm: "repeat(2, 1fr)",
+            lg: "repeat(4, 1fr)",
+          }}
+          gap={0}
         >
-          Services
-        </Heading>
-        <Text
-          mx="auto"
-          mb="3.5rem"
-          fontSize={{ base: "2.5rem", md: "3rem", lg: "3.5rem" }}
-          fontFamily={"playfair"}
-        >
-          SERVICE MENU
-        </Text>
-      </VStack>
-      <Grid
-        templateColumns={{
-          base: "repeat(1, 1fr)",
-          sm: "repeat(2, 1fr)",
-          lg: "repeat(4, 1fr)",
-        }}
-        gap={0}
-      >
-        {servicesData.map((service, index) => {
-          const isFirstRow = index < 4;
-          let isImageCardPattern;
-          if (isFirstRow) {
-            isImageCardPattern = index % 2 === 0;
-          } else {
-            isImageCardPattern = (index - 4) % 2 !== 0;
-          }
+          {servicesData.map((service, index) => {
+            const isFirstRow = index < 4;
+            let isImageCardPattern;
+            if (isFirstRow) {
+              isImageCardPattern = index % 2 === 0;
+            } else {
+              isImageCardPattern = (index - 4) % 2 !== 0;
+            }
 
-          const finalIsImageCard = isImageCardPattern && service.imageUrl;
+            const finalIsImageCard = isImageCardPattern && service.imageUrl;
 
-          return (
-            <GridItem
-              key={service.id}
-              minH={{ base: "280px", md: "320px", lg: "350px" }}
-              bg={
-                finalIsImageCard
-                  ? `url(${service.imageUrl?.src})`
-                  : "yellow.100"
-              }
-              backgroundSize="cover"
-              backgroundPosition="center"
-              position="relative"
-              color="white"
-              border={
-                !finalIsImageCard
-                  ? { base: ".1px solid black", xl: "none" }
-                  : "none"
-              }
-              _hover={
-                finalIsImageCard
-                  ? {
-                      transform: "scale(1.02)",
-                      transition: "transform 0.3s ease-in-out",
-                    }
-                  : {}
-              }
-            >
-              {finalIsImageCard && (
-                <Box
-                  position="absolute"
-                  top="0"
-                  left="0"
-                  right="0"
-                  bottom="0"
-                  bg="rgba(0,0,0,0.6)"
-                  zIndex="0"
-                  transition="background-color 0.3s ease-in-out"
-                  _hover={{ bg: "rgba(0,0,0,0.6)" }}
-                />
-              )}
-              <Flex
-                direction="column"
-                alignItems="center"
-                justifyContent="center"
-                textAlign="center"
-                h="100%"
-                p={{ base: 4, md: 6, lg: 8 }}
+            return (
+              <GridItem
+                key={service.id}
+                minH={{ base: "280px", md: "320px", lg: "350px" }}
+                bg={
+                  finalIsImageCard
+                    ? `url(${service.imageUrl?.src})`
+                    : "yellow.100"
+                }
+                backgroundSize="cover"
+                backgroundPosition="center"
                 position="relative"
-                gap="3rem"
-                zIndex="1"
+                color="white"
+                border={
+                  !finalIsImageCard
+                    ? { base: ".1px solid black", xl: "none" }
+                    : "none"
+                }
+                _hover={
+                  finalIsImageCard
+                    ? {
+                        transform: "scale(1.02)",
+                        transition: "transform 0.3s ease-in-out",
+                      }
+                    : {}
+                }
               >
-                <Heading
-                  as="h3"
-                  fontSize={{ base: "2rem", md: "2.3rem" }}
-                  fontFamily="playfair"
-                  border={service.imageUrl ? "1px solid white" : "none"}
-                  p={service.imageUrl ? "1.5rem" : 0}
-                  lineHeight={1.3}
+                {finalIsImageCard && (
+                  <Box
+                    position="absolute"
+                    top="0"
+                    left="0"
+                    right="0"
+                    bottom="0"
+                    bg="rgba(0,0,0,0.6)"
+                    zIndex="0"
+                    transition="background-color 0.3s ease-in-out"
+                    _hover={{ bg: "rgba(0,0,0,0.6)" }}
+                  />
+                )}
+                <Flex
+                  direction="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  textAlign="center"
+                  h="100%"
+                  p={{ base: 4, md: 6, lg: 8 }}
+                  position="relative"
+                  gap="3rem"
+                  zIndex="1"
                 >
-                  {service.heading}
-                </Heading>
-
-                <Link
-                  href={token ? "/book-appointment" : "/login"}
-                  style={{ fontSize: "1.9rem" }}
-                >
-                  Book Service
-                </Link>
-               
-              </Flex>
-            </GridItem>
-          );
-        })}
-      </Grid>
+                  <Heading
+                    as="h3"
+                    fontSize={{ base: "2rem", md: "2.3rem" }}
+                    fontFamily="playfair"
+                    border={service.imageUrl ? "1px solid white" : "none"}
+                    p={service.imageUrl ? "1.5rem" : 0}
+                    lineHeight={1.3}
+                  >
+                    {service.heading}
+                  </Heading>
+                  <Text style={{ fontSize: "1.9rem" }}>Book Service</Text>
+                </Flex>
+              </GridItem>
+            );
+          })}
+        </Grid>
+      </Link>
     </Box>
   );
 };
